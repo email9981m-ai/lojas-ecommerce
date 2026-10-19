@@ -100,10 +100,18 @@
     .size-fieldset { margin: 0; padding: 0; border: 0; }
     .hint { min-height: 19px; margin: 8px 0 0; color: var(--muted); font-size: 11px; }
     .hint.error { color: var(--red); }
-    .cta { width: 100%; min-height: 58px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; margin-top: 7px; padding: 15px 18px; border: 1px solid var(--brand); border-radius: 10px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 780; cursor: pointer; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
-    .cta:hover { border-color: var(--brand-dark); background: var(--brand-dark); box-shadow: 0 8px 18px rgba(36,83,61,.2); }
-    .cta:active { transform: scale(.99); }
-    .cta svg { width: 18px; height: 18px; flex: none; }
+    .cta { position: relative; width: 100%; min-height: 68px; display: inline-flex; justify-content: center; align-items: center; gap: 11px; margin-top: 7px; padding: 13px 19px; overflow: hidden; border: 1px solid var(--brand-dark); border-radius: 12px; background: linear-gradient(135deg, var(--brand) 0%, #3b7b5b 100%); color: #fff; box-shadow: 0 8px 18px rgba(36,83,61,.2), inset 0 1px 0 rgba(255,255,255,.18); font-size: 15px; font-weight: 800; letter-spacing: .005em; cursor: pointer; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
+    .cta::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.16) 50%, transparent 75%); transform: translateX(-130%); transition: transform .55s ease; pointer-events: none; }
+    .cta:hover { border-color: #1d4633; background: linear-gradient(135deg, var(--brand-dark) 0%, #2e684b 100%); box-shadow: 0 10px 22px rgba(36,83,61,.27), inset 0 1px 0 rgba(255,255,255,.16); transform: translateY(-1px); }
+    .cta:hover::after { transform: translateX(130%); }
+    .cta:focus-visible { outline: 3px solid #a9cbb5; outline-offset: 3px; }
+    .cta:active { transform: translateY(1px); box-shadow: 0 4px 10px rgba(36,83,61,.18); }
+    .cta > svg { width: 21px; height: 21px; flex: none; padding: 6px; box-sizing: content-box; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; background: rgba(255,255,255,.14); }
+    .cta-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; }
+    .cta-copy > span { line-height: 1.15; }
+    .cta-copy small { color: rgba(255,255,255,.82); font-size: 10px; font-weight: 550; line-height: 1.2; letter-spacing: .01em; }
+    .cta-arrow { margin-left: 3px; color: rgba(255,255,255,.9); font-size: 22px; font-weight: 400; line-height: 1; transition: transform .18s; }
+    .cta:hover .cta-arrow { transform: translateX(3px); }
     .checkout-note { display: flex; align-items: flex-start; gap: 8px; margin: 11px 0 0; color: var(--muted); font-size: 11px; }
     .checkout-note svg { width: 15px; height: 15px; flex: none; margin-top: 1px; color: var(--brand); }
     .trust-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0 23px; padding: 15px 0; border-block: 1px solid var(--line); }
@@ -119,10 +127,16 @@
     .shipping-form input { min-width: 0; flex: 1; height: 42px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; }
     .shipping-form button { height: 42px; padding: 0 17px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 700; }
     .shipping-help { margin: 8px 0 0; color: var(--muted); font-size: 10px; }
-    .product-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 17px 0; border-bottom: 1px solid var(--line); }
-    .share-block, .wishlist-block { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; }
-    .share-block span, .wishlist-block span { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 9px; font-weight: 750; }
-    .share-block button, .wishlist-block button { border: 0; padding: 0; background: transparent; color: var(--brand-dark); cursor: pointer; font-size: 12px; }
+    .product-actions-row { display: grid; grid-template-columns: 7fr 5fr; gap: 0; margin-top: 0; padding: 15px 0 17px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .share-block, .wishlist-block { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; min-width: 0; }
+    .share-block { padding-right: 18px; }
+    .wishlist-block { padding-left: 18px; border-left: 1px solid var(--line); }
+    .share-block > span, .wishlist-block > span { display: block; color: var(--muted); font-size: 9px; font-weight: 750; letter-spacing: .08em; line-height: 1.2; text-transform: uppercase; }
+    .share-block > span svg, .wishlist-block > span svg { display: none; }
+    .share-block button, .wishlist-block button { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; border: 0; padding: 0; background: transparent; color: var(--brand-dark); cursor: pointer; font-size: 12px; font-weight: 500; }
+    .share-block button::after { content: '↗'; font-size: 15px; line-height: 1; }
+    .wishlist-block button::first-letter { color: var(--red); }
+    .share-block button:hover, .wishlist-block button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
     .wishlist-block button.is-added { color: var(--red); }
     .product-information { margin-top: 0; }
     .product-tab { width: 100%; margin-top: 0; border-bottom: 1px solid var(--line); }
@@ -131,7 +145,7 @@
     .product-tab-list li { margin: 0; }
     .product-tab-list a { display: inline-block; padding: 15px 17px 13px; border: 1px solid transparent; border-bottom: 2px solid var(--ink); color: var(--ink); font-size: 12px; font-weight: 750; line-height: 1.2; }
     .product-tab-content { padding: 22px 17px 25px; background: #fff; }
-    .product-tab-content p { max-width: none; margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.68; }
+    .product-tab-content p { max-width: none; margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.72; }
     .product-tab-content strong { color: var(--ink); font-weight: 750; }
     .similar-products { margin-top: 58px; padding-top: 28px; border-top: 1px solid var(--line); }
     .similar-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
@@ -218,8 +232,19 @@
       .price { font-size: 36px; }
       .offer-card { margin: 15px 0 19px; }
       .trust-strip { margin: 18px 0 17px; }
+      .product-info > .cta { min-height: 64px; gap: 8px; padding: 11px 12px; font-size: 13px; }
+      .product-info > .cta > svg { width: 19px; height: 19px; padding: 5px; }
+      .cta-copy small { font-size: 9px; }
+      .cta-arrow { font-size: 20px; }
+      .sticky .cta { min-height: 44px; padding-inline: 8px; font-size: 12px; }
       .confidence { margin-top: 46px; padding: 21px; }
-      .product-actions-row { grid-template-columns: 1fr; gap: 12px; }
+      .product-actions-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .product-actions-row { gap: 0; padding: 14px 0 16px; }
+      .share-block, .wishlist-block { min-width: 0; min-height: 0; gap: 6px; padding-top: 0; padding-bottom: 0; }
+      .share-block { padding-right: 10px; }
+      .wishlist-block { padding-left: 10px; }
+      .share-block > span, .wishlist-block > span { min-width: 0; font-size: 8px; }
+      .share-block button, .wishlist-block button { min-height: 25px; padding: 0; font-size: 11px; white-space: nowrap; }
       .similar-products { margin-top: 42px; }
       .similar-head { display: block; }
       .similar-head small { display: block; margin-top: 8px; }
@@ -227,7 +252,7 @@
       .product-tab { margin-top: 6px; }
       .product-tab-list a { width: 100%; padding: 14px 0 11px; font-size: 12px; }
       .product-tab-content { padding: 18px 0 22px; }
-      .product-tab-content p { font-size: 12px; line-height: 1.65; }
+      .product-tab-content p { font-size: 13px; line-height: 1.7; }
       .confidence-head { display: block; margin-bottom: 17px; }
       .confidence-head h2 { font-size: 20px; }
       .confidence-head small { display: block; margin-top: 8px; }
@@ -321,7 +346,7 @@
           <p class="hint" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
         </fieldset>
 
-        <button class="cta" id="add-button" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span id="add-label">Escolher meu tamanho</span></button>
+        <button class="cta" id="add-button" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Quero a camiseta grátis</span><small>Selecione o tamanho para continuar</small></span><span class="cta-arrow" aria-hidden="true">→</span></button>
         <section class="shipping-box" aria-label="Frete e prazo">
           <div class="shipping-heading"><strong>Frete e prazo</strong><span id="shipping-status">Consulte pelo CEP</span></div>
           <div class="shipping-form">
@@ -333,8 +358,8 @@
         </section>
 
         <div class="product-actions-row" aria-label="Ações do produto">
-          <div class="share-block"><span>Compartilhar</span><button type="button" id="share-product" aria-label="Compartilhar produto">↗</button></div>
-          <div class="wishlist-block"><span>Lista de desejos</span><button type="button" id="wishlist-product" aria-pressed="false">♡ Adicionar</button></div>
+          <div class="share-block"><span>Compartilhar</span><button type="button" id="share-product" aria-label="Compartilhar produto">Compartilhar</button></div>
+          <div class="wishlist-block"><span>Lista De Desejos</span><button type="button" id="wishlist-product" aria-pressed="false">♡&nbsp; Adicionar</button></div>
         </div>
 
       </div>
@@ -382,7 +407,7 @@
 
   <div class="sticky" id="sticky-bar" aria-label="Adicionar produto à sacola">
     <span class="sticky-price">R$ 0,00<small>Preço do produto</small></span>
-    <button class="cta" type="button" id="sticky-button">Selecionar tamanho</button>
+    <button class="cta" type="button" id="sticky-button">Quero a camiseta grátis</button>
   </div>
 
   <dialog id="cart-dialog" aria-labelledby="cart-title">
@@ -441,8 +466,8 @@
     });
 
     function updateLabels() {
-      $('add-label').textContent = size ? `Quero a minha — tamanho ${size}` : 'Escolher meu tamanho';
-      $('sticky-button').textContent = size ? `Quero a minha · ${size}` : 'Escolher tamanho';
+      $('add-label').textContent = size ? `Quero a camiseta grátis · ${size}` : 'Quero a camiseta grátis';
+      $('sticky-button').textContent = size ? `Quero a camiseta grátis · ${size}` : 'Quero a camiseta grátis';
       $('size-label').textContent = size ? `· ${size}` : '';
     }
     document.querySelectorAll('.size').forEach((button) => button.addEventListener('click', () => {
