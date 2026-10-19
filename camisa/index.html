@@ -23,8 +23,6 @@
       --brand: #2f6b4f;
       --brand-dark: #24533d;
       --brand-soft: #edf5ef;
-      --gold: #a8792f;
-      --gold-soft: #fbf5e8;
       --red: #a23932;
       --shadow: 0 18px 50px rgba(28, 31, 27, .08);
       --radius: 18px;
@@ -68,38 +66,30 @@
     .thumb img { width: 100%; height: 100%; object-fit: contain; }
     .stage { position: relative; min-width: 0; aspect-ratio: .87; display: grid; place-items: center; overflow: hidden; border: 1px solid #efeee9; border-radius: var(--radius); background: var(--canvas); }
     .stage img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
-    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: grid; grid-template-columns: 31px 1fr; column-gap: 10px; width: min(244px, calc(100% - 32px)); padding: 12px 14px 12px 11px; overflow: hidden; border: 1px solid rgba(234,217,174,.95); border-radius: 14px; background: linear-gradient(135deg, rgba(29,67,48,.98), rgba(36,83,61,.95)); color: #fff; box-shadow: 0 11px 26px rgba(20,42,29,.28); }
-    .gallery-label::after { content: ""; position: absolute; top: -34px; right: -26px; width: 88px; height: 88px; border: 1px solid rgba(234,217,174,.25); border-radius: 50%; box-shadow: 0 0 0 11px rgba(234,217,174,.07), 0 0 0 22px rgba(234,217,174,.045); }
-    .gallery-label svg { width: 31px; height: 31px; grid-row: span 2; align-self: start; padding: 6px; border: 1px solid rgba(234,217,174,.65); border-radius: 9px; background: var(--gold-soft); color: var(--gold); }
-    .gallery-label-copy { position: relative; z-index: 1; display: grid; gap: 3px; }
-    .gallery-label-copy small { color: #e9d7a8; font-size: 8px; font-weight: 850; letter-spacing: .13em; line-height: 1.1; text-transform: uppercase; }
-    .gallery-label-copy strong { color: #fff; font-size: 17px; letter-spacing: -.025em; line-height: 1.05; }
-    .gallery-label-copy span { margin-top: 2px; color: rgba(255,255,255,.76); font-size: 10px; line-height: 1.25; }
+    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(255,255,255,.88); color: var(--ink-soft); font-size: 11px; font-weight: 650; backdrop-filter: blur(8px); }
+    .gallery-label svg { width: 14px; height: 14px; color: var(--brand); }
+    .gallery-caption { margin: 12px 0 0 90px; color: var(--muted); font-size: 11px; }
     .product-info { padding-top: 8px; }
+    .eyebrow { margin: 0 0 10px; color: var(--brand); font-size: 10px; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; }
     h1 { margin: 0; font-size: clamp(30px, 3vw, 39px); line-height: 1.12; letter-spacing: -.045em; font-weight: 760; }
     .subtitle { max-width: 44ch; margin: 12px 0 23px; color: var(--muted); font-size: 14px; }
-    .rating-note { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 20px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); box-shadow: 0 3px 10px rgba(28,31,27,.035); font-size: 11px; }
-    .rating-stars { padding: 5px 7px; border-radius: 6px; background: var(--gold-soft); color: var(--gold); font-size: 13px; letter-spacing: 1px; line-height: 1; }
-    .rating-score { color: var(--ink); font-size: 13px; font-weight: 800; letter-spacing: -.01em; }
-    .rating-scale { margin-left: -5px; color: var(--muted); font-size: 10px; }
-    .rating-divider { width: 1px; height: 18px; background: var(--line); }
-    .rating-count { color: var(--brand-dark); font-size: 11px; font-weight: 650; text-decoration: underline; text-decoration-color: #b8cfbd; text-underline-offset: 3px; }
-    .price-block { position: relative; margin: 0 0 22px; padding: 21px 21px 18px; overflow: hidden; border: 1px solid #cfe0d3; border-radius: 16px; background: radial-gradient(circle at 100% 0%, rgba(232,213,166,.26), transparent 34%), linear-gradient(135deg, #f5faf6 0%, #fff 72%); box-shadow: 0 9px 24px rgba(36,83,61,.09); }
-    .price-block::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg, var(--gold), var(--brand)); }
-    .price-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 15px; }
-    .price-kicker { display: inline-flex; align-items: center; gap: 7px; color: var(--brand-dark); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-    .price-kicker svg { width: 14px; height: 14px; color: var(--gold); }
-    .free-badge { display: inline-flex; align-items: center; min-height: 28px; padding: 5px 11px; border: 1px solid #ead9ae; border-radius: 999px; background: var(--gold-soft); color: #75551d; font-size: 10px; font-weight: 850; letter-spacing: .08em; }
-    .price-row { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; }
-    .price { color: var(--brand-dark); font-size: 46px; line-height: 1; letter-spacing: -.06em; font-weight: 850; }
-    .price-reference { display: grid; gap: 3px; padding-left: 15px; border-left: 1px solid #d7e5db; }
-    .price-reference strong { color: var(--ink-soft); font-size: 13px; line-height: 1.2; }
+    .rating-note { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 20px; color: var(--muted); font-size: 11px; }
+    .rating-note svg { width: 15px; height: 15px; color: var(--brand); }
+    .rating-note strong { color: var(--ink-soft); font-weight: 650; }
+    .price-block { margin: 0; padding: 19px 18px 17px; border: 1px solid #dbe7dd; border-left: 4px solid var(--brand); border-radius: 12px; background: #f7faf7; }
+    .price-kicker { display: block; margin-bottom: 7px; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .price-row { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .price { color: var(--brand-dark); font-size: 46px; line-height: 1; letter-spacing: -.055em; font-weight: 820; }
+    .price-reference { display: grid; gap: 2px; padding-left: 15px; border-left: 1px solid #d7e5db; }
+    .price-reference strong { color: var(--ink-soft); font-size: 14px; line-height: 1.2; }
     .price-reference small { color: var(--muted); font-size: 10px; }
-    .special-copy { margin: 10px 0 0; color: var(--ink-soft); font-size: 12px; font-weight: 650; }
-    .price-conditions { display: flex; align-items: flex-start; gap: 8px; margin: 15px 0 0; padding-top: 12px; border-top: 1px solid #dfe9e1; color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .price-conditions svg { width: 15px; height: 15px; flex: none; margin-top: 1px; color: var(--brand); }
-    .offer-countdown { display: inline-flex; align-items: center; min-width: 48px; justify-content: center; margin-left: 4px; padding: 3px 7px; border: 1px solid #ead9ae; border-radius: 6px; background: var(--gold-soft); color: #75551d; font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 850; letter-spacing: .04em; white-space: nowrap; }
-    .offer-countdown.is-ended { border-color: var(--line); background: var(--wash); color: var(--muted); }
+    .offer-timing { min-height: 1.5em; margin: 9px 0 0; color: var(--ink-soft); font-size: 12px; font-weight: 650; letter-spacing: .005em; }
+    .offer-timing-text { display: inline-block; transition: opacity .22s ease, transform .22s ease; }
+    .offer-timing-text.is-changing { opacity: 0; transform: translateY(-3px); }
+    .offer-card { display: flex; gap: 12px; margin: 14px 0 20px; padding: 13px 15px; border: 1px solid #dbe7dd; border-radius: 12px; background: #f7faf7; }
+    .offer-icon { width: 20px; height: 20px; flex: none; color: var(--brand); }
+    .offer-copy strong { display: block; margin-bottom: 2px; font-size: 12px; }
+    .offer-copy p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
     .size-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
     .size-heading strong { font-size: 13px; }
     .size-guide-link { border: 0; padding: 0; background: transparent; color: var(--brand-dark); font-size: 11px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
@@ -108,6 +98,8 @@
     .size:hover { border-color: var(--ink); }
     .size[aria-pressed="true"] { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
     .size-fieldset { margin: 0; padding: 0; border: 0; }
+    .hint { min-height: 19px; margin: 8px 0 0; color: var(--muted); font-size: 11px; }
+    .hint.error { color: var(--red); }
     .cta { width: 100%; min-height: 58px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; margin-top: 7px; padding: 15px 18px; border: 1px solid var(--brand); border-radius: 10px; background: var(--brand); color: #fff; font-size: 14px; font-weight: 780; cursor: pointer; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
     .cta:hover { border-color: var(--brand-dark); background: var(--brand-dark); box-shadow: 0 8px 18px rgba(36,83,61,.2); }
     .cta:active { transform: scale(.99); }
@@ -120,6 +112,38 @@
     .trust-item strong { display: block; font-size: 11px; }
     .trust-item small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .details { margin-top: 3px; }
+    .shipping-box { margin-top: 20px; padding: 15px 0 16px; border-block: 1px solid var(--line); }
+    .shipping-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; font-size: 12px; }
+    .shipping-heading span { color: var(--muted); font-size: 11px; }
+    .shipping-form { display: flex; gap: 8px; }
+    .shipping-form input { min-width: 0; flex: 1; height: 42px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; }
+    .shipping-form button { height: 42px; padding: 0 17px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .shipping-help { margin: 8px 0 0; color: var(--muted); font-size: 10px; }
+    .product-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+    .share-block, .wishlist-block { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; }
+    .share-block span, .wishlist-block span { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 9px; font-weight: 750; }
+    .share-block button, .wishlist-block button { border: 0; padding: 0; background: transparent; color: var(--brand-dark); cursor: pointer; font-size: 12px; }
+    .wishlist-block button.is-added { color: var(--red); }
+    .product-information { margin-top: 0; }
+    .product-tab { width: 100%; margin-top: 0; border-bottom: 1px solid var(--line); }
+    .product-tab-nav { margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+    .product-tab-list { display: flex; margin: 0; padding: 0; list-style: none; }
+    .product-tab-list li { margin: 0; }
+    .product-tab-list a { display: inline-block; padding: 15px 17px 13px; border: 1px solid transparent; border-bottom: 2px solid var(--ink); color: var(--ink); font-size: 12px; font-weight: 750; line-height: 1.2; }
+    .product-tab-content { padding: 22px 17px 25px; background: #fff; }
+    .product-tab-content p { max-width: none; margin: 0; color: var(--ink-soft); font-size: 13px; line-height: 1.68; }
+    .product-tab-content strong { color: var(--ink); font-weight: 750; }
+    .similar-products { margin-top: 58px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .similar-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
+    .similar-head p { margin: 0 0 5px; color: var(--brand); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .similar-head h2 { margin: 0; font-size: 22px; line-height: 1.2; letter-spacing: -.035em; }
+    .similar-head small { max-width: 28ch; color: var(--muted); font-size: 11px; }
+    .similar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .similar-card { min-width: 0; }
+    .similar-image { aspect-ratio: .88; overflow: hidden; border-radius: 12px; background: var(--canvas); }
+    .similar-image img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+    .similar-card strong { display: block; margin-top: 10px; font-size: 11px; }
+    .similar-card span { display: block; margin-top: 4px; color: var(--brand-dark); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
     details { border-bottom: 1px solid var(--line); }
     summary { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 0; list-style: none; cursor: pointer; font-size: 12px; font-weight: 650; }
     summary::-webkit-details-marker { display: none; }
@@ -170,6 +194,7 @@
       .product { grid-template-columns: minmax(0,1fr) minmax(340px,.9fr); gap: 38px; }
       .gallery { grid-template-columns: 62px minmax(0,1fr); gap: 10px; }
       .thumb { width: 62px; height: 72px; }
+      .gallery-caption { margin-left: 72px; }
     }
     @media (max-width: 720px) {
       .wrap { width: min(100% - 32px, 560px); }
@@ -183,19 +208,26 @@
       .gallery { grid-template-columns: minmax(0,1fr); gap: 11px; }
       .stage { aspect-ratio: .97; border-radius: 14px; }
       .stage img { padding: 12px; }
-      .gallery-label { left: 12px; bottom: 12px; width: min(224px, calc(100% - 24px)); }
       .thumbs { order: 2; flex-direction: row; overflow-x: auto; padding: 1px 1px 5px; scrollbar-width: thin; }
       .thumb { width: 62px; height: 66px; flex: 0 0 auto; }
+      .gallery-caption { margin: 0; }
       .product-info { padding-top: 0; }
       .eyebrow { margin-bottom: 8px; }
       h1 { font-size: 31px; }
       .subtitle { margin: 9px 0 18px; }
       .price { font-size: 36px; }
-      .price-block { padding: 18px 17px 16px; }
-      .price-heading { align-items: flex-start; }
-      .price-reference { max-width: 150px; }
+      .offer-card { margin: 15px 0 19px; }
       .trust-strip { margin: 18px 0 17px; }
       .confidence { margin-top: 46px; padding: 21px; }
+      .product-actions-row { grid-template-columns: 1fr; gap: 12px; }
+      .similar-products { margin-top: 42px; }
+      .similar-head { display: block; }
+      .similar-head small { display: block; margin-top: 8px; }
+      .similar-grid { grid-template-columns: repeat(2, 1fr); gap: 17px 10px; }
+      .product-tab { margin-top: 6px; }
+      .product-tab-list a { width: 100%; padding: 14px 0 11px; font-size: 12px; }
+      .product-tab-content { padding: 18px 0 22px; }
+      .product-tab-content p { font-size: 12px; line-height: 1.65; }
       .confidence-head { display: block; margin-bottom: 17px; }
       .confidence-head h2 { font-size: 20px; }
       .confidence-head small { display: block; margin-top: 8px; }
@@ -256,24 +288,29 @@
           </div>
           <div class="stage">
             <img id="main-image" width="1031" height="1200" fetchpriority="high" decoding="async" alt="Camiseta preta casual com brasão do Corinthians, vestida por modelo">
-            <span class="gallery-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="m19 16 .7 1.8L21.5 18l-1.8.7L19 20.5l-.7-1.8-1.8-.7 1.8-.7L19 16Z"/></svg><span class="gallery-label-copy"><small>Condição especial</small><strong>Camiseta grátis</strong><span>Uma peça especial para a Fiel</span></span></span>
+            <span class="gallery-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>Veja os detalhes nas fotos</span>
           </div>
         </div>
+        <p class="gallery-caption">Imagens do produto para referência visual.</p>
       </div>
 
       <div class="product-info">
-        <div class="rating-note" aria-label="Avaliação 4,8 de 5 com base em 10 avaliações"><span class="rating-stars" aria-hidden="true">★★★★★</span><strong class="rating-score">4,8</strong><span class="rating-scale">/5</span><span class="rating-divider" aria-hidden="true"></span><span class="rating-count">10 avaliações</span></div>
+        <p class="eyebrow">ESTILO DE TORCIDA · KOKESHI</p>
         <h1 id="product-title">Corinthians no peito. Seu estilo em campo.</h1>
         <p class="subtitle">Camiseta casual preta com brasão do Corinthians — para levar a paixão pelo Timão ao seu visual do dia a dia.</p>
 
-        <div class="price-block" aria-label="Benefício especial e condições do produto">
-          <div class="price-heading"><span class="price-kicker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="m19 16 .7 1.8L21.5 18l-1.8.7L19 20.5l-.7-1.8-1.8-.7 1.8-.7L19 16Z"/></svg>Condição especial</span><span class="free-badge">PARA VOCÊ</span></div>
-          <div class="price-row"><span class="price">R$ 0,00</span><span class="price-reference"><strong>Você não paga pela camiseta</strong><small>Frete não incluído</small></span></div>
-          <p class="special-copy">Uma peça especial para vestir sua paixão pelo Timão.</p>
-          <p class="price-conditions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>A oferta termina em <strong class="offer-countdown" id="offer-countdown" role="timer" aria-live="polite">27:00</strong></span></p>
+        <div class="price-block" aria-label="Preço do produto">
+          <span class="price-kicker">Oferta do produto</span>
+          <div class="price-row"><span class="price">Grátis</span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
+          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; termina hoje, 19 de outubro de 2026.</span></p>
         </div>
 
-        <fieldset class="size-fieldset" id="tamanhos">
+        <div class="offer-card">
+          <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <div class="offer-copy"><strong>Uma peça de torcida, com preço claro</strong><p>Escolha P, M ou G. Eventuais custos de entrega e a disponibilidade precisam ser confirmados antes do pedido.</p></div>
+        </div>
+
+        <fieldset class="size-fieldset" id="tamanhos" aria-describedby="hint">
           <legend class="sr-only">Selecione o tamanho</legend>
           <div class="size-heading"><strong>Escolha seu tamanho <span id="size-label" aria-live="polite"></span></strong><button class="size-guide-link" type="button" id="size-guide-link">Ajuda com o tamanho</button></div>
           <div class="sizes">
@@ -281,31 +318,56 @@
             <button class="size" type="button" data-size="M" aria-pressed="false">M</button>
             <button class="size" type="button" data-size="G" aria-pressed="false">G</button>
           </div>
+          <p class="hint" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
         </fieldset>
 
         <button class="cta" id="add-button" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span id="add-label">Escolher meu tamanho</span></button>
-        <p class="checkout-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 2.9 8.1 7 10 4.1-1.9 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span>Adicione à sacola para revisar a seleção. Esta prévia não conclui pedidos ou pagamentos.</span></p>
+        <section class="shipping-box" aria-label="Frete e prazo">
+          <div class="shipping-heading"><strong>Frete e prazo</strong><span id="shipping-status">Consulte pelo CEP</span></div>
+          <div class="shipping-form">
+            <label class="sr-only" for="postal-code">CEP</label>
+            <input id="postal-code" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" autocomplete="postal-code">
+            <button type="button" id="calculate-shipping">Calcular</button>
+          </div>
+          <p class="shipping-help">Informe seu CEP para simular prazo e disponibilidade de entrega.</p>
+        </section>
 
-        <div class="trust-strip" aria-label="Informações importantes">
-          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Preço informado</strong><small>Produto por R$ 0,00</small></span></div>
-          <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="17.5" cy="19" r="1.5"/></svg><span><strong>Frete transparente</strong><small>Conferido antes de confirmar</small></span></div>
+        <div class="product-actions-row" aria-label="Ações do produto">
+          <div class="share-block"><span>Compartilhar</span><button type="button" id="share-product" aria-label="Compartilhar produto">↗</button></div>
+          <div class="wishlist-block"><span>Lista de desejos</span><button type="button" id="wishlist-product" aria-pressed="false">♡ Adicionar</button></div>
         </div>
 
-        <div class="details">
-          <details open><summary>Descrição do produto</summary><p>Camiseta preta casual com brasão do Corinthians. Consulte as diferentes imagens para observar a frente, as costas e detalhes da peça.</p></details>
-          <details id="size-guide"><summary>Como escolher o tamanho</summary><p>Compare uma camiseta que veste bem com as opções disponíveis. Esta página não informa medidas exatas para P, M e G; por isso, a escolha é apenas uma referência e não substitui uma tabela de medidas da peça.</p></details>
-          <details><summary>Entrega e condições</summary><p>O produto está anunciado por R$ 0,00. Eventual frete ou custo de logística, prazo e disponibilidade precisam ser confirmados antes de concluir. Esta página demonstrativa não consulta CEP nem estoque real.</p></details>
-          <details><summary>Sobre esta oferta</summary><p>Esta é uma oferta independente. A página não representa o Corinthians nem declara licenciamento ou endosso do clube. A marcação do produto não implica vínculo oficial.</p></details>
-        </div>
       </div>
     </section>
 
-    <section class="confidence" aria-labelledby="confidence-title">
-      <div class="confidence-head"><div><p>Antes de escolher</p><h2 id="confidence-title">Curtiu a peça? Veja os detalhes e escolha o tamanho.</h2></div><small>Fotos da frente, das costas e de detalhes para você conhecer melhor a camiseta.</small></div>
-      <div class="confidence-grid">
-        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg><strong>Preço do produto: R$ 0,00</strong><p>O valor anunciado para a camiseta está visível antes de selecionar.</p></article>
-        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="17.5" cy="19" r="1.5"/></svg><strong>Frete sem surpresa</strong><p>Se houver custo de entrega, o valor deve ser informado antes da confirmação.</p></article>
-        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 2.9 8.1 7 10 4.1-1.9 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><strong>Seleção em poucos passos</strong><p>Escolha o tamanho e confira a sacola demonstrativa da página.</p></article>
+    <section class="product-tab product-information" aria-labelledby="product-info-tab">
+      <nav class="product-tab-nav" aria-label="Informações do produto">
+        <ul class="product-tab-list"><li class="active"><a id="product-info-tab" href="#product-details">Informações do Produto</a></li></ul>
+      </nav>
+      <div class="product-tab-content" id="product-details">
+        <p>
+          A camiseta casual Corinthians é uma peça essencial para quem quer levar a paixão pelo Timão ao visual do dia a dia. Com visual confortável e versátil, ela combina simplicidade, identidade e estilo para diferentes ocasiões.<br><br>
+          <strong>Principais características:</strong><br><br>
+          <strong>Visual de torcida:</strong> o brasão do Corinthians destaca a identidade da peça e cria um ponto de destaque no look.<br><br>
+          <strong>Conforto para o dia a dia:</strong> a modelagem foi pensada para acompanhar a rotina com liberdade de movimento e uso versátil.<br><br>
+          <strong>Estilo casual:</strong> combine a camiseta com jeans, bermudas ou outras peças básicas para criar produções simples e autênticas.<br><br>
+          <strong>Detalhes da peça:</strong> consulte as imagens da galeria para observar a frente, as costas, o brasão e a etiqueta.<br><br>
+          <strong>Tamanhos:</strong><br><br>
+          Escolha entre P, M e G. Compare uma camiseta que veste bem com as opções disponíveis antes de selecionar.<br><br>
+          <strong>Cuidados:</strong><br><br>
+          Siga as instruções da etiqueta para preservar o tecido, as cores e os detalhes da camiseta. Evite produtos agressivos e prefira a lavagem adequada à composição da peça.<br><br>
+          A disponibilidade, o prazo e eventuais custos de entrega devem ser confirmados antes da conclusão do pedido.
+        </p>
+      </div>
+    </section>
+
+    <section class="similar-products" aria-labelledby="similar-title">
+      <div class="similar-head"><div><p>Você também pode gostar</p><h2 id="similar-title">Mais peças para completar seu estilo.</h2></div><small>Explore outras opções da mesma curadoria.</small></div>
+      <div class="similar-grid">
+        <article class="similar-card"><div class="similar-image"><img data-similar-image="1" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · preta</strong><span>Ver produto</span></article>
+        <article class="similar-card"><div class="similar-image"><img data-similar-image="2" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · verde</strong><span>Ver produto</span></article>
+        <article class="similar-card"><div class="similar-image"><img data-similar-image="3" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · marinho</strong><span>Ver produto</span></article>
+        <article class="similar-card"><div class="similar-image"><img data-similar-image="4" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · clara</strong><span>Ver produto</span></article>
       </div>
     </section>
   </main>
@@ -351,24 +413,21 @@
     let size = '';
     const cart = [];
 
-    const countdown = $('offer-countdown');
-    let remainingSeconds = 27 * 60;
-    const renderCountdown = () => {
-      const minutes = Math.floor(remainingSeconds / 60).toString().padStart(2, '0');
-      const seconds = (remainingSeconds % 60).toString().padStart(2, '0');
-      countdown.textContent = `${minutes}:${seconds}`;
-    };
-    renderCountdown();
-    const countdownTimer = window.setInterval(() => {
-      remainingSeconds -= 1;
-      renderCountdown();
-      if (remainingSeconds <= 0) {
-        window.clearInterval(countdownTimer);
-        countdown.textContent = 'Encerrada';
-        countdown.classList.add('is-ended');
-        countdown.setAttribute('aria-label', 'Oferta encerrada');
-      }
-    }, 1000);
+    const offerTiming = $('offer-timing-text');
+    const offerPhrases = ['Para a Fiel · por tempo limitado', 'Para a Fiel · termina hoje (19/10/2026)'];
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      offerTiming.textContent = 'Para a Fiel · por tempo limitado · termina hoje (19/10/2026)';
+    } else {
+      let offerPhraseIndex = 0;
+      window.setInterval(() => {
+        offerTiming.classList.add('is-changing');
+        window.setTimeout(() => {
+          offerPhraseIndex = (offerPhraseIndex + 1) % offerPhrases.length;
+          offerTiming.textContent = offerPhrases[offerPhraseIndex];
+          offerTiming.classList.remove('is-changing');
+        }, 220);
+      }, 3400);
+    }
 
     $('main-image').src = imgs[0][0];
     document.querySelectorAll('.thumb').forEach((button) => {
@@ -389,6 +448,8 @@
     document.querySelectorAll('.size').forEach((button) => button.addEventListener('click', () => {
       size = button.dataset.size;
       document.querySelectorAll('.size').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      $('hint').textContent = `Tamanho ${size} selecionado — pronto para adicionar à sacola.`;
+      $('hint').classList.remove('error');
       updateLabels();
     }));
 
@@ -427,6 +488,8 @@
     }
     function buy() {
       if (!size) {
+        $('hint').textContent = 'Escolha P, M ou G para continuar.';
+        $('hint').classList.add('error');
         $('tamanhos').scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.querySelector('.size').focus({ preventScroll: true });
         return;
@@ -444,11 +507,32 @@
     $('close-cart').addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
     $('cart-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
+    $('calculate-shipping').addEventListener('click', () => {
+      const raw = $('postal-code').value.replace(/\D/g, '').slice(0, 8);
+      $('postal-code').value = raw.length > 5 ? `${raw.slice(0, 5)}-${raw.slice(5)}` : raw;
+      $('shipping-status').textContent = raw.length === 8 ? 'Simulação disponível' : 'Informe um CEP válido';
+      $('shipping-status').style.color = raw.length === 8 ? 'var(--brand-dark)' : 'var(--red)';
+    });
+    $('share-product').addEventListener('click', async () => {
+      const shareData = { title: document.title, text: 'Confira este produto', url: location.href };
+      if (navigator.share) await navigator.share(shareData);
+      else { await navigator.clipboard?.writeText(location.href); $('share-product').textContent = 'Link copiado'; }
+    });
+    $('wishlist-product').addEventListener('click', () => {
+      const button = $('wishlist-product');
+      const added = button.getAttribute('aria-pressed') !== 'true';
+      button.setAttribute('aria-pressed', String(added));
+      button.classList.toggle('is-added', added);
+      button.textContent = added ? '♥ Adicionado' : '♡ Adicionar';
+    });
+    document.querySelectorAll('[data-similar-image]').forEach((image) => {
+      image.src = imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
+    });
+
     $('size-guide-link').addEventListener('click', () => {
-      const guide = $('size-guide');
-      guide.open = true;
+      const guide = $('product-details');
       guide.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      guide.querySelector('summary').focus({ preventScroll: true });
+      $('product-info-tab').focus({ preventScroll: true });
     });
 
     function renderFooter() {
