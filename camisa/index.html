@@ -132,17 +132,13 @@
     .shipping-form input { min-width: 0; flex: 1; height: 42px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; }
     .shipping-form button { height: 42px; padding: 0 17px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 700; }
     .shipping-help { margin: 9px 0 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
-    .product-actions-row { display: grid; grid-template-columns: 7fr 5fr; gap: 0; margin-top: 0; padding: 15px 0 17px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .share-block, .wishlist-block { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; min-width: 0; }
-    .share-block { padding-right: 18px; }
-    .wishlist-block { padding-left: 18px; border-left: 1px solid var(--line); }
-    .share-block > span, .wishlist-block > span { display: block; color: var(--muted); font-size: 9px; font-weight: 750; letter-spacing: .08em; line-height: 1.2; text-transform: uppercase; }
-    .share-block > span svg, .wishlist-block > span svg { display: none; }
-    .share-block button, .wishlist-block button { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; border: 0; padding: 0; background: transparent; color: var(--brand-dark); cursor: pointer; font-size: 12px; font-weight: 500; }
-    .share-block button::after { content: '↗'; font-size: 15px; line-height: 1; }
-    .wishlist-block button::first-letter { color: var(--red); }
-    .share-block button:hover, .wishlist-block button:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-    .wishlist-block button.is-added { color: var(--red); }
+    .product-actions-row { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 0; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .product-action { width: 40px; height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; background: #fff; color: var(--ink-soft); cursor: pointer; transition: color .18s, background .18s, border-color .18s, transform .18s; }
+    .product-action:hover { transform: translateY(-1px); border-color: #b7cbbd; background: var(--brand-soft); color: var(--brand-dark); }
+    .product-action svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .product-action.is-added { border-color: #ead5d3; background: #fcf3f2; color: var(--red); }
+    .product-action.is-added svg { fill: currentColor; }
+    .product-action:focus-visible { outline: 3px solid #a9cbb5; outline-offset: 3px; }
     .product-information { margin-top: 0; }
     .product-tab { width: 100%; margin-top: 28px; border-bottom: 1px solid var(--line); background: #fff; }
     .product-tab-nav { margin: 0; padding: 0; border-bottom: 1px solid var(--line); text-align: left; }
@@ -365,9 +361,9 @@
           <p class="shipping-help">Informe seu CEP para simular prazo e disponibilidade de entrega.</p>
         </section>
 
-        <div class="product-actions-row" aria-label="Ações do produto">
-          <div class="share-block"><span>Compartilhe este produto</span><button type="button" id="share-product" aria-label="Compartilhar produto">Compartilhar</button></div>
-          <div class="wishlist-block"><span>Lista de desejos</span><button type="button" id="wishlist-product" aria-pressed="false">♡&nbsp; Adicionar à lista</button></div>
+        <div class="product-actions-row" role="group" aria-label="Ações do produto">
+          <button class="product-action" type="button" id="share-product" aria-label="Compartilhar produto" title="Compartilhar produto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
+          <button class="product-action" type="button" id="wishlist-product" aria-label="Adicionar aos favoritos" title="Adicionar aos favoritos" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.2-8.8 10.2-8.8 10.2S3.2 14 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/></svg></button>
         </div>
 
       </div>
@@ -552,14 +548,21 @@
     $('share-product').addEventListener('click', async () => {
       const shareData = { title: document.title, text: 'Confira este produto', url: location.href };
       if (navigator.share) await navigator.share(shareData);
-      else { await navigator.clipboard?.writeText(location.href); $('share-product').textContent = 'Link copiado'; }
+      else {
+        await navigator.clipboard?.writeText(location.href);
+        const button = $('share-product');
+        button.setAttribute('aria-label', 'Link copiado');
+        button.title = 'Link copiado';
+        setTimeout(() => { button.setAttribute('aria-label', 'Compartilhar produto'); button.title = 'Compartilhar produto'; }, 1800);
+      }
     });
     $('wishlist-product').addEventListener('click', () => {
       const button = $('wishlist-product');
       const added = button.getAttribute('aria-pressed') !== 'true';
       button.setAttribute('aria-pressed', String(added));
       button.classList.toggle('is-added', added);
-      button.textContent = added ? '♥ Adicionado à lista' : '♡  Adicionar à lista';
+      button.setAttribute('aria-label', added ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+      button.title = added ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
     });
     document.querySelectorAll('[data-similar-image]').forEach((image) => {
       image.src = imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
