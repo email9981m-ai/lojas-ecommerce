@@ -941,6 +941,10 @@
     .checkout-form input:user-invalid { border-color: #d6a5a0; box-shadow: 0 0 0 3px rgba(162,57,50,.08); }
     .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .checkout-grid-address { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(88px, .5fr); gap: 12px; }
+    .checkout-address-details { display: grid; gap: 14px; }
+    .checkout-cep-status { margin: -3px 0 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .checkout-cep-status.success { color: var(--brand-dark); }
+    .checkout-cep-status.error { color: #8c3932; }
     .checkout-actions { display: flex; gap: 10px; margin-top: 18px; }
     .checkout-actions .cta { min-height: 50px; margin: 0; }
     .checkout-back { min-height: 50px; padding: 0 17px; border: 1px solid #d3ddd5; border-radius: 11px; background: rgba(255,255,255,.7); color: var(--ink-soft); cursor: pointer; font-size: 12px; font-weight: 750; transition: border-color .16s, background .16s, color .16s; }
@@ -1274,10 +1278,7 @@
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
           <form class="checkout-form" id="checkout-personal-form">
             <label>Nome completo<input id="checkout-name" autocomplete="name" required placeholder="Seu nome completo"></label>
-            <div class="checkout-grid-2">
-              <label>E-mail<input id="checkout-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
-              <label>WhatsApp / celular<input id="checkout-phone" type="tel" autocomplete="tel" required placeholder="(11) 99999-9999"></label>
-            </div>
+            <label>E-mail<input id="checkout-email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
             <label>CPF<input id="checkout-cpf" inputmode="numeric" maxlength="14" required placeholder="000.000.000-00"></label>
             <div class="checkout-actions"><button class="cta" type="submit">Continuar para entrega <span class="cta-arrow">→</span></button></div>
           </form>
@@ -1286,12 +1287,15 @@
           <p class="checkout-pane-kicker">Entrega</p><h3>Endereço de entrega</h3>
           <p>Informe o CEP para preencher o endereço. Revise os dados antes de continuar.</p>
           <form class="checkout-form" id="checkout-address-form">
-            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000"></label>
-            <div class="checkout-grid-address"><label>Rua / avenida<input id="checkout-street" autocomplete="address-line1" required></label><label>Número<input id="checkout-number" required></label></div>
-            <label>Complemento (opcional)<input id="checkout-complement" autocomplete="address-line2"></label>
-            <label>Bairro<input id="checkout-neighborhood" required></label>
-            <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
-            <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" type="submit">Continuar para pagamento <span class="cta-arrow">→</span></button></div>
+            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000" aria-describedby="checkout-cep-status"></label>
+            <p class="checkout-cep-status" id="checkout-cep-status" hidden role="status"></p>
+            <div class="checkout-address-details" id="checkout-address-details" hidden>
+              <div class="checkout-grid-address"><label>Rua / avenida<input id="checkout-street" autocomplete="address-line1" required></label><label>Número<input id="checkout-number" required></label></div>
+              <label>Complemento (opcional)<input id="checkout-complement" autocomplete="address-line2"></label>
+              <label>Bairro<input id="checkout-neighborhood" required></label>
+              <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
+            </div>
+            <div class="checkout-actions checkout-address-actions" id="checkout-address-actions" hidden><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" type="submit">Continuar para pagamento <span class="cta-arrow">→</span></button></div>
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
@@ -1801,7 +1805,6 @@
     function showCheckoutAlert(message) { const el = $('checkout-alert'); if (el) { el.textContent = message; el.classList.add('show'); } }
     function clearCheckoutAlert() { const el = $('checkout-alert'); if (el) { el.textContent = ''; el.classList.remove('show'); } }
     function formatCpf(value) { const digits = value.replace(/\D/g, '').slice(0, 11); return digits.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); }
-    function formatPhone(value) { const digits = value.replace(/\D/g, '').slice(0, 11); if (digits.length <= 10) return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2'); return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2'); }
     let pixCountdownTimer;
     function startPixCountdown(totalSeconds) {
       clearInterval(pixCountdownTimer);
@@ -1821,16 +1824,33 @@
       pixCountdownTimer = setInterval(tick, 1000);
     }
     $('checkout-cpf').addEventListener('input', () => { $('checkout-cpf').value = formatCpf($('checkout-cpf').value); });
-    $('checkout-phone').addEventListener('input', () => { $('checkout-phone').value = formatPhone($('checkout-phone').value); });
     document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); }));
     document.querySelectorAll('[data-checkout-back]').forEach((button) => button.addEventListener('click', () => setCheckoutStep(Number(button.dataset.checkoutBack))));
-    $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.phone = $('checkout-phone').value.replace(/\D/g, ''); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
+    $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
     $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); setCheckoutStep(3); });
-    $('checkout-cep').addEventListener('input', () => { const raw = $('checkout-cep').value.replace(/\D/g, '').slice(0, 8); $('checkout-cep').value = raw.length > 5 ? `${raw.slice(0,5)}-${raw.slice(5)}` : raw; if (raw.length === 8) fetch(`https://viacep.com.br/ws/${raw}/json/`).then((r) => r.json()).then((data) => { if (!data.erro) { $('checkout-street').value = data.logradouro || ''; $('checkout-neighborhood').value = data.bairro || ''; $('checkout-city').value = data.localidade || ''; $('checkout-state').value = data.uf || ''; } }).catch(() => {}); });
+    let cepRequestId = 0;
+    $('checkout-cep').addEventListener('input', async () => {
+      const raw = $('checkout-cep').value.replace(/\D/g, '').slice(0, 8);
+      $('checkout-cep').value = raw.length > 5 ? `${raw.slice(0,5)}-${raw.slice(5)}` : raw;
+      const status = $('checkout-cep-status'); const details = $('checkout-address-details'); const actions = $('checkout-address-actions');
+      if (raw.length < 8) { status.hidden = true; status.className = 'checkout-cep-status'; details.hidden = true; actions.hidden = true; return; }
+      const requestId = ++cepRequestId; status.hidden = false; status.className = 'checkout-cep-status'; status.textContent = 'Consultando endereço…'; details.hidden = true; actions.hidden = true;
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${raw}/json/`); const data = await response.json();
+        if (requestId !== cepRequestId) return;
+        if (data.erro) throw new Error('CEP não encontrado');
+        $('checkout-street').value = data.logradouro || ''; $('checkout-neighborhood').value = data.bairro || ''; $('checkout-city').value = data.localidade || ''; $('checkout-state').value = data.uf || '';
+        status.className = 'checkout-cep-status success'; status.textContent = 'Endereço encontrado. Confira os dados abaixo.'; details.hidden = false; actions.hidden = false;
+        $('checkout-number').focus();
+      } catch (error) {
+        if (requestId !== cepRequestId) return;
+        status.className = 'checkout-cep-status error'; status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; actions.hidden = false;
+      }
+    });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert(); const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
-      const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, phone: checkoutState.donor.phone, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, address: checkoutState.donor };
+      const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, address: checkoutState.donor };
       try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar QR Code PIX →'; } });
 
     renderCart();
