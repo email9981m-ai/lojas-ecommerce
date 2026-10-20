@@ -73,7 +73,8 @@
     .thumb img { width: 100%; height: 100%; object-fit: contain; }
     .stage { position: relative; min-width: 0; aspect-ratio: .87; display: grid; place-items: center; overflow: hidden; border: 1px solid #efeee9; border-radius: var(--radius); background: var(--canvas); }
     .stage img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
-    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(255,255,255,.88); color: var(--ink-soft); font-size: 11px; font-weight: 650; backdrop-filter: blur(8px); }
+    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(255,255,255,.9); color: var(--ink-soft); font-size: 11px; font-weight: 650; cursor: zoom-in; backdrop-filter: blur(8px); transition: background .16s, transform .16s; }
+    .gallery-label:hover { transform: translateY(-1px); background: #fff; }
     .gallery-label svg { width: 14px; height: 14px; color: var(--brand); }
     .gallery-caption { margin: 12px 0 0 90px; color: var(--muted); font-size: 11px; }
     .product-info { padding-top: 8px; }
@@ -219,6 +220,17 @@
     .similar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .similar-card { min-width: 0; }
     .similar-image { aspect-ratio: .88; overflow: hidden; border-radius: 12px; background: var(--canvas); }
+    .similar-image-button { width: 100%; display: block; padding: 0; border: 0; text-align: inherit; cursor: zoom-in; }
+    .similar-image-button:focus-visible { outline: 3px solid #91b3a0; outline-offset: 3px; }
+    .similar-image-button img { transition: transform .28s ease; }
+    .similar-image-button:hover img { transform: scale(1.045); }
+    .image-view-dialog { width: min(900px, calc(100% - 32px)); max-width: 900px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.7); border-radius: 18px; background: #fff; }
+    .image-view-content { position: relative; padding: 18px; }
+    .image-view-close { position: absolute; top: 12px; right: 12px; z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(23,25,22,.1); border-radius: 50%; background: rgba(255,255,255,.94); color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.1); }
+    .image-view-close:hover { background: #f2f4f1; }
+    .image-view-content img { width: 100%; max-height: min(76vh, 800px); object-fit: contain; border-radius: 12px; background: var(--canvas); }
+    .image-view-caption { margin: 12px 2px 1px; color: var(--ink-soft); font-size: 13px; font-weight: 650; }
+
     .similar-image img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
     .similar-card strong { display: block; margin-top: 10px; font-size: 11px; }
     .similar-card span { display: block; margin-top: 4px; color: var(--brand-dark); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
@@ -894,7 +906,7 @@
           </div>
           <div class="stage">
             <img id="main-image" width="1031" height="1200" fetchpriority="high" decoding="async" alt="Camiseta preta casual com brasão do Corinthians, vestida por modelo">
-            <span class="gallery-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>Veja os detalhes nas fotos</span>
+            <button class="gallery-label" id="view-main-image" type="button" aria-label="Ampliar imagem principal do produto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>Veja os detalhes nas fotos</button>
           </div>
         </div>
         <p class="gallery-caption">Imagens do produto para referência visual.</p>
@@ -971,10 +983,10 @@
     <section class="similar-products" aria-labelledby="similar-title">
       <div class="similar-head"><div><p>Você também pode gostar</p><h2 id="similar-title">Mais peças para completar seu estilo.</h2></div><small>Explore outras opções da mesma curadoria.</small></div>
       <div class="similar-grid">
-        <article class="similar-card"><div class="similar-image"><img data-similar-image="1" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · preta</strong><span>Ver produto</span></article>
-        <article class="similar-card"><div class="similar-image"><img data-similar-image="2" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · verde</strong><span>Ver produto</span></article>
-        <article class="similar-card"><div class="similar-image"><img data-similar-image="3" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · marinho</strong><span>Ver produto</span></article>
-        <article class="similar-card"><div class="similar-image"><img data-similar-image="4" alt="Camiseta casual em detalhe"></div><strong>Camiseta essencial · clara</strong><span>Ver produto</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="1" aria-label="Ampliar imagem: Camiseta essencial preta"><img data-similar-image="1" alt="Camiseta essencial preta"></button><strong>Camiseta essencial · preta</strong><span>Ver produto</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="2" aria-label="Ampliar imagem: Camiseta essencial verde"><img data-similar-image="2" alt="Camiseta essencial verde"></button><strong>Camiseta essencial · verde</strong><span>Ver produto</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="3" aria-label="Ampliar imagem: Camiseta essencial marinho"><img data-similar-image="3" alt="Camiseta essencial marinho"></button><strong>Camiseta essencial · marinho</strong><span>Ver produto</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="4" aria-label="Ampliar imagem: Camiseta essencial clara"><img data-similar-image="4" alt="Camiseta essencial clara"></button><strong>Camiseta essencial · clara</strong><span>Ver produto</span></article>
       </div>
     </section>
 
@@ -1146,6 +1158,14 @@
     </div>
   </dialog>
 
+  <dialog class="image-view-dialog" id="image-view-dialog" aria-labelledby="image-view-caption">
+    <div class="image-view-content">
+      <button class="image-view-close" id="image-view-close" type="button" aria-label="Fechar visualização">×</button>
+      <img id="image-view-full" alt="">
+      <p class="image-view-caption" id="image-view-caption"></p>
+    </div>
+  </dialog>
+
   <script>
     // Para ativar um checkout real, informe a URL da loja aqui. O tamanho segue como ?size=P|M|G.
     const CHECKOUT_URL = '';
@@ -1307,6 +1327,23 @@
     document.querySelectorAll('[data-similar-image]').forEach((image) => {
       image.src = imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
     });
+    const imageView = $('image-view-dialog');
+    $('view-main-image').addEventListener('click', () => {
+      const image = $('main-image');
+      $('image-view-full').src = image.currentSrc || image.src;
+      $('image-view-full').alt = image.alt;
+      $('image-view-caption').textContent = image.alt || 'Detalhes da camiseta';
+      imageView.showModal();
+    });
+    document.querySelectorAll('[data-image-view]').forEach((button) => button.addEventListener('click', () => {
+      const image = button.querySelector('img');
+      $('image-view-full').src = image.currentSrc || image.src;
+      $('image-view-full').alt = image.alt;
+      $('image-view-caption').textContent = image.alt;
+      imageView.showModal();
+    }));
+    $('image-view-close').addEventListener('click', () => imageView.close());
+    imageView.addEventListener('click', (event) => { if (event.target === imageView) imageView.close(); });
 
     $('size-guide-link').addEventListener('click', () => {
       const guide = $('product-details');
