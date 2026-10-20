@@ -105,16 +105,18 @@
     .price { color: var(--brand-dark); font-size: 46px; line-height: 1; letter-spacing: -.055em; font-weight: 820; }
     .price-wrap { position: relative; display: inline-block; flex: none; padding-bottom: 13px; }
     .price-wrap .price { display: block; }
+    .price-wrap .price { transform-origin: left center; animation: free-price-enter .62s cubic-bezier(.2,.75,.25,1) both; }
     .price-brush { position: absolute; left: 0; bottom: 0; display: block; width: 100%; height: 15px; overflow: visible; }
-    .price-brush path { fill: none; stroke: #2f6b4f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-    .price-brush path + path { stroke: #76a184; stroke-width: 2; opacity: .8; }
+    .price-brush path { fill: none; stroke: #2f6b4f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .16s forwards; }
+    .price-brush path + path { stroke: #76a184; stroke-width: 2; opacity: .8; animation-delay: .34s; }
 
     .price-reference { display: grid; gap: 2px; padding-left: 15px; border-left: 1px solid #d7e5db; }
     .price-reference strong { color: var(--ink-soft); font-size: 14px; line-height: 1.2; }
     .price-reference small { color: var(--muted); font-size: 10px; }
-    .offer-timing { min-height: 1.5em; margin: 9px 0 0; color: var(--ink-soft); font-size: 12px; font-weight: 650; letter-spacing: .005em; }
-    .offer-timing-text { display: inline-block; transition: opacity .22s ease, transform .22s ease; }
-    .offer-timing-text.is-changing { opacity: 0; transform: translateY(-3px); }
+    .price-disclosure { display: flex; align-items: flex-start; gap: 9px; margin: 13px 0 0; padding: 11px 12px; border: 1px solid #dfe9e1; border-radius: 10px; background: #f5f9f5; color: #505a52; font-size: 11px; line-height: 1.55; }
+    .price-disclosure svg { width: 16px; height: 16px; flex: none; margin-top: 1px; color: var(--brand); }
+    .price-disclosure strong { color: var(--ink); font-weight: 750; }
+
     .offer-card { display: flex; gap: 12px; margin: 14px 0 20px; padding: 13px 15px; border: 1px solid #dbe7dd; border-radius: 12px; background: #f7faf7; }
     .offer-icon { width: 20px; height: 20px; flex: none; color: var(--brand); }
     .offer-copy strong { display: block; margin-bottom: 2px; font-size: 12px; }
@@ -290,9 +292,10 @@
     .final-purchase-copy p:last-child { margin: 11px 0 0; color: var(--muted); font-size: 12px; }
     .final-price { display: block; margin-top: 15px; color: var(--brand-dark); font-size: 29px; line-height: 1; font-weight: 820; letter-spacing: -.04em; }
     .final-price-note { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; }
+    .final-price { transform-origin: left center; animation: free-price-enter .62s cubic-bezier(.2,.75,.25,1) .12s both; }
     .price-flourish { display: block; width: 108px; height: 15px; margin: 3px 0 0 1px; overflow: visible; }
-    .price-flourish path { fill: none; stroke: #2f6b4f; stroke-width: 4.2; stroke-linecap: round; }
-    .price-flourish path + path { stroke: #76a184; stroke-width: 1.8; opacity: .8; }
+    .price-flourish path { fill: none; stroke: #2f6b4f; stroke-width: 4.2; stroke-linecap: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .28s forwards; }
+    .price-flourish path + path { stroke: #76a184; stroke-width: 1.8; opacity: .8; animation-delay: .44s; }
 
     .final-purchase-controls { min-width: 0; padding: 18px; border: 1px solid #e7ebe5; border-radius: 13px; background: rgba(255,255,255,.82); }
     .final-purchase-controls > strong { display: block; margin-bottom: 10px; font-size: 11px; }
@@ -301,6 +304,12 @@
     .final-purchase .cta { min-height: 52px; margin: 0; }
     .final-purchase-hint { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); font-size: 10px; }
     .final-purchase-hint.error { color: var(--red); }
+    @keyframes free-price-enter { from { opacity: .55; transform: translateY(5px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes brush-draw { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .price-wrap .price, .final-price { animation: none; }
+      .price-brush path, .price-flourish path { animation: none; stroke-dashoffset: 0; }
+    }
     .footer { border-top: 1px solid var(--line); background: #fcfcfa; }
     .footer-inner { display: grid; grid-template-columns: minmax(180px,1.2fr) repeat(3,minmax(130px,1fr)); align-items: start; gap: 28px; padding: 38px 0 30px; }
     .footer-static h2 { margin: 0 0 12px; color: var(--ink-soft); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
@@ -956,12 +965,12 @@
         <div class="price-block" aria-label="Preço do produto">
           <span class="price-kicker">Oferta do produto</span>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
-          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; termina hoje, 19 de outubro de 2026.</span></p>
+          <p class="price-disclosure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c-.7-1-1.7-1.5-3-1.5-1.7 0-2.8.8-2.8 2s1.1 1.8 2.8 2 2.8.8 2.8 2-1.1 2-2.8 2c-1.3 0-2.3-.5-3-1.5"/></svg><span><strong>R$ 0,00 pela camiseta.</strong> O frete pode ser cobrado à parte; confirme o valor pelo CEP antes do pedido.</span></p>
         </div>
 
         <div class="offer-card">
           <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
-          <div class="offer-copy"><strong>Uma peça de torcida, com preço claro</strong><p>Escolha P, M ou G. Eventuais custos de entrega e a disponibilidade precisam ser confirmados antes do pedido.</p></div>
+          <div class="offer-copy"><strong>Confira as condições antes de pedir</strong><p>Verifique o tamanho disponível e confira o total com frete junto à loja antes de confirmar.</p></div>
         </div>
 
         <fieldset class="size-fieldset" id="tamanhos" aria-describedby="hint">
@@ -1234,22 +1243,6 @@
     const $ = (id) => document.getElementById(id);
     let size = '';
     const cart = [];
-
-    const offerTiming = $('offer-timing-text');
-    const offerPhrases = ['Para a Fiel · por tempo limitado', 'Para a Fiel · termina hoje (19/10/2026)'];
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      offerTiming.textContent = 'Para a Fiel · por tempo limitado · termina hoje (19/10/2026)';
-    } else {
-      let offerPhraseIndex = 0;
-      window.setInterval(() => {
-        offerTiming.classList.add('is-changing');
-        window.setTimeout(() => {
-          offerPhraseIndex = (offerPhraseIndex + 1) % offerPhrases.length;
-          offerTiming.textContent = offerPhrases[offerPhraseIndex];
-          offerTiming.classList.remove('is-changing');
-        }, 220);
-      }, 3400);
-    }
 
     $('main-image').src = imgs[0][0];
     $('final-product-image').src = imgs[0][0];
