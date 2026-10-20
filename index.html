@@ -941,11 +941,28 @@
     .checkout-form input:user-invalid { border-color: #d6a5a0; box-shadow: 0 0 0 3px rgba(162,57,50,.08); }
     .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .checkout-grid-address { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(88px, .5fr); gap: 12px; }
+    .checkout-number-row { grid-template-columns: minmax(88px, .65fr) minmax(0, 1.35fr); }
     .checkout-address-details { display: grid; gap: 14px; }
     .checkout-address-details[hidden], .checkout-address-actions[hidden], .checkout-cep-status[hidden] { display: none !important; }
+    .checkout-address-actions .cta:disabled { opacity: .48; cursor: not-allowed; box-shadow: none; }
     .checkout-cep-status { margin: -3px 0 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .checkout-cep-status.success { color: var(--brand-dark); }
     .checkout-cep-status.error { color: #8c3932; }
+    .checkout-shipping-block { display: grid; gap: 8px; padding-top: 4px; }
+    .checkout-shipping-option { position: relative; display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: start; gap: 11px; padding: 13px 14px; border: 1px solid #d1ddd4; border-radius: 12px; background: #fff; color: var(--ink-soft); box-shadow: 0 3px 11px rgba(30,50,35,.05); transition: border-color .16s, box-shadow .16s, transform .16s; }
+    .checkout-shipping-option:has(input:checked) { border-color: #91b298; box-shadow: 0 4px 13px rgba(30,70,40,.08); }
+    .checkout-shipping-option:hover { border-color: #9fbea5; transform: translateY(-1px); }
+    .checkout-shipping-option input { width: 16px; height: 16px; margin: 4px 0 0; accent-color: var(--brand); }
+    .checkout-shipping-copy { display: grid; gap: 4px; min-width: 0; }
+    .checkout-shipping-copy strong { color: var(--ink); font-size: 13px; }
+    .checkout-shipping-copy > span { color: var(--muted); font-size: 10px; }
+    .checkout-shipping-provider { display: flex; align-items: center; gap: 7px; color: var(--brand-dark); font-size: 10px; font-weight: 850; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+    .checkout-shipping-status { margin-left: 4px; padding: 3px 5px; border-radius: 4px; background: #edf6ef; color: #4d7657; font-size: 8px; font-style: normal; letter-spacing: .04em; }
+    .checkout-postal-icon { display: grid; width: 23px; height: 23px; place-items: center; border-radius: 6px; background: #f2c900; color: #173f85; }
+    .checkout-postal-icon svg { width: 16px; height: 16px; }
+    .checkout-shipping-price { display: grid; gap: 3px; justify-items: end; padding-top: 2px; color: var(--brand-dark); font-size: 15px; font-weight: 850; white-space: nowrap; }
+    .checkout-shipping-price small { color: var(--muted); font-size: 9px; font-weight: 650; }
+    .checkout-shipping-note { margin: 0 2px; color: #657067; font-size: 10px; line-height: 1.4; }
     .checkout-actions { display: flex; gap: 10px; margin-top: 18px; }
     .checkout-actions .cta { min-height: 50px; margin: 0; }
     .checkout-back { min-height: 50px; padding: 0 17px; border: 1px solid #d3ddd5; border-radius: 11px; background: rgba(255,255,255,.7); color: var(--ink-soft); cursor: pointer; font-size: 12px; font-weight: 750; transition: border-color .16s, background .16s, color .16s; }
@@ -958,6 +975,9 @@
     .checkout-order-row strong { color: var(--ink); text-align: right; }
     .checkout-order-total { margin-top: 12px; padding-top: 12px; border-top: 1px solid #dce7de; font-size: 14px; }
     .checkout-order-total strong { color: var(--brand-dark); font-size: 18px; }
+    .checkout-payment-summary { margin: 0 0 16px; padding: 13px 14px; border: 1px solid #cfe1d2; border-radius: 11px; background: #f3f9f4; }
+    .checkout-payment-summary strong { display: block; color: var(--brand-dark); font-size: 14px; line-height: 1.3; }
+    .checkout-payment-summary span { display: block; margin-top: 3px; color: #647066; font-size: 10px; line-height: 1.45; }
     .checkout-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
     .checkout-review-card { min-width: 0; padding: 12px 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.72); }
     .checkout-review-card > span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
@@ -986,7 +1006,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2 { grid-template-columns: 1fr; gap: 13px; } .checkout-grid-address { grid-template-columns: minmax(0, 1.35fr) minmax(76px, .65fr); gap: 10px; } .checkout-number-row { grid-template-columns: minmax(76px, .65fr) minmax(0, 1.35fr); } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1291,33 +1311,29 @@
             <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000" aria-describedby="checkout-cep-status"></label>
             <p class="checkout-cep-status" id="checkout-cep-status" hidden role="status"></p>
             <div class="checkout-address-details" id="checkout-address-details" hidden>
-              <div class="checkout-grid-address"><label>Rua / avenida<input id="checkout-street" autocomplete="address-line1" required></label><label>Número<input id="checkout-number" required></label></div>
-              <label>Complemento (opcional)<input id="checkout-complement" autocomplete="address-line2"></label>
+              <label>Rua / avenida<input id="checkout-street" autocomplete="address-line1" required></label>
+              <div class="checkout-grid-address checkout-number-row"><label>Número<input id="checkout-number" required></label><label title="Complemento opcional">Complemento<input id="checkout-complement" autocomplete="address-line2"></label></div>
               <label>Bairro<input id="checkout-neighborhood" required></label>
               <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
+              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios <em class="checkout-shipping-status">Selecionado</em></span><strong>Entrega padrão</strong><span>Prazo estimado: até 3 dias úteis</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Pagamento exclusivo da entrega · prazo e valor exibidos antes da confirmação.</p></div>
             </div>
-            <div class="checkout-actions checkout-address-actions" id="checkout-address-actions" hidden><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" type="submit">Continuar para pagamento <span class="cta-arrow">→</span></button></div>
+            <div class="checkout-actions checkout-address-actions" id="checkout-address-actions"><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" id="checkout-address-submit" type="submit" disabled>Continuar para pagamento <span class="cta-arrow">→</span></button></div>
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
           <p class="checkout-pane-kicker">Confirmação</p><h3>Revisar e pagar</h3>
-          <p>Confira o item, a contribuição escolhida, o endereço e o valor final antes de gerar o PIX.</p>
+          <p>Confira o item, o frete, o endereço e o valor final antes de gerar o PIX.</p>
           <div class="checkout-order">
             <div class="checkout-order-row"><span>Item</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
             <div class="checkout-order-row"><span>Preço do produto</span><strong>R$ 0,00</strong></div>
-            <div class="checkout-order-row"><span>Contribuição</span><strong id="checkout-contribution-label">Contribuição Benfeitor</strong></div>
-            <div class="checkout-order-row checkout-order-total"><span>Total</span><strong id="checkout-total">R$ 50,00</strong></div>
+            <div class="checkout-order-row"><span>Contribuição</span><strong id="checkout-contribution-label">Não incluída</strong></div>
+            <div class="checkout-order-row"><span>Frete</span><strong id="checkout-shipping-label">R$ 39,00</strong></div>
+            <div class="checkout-order-row checkout-order-total"><span>Total</span><strong id="checkout-total">R$ 39,00</strong></div>
           </div>
+          <div class="checkout-payment-summary"><strong>Pagamento somente do frete</strong><span>A camiseta é gratuita. O total de R$ 39,00 corresponde exclusivamente à entrega em até 3 dias.</span></div>
           <div class="checkout-review-grid" aria-label="Dados para conferência">
             <div class="checkout-review-card"><span>Cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
             <div class="checkout-review-card"><span>Entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
-          </div>
-          <div class="checkout-subheading">Escolha a contribuição</div>
-          <div class="contribution-grid">
-            <label class="contribution-option"><input type="radio" name="checkout-contribution" value="10" data-label="Devoto"><span>Devoto</span><strong>R$ 10</strong></label>
-            <label class="contribution-option"><input type="radio" name="checkout-contribution" value="15" data-label="Protetor"><span>Protetor</span><strong>R$ 15</strong></label>
-            <label class="contribution-option"><input type="radio" name="checkout-contribution" value="20" data-label="Padrinho"><span>Padrinho</span><strong>R$ 20</strong></label>
-            <label class="contribution-option"><input type="radio" name="checkout-contribution" value="50" data-label="Benfeitor" checked><span>Benfeitor</span><strong>R$ 50</strong></label>
           </div>
           <p class="checkout-transparency-note"><strong>Confira antes de pagar:</strong> total, endereço e beneficiário aparecem nesta etapa.</p>
           <div class="pix-box"><strong>Pagamento por PIX</strong><p>Confira o beneficiário e o valor no aplicativo do seu banco antes de confirmar.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar QR Code PIX <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
@@ -1781,7 +1797,7 @@
     updateLabels();
 
     // Checkout integrado ao site. O pagamento real depende do endpoint /api/create-payment.
-    const checkoutState = { step: 1, contribution: 50, contributionLabel: 'Benfeitor', donor: {} };
+    const checkoutState = { step: 1, contribution: 0, contributionLabel: 'Não incluída', shipping: 39, donor: {} };
     const moneyBRL = (value) => Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     function setCheckoutStep(step) {
       checkoutState.step = step;
@@ -1796,8 +1812,9 @@
       const sizeEl = $('checkout-size'); if (sizeEl) sizeEl.textContent = selected;
       const cardSizeEl = $('checkout-card-size'); if (cardSizeEl) cardSizeEl.textContent = selected;
       const productImageEl = $('checkout-product-image'); if (productImageEl && imgs[0]) { productImageEl.src = imgs[0][0]; productImageEl.alt = imgs[0][1] || 'Camiseta Casual Corinthians'; }
-      const labelEl = $('checkout-contribution-label'); if (labelEl) labelEl.textContent = `Contribuição ${checkoutState.contributionLabel}`;
-      const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = moneyBRL(checkoutState.contribution);
+      const labelEl = $('checkout-contribution-label'); if (labelEl) labelEl.textContent = checkoutState.contribution > 0 ? `Contribuição ${checkoutState.contributionLabel}` : 'Não incluída';
+      const shippingEl = $('checkout-shipping-label'); if (shippingEl) shippingEl.textContent = moneyBRL(checkoutState.shipping);
+      const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = moneyBRL(checkoutState.contribution + checkoutState.shipping);
       const nameEl = $('checkout-review-name'); if (nameEl) nameEl.textContent = checkoutState.donor.name || 'A preencher';
       const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
       const addressEl = $('checkout-review-address'); if (addressEl) addressEl.textContent = checkoutState.donor.street ? `${checkoutState.donor.street}, ${checkoutState.donor.number}` : 'A preencher';
@@ -1828,30 +1845,30 @@
     document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); }));
     document.querySelectorAll('[data-checkout-back]').forEach((button) => button.addEventListener('click', () => setCheckoutStep(Number(button.dataset.checkoutBack))));
     $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
-    $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); setCheckoutStep(3); });
+    $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); checkoutState.shipping = 39; syncCheckoutSummary(); setCheckoutStep(3); });
     let cepRequestId = 0;
     $('checkout-cep').addEventListener('input', async () => {
       const raw = $('checkout-cep').value.replace(/\D/g, '').slice(0, 8);
       $('checkout-cep').value = raw.length > 5 ? `${raw.slice(0,5)}-${raw.slice(5)}` : raw;
       const status = $('checkout-cep-status'); const details = $('checkout-address-details'); const actions = $('checkout-address-actions');
-      if (raw.length < 8) { status.hidden = true; status.className = 'checkout-cep-status'; details.hidden = true; actions.hidden = true; return; }
-      const requestId = ++cepRequestId; status.hidden = false; status.className = 'checkout-cep-status'; status.textContent = 'Consultando endereço…'; details.hidden = true; actions.hidden = true;
+      if (raw.length < 8) { status.hidden = true; status.className = 'checkout-cep-status'; details.hidden = true; $('checkout-address-submit').disabled = true; return; }
+      const requestId = ++cepRequestId; status.hidden = false; status.className = 'checkout-cep-status'; status.textContent = 'Consultando endereço…'; details.hidden = true; $('checkout-address-submit').disabled = true;
       try {
         const response = await fetch(`https://viacep.com.br/ws/${raw}/json/`); const data = await response.json();
         if (requestId !== cepRequestId) return;
         if (data.erro) throw new Error('CEP não encontrado');
         $('checkout-street').value = data.logradouro || ''; $('checkout-neighborhood').value = data.bairro || ''; $('checkout-city').value = data.localidade || ''; $('checkout-state').value = data.uf || '';
-        status.className = 'checkout-cep-status success'; status.textContent = 'Endereço encontrado. Confira os dados abaixo.'; details.hidden = false; actions.hidden = false;
+        status.className = 'checkout-cep-status success'; status.textContent = 'Endereço encontrado. Confira os dados abaixo.'; details.hidden = false; $('checkout-address-submit').disabled = false;
         $('checkout-number').focus();
       } catch (error) {
         if (requestId !== cepRequestId) return;
-        status.className = 'checkout-cep-status error'; status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; actions.hidden = false;
+        status.className = 'checkout-cep-status error'; status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; $('checkout-address-submit').disabled = false;
       }
     });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert(); const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
-      const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, address: checkoutState.donor };
+      const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution + checkoutState.shipping, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, shipping: { amount: checkoutState.shipping, label: 'Entrega em até 3 dias' }, address: checkoutState.donor };
       try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar QR Code PIX →'; } });
 
     renderCart();
