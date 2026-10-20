@@ -1192,6 +1192,16 @@
     .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price small { margin-top: 2px; color: #748078; font-size: 9px; }
     .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note { margin: 1px 2px 0; color: #69756d; font-size: 10px; }
     .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note::before { content: none; }
+
+    /* Alinhamento final: modalidade e valor na mesma linha, sem rótulos redundantes. */
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row > strong:first-child { min-width: 0; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row .checkout-shipping-price { display: block; flex: none; padding: 0; color: #245b31; font-size: 15px; line-height: 1.2; text-align: right; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row .checkout-shipping-price small { display: none; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy > span:last-child { margin-top: 1px; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row .checkout-shipping-price { grid-column: auto; }
+    }
   </style>
 </head>
 <body>
@@ -1499,7 +1509,7 @@
               <div class="checkout-grid-address checkout-number-row"><label>Número<input id="checkout-number" required></label><label title="Complemento opcional">Complemento<input id="checkout-complement" autocomplete="address-line2"></label></div>
               <label>Bairro<input id="checkout-neighborhood" required></label>
               <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
-              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios</span><strong>Entrega padrão</strong><span>Até 3 dias úteis após o pagamento</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Frete pago separadamente · prazo contado após o pagamento.</p></div>
+              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios</span><span class="checkout-shipping-main-row"><strong>Entrega padrão</strong><strong class="checkout-shipping-price">R$ 39,00</strong></span><span>Até 3 dias úteis após o pagamento</span></span></label><p class="checkout-shipping-note">Pagamento separado · prazo contado após o pagamento.</p></div>
             </div>
             <div class="checkout-actions checkout-address-actions" id="checkout-address-actions"><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" id="checkout-address-submit" type="submit" disabled>Continuar para pagamento <span class="cta-arrow">→</span></button></div>
           </form>
