@@ -936,8 +936,9 @@
     .checkout-product-price small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 600; }
     .checkout-pane { display: none; }
     .checkout-pane.active { display: block; }
+    .checkout-pane-kicker { margin: 0 0 7px; color: var(--brand); font-size: 9px; font-weight: 850; letter-spacing: .14em; line-height: 1.2; text-transform: uppercase; }
     .checkout-pane h3 { margin: 0 0 6px; color: var(--ink); font-size: 22px; line-height: 1.2; letter-spacing: -.045em; }
-    .checkout-pane > p { margin: 0 0 19px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .checkout-pane > p:not(.checkout-pane-kicker) { max-width: 58ch; margin: 0 0 22px; color: var(--muted); font-size: 12px; line-height: 1.55; }
     .checkout-form { display: grid; gap: 14px; }
     .checkout-form label { display: grid; gap: 6px; color: #4b584e; font-size: 10.5px; font-weight: 800; letter-spacing: .01em; }
     .checkout-form label:focus-within { color: var(--brand-dark); }
@@ -972,6 +973,7 @@
     .contribution-option input { width: 15px; height: 15px; margin: 0 2px 0 0; accent-color: var(--brand); }
     .contribution-option span { font-size: 11px; font-weight: 700; }
     .contribution-option strong { color: var(--brand-dark); font-size: 13px; }
+    .checkout-subheading { margin: 2px 0 10px; color: var(--ink-soft); font-size: 12px; font-weight: 800; }
     .pix-box { padding: 15px; border: 1px dashed #b8d0bc; border-radius: 12px; background: #f7faf7; }
     .pix-box strong { display: block; margin-bottom: 4px; color: var(--brand-dark); font-size: 14px; }
     .pix-box p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
@@ -983,7 +985,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-steps { gap: 5px; padding-top: 10px; padding-bottom: 10px; } .checkout-step-pill { padding: 0; font-size: 9px; } .checkout-step-pill::before { width: 22px; height: 22px; font-size: 9px; } .checkout-steps::before { top: 22px; left: 38px; right: 38px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-steps { gap: 5px; padding-top: 10px; padding-bottom: 10px; } .checkout-step-pill { padding: 0; font-size: 9px; } .checkout-step-pill::before { width: 22px; height: 22px; font-size: 9px; } .checkout-steps::before { top: 22px; left: 38px; right: 38px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1277,7 +1279,7 @@
         </article>
         <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
         <section class="checkout-pane active" data-checkout-pane="1">
-          <h3>Dados do cliente</h3>
+          <p class="checkout-pane-kicker">Etapa 1 · Identificação</p><h3>Dados do cliente</h3>
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
           <form class="checkout-form" id="checkout-personal-form">
             <label>Nome completo<input id="checkout-name" autocomplete="name" required placeholder="Seu nome completo"></label>
@@ -1290,7 +1292,7 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="2">
-          <h3>Endereço de entrega</h3>
+          <p class="checkout-pane-kicker">Etapa 2 · Entrega</p><h3>Endereço de entrega</h3>
           <p>Informe o CEP para preencher o endereço. Revise os dados antes de continuar.</p>
           <form class="checkout-form" id="checkout-address-form">
             <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000"></label>
@@ -1302,7 +1304,7 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <h3>Revisar e pagar</h3>
+          <p class="checkout-pane-kicker">Etapa 3 · Confirmação</p><h3>Revisar e pagar</h3>
           <p>Confira o item, a contribuição escolhida, o endereço e o valor final antes de gerar o PIX.</p>
           <div class="checkout-order">
             <div class="checkout-order-row"><span>Produto</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
@@ -1314,7 +1316,7 @@
             <div class="checkout-review-card"><span>Cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
             <div class="checkout-review-card"><span>Entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
           </div>
-          <strong style="font-size:12px;">Escolha a contribuição</strong>
+          <div class="checkout-subheading">Escolha a contribuição</div>
           <div class="contribution-grid">
             <label class="contribution-option"><input type="radio" name="checkout-contribution" value="10" data-label="Devoto"><span>Devoto</span><strong>R$ 10</strong></label>
             <label class="contribution-option"><input type="radio" name="checkout-contribution" value="15" data-label="Protetor"><span>Protetor</span><strong>R$ 15</strong></label>
