@@ -2029,15 +2029,18 @@
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
       document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
       syncCheckoutSummary();
-      const checkoutShell = document.querySelector('.checkout-shell');
+      const checkoutDialog = $('cart-dialog');
+      const checkoutShell = checkoutDialog?.querySelector('.checkout-shell');
+      const scrollCheckoutToTop = () => {
+        // O <dialog> também pode ser o elemento rolável quando o conteúdo ultrapassa a viewport.
+        if (checkoutDialog) { checkoutDialog.scrollTop = 0; checkoutDialog.scrollLeft = 0; }
+        if (checkoutShell) { checkoutShell.scrollTop = 0; checkoutShell.scrollLeft = 0; }
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      };
       if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-      if (checkoutShell) checkoutShell.scrollTo({ top: 0, behavior: 'auto' });
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      // Reaplica após o navegador recalcular o layout da etapa final.
-      if (step === 3) requestAnimationFrame(() => {
-        if (checkoutShell) checkoutShell.scrollTo({ top: 0, behavior: 'auto' });
-        window.scrollTo({ top: 0, behavior: 'auto' });
-      });
+      scrollCheckoutToTop();
+      // Reaplica após a troca de painel e o recálculo do layout da etapa final.
+      if (step === 3) requestAnimationFrame(scrollCheckoutToTop);
     }
     function syncCheckoutSummary() {
       const selected = cart[0] || size || '—';
