@@ -948,15 +948,15 @@
     .checkout-address-actions .cta:disabled { opacity: .48; cursor: not-allowed; box-shadow: none; }
     .checkout-cep-status { position: relative; display: flex; align-items: center; gap: 10px; margin: 0; padding: 11px 14px; overflow: hidden; border: 1px solid transparent; border-radius: 10px; font-size: 12px; font-weight: 600; line-height: 1.5; transition: background .2s, border-color .2s, color .2s, box-shadow .2s; }
     .checkout-cep-status::before { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 850; line-height: 1; }
-    .checkout-cep-status.loading { border-color: #dfe7e0; background: #f7f9f7; color: #43564a; box-shadow: 0 1px 3px rgba(25,45,30,.035); }
+    .checkout-cep-status.loading { min-height: 46px; padding-bottom: 12px; border-color: #dfe7e0; background: #f7f9f7; color: #43564a; box-shadow: 0 1px 3px rgba(25,45,30,.035), inset 0 -2px 0 #e6ede7; }
     .checkout-cep-status.loading::before { content: ""; width: 17px; height: 17px; border: 2px solid #d8e3da; border-top-color: var(--brand); border-right-color: var(--brand); animation: checkout-cep-spin .85s linear infinite; }
-    .checkout-cep-status.loading::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #4a8060 32%, #4a8060 68%, transparent 100%) no-repeat; background-size: 32% 100%; animation: checkout-cep-progress 1.5s ease-in-out 2; animation-fill-mode: forwards; opacity: .72; }
+    .checkout-cep-status.loading::after { content: ""; position: absolute; bottom: 0; left: 0; width: 32%; height: 3px; transform: translateX(-100%); border-radius: 99px; background: linear-gradient(90deg, transparent, #4a8060 16%, #2f6b4f 50%, #4a8060 84%, transparent); animation: checkout-cep-progress 1.5s cubic-bezier(.4,0,.2,1) 2 forwards; opacity: .82; will-change: transform; }
     .checkout-cep-status.success { border-color: #cfe2d3; background: #f0f7f1; color: #24533d; box-shadow: 0 2px 7px rgba(36,83,61,.035); animation: checkout-status-enter .24s ease-out both; }
     .checkout-cep-status.success::before { content: "✓"; border: 1px solid #b8d3be; background: #dceee0; color: #24533d; }
     .checkout-cep-status.error { border-color: #ecd5d2; background: #fcf4f3; color: #8c3932; }
     .checkout-cep-status.error::before { content: "!"; border: 1px solid #e7c5c1; background: #f8e7e4; color: #8c3932; }
     @keyframes checkout-cep-spin { to { transform: rotate(360deg); } }
-    @keyframes checkout-cep-progress { from { background-position: -32% 0; } to { background-position: 132% 0; } }
+    @keyframes checkout-cep-progress { from { transform: translateX(-100%); } to { transform: translateX(412.5%); } }
     @keyframes checkout-status-enter { from { opacity: .55; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes checkout-address-reveal { from { opacity: .65; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     @media (prefers-reduced-motion: reduce) {
@@ -1241,6 +1241,16 @@
     .checkout-resume-cpf input:focus { border-color: var(--brand); outline: 3px solid rgba(47,107,79,.12); }
     .checkout-resume-cpf-note { display: none; margin-top: 5px; color: #6a756c; font-size: 10px; line-height: 1.45; }
     .checkout-resume-cpf-wrap:not([hidden]) + .checkout-resume-cpf-note { display: block; }
+
+    .checkout-transition-loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(248,247,244,.78); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); opacity: 0; visibility: hidden; transition: opacity .18s ease, visibility .18s ease; }
+    .checkout-transition-loader[hidden] { display: none !important; }
+    .checkout-transition-loader.is-visible { opacity: 1; visibility: visible; }
+    .checkout-transition-card { width: min(340px, 100%); display: grid; justify-items: center; gap: 10px; padding: 28px 25px; border: 1px solid #dce6de; border-radius: 16px; background: rgba(255,255,255,.97); color: var(--ink); box-shadow: 0 18px 56px rgba(25,45,30,.14); text-align: center; }
+    .checkout-transition-spinner { width: 40px; height: 40px; margin-bottom: 3px; border: 3px solid #e1eae3; border-top-color: var(--brand); border-right-color: #6b9879; border-radius: 50%; animation: checkout-transition-spin .78s linear infinite; }
+    .checkout-transition-card strong { color: #244b34; font-size: 14px; font-weight: 800; }
+    .checkout-transition-card > span:last-child { max-width: 30ch; color: #69756c; font-size: 11px; line-height: 1.55; }
+    @keyframes checkout-transition-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .checkout-transition-loader { transition: none; } .checkout-transition-spinner { animation: none; } }
 </style>
 </head>
 <body>
@@ -1591,6 +1601,13 @@
         </section>
       </div>
     </div>
+    <div class="checkout-transition-loader" id="checkout-step-loader" hidden role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
+      <div class="checkout-transition-card">
+        <span class="checkout-transition-spinner" aria-hidden="true"></span>
+        <strong>Preparando a próxima etapa</strong>
+        <span>Estamos organizando seus dados e o resumo do pedido.</span>
+      </div>
+    </div>
   </dialog>
 
   <dialog id="account-dialog" aria-labelledby="account-title">
@@ -1714,6 +1731,7 @@
       syncCheckoutSummary();
     }
     $('cart-dialog').addEventListener('close', () => { persistCheckoutDraft(); releaseCheckoutBackGuard(); });
+    $('cart-dialog').addEventListener('cancel', (event) => { if ($('cart-dialog').getAttribute('aria-busy') === 'true') event.preventDefault(); });
     function buy() {
       if (!size) {
         $('add-button').classList.remove('needs-size');
@@ -2142,6 +2160,27 @@
       // Reaplica após a troca de painel e o recálculo do layout da etapa final.
       if (step === 3) requestAnimationFrame(scrollCheckoutToTop);
     }
+    function showCheckoutStepTransition(onComplete) {
+      const dialog = $('cart-dialog');
+      const shell = dialog.querySelector('.checkout-shell');
+      const loader = $('checkout-step-loader');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const visibleDuration = prefersReducedMotion ? 350 : 1000;
+      const fadeDuration = prefersReducedMotion ? 0 : 180;
+      dialog.setAttribute('aria-busy', 'true');
+      shell.setAttribute('inert', '');
+      loader.hidden = false;
+      requestAnimationFrame(() => { loader.classList.add('is-visible'); loader.focus({ preventScroll: true }); });
+      setTimeout(() => {
+        loader.classList.remove('is-visible');
+        setTimeout(() => {
+          loader.hidden = true;
+          shell.removeAttribute('inert');
+          dialog.removeAttribute('aria-busy');
+          onComplete();
+        }, fadeDuration);
+      }, visibleDuration);
+    }
     function syncCheckoutSummary() {
       const selected = cart[0] || size || '—';
       const sizeEl = $('checkout-size'); if (sizeEl) sizeEl.textContent = selected;
@@ -2185,7 +2224,12 @@
     document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); persistCheckoutDraft(); }));
     document.querySelectorAll('[data-checkout-back]').forEach((button) => button.addEventListener('click', () => setCheckoutStep(Number(button.dataset.checkoutBack))));
     $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
-    $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); checkoutState.shipping = 39; syncCheckoutSummary(); setCheckoutStep(3); });
+    $('checkout-address-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); checkoutState.shipping = 39;
+      persistCheckoutDraft();
+      showCheckoutStepTransition(() => { syncCheckoutSummary(); setCheckoutStep(3); });
+    });
     let cepRequestId = 0;
     $('checkout-cep').addEventListener('input', async () => {
       const cepInput = $('checkout-cep');
@@ -2202,7 +2246,7 @@
         const remaining = minimumLoadingDuration - (Date.now() - loadingStartedAt);
         if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
       };
-      status.hidden = false; status.className = 'checkout-cep-status loading'; status.setAttribute('aria-busy', 'true'); status.textContent = 'Consultando o CEP e localizando seu endereço…'; details.hidden = true; $('checkout-address-submit').disabled = true;
+      status.hidden = false; status.className = 'checkout-cep-status loading'; status.setAttribute('aria-busy', 'true'); status.textContent = 'Consultando seu endereço…'; details.hidden = true; $('checkout-address-submit').disabled = true;
       try {
         const response = await fetch(`https://viacep.com.br/ws/${raw}/json/`); const data = await response.json();
         await waitForMinimumLoading();
