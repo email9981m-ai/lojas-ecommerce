@@ -950,7 +950,7 @@
     .checkout-cep-status::before { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 850; line-height: 1; }
     .checkout-cep-status.loading { border-color: #dfe7e0; background: #f7f9f7; color: #43564a; box-shadow: 0 1px 3px rgba(25,45,30,.035); }
     .checkout-cep-status.loading::before { content: ""; width: 17px; height: 17px; border: 2px solid #d8e3da; border-top-color: var(--brand); border-right-color: var(--brand); animation: checkout-cep-spin .85s linear infinite; }
-    .checkout-cep-status.loading::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #4a8060 32%, #4a8060 68%, transparent 100%) no-repeat; background-size: 32% 100%; animation: checkout-cep-progress 1.5s ease-in-out infinite; opacity: .72; }
+    .checkout-cep-status.loading::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, #4a8060 32%, #4a8060 68%, transparent 100%) no-repeat; background-size: 32% 100%; animation: checkout-cep-progress 1.5s ease-in-out 2; animation-fill-mode: forwards; opacity: .72; }
     .checkout-cep-status.success { border-color: #cfe2d3; background: #f0f7f1; color: #24533d; box-shadow: 0 2px 7px rgba(36,83,61,.035); animation: checkout-status-enter .24s ease-out both; }
     .checkout-cep-status.success::before { content: "✓"; border: 1px solid #b8d3be; background: #dceee0; color: #24533d; }
     .checkout-cep-status.error { border-color: #ecd5d2; background: #fcf4f3; color: #8c3932; }
@@ -1232,6 +1232,15 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 17px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button { font-size: 13px; }
     }
+
+    .checkout-back-notice { position: fixed; top: max(12px, env(safe-area-inset-top)); left: 50%; z-index: 50; width: min(520px, calc(100% - 28px)); margin: 0; padding: 11px 15px; transform: translateX(-50%); border: 1px solid #cfe0d2; border-radius: 10px; background: #f4f8f4; color: #31533c; box-shadow: 0 8px 24px rgba(20,40,25,.12); font-size: 12px; font-weight: 650; line-height: 1.45; text-align: center; }
+    .checkout-back-notice[hidden], .checkout-resume-cpf[hidden] { display: none !important; }
+    .checkout-draft-note { margin: -12px 0 18px; color: #717970; font-size: 10px; line-height: 1.5; }
+    .checkout-resume-cpf { display: grid; gap: 6px; margin: 13px 0 0; color: #43564a; font-size: 11px; font-weight: 750; }
+    .checkout-resume-cpf input { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid #cdd9cf; border-radius: 9px; background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
+    .checkout-resume-cpf input:focus { border-color: var(--brand); outline: 3px solid rgba(47,107,79,.12); }
+    .checkout-resume-cpf-note { display: none; margin-top: 5px; color: #6a756c; font-size: 10px; line-height: 1.45; }
+    .checkout-resume-cpf-wrap:not([hidden]) + .checkout-resume-cpf-note { display: block; }
 </style>
 </head>
 <body>
@@ -1507,6 +1516,7 @@
 
   <dialog id="cart-dialog" class="checkout-dialog" aria-labelledby="checkout-title">
     <div class="checkout-shell">
+      <p class="checkout-back-notice" id="checkout-back-notice" hidden role="status" aria-live="polite">Você continua no checkout. Use os botões da tela para navegar; seu progresso está salvo.</p>
       <div class="checkout-head">
         <div class="checkout-head-copy"><div class="checkout-logo" aria-label="Kokeshi">kokeshi<span>.</span></div><div><h2 id="checkout-title">Finalizar pedido</h2><span class="checkout-secure">● Checkout transparente</span></div></div>
         <button class="checkout-close" id="close-icon" type="button" aria-label="Fechar checkout">×</button>
@@ -1518,6 +1528,7 @@
           <div class="checkout-product-price">Grátis<small>camiseta · R$ 0,00</small></div>
         </article>
         <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
+        <p class="checkout-draft-note">Nome, e-mail e endereço ficam salvos neste navegador para você retomar o checkout. CPF e dados do Pix não são armazenados.</p>
         <section class="checkout-pane active" data-checkout-pane="1">
           <p class="checkout-pane-kicker">Identificação</p><h3>Dados do cliente</h3>
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
@@ -1567,6 +1578,8 @@
                 <strong>Pague o frete via Pix</strong>
                 <p>A camiseta é grátis. O único valor a pagar para concluir é o frete de entrega.</p>
                 <div class="checkout-payment-amount"><span>Total para pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <label class="checkout-resume-cpf" id="checkout-resume-cpf-wrap" hidden>CPF para gerar o Pix<input id="checkout-resume-cpf" inputmode="numeric" maxlength="14" autocomplete="off" placeholder="000.000.000-00" aria-describedby="checkout-resume-cpf-note"></label>
+                <small class="checkout-resume-cpf-note" id="checkout-resume-cpf-note">Por segurança, informe novamente seu CPF para continuar. Ele não fica salvo no navegador.</small>
                 <p class="checkout-payment-caption">Confirme o valor de <strong id="checkout-pix-total-copy">R$ 39,00</strong> no aplicativo do seu banco.</p>
                 <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar Pix e pagar o frete <span class="cta-arrow">→</span></button>
                 <p class="checkout-payment-trust">Você só conclui quando conferir o valor e o beneficiário no seu banco.</p>
@@ -1683,13 +1696,24 @@
       });
     }
     function openCart() {
-      renderCart();
       const dialog = $('cart-dialog');
+      const stepToOpen = hasSavedCheckoutDraft ? checkoutState.step : 1;
+      document.querySelectorAll('.sizes .size').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.size === size)));
+      updateLabels();
+      renderCart();
       if (!dialog.open && typeof dialog.showModal === 'function') dialog.showModal();
       else dialog.setAttribute('open', '');
-      setCheckoutStep(1);
+      activateCheckoutBackGuard();
+      if (stepToOpen >= 2 && $('checkout-cep').value.replace(/\D/g, '').length === 8) {
+        const status = $('checkout-cep-status');
+        status.hidden = false; status.className = 'checkout-cep-status success'; status.setAttribute('aria-busy', 'false');
+        status.textContent = 'Endereço recuperado do rascunho. Confira os dados antes de continuar.';
+        $('checkout-address-details').hidden = false; $('checkout-address-submit').disabled = false;
+      }
+      setCheckoutStep(stepToOpen);
       syncCheckoutSummary();
     }
+    $('cart-dialog').addEventListener('close', () => { persistCheckoutDraft(); releaseCheckoutBackGuard(); });
     function buy() {
       if (!size) {
         $('add-button').classList.remove('needs-size');
@@ -2035,11 +2059,76 @@
     // Checkout integrado ao site. O pagamento real depende do endpoint /api/create-payment.
     const checkoutState = { step: 1, contribution: 0, contributionLabel: 'Não incluída', shipping: 39, donor: {} };
     const moneyBRL = (value) => Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const checkoutDraftKey = 'kokeshi.checkout.draft.v1';
+    const checkoutDraftFieldIds = ['checkout-name', 'checkout-email', 'checkout-cep', 'checkout-street', 'checkout-number', 'checkout-complement', 'checkout-neighborhood', 'checkout-city', 'checkout-state'];
+    const checkoutDraftMaxAge = 30 * 24 * 60 * 60 * 1000;
+    let hasSavedCheckoutDraft = false;
+    let checkoutBackGuardActive = false;
+    function readCheckoutDraft() {
+      try {
+        const raw = localStorage.getItem(checkoutDraftKey);
+        if (!raw) return null;
+        const draft = JSON.parse(raw);
+        if (!draft || draft.version !== 1 || !draft.fields || Date.now() - Number(draft.savedAt || 0) > checkoutDraftMaxAge) {
+          localStorage.removeItem(checkoutDraftKey);
+          return null;
+        }
+        return draft;
+      } catch (error) { return null; }
+    }
+    function persistCheckoutDraft() {
+      const fields = Object.fromEntries(checkoutDraftFieldIds.map((id) => [id, $(id)?.value || '']));
+      const hasProgress = checkoutState.step > 1 || Object.values(fields).some((value) => value.trim());
+      try {
+        if (!hasProgress) { localStorage.removeItem(checkoutDraftKey); hasSavedCheckoutDraft = false; return; }
+        const draft = { version: 1, savedAt: Date.now(), step: checkoutState.step, size: cart[0] || size, shipping: checkoutState.shipping, fields };
+        // CPF e qualquer dado/QR do Pix são deliberadamente excluídos do armazenamento persistente.
+        localStorage.setItem(checkoutDraftKey, JSON.stringify(draft));
+        hasSavedCheckoutDraft = true;
+      } catch (error) { hasSavedCheckoutDraft = false; }
+    }
+    function applyCheckoutDraft() {
+      const draft = readCheckoutDraft();
+      if (!draft) return;
+      const allowedSizes = Array.from(document.querySelectorAll('.sizes .size'), (button) => button.dataset.size);
+      if (allowedSizes.includes(draft.size)) {
+        size = draft.size;
+        cart.splice(0, cart.length, draft.size);
+      }
+      checkoutDraftFieldIds.forEach((id) => { const input = $(id); if (input && typeof draft.fields[id] === 'string') input.value = draft.fields[id].slice(0, 300); });
+      checkoutState.step = [1, 2, 3].includes(Number(draft.step)) ? Number(draft.step) : 1;
+      checkoutState.shipping = Number.isFinite(Number(draft.shipping)) && Number(draft.shipping) > 0 ? Number(draft.shipping) : 39;
+      checkoutState.donor = {
+        name: $('checkout-name').value.trim(), email: $('checkout-email').value.trim(), cep: $('checkout-cep').value.trim(),
+        street: $('checkout-street').value.trim(), number: $('checkout-number').value.trim(), complement: $('checkout-complement').value.trim(),
+        neighborhood: $('checkout-neighborhood').value.trim(), city: $('checkout-city').value.trim(), state: $('checkout-state').value.trim().toUpperCase(), cpf: ''
+      };
+      hasSavedCheckoutDraft = true;
+    }
+    applyCheckoutDraft();
+    function activateCheckoutBackGuard() {
+      if (checkoutBackGuardActive) return;
+      try { history.pushState({ ...(history.state || {}), kokeshiCheckoutGuard: true }, '', location.href); checkoutBackGuardActive = true; } catch (error) { checkoutBackGuardActive = false; }
+    }
+    function releaseCheckoutBackGuard() {
+      if (!checkoutBackGuardActive) return;
+      checkoutBackGuardActive = false;
+      if (history.state?.kokeshiCheckoutGuard) history.back();
+    }
+    window.addEventListener('popstate', () => {
+      if (!checkoutBackGuardActive || !$('cart-dialog')?.open) return;
+      try { history.pushState({ ...(history.state || {}), kokeshiCheckoutGuard: true }, '', location.href); } catch (error) {}
+      const notice = $('checkout-back-notice');
+      if (notice) { notice.hidden = false; clearTimeout(notice.hideTimer); notice.hideTimer = setTimeout(() => { notice.hidden = true; }, 4200); }
+    });
     function setCheckoutStep(step) {
       checkoutState.step = step;
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
       document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
+      const resumeCpf = $('checkout-resume-cpf-wrap');
+      if (resumeCpf) resumeCpf.hidden = !(step === 3 && !checkoutState.donor.cpf);
       syncCheckoutSummary();
+      persistCheckoutDraft();
       const checkoutDialog = $('cart-dialog');
       const checkoutShell = checkoutDialog?.querySelector('.checkout-shell');
       const scrollCheckoutToTop = () => {
@@ -2092,7 +2181,8 @@
       pixCountdownTimer = setInterval(tick, 1000);
     }
     $('checkout-cpf').addEventListener('input', () => { $('checkout-cpf').value = formatCpf($('checkout-cpf').value); });
-    document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); }));
+    document.querySelectorAll('#checkout-personal-form input, #checkout-address-form input').forEach((input) => input.addEventListener('input', persistCheckoutDraft));
+    document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); persistCheckoutDraft(); }));
     document.querySelectorAll('[data-checkout-back]').forEach((button) => button.addEventListener('click', () => setCheckoutStep(Number(button.dataset.checkoutBack))));
     $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
     $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); checkoutState.shipping = 39; syncCheckoutSummary(); setCheckoutStep(3); });
@@ -2106,7 +2196,7 @@
       // Ao completar o CEP, fecha o teclado virtual sem abrir o próximo campo automaticamente.
       cepInput.blur();
       const requestId = ++cepRequestId;
-      const minimumLoadingDuration = 1500;
+      const minimumLoadingDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 700 : 3200; // Dois percursos de 1,5 s, mais margem de renderização.
       const loadingStartedAt = Date.now();
       const waitForMinimumLoading = async () => {
         const remaining = minimumLoadingDuration - (Date.now() - loadingStartedAt);
@@ -2126,9 +2216,12 @@
         status.className = 'checkout-cep-status error'; status.setAttribute('aria-busy', 'false'); status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; $('checkout-address-submit').disabled = false;
       }
     });
+    $('checkout-resume-cpf').addEventListener('input', () => { $('checkout-resume-cpf').value = formatCpf($('checkout-resume-cpf').value); checkoutState.donor.cpf = $('checkout-resume-cpf').value.replace(/\D/g, ''); });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
     $('checkout-pix-button').addEventListener('click', async () => {
-      clearCheckoutAlert(); const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
+      clearCheckoutAlert();
+      if (!checkoutState.donor.cpf || checkoutState.donor.cpf.length !== 11) { showCheckoutAlert('Informe novamente seu CPF para gerar o Pix. Por segurança, ele não é salvo no rascunho.'); $('checkout-resume-cpf-wrap').hidden = false; $('checkout-resume-cpf').focus(); return; }
+      const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
       const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution + checkoutState.shipping, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, shipping: { amount: checkoutState.shipping, label: 'Entrega em até 3 dias' }, address: checkoutState.donor };
       try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar Pix e pagar o frete →'; } });
 
