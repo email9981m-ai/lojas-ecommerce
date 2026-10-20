@@ -1215,7 +1215,23 @@
     @media (max-width: 520px) {
       .checkout-pane[data-checkout-pane="2"] .checkout-shipping-main-row .checkout-shipping-price { grid-column: auto; }
     }
-  </style>
+  
+    /* Etapa final em sequência: dados primeiro, pagamento do frete logo abaixo. */
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-top: 24px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { position: static; padding: 0; border: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label { margin-top: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-caption { margin: 0; color: #536259; font-size: 11px; line-height: 1.5; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-caption strong { color: var(--brand-dark); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-bottom: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 22px; border-color: #8fb49a; background: linear-gradient(145deg, #edf7ef 0%, #fbfdfb 100%); box-shadow: 0 5px 16px rgba(36,83,61,.07); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button { min-height: 58px !important; margin-top: 14px !important; font-size: 14px; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { gap: 17px; margin-top: 20px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 17px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button { font-size: 13px; }
+    }
+</style>
 </head>
 <body>
   <div class="announcement" role="region" aria-label="Informações da oferta">
@@ -1528,36 +1544,30 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <p class="checkout-pane-kicker">Tudo certo até aqui</p>
-          <h3>Revise e finalize seu pedido</h3>
-          <p>Confira os dados abaixo. O único valor cobrado agora é o frete de entrega.</p>
+          <p class="checkout-pane-kicker">Revisão final</p>
+          <h3>Revise seus dados</h3>
+          <p>Confira suas informações de entrega. Abaixo, você verá o valor do frete antes de gerar o Pix.</p>
           <div class="checkout-final-layout">
             <div class="checkout-final-review">
-              <div class="checkout-section-label">Resumo do pedido</div>
-              <div class="checkout-order checkout-final-total" aria-label="Resumo de valores">
-                <div class="checkout-order-row"><span>Camiseta</span><strong>R$ 0,00</strong></div>
-                <div class="checkout-order-row"><span>Frete de entrega</span><strong id="checkout-shipping-label">R$ 39,00</strong></div>
-                <div class="checkout-order-row checkout-contribution-row"><span id="checkout-contribution-label">Não incluída</span><strong>R$ 0,00</strong></div>
-                <div class="checkout-order-total"><span>Total a pagar</span><strong id="checkout-total">R$ 39,00</strong></div>
-              </div>
               <div class="checkout-section-label checkout-data-label">Seus dados</div>
               <div class="checkout-review-grid" aria-label="Dados para conferência">
                 <div class="checkout-review-card">
                   <div class="checkout-review-section"><span>Cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
                   <div class="checkout-review-section"><span>Entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
-                  <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo estimado<strong>Até 3 dias úteis</strong></span><span>Frete<strong id="checkout-shipping-label-card">R$ 39,00</strong></span></div>
+                  <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo estimado<strong>Até 3 dias úteis</strong></span><span>Frete<strong id="checkout-shipping-label">R$ 39,00</strong></span></div>
                 </div>
               </div>
               <button class="checkout-back checkout-edit-link" type="button" data-checkout-back="2">← Voltar e editar endereço</button>
             </div>
             <div class="checkout-final-payment">
-              <div class="checkout-section-label">Pagamento seguro</div>
+              <div class="checkout-section-label">Pagamento do frete</div>
               <div class="pix-box">
                 <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Aprovação imediata</span></div>
-                <strong>Pague apenas o frete</strong>
-                <p>Gere o código PIX e confirme o valor de <strong id="checkout-pix-total-copy">R$ 39,00</strong> no aplicativo do seu banco.</p>
-                <div class="checkout-payment-amount"><span>Total a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
-                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar código PIX <span class="cta-arrow">→</span></button>
+                <strong>Pague o frete via Pix</strong>
+                <p>A camiseta é grátis. O único valor a pagar para concluir é o frete de entrega.</p>
+                <div class="checkout-payment-amount"><span>Total para pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <p class="checkout-payment-caption">Confirme o valor de <strong id="checkout-pix-total-copy">R$ 39,00</strong> no aplicativo do seu banco.</p>
+                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar Pix e pagar o frete <span class="cta-arrow">→</span></button>
                 <p class="checkout-payment-trust">Você só conclui quando conferir o valor e o beneficiário no seu banco.</p>
                 <div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div>
               </div>
@@ -2048,8 +2058,12 @@
       const cardSizeEl = $('checkout-card-size'); if (cardSizeEl) cardSizeEl.textContent = selected;
       const productImageEl = $('checkout-product-image'); if (productImageEl && imgs[0]) { productImageEl.src = imgs[0][0]; productImageEl.alt = imgs[0][1] || 'Camiseta Casual Corinthians'; }
       const labelEl = $('checkout-contribution-label'); if (labelEl) labelEl.textContent = checkoutState.contribution > 0 ? `Contribuição ${checkoutState.contributionLabel}` : 'Não incluída';
-      const shippingEl = $('checkout-shipping-label'); if (shippingEl) shippingEl.textContent = moneyBRL(checkoutState.shipping);
-      const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = moneyBRL(checkoutState.contribution + checkoutState.shipping);
+      const shippingAmount = moneyBRL(checkoutState.shipping);
+      const shippingEl = $('checkout-shipping-label'); if (shippingEl) shippingEl.textContent = shippingAmount;
+      const totalAmount = moneyBRL(checkoutState.contribution + checkoutState.shipping);
+      const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = totalAmount;
+      const pixAmountEl = $('checkout-pix-amount'); if (pixAmountEl) pixAmountEl.textContent = totalAmount;
+      const pixCopyEl = $('checkout-pix-total-copy'); if (pixCopyEl) pixCopyEl.textContent = totalAmount;
       const nameEl = $('checkout-review-name'); if (nameEl) nameEl.textContent = checkoutState.donor.name || 'A preencher';
       const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
       const addressEl = $('checkout-review-address'); if (addressEl) addressEl.textContent = checkoutState.donor.street ? `${checkoutState.donor.street}, ${checkoutState.donor.number}` : 'A preencher';
@@ -2114,7 +2128,7 @@
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert(); const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
       const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution + checkoutState.shipping, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, shipping: { amount: checkoutState.shipping, label: 'Entrega em até 3 dias' }, address: checkoutState.donor };
-      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar PIX de R$ 39,00 →'; } });
+      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar Pix e pagar o frete →'; } });
 
     renderCart();
   </script>
