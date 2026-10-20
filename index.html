@@ -1122,6 +1122,38 @@
     }
     @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-order-total { margin-top: 10px; padding: 12px 10px 2px; } .checkout-order-total strong { font-size: 19px; } .checkout-payment-summary { display: block; padding: 12px 13px; } .checkout-payment-summary span { display: block; margin-top: 4px; text-align: left; } .checkout-grid-2 { grid-template-columns: 1fr; gap: 13px; } .checkout-grid-address { grid-template-columns: minmax(0, 1.35fr) minmax(76px, .65fr); gap: 10px; } .checkout-number-row { grid-template-columns: minmax(76px, .65fr) minmax(0, 1.35fr); } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
+
+    /* Ajustes exclusivos da etapa 3: leitura rápida, total inequívoco e ação sem fricção. */
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-total { margin: 0 0 24px; padding: 16px 18px 14px; border-color: #d7e2d9; background: #fbfdfb; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-total .checkout-order-row { font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-contribution-row { display: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total { margin-top: 13px; padding-top: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total span { font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 26px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-data-label { margin-top: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-edit-link { min-height: 38px; margin-top: 15px; padding: 0; border: 0; background: transparent; color: var(--brand-dark); font-size: 11px; font-weight: 800; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-edit-link:hover { background: transparent; color: var(--ink); text-decoration: underline; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 18px; border: 1px solid #9fc2a7; border-radius: 14px; background: linear-gradient(145deg, #f0f8f2, #fbfdfb); }
+    .checkout-pane[data-checkout-pane="3"] .pix-heading-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-badge { padding: 5px 8px; border-radius: 6px; background: #1f8b50; color: #fff; font-size: 10px; font-weight: 900; letter-spacing: .08em; }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-note { color: #4d7657; font-size: 10px; font-weight: 750; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box > strong { color: #173f24; font-size: 17px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box > p { max-width: none; margin-top: 6px; color: #536259; font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box > p strong { color: #1b5429; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 16px; padding: 13px 0; border-block: 1px solid #d7e7da; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { color: #185b28; font-size: 23px; }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { width: 100%; min-height: 54px !important; margin-top: 14px !important; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin: 12px 0 0; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-alert { margin-top: 12px; }
+    @media (max-width: 720px) {
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-total { margin-bottom: 21px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-edit-link { width: auto; }
+      .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 16px; }
+    }
+    @media (max-width: 390px) {
+      .checkout-pane[data-checkout-pane="3"] .pix-method-note { font-size: 9px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 23px; }
+    }
   </style>
 </head>
 <body>
@@ -1435,23 +1467,39 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <p class="checkout-pane-kicker">Última etapa</p><h3>Confirme seus dados e pague</h3>
-          <p>Revise as informações e finalize seu pedido com segurança.</p>
+          <p class="checkout-pane-kicker">Tudo certo até aqui</p>
+          <h3>Revise e finalize seu pedido</h3>
+          <p>Confira os dados abaixo. O único valor cobrado agora é o frete de entrega.</p>
           <div class="checkout-final-layout">
             <div class="checkout-final-review">
-              <div class="checkout-section-label">Conferência dos dados</div>
+              <div class="checkout-section-label">Resumo do pedido</div>
+              <div class="checkout-order checkout-final-total" aria-label="Resumo de valores">
+                <div class="checkout-order-row"><span>Camiseta</span><strong>R$ 0,00</strong></div>
+                <div class="checkout-order-row"><span>Frete de entrega</span><strong id="checkout-shipping-label">R$ 39,00</strong></div>
+                <div class="checkout-order-row checkout-contribution-row"><span id="checkout-contribution-label">Não incluída</span><strong>R$ 0,00</strong></div>
+                <div class="checkout-order-total"><span>Total a pagar</span><strong id="checkout-total">R$ 39,00</strong></div>
+              </div>
+              <div class="checkout-section-label checkout-data-label">Seus dados</div>
               <div class="checkout-review-grid" aria-label="Dados para conferência">
                 <div class="checkout-review-card">
-                  <div class="checkout-review-section"><span>Dados do cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
-                  <div class="checkout-review-section"><span>Endereço de entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
-                  <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo de entrega<strong>Até 3 dias úteis</strong></span><span>Valor do frete<strong>R$ 39,00</strong></span></div>
+                  <div class="checkout-review-section"><span>Cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
+                  <div class="checkout-review-section"><span>Entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+                  <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo estimado<strong>Até 3 dias úteis</strong></span><span>Frete<strong id="checkout-shipping-label-card">R$ 39,00</strong></span></div>
                 </div>
               </div>
+              <button class="checkout-back checkout-edit-link" type="button" data-checkout-back="2">← Voltar e editar endereço</button>
             </div>
             <div class="checkout-final-payment">
-              <div class="checkout-section-label">Pagamento</div>
-              <div class="pix-box"><strong>Finalize com PIX</strong><p>Confira o beneficiário e confirme o valor no aplicativo do seu banco.</p><div class="checkout-payment-amount"><span>Total da entrega</span><strong>R$ 39,00</strong></div><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar PIX de R$ 39,00 <span class="cta-arrow">→</span></button><p class="checkout-payment-trust">Pagamento processado com segurança. O pedido só será confirmado após a identificação do PIX.</p><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
-              <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="2">Voltar e editar</button></div>
+              <div class="checkout-section-label">Pagamento seguro</div>
+              <div class="pix-box">
+                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Aprovação imediata</span></div>
+                <strong>Pague apenas o frete</strong>
+                <p>Gere o código PIX e confirme o valor de <strong id="checkout-pix-total-copy">R$ 39,00</strong> no aplicativo do seu banco.</p>
+                <div class="checkout-payment-amount"><span>Total a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar código PIX <span class="cta-arrow">→</span></button>
+                <p class="checkout-payment-trust">Você só conclui quando conferir o valor e o beneficiário no seu banco.</p>
+                <div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div>
+              </div>
               <p class="checkout-alert" id="checkout-alert" role="alert"></p>
             </div>
           </div>
