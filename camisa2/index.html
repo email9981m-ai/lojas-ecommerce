@@ -223,6 +223,21 @@
     .confidence-card svg { width: 19px; height: 19px; margin-bottom: 12px; color: var(--brand); }
     .confidence-card strong { display: block; margin-bottom: 4px; font-size: 12px; }
     .confidence-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .final-purchase { display: grid; grid-template-columns: 210px minmax(0,1fr) minmax(240px, .8fr); align-items: center; gap: 28px; width: min(1180px, calc(100% - 48px)); margin: 54px auto 42px; padding: 24px; border: 1px solid #dfe8e0; border-radius: 20px; background: linear-gradient(115deg, #f5f8f4 0%, #fff 65%); box-shadow: 0 16px 42px rgba(28,45,33,.07); }
+    .final-purchase-image { display: grid; place-items: center; width: 100%; aspect-ratio: 1; overflow: hidden; border: 1px solid #eaeee9; border-radius: 14px; background: #f5f5f1; }
+    .final-purchase-image img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+    .final-purchase-copy .eyebrow { margin-bottom: 8px; }
+    .final-purchase h2 { margin: 0; font-size: 25px; line-height: 1.18; letter-spacing: -.04em; }
+    .final-purchase-copy p:last-child { margin: 11px 0 0; color: var(--muted); font-size: 12px; }
+    .final-price { display: block; margin-top: 15px; color: var(--brand-dark); font-size: 29px; line-height: 1; font-weight: 820; letter-spacing: -.04em; }
+    .final-price-note { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; }
+    .final-purchase-controls { min-width: 0; padding: 18px; border: 1px solid #e7ebe5; border-radius: 13px; background: rgba(255,255,255,.82); }
+    .final-purchase-controls > strong { display: block; margin-bottom: 10px; font-size: 11px; }
+    .final-purchase-sizes { display: flex; gap: 8px; margin-bottom: 12px; }
+    .final-purchase-sizes .size { width: 42px; height: 40px; }
+    .final-purchase .cta { min-height: 52px; margin: 0; }
+    .final-purchase-hint { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); font-size: 10px; }
+    .final-purchase-hint.error { color: var(--red); }
     .footer { border-top: 1px solid var(--line); background: #fcfcfa; }
     .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; padding: 26px 0; }
     .footer-brand .logo { font-size: 23px; }
@@ -351,6 +366,13 @@
       .confidence-card { display: grid; grid-template-columns: 25px 1fr; column-gap: 10px; padding: 13px; }
       .confidence-card svg { grid-row: span 2; margin: 0; }
       .confidence-card strong { margin: 0 0 2px; }
+      .final-purchase { grid-template-columns: 112px minmax(0,1fr); gap: 16px; width: calc(100% - 30px); margin: 38px auto 28px; padding: 15px; }
+      .final-purchase-image { grid-row: span 2; align-self: start; }
+      .final-purchase h2 { font-size: 19px; }
+      .final-purchase-copy p:last-child { margin-top: 7px; font-size: 11px; }
+      .final-price { margin-top: 10px; font-size: 24px; }
+      .final-purchase-controls { grid-column: 1 / -1; padding: 14px; }
+      .final-purchase-sizes { justify-content: flex-start; }
       .sticky { display: flex; }
       body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
       .footer-inner { flex-direction: column; gap: 22px; }
@@ -949,7 +971,79 @@
               <div class="average-row"><span>1–3 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:0%"></div></div><span class="average-count">0</span></div>
             </div>
           </section>
+          <div class="reviews-toolbar">
+            <strong>Opiniões em destaque</strong>
+            <div class="review-controls">
+              <label class="reviews-sort" for="reviews-filter">Nota
+                <select id="reviews-filter" aria-label="Filtrar avaliações por nota">
+                  <option value="all">Todas</option>
+                  <option value="5">5 estrelas</option>
+                  <option value="4">4 estrelas</option>
+                </select>
+              </label>
+              <label class="reviews-sort" for="reviews-sort">Ordenar
+                <select id="reviews-sort" aria-label="Ordenar avaliações">
+                  <option value="relevant">Mais relevantes</option>
+                  <option value="recent">Mais recentes</option>
+                  <option value="highest">Maior nota</option>
+                  <option value="lowest">Menor nota</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="reviews-groups" id="reviews-groups" aria-live="polite" aria-atomic="true"></div>
+          <nav class="reviews-pagination" aria-label="Paginação das avaliações">
+            <button type="button" id="reviews-prev" aria-label="Ver página anterior">Anterior</button>
+            <div class="reviews-pages" id="reviews-pages"></div>
+            <span class="reviews-page-status" id="reviews-page-status" role="status" aria-live="polite" tabindex="-1">Página 1 de 10</span>
+            <button type="button" id="reviews-next" aria-label="Ver próxima página">Próximo</button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="confidence" aria-labelledby="confidence-title">
+      <div class="confidence-head">
+        <div><p>Antes de escolher</p><h2 id="confidence-title">Informações para comprar com mais segurança.</h2></div>
+        <small>Confira os detalhes da peça e valide as condições diretamente com a loja antes de concluir qualquer pedido.</small>
+      </div>
+      <div class="confidence-grid">
+        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V5a4 4 0 0 1 8 0v2"/><path d="M9 12h6"/></svg><strong>Confira o tamanho</strong><p>Compare as medidas de uma camiseta que veste bem com a tabela e a disponibilidade informadas pela loja.</p></article>
+        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="17.5" cy="19" r="1.5"/></svg><strong>Consulte entrega e frete</strong><p>Prazo, cobertura e custo de envio dependem do CEP e devem ser confirmados antes da compra.</p></article>
+        <article class="confidence-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><strong>Verifique as condições</strong><p>Confirme disponibilidade, pagamento, trocas e devoluções nos canais oficiais da loja.</p></article>
+      </div>
+    </section>
+
+    <section class="confidence" aria-labelledby="faq-title">
+      <div class="confidence-head"><div><p>Dúvidas comuns</p><h2 id="faq-title">O que vale conferir?</h2></div><small>As respostas abaixo são orientações gerais; as condições finais são as informadas pela loja.</small></div>
+      <details><summary>Como escolher o tamanho?</summary><p>Compare as medidas da peça com uma camiseta sua e consulte a tabela de tamanhos da loja. A disponibilidade dos tamanhos pode variar.</p></details>
+      <details><summary>O frete e o prazo já estão incluídos?</summary><p>Não. O custo e o prazo de entrega precisam ser calculados para o CEP e confirmados pela loja antes da conclusão do pedido.</p></details>
+      <details><summary>As avaliações exibidas são de compradores reais?</summary><p>Não. Esta página é demonstrativa e as avaliações, nomes, notas e comentários apresentados são fictícios, como informado na própria seção.</p></details>
+      <details><summary>Como confirmar trocas, devoluções e disponibilidade?</summary><p>Consulte diretamente os canais oficiais da loja antes de comprar. Esta página demonstrativa não confirma estoque nem processa pedidos ou pagamentos.</p></details>
+    </section>
+
   </main>
+
+    <section class="final-purchase" aria-labelledby="final-purchase-title">
+      <div class="final-purchase-image"><img id="final-product-image" alt="Camiseta Casual Corinthians" loading="lazy" decoding="async"></div>
+      <div class="final-purchase-copy">
+        <p class="eyebrow">Escolha com tranquilidade</p>
+        <h2 id="final-purchase-title">Camiseta Casual Corinthians</h2>
+        <p>Uma peça versátil para levar a paixão pelo Timão ao dia a dia.</p>
+        <strong class="final-price">Grátis</strong>
+        <small class="final-price-note">Frete e prazo calculados conforme o CEP.</small>
+      </div>
+      <div class="final-purchase-controls">
+        <strong>Selecione seu tamanho</strong>
+        <div class="final-purchase-sizes" role="group" aria-label="Escolha o tamanho da camiseta">
+          <button class="size" type="button" data-final-size="P" aria-pressed="false">P</button>
+          <button class="size" type="button" data-final-size="M" aria-pressed="false">M</button>
+          <button class="size" type="button" data-final-size="G" aria-pressed="false">G</button>
+        </div>
+        <button class="cta" type="button" id="final-buy-button"><span>Escolha um tamanho</span><span class="cta-arrow" aria-hidden="true">→</span></button>
+        <p class="final-purchase-hint" id="final-purchase-hint" aria-live="polite">Selecione P, M ou G para continuar.</p>
+      </div>
+    </section>
 
   <footer class="footer">
     <div class="wrap footer-inner">
@@ -1009,6 +1103,7 @@
     }
 
     $('main-image').src = imgs[0][0];
+    $('final-product-image').src = imgs[0][0];
     document.querySelectorAll('.thumb').forEach((button) => {
       const i = Number(button.dataset.i);
       button.querySelector('img').src = imgs[i][0];
@@ -1084,6 +1179,22 @@
     }
     $('add-button').addEventListener('click', buy);
     $('sticky-button').addEventListener('click', buy);
+    document.querySelectorAll('[data-final-size]').forEach((button) => button.addEventListener('click', () => {
+      const matchingSize = document.querySelector(`.sizes .size[data-size="${button.dataset.finalSize}"]`);
+      if (matchingSize) matchingSize.click();
+      document.querySelectorAll('[data-final-size]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      $('final-buy-button').querySelector('span').textContent = `Adicionar tamanho ${button.dataset.finalSize} à sacola`;
+      $('final-purchase-hint').textContent = `Tamanho ${button.dataset.finalSize} selecionado.`;
+      $('final-purchase-hint').classList.remove('error');
+    }));
+    $('final-buy-button').addEventListener('click', () => {
+      if (!size) {
+        $('final-purchase-hint').textContent = 'Selecione P, M ou G para continuar.';
+        $('final-purchase-hint').classList.add('error');
+        return;
+      }
+      $('add-button').click();
+    });
     $('cart-button').addEventListener('click', openCart);
     $('close-cart').addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
