@@ -942,6 +942,7 @@
     .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .checkout-grid-address { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(88px, .5fr); gap: 12px; }
     .checkout-address-details { display: grid; gap: 14px; }
+    .checkout-address-details[hidden], .checkout-address-actions[hidden], .checkout-cep-status[hidden] { display: none !important; }
     .checkout-cep-status { margin: -3px 0 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .checkout-cep-status.success { color: var(--brand-dark); }
     .checkout-cep-status.error { color: #8c3932; }
