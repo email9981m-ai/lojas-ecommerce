@@ -919,14 +919,22 @@
     .checkout-secure { display: inline-flex; align-items: center; gap: 5px; color: var(--brand-dark); font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
     .checkout-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); cursor: pointer; font-size: 21px; line-height: 1; }
     .checkout-body { width: min(820px, calc(100% - 48px)); margin: 0 auto; padding: 36px 0 64px; scroll-padding-top: 120px; }
+    .checkout-campaign-banner { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; padding: 11px 13px; border: 1px solid #d8e6da; border-left: 3px solid var(--brand); border-radius: 10px; background: linear-gradient(90deg, #f1f8f2 0%, #fbfdfb 100%); }
+    .checkout-campaign-badge { flex: 0 0 auto; padding: 5px 7px; border-radius: 5px; background: var(--brand-dark); color: #fff; font-size: 8px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .checkout-campaign-copy { min-width: 0; }
+    .checkout-campaign-copy strong { display: block; color: var(--brand-dark); font-size: 12px; line-height: 1.25; }
+    .checkout-campaign-copy span { display: block; margin-top: 2px; color: #68736a; font-size: 10px; line-height: 1.35; }
     .checkout-product-card { position: sticky; top: 0; z-index: 4; display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 14px; margin-bottom: 28px; padding: 10px 0 16px; border: 0; border-bottom: 1px solid #dfe8e0; border-radius: 0; background: rgba(248,247,244,.96); box-shadow: none; backdrop-filter: blur(8px); }
     .checkout-product-image { width: 76px; height: 76px; object-fit: contain; border: 1px solid #e0e7e0; border-radius: 12px; background: #f0f3ef; }
     .checkout-product-kicker { margin: 0 0 4px; color: var(--brand); font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .checkout-product-name { margin: 0; color: var(--ink); font-size: 15px; font-weight: 800; line-height: 1.25; }
     .checkout-product-meta { margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
-    .checkout-product-price { color: var(--brand-dark); font-size: 16px; font-weight: 800; text-align: right; white-space: nowrap; }
-    .checkout-product-price small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 600; }
-    .checkout-pane { display: none; }
+    .checkout-product-price { color: var(--brand-dark); font-size: 16px; font-weight: 850; text-align: right; white-space: nowrap; }
+    .checkout-product-price small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 650; }
+    .checkout-product-offer { position: relative; grid-column: 2 / -1; margin: -2px 0 0; padding: 8px 0 0 11px; border-top: 1px solid #edf1ed; color: #647066; font-size: 10px; line-height: 1.45; }
+    .checkout-product-offer::before { content: ''; position: absolute; top: 8px; bottom: 0; left: 0; width: 2px; border-radius: 2px; background: #9abb9f; }
+    .checkout-product-offer strong { color: var(--brand-dark); font-weight: 850; }
+    .checkout-pane { display: none; max-width: 700px; margin: 0 auto; }
     .checkout-pane.active { display: block; }
     .checkout-pane-kicker { margin: 0 0 7px; color: var(--brand); font-size: 9px; font-weight: 850; letter-spacing: .14em; line-height: 1.2; text-transform: uppercase; }
     .checkout-pane h3 { margin: 0 0 6px; color: var(--ink); font-size: 22px; line-height: 1.2; letter-spacing: -.045em; }
@@ -969,6 +977,10 @@
     .pix-box { padding: 15px; border: 1px dashed #b8d0bc; border-radius: 12px; background: #f7faf7; }
     .pix-box strong { display: block; margin-bottom: 4px; color: var(--brand-dark); font-size: 14px; }
     .pix-box p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .pix-expiry { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #dce7de; color: #657067; font-size: 10px; }
+    .pix-expiry strong { margin: 0; color: var(--brand-dark); font-size: 13px; font-variant-numeric: tabular-nums; }
+    .pix-expiry.expired { color: #8c3932; }
+    .pix-expiry.expired strong { color: #8c3932; }
     .checkout-transparency-note { margin: 0 0 12px; padding: 11px 12px; border-left: 3px solid #9abb9f; border-radius: 0 9px 9px 0; background: #f5f9f5; color: #546057; font-size: 10px; line-height: 1.55; }
     .checkout-transparency-note strong { color: var(--ink-soft); }
     .pix-result { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid #dce7de; }
@@ -977,7 +989,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-offer { grid-column: 1 / -1; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1259,10 +1271,15 @@
         <button class="checkout-close" id="close-icon" type="button" aria-label="Fechar checkout">×</button>
       </div>
       <div class="checkout-body">
+        <div class="checkout-campaign-banner" role="note" aria-label="Oferta promocional">
+          <span class="checkout-campaign-badge">Oferta</span>
+          <div class="checkout-campaign-copy"><strong>Condição promocional por tempo limitado</strong><span>Aproveite enquanto esta campanha estiver ativa e confira o total antes do PIX.</span></div>
+        </div>
         <article class="checkout-product-card" aria-label="Produto do pedido">
           <img class="checkout-product-image" id="checkout-product-image" alt="Camiseta Casual Corinthians">
-          <div><p class="checkout-product-kicker">Você está comprando</p><h3 class="checkout-product-name">Camiseta Casual Corinthians</h3><p class="checkout-product-meta">Quantidade: 1 · Tamanho: <strong id="checkout-card-size">M</strong></p></div>
-          <div class="checkout-product-price">R$ 0,00<small>produto</small></div>
+          <div><p class="checkout-product-kicker">Oferta selecionada</p><h3 class="checkout-product-name">Camiseta Casual Corinthians</h3><p class="checkout-product-meta">Quantidade: 1 · Tamanho: <strong id="checkout-card-size">M</strong></p></div>
+          <div class="checkout-product-price">Grátis<small>camiseta · R$ 0,00</small></div>
+          <p class="checkout-product-offer"><strong>Camiseta por R$ 0,00.</strong> A contribuição escolhida aparece separadamente antes do pagamento.</p>
         </article>
         <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
         <section class="checkout-pane active" data-checkout-pane="1">
@@ -1311,7 +1328,7 @@
             <label class="contribution-option"><input type="radio" name="checkout-contribution" value="50" data-label="Benfeitor" checked><span>Benfeitor</span><strong>R$ 50</strong></label>
           </div>
           <p class="checkout-transparency-note"><strong>Confira antes de pagar:</strong> total, endereço e beneficiário aparecem nesta etapa.</p>
-          <div class="pix-box"><strong>Pagamento por PIX</strong><p>Confira o beneficiário e o valor no aplicativo do seu banco antes de confirmar.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar QR Code PIX <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div></div></div>
+          <div class="pix-box"><strong>Pagamento por PIX</strong><p>Confira o beneficiário e o valor no aplicativo do seu banco antes de confirmar.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar QR Code PIX <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
           <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="2">Voltar</button></div>
           <p class="checkout-alert" id="checkout-alert" role="alert"></p>
         </section>
@@ -1798,6 +1815,24 @@
     function clearCheckoutAlert() { const el = $('checkout-alert'); if (el) { el.textContent = ''; el.classList.remove('show'); } }
     function formatCpf(value) { const digits = value.replace(/\D/g, '').slice(0, 11); return digits.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); }
     function formatPhone(value) { const digits = value.replace(/\D/g, '').slice(0, 11); if (digits.length <= 10) return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2'); return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2'); }
+    let pixCountdownTimer;
+    function startPixCountdown(totalSeconds) {
+      clearInterval(pixCountdownTimer);
+      let remaining = Math.max(60, Number(totalSeconds) || 900);
+      const expiry = $('checkout-pix-expiry');
+      const countdown = $('checkout-pix-countdown');
+      expiry.hidden = false;
+      expiry.classList.remove('expired');
+      const tick = () => {
+        const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
+        const seconds = String(remaining % 60).padStart(2, '0');
+        countdown.textContent = `${minutes}:${seconds}`;
+        if (remaining <= 0) { clearInterval(pixCountdownTimer); expiry.classList.add('expired'); expiry.querySelector('span').textContent = 'QR Code expirado'; countdown.textContent = 'Gere novamente'; $('checkout-pix-copy').disabled = true; }
+        remaining -= 1;
+      };
+      tick();
+      pixCountdownTimer = setInterval(tick, 1000);
+    }
     $('checkout-cpf').addEventListener('input', () => { $('checkout-cpf').value = formatCpf($('checkout-cpf').value); });
     $('checkout-phone').addEventListener('input', () => { $('checkout-phone').value = formatPhone($('checkout-phone').value); });
     document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); }));
@@ -1809,7 +1844,7 @@
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert(); const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
       const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, phone: checkoutState.donor.phone, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, address: checkoutState.donor };
-      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar QR Code PIX →'; } });
+      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.textContent = 'Gerar QR Code PIX →'; } });
 
     renderCart();
   </script>
