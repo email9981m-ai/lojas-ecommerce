@@ -149,6 +149,34 @@
     .product-tab-content { width: 100%; margin: 0; padding: 24px 16px 30px; background: #fff; }
     .product-tab-content p { max-width: 900px; margin: 0 auto; color: var(--ink-soft); font-size: 14px; line-height: 1.72; }
     .product-tab-content strong { color: var(--ink); font-weight: 750; }
+
+    .customer-reviews { margin-top: 58px; padding-top: 30px; border-top: 1px solid var(--line); }
+    .reviews-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 20px; }
+    .reviews-heading .eyebrow { margin-bottom: 6px; }
+    .reviews-heading h2 { margin: 0; font-size: 25px; line-height: 1.2; letter-spacing: -.04em; }
+    .reviews-subtitle { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+    .reviews-count { flex: none; padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink-soft); font-size: 11px; font-weight: 700; }
+    .reviews-disclosure { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 21px; padding: 13px 15px; border: 1px solid #e8e3d5; border-radius: 10px; background: #faf8f1; color: #5e594b; font-size: 11px; line-height: 1.55; }
+    .reviews-disclosure svg { width: 17px; height: 17px; flex: none; margin-top: 1px; color: #89733e; }
+    .reviews-groups { display: grid; gap: 22px; }
+    .review-group h3 { margin: 0 0 10px; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .review-card { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .review-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .review-author { display: block; color: var(--ink); font-size: 12px; font-weight: 750; }
+    .review-context { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .review-rating { flex: none; color: #9b762b; font-size: 11px; font-weight: 750; white-space: nowrap; }
+    .review-rating span { margin-right: 4px; color: #b1852d; letter-spacing: .08em; }
+    .review-text { margin: 12px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+    .reviews-pagination { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); }
+    .reviews-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .reviews-pagination button { min-width: 38px; height: 38px; padding: 0 11px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; cursor: pointer; font-size: 11px; font-weight: 700; }
+    .reviews-pagination button:hover:not(:disabled) { border-color: var(--brand); color: var(--brand-dark); }
+    .reviews-pagination button[aria-current="page"] { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
+    .reviews-pagination button:disabled { opacity: .45; cursor: not-allowed; }
+    .reviews-page-status { min-width: 105px; color: var(--muted); font-size: 10px; text-align: center; }
+    .reviews-page-status:focus { outline: none; }
+
     .similar-products { margin-top: 58px; padding-top: 28px; border-top: 1px solid var(--line); }
     .similar-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
     .similar-head p { margin: 0 0 5px; color: var(--brand); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
@@ -185,21 +213,14 @@
     .footer-cols a, .footer-cols p { display: block; margin: 0 0 5px; color: var(--muted); font-size: 11px; }
     .footer-cols a:hover { color: var(--brand-dark); }
     .legal-line { padding: 12px 0 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
-    .sticky { position: fixed; inset: auto 0 0; z-index: 20; width: 100%; max-width: 560px; display: none; align-items: center; gap: 12px; margin-inline: auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border: 1px solid var(--line); border-bottom: 0; border-radius: 13px 13px 0 0; background: rgba(255,255,255,.98); box-shadow: 0 -4px 18px rgba(20,22,19,.08); transform: translateY(120%); transition: transform .22s; }
+    .sticky { position: fixed; inset: auto 0 0; z-index: 20; width: 100%; max-width: 600px; display: none; align-items: center; gap: 12px; margin-inline: auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border: 1px solid var(--line); border-bottom: 0; border-radius: 15px 15px 0 0; background: rgba(255,255,255,.98); box-shadow: 0 -10px 28px rgba(20,22,19,.09); transform: translateY(120%); transition: transform .22s; backdrop-filter: blur(12px); }
     .sticky.on { transform: none; }
-    .sticky-offer { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; line-height: 1.1; }
-    .sticky-offer strong { color: var(--ink-soft); font-size: 14px; font-weight: 740; letter-spacing: -.01em; white-space: nowrap; }
-    .sticky-clock { width: 13px; height: 13px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .sticky-countdown { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 10px; font-weight: 550; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    .sticky-countdown time { color: var(--brand-dark); font-weight: 750; }
-    .sticky-countdown[hidden], .sticky-offer-fallback[hidden] { display: none; }
-    .sticky-offer-fallback { color: var(--muted); font-size: 10px; font-weight: 500; white-space: nowrap; }
-    .sticky .cta { width: auto; min-width: 0; min-height: 46px; justify-content: center; gap: 7px; margin: 0; padding: 8px 11px; border: 1px solid var(--brand-dark); border-radius: 10px; background: var(--brand); color: #fff; box-shadow: 0 3px 8px rgba(36,83,61,.14); font-size: 12px; white-space: nowrap; }
-    .sticky .cta:hover { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
-    .sticky .cta:disabled, .sticky .cta:disabled:hover { opacity: .65; cursor: not-allowed; box-shadow: none; }
-    .product-info > .cta:disabled, .product-info > .cta:disabled:hover { opacity: .58; cursor: not-allowed; box-shadow: none; transform: none; }
+    .sticky-price { flex: 0 0 auto; min-width: 82px; font-size: 16px; font-weight: 760; line-height: 1.1; }
+    .sticky-price strong { display: block; color: var(--brand-dark); font-size: 17px; font-weight: 800; letter-spacing: -.025em; }
+    .sticky-price small { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; font-weight: 550; white-space: nowrap; }
+    .sticky .cta { width: auto; min-width: 0; min-height: 48px; flex: 1 1 auto; justify-content: center; gap: 8px; margin: 0; padding: 9px 10px; border-radius: 10px; font-size: 12px; }
     .sticky .cta > svg { width: 17px; height: 17px; padding: 0; border: 0; border-radius: 0; background: transparent; box-sizing: content-box; }
-    .sticky .cta .sticky-arrow { margin-left: 0; color: inherit; font-size: 18px; }
+    .sticky .cta .sticky-arrow { margin-left: 0; font-size: 18px; }
     dialog { width: min(440px, calc(100% - 28px)); max-height: min(80vh, 680px); padding: 0; overflow: auto; border: 0; border-radius: 17px; color: var(--ink); box-shadow: 0 24px 80px rgba(0,0,0,.3); }
     dialog::backdrop { background: rgba(17,20,17,.52); backdrop-filter: blur(3px); }
     .dialog-body { padding: 23px; }
@@ -257,6 +278,16 @@
       .wishlist-block { padding-left: 10px; }
       .share-block > span, .wishlist-block > span { min-width: 0; font-size: 8px; }
       .share-block button, .wishlist-block button { min-height: 25px; padding: 0; font-size: 11px; white-space: nowrap; }
+
+      .customer-reviews { margin-top: 42px; padding-top: 24px; }
+      .reviews-heading { display: block; }
+      .reviews-heading h2 { font-size: 22px; }
+      .reviews-count { display: inline-block; margin-top: 12px; }
+      .review-grid { grid-template-columns: 1fr; gap: 9px; }
+      .review-card { padding: 14px; }
+      .reviews-pagination { gap: 7px; }
+      .reviews-pagination button { min-width: 34px; height: 36px; padding-inline: 9px; }
+      .reviews-page-status { min-width: 78px; font-size: 9px; }
       .similar-products { margin-top: 42px; }
       .similar-head { display: block; }
       .similar-head small { display: block; margin-top: 8px; }
@@ -273,7 +304,7 @@
       .confidence-card { display: grid; grid-template-columns: 25px 1fr; column-gap: 10px; padding: 13px; }
       .confidence-card svg { grid-row: span 2; margin: 0; }
       .confidence-card strong { margin: 0 0 2px; }
-      .sticky { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+      .sticky { display: flex; }
       body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
       .footer-inner { flex-direction: column; gap: 22px; }
       .footer-cols { gap: 24px; }
@@ -284,7 +315,6 @@
       .trust-item { gap: 6px; }
       .trust-item small { font-size: 9px; }
       .sticky { gap: 9px; padding-inline: 11px; }
-      .sticky .cta { gap: 6px; padding-inline: 8px; font-size: 11px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
@@ -341,7 +371,7 @@
         <div class="price-block" aria-label="Preço do produto">
           <span class="price-kicker">Oferta do produto</span>
           <div class="price-row"><span class="price">Grátis</span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
-          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; o cronômetro aparece quando o encerramento real for configurado.</span></p>
+          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; termina hoje, 19 de outubro de 2026.</span></p>
         </div>
 
         <div class="offer-card">
@@ -401,6 +431,28 @@
       </div>
     </section>
 
+    <section class="customer-reviews" id="avaliacoes" aria-labelledby="reviews-title">
+      <div class="reviews-heading">
+        <div>
+          <p class="eyebrow">Opiniões sobre o produto</p>
+          <h2 id="reviews-title">Avaliações de clientes</h2>
+          <p class="reviews-subtitle">Leia os relatos organizados em cinco blocos, com dois grupos de cinco por bloco.</p>
+        </div>
+        <span class="reviews-count" id="reviews-count">50 avaliações de exemplo</span>
+      </div>
+      <p class="reviews-disclosure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <span><strong>Transparência:</strong> esta página é uma demonstração. Os 50 relatos e as notas abaixo são exemplos fictícios, não foram enviados por clientes reais e não representam compras verificadas. Substitua-os por avaliações autênticas antes de publicar a loja.</span>
+      </p>
+      <div class="reviews-groups" id="reviews-groups" aria-live="polite" aria-atomic="true"></div>
+      <nav class="reviews-pagination" aria-label="Navegação dos blocos de avaliações">
+        <button type="button" id="reviews-prev" aria-label="Ver bloco anterior">Anterior</button>
+        <div class="reviews-pages" id="reviews-pages"></div>
+        <span class="reviews-page-status" id="reviews-page-status" role="status" aria-live="polite" tabindex="-1">Bloco 1 de 5</span>
+        <button type="button" id="reviews-next" aria-label="Ver próximo bloco">Próximo</button>
+      </nav>
+    </section>
+
     <section class="similar-products" aria-labelledby="similar-title">
       <div class="similar-head"><div><p>Você também pode gostar</p><h2 id="similar-title">Mais peças para completar seu estilo.</h2></div><small>Explore outras opções da mesma curadoria.</small></div>
       <div class="similar-grid">
@@ -421,8 +473,8 @@
   </footer>
 
   <div class="sticky" id="sticky-bar" role="region" aria-label="Compra rápida">
-    <div class="sticky-offer"><strong id="sticky-offer-title">Camiseta grátis</strong><span class="sticky-countdown" id="sticky-countdown" aria-live="off" hidden><svg class="sticky-clock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Termina em</span><time id="sticky-countdown-time">20:00</time></span><span class="sticky-offer-fallback" id="sticky-offer-fallback">Oferta por tempo limitado</span></div>
-    <button class="cta" type="button" id="sticky-button" aria-label="Adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span id="sticky-button-label">Adicionar à sacola</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
+    <span class="sticky-price"><strong>Grátis</strong><small>Frete a confirmar</small></span>
+    <button class="cta" type="button" id="sticky-button" aria-label="Adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Adicionar à sacola</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
   </div>
 
   <dialog id="cart-dialog" aria-labelledby="cart-title">
@@ -440,8 +492,6 @@
   <script>
     // Para ativar um checkout real, informe a URL da loja aqui. O tamanho segue como ?size=P|M|G.
     const CHECKOUT_URL = '';
-    // Prazo global real em ISO 8601 com fuso (ex.: AAAA-MM-DDTHH:MM:SS-03:00). Vazio = sem cronômetro.
-    const OFFER_END_AT = '';
     // Preencha somente informações reais da loja; campos vazios não aparecem.
     const STORE = { email: '', whatsapp: '', razaoSocial: '', cnpj: '', privacidade: '', termos: '', trocas: '' };
     const imgs = [
@@ -456,38 +506,19 @@
     const cart = [];
 
     const offerTiming = $('offer-timing-text');
-    offerTiming.textContent = 'Para a Fiel · por tempo limitado';
-    let offerExpired = false;
-    const offerDeadline = OFFER_END_AT.trim() ? Date.parse(OFFER_END_AT) : Number.NaN;
-    let countdownInterval = null;
-    function updateOfferCountdown() {
-      if (!Number.isFinite(offerDeadline)) return;
-      $('sticky-offer-fallback').hidden = true;
-      const secondsLeft = Math.ceil((offerDeadline - Date.now()) / 1000);
-      if (secondsLeft <= 0) {
-        offerExpired = true;
-        $('sticky-offer-title').textContent = 'Oferta encerrada';
-        $('sticky-countdown').hidden = true;
-        $('hint').textContent = 'Esta oferta terminou.';
-        $('hint').classList.remove('error');
-        document.querySelectorAll('.size').forEach((button) => { button.disabled = true; });
-        updateLabels();
-        $('add-button').setAttribute('aria-label', 'Oferta encerrada');
-        $('sticky-button').setAttribute('aria-label', 'Oferta encerrada');
-        if (countdownInterval !== null) window.clearInterval(countdownInterval);
-        return;
-      }
-      const hours = Math.floor(secondsLeft / 3600);
-      const minutes = Math.floor((secondsLeft % 3600) / 60);
-      const seconds = secondsLeft % 60;
-      $('sticky-countdown-time').textContent = hours
-        ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-        : `${String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-      $('sticky-countdown').hidden = false;
-    }
-    if (Number.isFinite(offerDeadline)) {
-      updateOfferCountdown();
-      countdownInterval = window.setInterval(updateOfferCountdown, 1000);
+    const offerPhrases = ['Para a Fiel · por tempo limitado', 'Para a Fiel · termina hoje (19/10/2026)'];
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      offerTiming.textContent = 'Para a Fiel · por tempo limitado · termina hoje (19/10/2026)';
+    } else {
+      let offerPhraseIndex = 0;
+      window.setInterval(() => {
+        offerTiming.classList.add('is-changing');
+        window.setTimeout(() => {
+          offerPhraseIndex = (offerPhraseIndex + 1) % offerPhrases.length;
+          offerTiming.textContent = offerPhrases[offerPhraseIndex];
+          offerTiming.classList.remove('is-changing');
+        }, 220);
+      }, 3400);
     }
 
     $('main-image').src = imgs[0][0];
@@ -502,10 +533,7 @@
     });
 
     function updateLabels() {
-      $('add-label').textContent = offerExpired ? 'Oferta encerrada' : 'Adicionar à sacola';
-      $('sticky-button-label').textContent = offerExpired ? 'Oferta encerrada' : 'Adicionar à sacola';
-      $('add-button').disabled = offerExpired;
-      $('sticky-button').disabled = offerExpired;
+      $('add-label').textContent = 'Adicionar à sacola';
       $('size-label').textContent = size ? `· ${size}` : '';
     }
     document.querySelectorAll('.size').forEach((button) => button.addEventListener('click', () => {
@@ -550,7 +578,6 @@
       else dialog.setAttribute('open', '');
     }
     function buy() {
-      if (offerExpired) return;
       if (!size) {
         $('add-button').classList.remove('needs-size');
         void $('add-button').offsetWidth;
@@ -608,6 +635,130 @@
       guide.scrollIntoView({ behavior: 'smooth', block: 'center' });
       $('product-info-tab').focus({ preventScroll: true });
     });
+
+
+    const DEMO_REVIEWS = [
+      { name: "Camila R.", date: "18 out. 2026", text: "Comprei pela estampa e gostei mais ainda quando vi o brasão de perto. Ficou bem bonita no look.", rating: 5 },
+      { name: "Rafael M.", date: "17 out. 2026", text: "Curti bastante. É uma camiseta de torcida sem aquele visual carregado, combina fácil com jeans.", rating: 5 },
+      { name: "Juliana S.", date: "16 out. 2026", text: "A estampa é bem bonita e o preto deixa a peça fácil de usar. Já entrou para os meus looks de jogo.", rating: 5 },
+      { name: "Diego A.", date: "15 out. 2026", text: "Gostei da camiseta. O destaque do Corinthians ficou na medida certa e o visual é bem versátil.", rating: 4 },
+      { name: "Mariana F.", date: "14 out. 2026", text: "Presente para meu irmão e ele adorou. O modelo é simples, mas tem bastante personalidade.", rating: 5 },
+      { name: "Bruno C.", date: "14 out. 2026", text: "Gostei muito do visual, principalmente do escudo. Dá para usar no dia a dia sem ficar exagerado.", rating: 5 },
+      { name: "Larissa P.", date: "13 out. 2026", text: "A camiseta é linda! O preto com o símbolo do Timão ficou uma combinação certeira.", rating: 5 },
+      { name: "André L.", date: "12 out. 2026", text: "Boa opção para quem quer mostrar que é corintiano de um jeito mais casual. Curti.", rating: 4 },
+      { name: "Fernanda G.", date: "11 out. 2026", text: "O design é bonito e combina com várias peças. Gostei bastante da proposta.", rating: 5 },
+      { name: "Lucas T.", date: "10 out. 2026", text: "Bem legal, o brasão chama atenção e a camiseta fica com um visual bacana.", rating: 5 },
+      { name: "Priscila N.", date: "18 out. 2026", text: "Comprei para usar nos jogos e gostei muito. O estilo é discreto e ainda representa o Timão.", rating: 5 },
+      { name: "Eduardo V.", date: "17 out. 2026", text: "Gostei da estampa e da proposta mais casual. É bem o tipo de camiseta que eu estava procurando.", rating: 5 },
+      { name: "Beatriz O.", date: "16 out. 2026", text: "O visual é ainda mais bonito do que eu imaginava. O escudo fica em evidência sem pesar.", rating: 5 },
+      { name: "Felipe D.", date: "15 out. 2026", text: "Camiseta bonita, fácil de combinar e com a cara da torcida. Recomendo para quem curte o Corinthians.", rating: 5 },
+      { name: "Aline B.", date: "13 out. 2026", text: "Adorei! O modelo é simples e o detalhe do time deixa a peça especial.", rating: 5 },
+      { name: "Thiago E.", date: "12 out. 2026", text: "Gostei bastante do resultado. Usei com jeans e ficou um look casual bem legal.", rating: 4 },
+      { name: "Renata K.", date: "11 out. 2026", text: "A camiseta tem um visual caprichado e o brasão é o que mais gostei nela.", rating: 5 },
+      { name: "Gustavo H.", date: "10 out. 2026", text: "Boa camiseta para o dia a dia. Curti que dá para usar também fora dos dias de jogo.", rating: 5 },
+      { name: "Isabela M.", date: "09 out. 2026", text: "Presente para meu pai, que é corintiano desde sempre. Ele gostou muito do estilo.", rating: 5 },
+      { name: "Caio R.", date: "08 out. 2026", text: "Gostei da combinação do preto com o símbolo. Ficou discreta e com identidade.", rating: 5 },
+      { name: "Natália C.", date: "18 out. 2026", text: "O visual é muito bonito e combina com bastante coisa. Já usei algumas vezes.", rating: 5 },
+      { name: "Vitor P.", date: "17 out. 2026", text: "Curti a camiseta. Para quem gosta do Timão e prefere algo mais básico, é uma boa escolha.", rating: 5 },
+      { name: "Amanda L.", date: "16 out. 2026", text: "Achei linda! O escudo dá um toque especial e não fica exagerado.", rating: 5 },
+      { name: "Rodrigo F.", date: "15 out. 2026", text: "Gostei da proposta e do visual. É uma camiseta que funciona bem em várias ocasiões casuais.", rating: 4 },
+      { name: "Carolina A.", date: "14 out. 2026", text: "Comprei para meu namorado e ele adorou. O detalhe do Corinthians ficou muito legal.", rating: 5 },
+      { name: "Marcelo S.", date: "12 out. 2026", text: "Visual bonito e simples, do jeito que eu gosto. O brasão se destaca bastante.", rating: 5 },
+      { name: "Patrícia R.", date: "11 out. 2026", text: "A estampa é o ponto alto. Ficou bem bonita com calça jeans e tênis.", rating: 5 },
+      { name: "Henrique M.", date: "10 out. 2026", text: "Camiseta bacana para torcer. Gostei do estilo mais limpo e fácil de combinar.", rating: 5 },
+      { name: "Sofia D.", date: "09 out. 2026", text: "Meu irmão adorou o presente. O design é bonito e representa bem o time.", rating: 5 },
+      { name: "Danilo G.", date: "08 out. 2026", text: "Bem legal para usar no cotidiano. O escudo dá personalidade sem deixar a peça chamativa demais.", rating: 4 },
+      { name: "Bianca T.", date: "18 out. 2026", text: "Gostei muito do estilo casual. Dá para montar um look de torcida sem ficar só com cara de uniforme.", rating: 5 },
+      { name: "Igor N.", date: "17 out. 2026", text: "O preto é fácil de combinar e o detalhe do Timão ficou bem bacana.", rating: 5 },
+      { name: "Letícia V.", date: "15 out. 2026", text: "A camiseta é bonita e tem um visual versátil. Foi uma boa escolha para presentear.", rating: 5 },
+      { name: "Renan B.", date: "14 out. 2026", text: "Curti bastante o modelo. O símbolo do Corinthians aparece bem e dá o toque que faltava.", rating: 5 },
+      { name: "Débora C.", date: "13 out. 2026", text: "É simples, bonita e combina com meu estilo. Gostei da ideia da peça.", rating: 4 },
+      { name: "Fábio O.", date: "12 out. 2026", text: "Boa camiseta para quem é torcedor. O visual é discreto e ao mesmo tempo tem identidade.", rating: 5 },
+      { name: "Elaine P.", date: "10 out. 2026", text: "Presente para meu filho. Ele gostou muito e já quis usar para assistir ao jogo.", rating: 5 },
+      { name: "Murilo A.", date: "09 out. 2026", text: "Gostei da estampa, principalmente por não ser muito grande. Ficou na medida.", rating: 5 },
+      { name: "Cecília F.", date: "08 out. 2026", text: "O design é bem bonito e combina com jeans, bermuda, várias opções. Recomendo.", rating: 5 },
+      { name: "Alexandre K.", date: "07 out. 2026", text: "Visual bonito e bem corintiano. Gostei da camiseta para usar no fim de semana.", rating: 4 },
+      { name: "Melissa S.", date: "18 out. 2026", text: "A camiseta tem uma pegada casual que eu gostei bastante. O escudo ficou muito bonito.", rating: 5 },
+      { name: "Sérgio D.", date: "16 out. 2026", text: "Comprei pela paixão pelo Corinthians e gostei do estilo. É mais versátil do que uma camisa de jogo.", rating: 5 },
+      { name: "Mônica H.", date: "15 out. 2026", text: "Ficou ótima com uma calça básica. Adorei o visual e o detalhe do brasão.", rating: 5 },
+      { name: "Pedro L.", date: "13 out. 2026", text: "Gostei bastante. É uma camiseta simples, mas o símbolo deixa claro para qual time vai a torcida.", rating: 4 },
+      { name: "Raquel E.", date: "11 out. 2026", text: "Meu marido gostou muito do presente. A estampa é discreta e a camiseta tem estilo.", rating: 5 },
+      { name: "Wesley C.", date: "10 out. 2026", text: "Uma boa opção para torcedor. Gostei que o visual funciona também no dia a dia.", rating: 5 },
+      { name: "Luana M.", date: "09 out. 2026", text: "Amei o detalhe do Corinthians. É o tipo de camiseta casual que eu estava procurando.", rating: 5 },
+      { name: "Roberto T.", date: "08 out. 2026", text: "Bonita e fácil de combinar. O brasão é o destaque, sem deixar o visual carregado.", rating: 5 },
+      { name: "Gabriela N.", date: "07 out. 2026", text: "Comprei para usar no jogo e gostei bastante. O estilo é casual e o símbolo ficou bem bonito.", rating: 4 },
+      { name: "Daniela A.", date: "06 out. 2026", text: "Gostei da camiseta e da proposta. É uma forma legal de levar o Timão para o look do dia a dia.", rating: 5 }
+    ];
+    let currentReviewBlock = 0;
+    function renderReviews() {
+      const groups = $('reviews-groups');
+      const pages = $('reviews-pages');
+      const status = $('reviews-page-status');
+      const previous = $('reviews-prev');
+      const next = $('reviews-next');
+      if (!groups || !pages || !status || !previous || !next) return;
+      const blockSize = 10;
+      const blockStart = currentReviewBlock * blockSize;
+      groups.replaceChildren();
+      for (let groupIndex = 0; groupIndex < 2; groupIndex++) {
+        const group = document.createElement('section');
+        group.className = 'review-group';
+        const heading = document.createElement('h3');
+        const firstNumber = blockStart + groupIndex * 5 + 1;
+        heading.textContent = `Avaliações ${firstNumber}–${firstNumber + 4}`;
+        const grid = document.createElement('div');
+        grid.className = 'review-grid';
+        grid.setAttribute('role', 'list');
+        for (let offset = 0; offset < 5; offset++) {
+          const index = blockStart + groupIndex * 5 + offset;
+          const item = DEMO_REVIEWS[index];
+          const article = document.createElement('article');
+          article.className = 'review-card';
+          article.setAttribute('role', 'listitem');
+          const top = document.createElement('div');
+          top.className = 'review-card-top';
+          const identity = document.createElement('div');
+          const author = document.createElement('span');
+          author.className = 'review-author';
+          author.textContent = item.name;
+          const context = document.createElement('small');
+          context.className = 'review-context';
+          context.textContent = `Exemplo ilustrativo · ${item.date}`;
+          identity.append(author, context);
+          const rating = document.createElement('span');
+          rating.className = 'review-rating';
+          rating.setAttribute('aria-label', `Nota ilustrativa: ${item.rating} de 5`);
+          const stars = document.createElement('span');
+          stars.setAttribute('aria-hidden', 'true');
+          stars.textContent = '★'.repeat(item.rating);
+          rating.append(stars, document.createTextNode(`${item.rating}/5`));
+          const text = document.createElement('p');
+          text.className = 'review-text';
+          text.textContent = item.text;
+          top.append(identity, rating);
+          article.append(top, text);
+          grid.append(article);
+        }
+        group.append(heading, grid);
+        groups.append(group);
+      }
+      pages.replaceChildren();
+      for (let page = 0; page < 5; page++) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = String(page + 1);
+        button.setAttribute('aria-label', `Ir para o bloco ${page + 1} de avaliações`);
+        if (page === currentReviewBlock) button.setAttribute('aria-current', 'page');
+        button.addEventListener('click', () => { currentReviewBlock = page; renderReviews(); });
+        pages.append(button);
+      }
+      status.textContent = `Bloco ${currentReviewBlock + 1} de 5 · avaliações ${blockStart + 1}–${blockStart + blockSize} de 50`;
+      previous.disabled = currentReviewBlock === 0;
+      next.disabled = currentReviewBlock === 4;
+    }
+    $('reviews-prev')?.addEventListener('click', () => { if (currentReviewBlock > 0) { currentReviewBlock--; renderReviews(); } });
+    $('reviews-next')?.addEventListener('click', () => { if (currentReviewBlock < 4) { currentReviewBlock++; renderReviews(); } });
+    renderReviews();
 
     function renderFooter() {
       const box = $('footer-cols');
