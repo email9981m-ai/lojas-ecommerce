@@ -105,7 +105,8 @@
     .size { width: 54px; height: 48px; border: 1px solid var(--line-strong); border-radius: 9px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 650; transition: background .15s, color .15s, border-color .15s; }
     .size:hover { border-color: var(--ink); }
     .size[aria-pressed="true"] { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
-    .size-fieldset { margin: 0; padding: 0; border: 0; }
+    .size-fieldset { margin: 0 0 14px; padding: 0; border: 0; }
+    .product-info > #add-button { margin-top: 0; }
     .hint { min-height: 19px; margin: 8px 0 0; color: var(--muted); font-size: 11px; }
     .hint.error { color: var(--red); }
     .cta { position: relative; width: 100%; min-height: 68px; display: inline-flex; justify-content: center; align-items: center; gap: 11px; margin-top: 7px; padding: 13px 19px; overflow: hidden; border: 1px solid var(--brand-dark); border-radius: 12px; background: linear-gradient(135deg, var(--brand) 0%, #3b7b5b 100%); color: #fff; box-shadow: 0 8px 18px rgba(36,83,61,.2), inset 0 1px 0 rgba(255,255,255,.18); font-size: 15px; font-weight: 800; letter-spacing: .005em; cursor: pointer; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
@@ -270,8 +271,8 @@
     .final-price-note { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; }
     .final-purchase-controls { min-width: 0; padding: 18px; border: 1px solid #e7ebe5; border-radius: 13px; background: rgba(255,255,255,.82); }
     .final-purchase-controls > strong { display: block; margin-bottom: 10px; font-size: 11px; }
-    .final-purchase-sizes { display: flex; gap: 8px; margin-bottom: 12px; }
-    .final-purchase-sizes .size { width: 42px; height: 40px; }
+    .final-purchase-sizes { display: flex; gap: 8px; margin-bottom: 14px; }
+    .final-purchase-sizes .size { width: 44px; height: 42px; }
     .final-purchase .cta { min-height: 52px; margin: 0; }
     .final-purchase-hint { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); font-size: 10px; }
     .final-purchase-hint.error { color: var(--red); }
@@ -946,7 +947,7 @@
             <button class="size" type="button" data-size="M" aria-pressed="false">M</button>
             <button class="size" type="button" data-size="G" aria-pressed="false">G</button>
           </div>
-          <p class="hint" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
+          <p class="hint sr-only" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
         </fieldset>
 
         <button class="cta" id="add-button" type="button" aria-label="Adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Adicionar à sacola</span></span><span class="cta-arrow" aria-hidden="true">→</span></button>
@@ -1105,7 +1106,7 @@
           <button class="size" type="button" data-final-size="G" aria-pressed="false">G</button>
         </div>
         <button class="cta" type="button" id="final-buy-button"><span>Escolha um tamanho</span><span class="cta-arrow" aria-hidden="true">→</span></button>
-        <p class="final-purchase-hint" id="final-purchase-hint" aria-live="polite">Selecione P, M ou G para continuar.</p>
+        <p class="final-purchase-hint sr-only" id="final-purchase-hint" aria-live="polite">Selecione P, M ou G para continuar.</p>
       </div>
     </section>
 
