@@ -1025,8 +1025,10 @@
     .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 24px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-order-total { color: #27372c; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-grid { gap: 12px; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 17px; border: 1px solid #c3d4c7; border-left: 4px solid var(--brand); border-radius: 12px; box-shadow: none; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > span { margin-bottom: 9px; color: var(--brand-dark); font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-grid { display: block; margin-bottom: 20px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 18px 20px; border: 1px solid #c3d4c7; border-left: 4px solid var(--brand); border-radius: 13px; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section + .checkout-review-section { margin-top: 17px; padding-top: 17px; border-top: 1px solid #e1e9e2; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section > span { display: block; margin-bottom: 9px; color: var(--brand-dark); font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-card strong { font-size: 13px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-card small { font-size: 11px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta { margin: 0 0 20px; padding: 14px 15px; border-color: #9bbb9f; background: #eaf5ec; box-shadow: none; }
@@ -1049,7 +1051,8 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-order { padding: 14px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-order-row { font-size: 11px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 21px; }
-      .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 15px 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-review-section + .checkout-review-section { margin-top: 14px; padding-top: 14px; }
       .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 16px; }
     }
     @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-order-total { margin-top: 10px; padding: 12px 10px 2px; } .checkout-order-total strong { font-size: 19px; } .checkout-payment-summary { display: block; padding: 12px 13px; } .checkout-payment-summary span { display: block; margin-top: 4px; text-align: left; } .checkout-grid-2 { grid-template-columns: 1fr; gap: 13px; } .checkout-grid-address { grid-template-columns: minmax(0, 1.35fr) minmax(76px, .65fr); gap: 10px; } .checkout-number-row { grid-template-columns: minmax(76px, .65fr) minmax(0, 1.35fr); } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
@@ -1369,16 +1372,12 @@
         <section class="checkout-pane" data-checkout-pane="3">
           <p class="checkout-pane-kicker">Confirmação</p><h3>Revisar e pagar</h3>
           <p>Sua camiseta é grátis. Você paga apenas o frete de R$ 39,00.</p>
-          <div class="checkout-section-label">Resumo do pedido</div>
-          <div class="checkout-order">
-            <div class="checkout-order-row"><span>Item</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
-            <div class="checkout-order-row"><span>Preço do produto</span><strong>R$ 0,00</strong></div>
-            <div class="checkout-order-row checkout-order-total"><span>Total a pagar</span><strong id="checkout-total">R$ 39,00</strong></div>
-          </div>
           <div class="checkout-section-label">Dados para entrega</div>
           <div class="checkout-review-grid" aria-label="Dados para conferência">
-            <div class="checkout-review-card"><span>Dados do cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
-            <div class="checkout-review-card"><span>Endereço de entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+            <div class="checkout-review-card">
+              <div class="checkout-review-section"><span>Dados do cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
+              <div class="checkout-review-section"><span>Endereço de entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+            </div>
           </div>
           <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo de entrega<strong>Até 3 dias úteis</strong></span><span>Valor do frete<strong>R$ 39,00</strong></span></div>
           <div class="checkout-section-label">Pagamento</div>
