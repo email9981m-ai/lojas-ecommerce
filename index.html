@@ -969,18 +969,25 @@
     .checkout-back:hover { border-color: #a9c2ae; background: #fff; color: var(--brand-dark); }
     .checkout-alert { display: none; margin: 12px 0 0; padding: 10px 12px; border: 1px solid #ead3d0; border-radius: 9px; background: #fff7f6; color: #8c3932; font-size: 11px; line-height: 1.45; }
     .checkout-alert.show { display: block; }
-    .checkout-order { margin: 0 0 16px; padding: 14px; border: 1px solid #dce7de; border-radius: 12px; background: #f7faf7; }
-    .checkout-order-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--ink-soft); font-size: 12px; }
+    .checkout-order { margin: 0 0 16px; padding: 15px; border: 1px solid #c9d8cc; border-radius: 12px; background: #fff; box-shadow: 0 3px 12px rgba(30,50,35,.045); }
+    .checkout-order-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: #5c675f; font-size: 12px; }
     .checkout-order-row + .checkout-order-row { margin-top: 9px; }
-    .checkout-order-row strong { color: var(--ink); text-align: right; }
+    .checkout-order-row strong { color: #1f2922; text-align: right; }
     .checkout-order-total { margin-top: 12px; padding: 12px 0 0; border-top: 1px solid #dce7de; font-size: 14px; }
     .checkout-order-total span { color: var(--ink); font-weight: 800; }
     .checkout-order-total strong { color: var(--brand-dark); font-size: 20px; letter-spacing: -.03em; }
     .checkout-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
-    .checkout-review-card { min-width: 0; padding: 13px 14px; border: 1px solid #d6e1d8; border-radius: 11px; background: #fff; box-shadow: 0 2px 8px rgba(30,50,35,.035); }
-    .checkout-review-card > span { display: block; margin-bottom: 6px; color: var(--brand-dark); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
-    .checkout-review-card strong { display: block; overflow: hidden; color: var(--ink-soft); font-size: 11px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+    .checkout-review-card { min-width: 0; padding: 14px; border: 1px solid #c9d8cc; border-left: 3px solid #8eaf96; border-radius: 11px; background: #fff; box-shadow: 0 3px 10px rgba(30,50,35,.045); }
+    .checkout-review-card > span { display: block; margin-bottom: 7px; color: #3e6d49; font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .checkout-review-card strong { display: block; overflow: hidden; color: #1f2922; font-size: 12px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
     .checkout-review-card small { display: block; overflow: hidden; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+    .checkout-delivery-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: -8px 0 18px; padding: 12px 13px; border: 1px solid #a9c7ae; border-radius: 10px; background: #eef7ef; box-shadow: 0 3px 10px rgba(30,70,40,.05); }
+    .checkout-delivery-meta span { display: grid; gap: 4px; color: #4e7055; font-size: 9px; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
+    .checkout-delivery-meta strong { color: #245b31; font-size: 12px; font-weight: 850; letter-spacing: 0; text-transform: none; }
+    .checkout-delivery-meta span:last-child { padding-left: 10px; border-left: 1px solid #c5ddc9; }
+    .checkout-section-label { margin: 18px 0 8px; color: #56645a; font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .checkout-payment-amount { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 9px 0 0; padding-top: 9px; border-top: 1px solid rgba(208,225,211,.8); color: var(--muted); font-size: 10px; }
+    .checkout-payment-amount strong { color: var(--brand-dark); font-size: 16px; }
     .contribution-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin: 12px 0 17px; }
     .contribution-option { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 13px; border: 1px solid #d5ded7; border-radius: 11px; background: rgba(255,255,255,.86); cursor: pointer; transition: border-color .16s, background .16s, box-shadow .16s, transform .16s; }
     .contribution-option:hover { border-color: #a9c2ae; transform: translateY(-1px); }
@@ -989,7 +996,7 @@
     .contribution-option span { font-size: 11px; font-weight: 700; }
     .contribution-option strong { color: var(--brand-dark); font-size: 13px; }
     .checkout-subheading { margin: 2px 0 10px; color: var(--ink-soft); font-size: 12px; font-weight: 800; }
-    .pix-box { padding: 15px; border: 1px dashed #b8d0bc; border-radius: 12px; background: #f7faf7; }
+    .pix-box { padding: 16px; border: 1px solid #9fbea5; border-radius: 12px; background: #f3f9f4; box-shadow: 0 4px 13px rgba(30,70,40,.06); }
     .pix-box strong { display: block; margin-bottom: 4px; color: var(--brand-dark); font-size: 14px; }
     .pix-box p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
     .pix-expiry { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #dce7de; color: #657067; font-size: 10px; }
@@ -1004,6 +1011,47 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
+    /* Refinamento profissional da etapa 3: confirmação, total e pagamento em primeiro plano. */
+    .checkout-pane[data-checkout-pane="3"] { max-width: 780px; padding: 30px 32px 32px; border: 1px solid #cbd9ce; border-radius: 18px; background: #fff; box-shadow: 0 14px 34px rgba(25,55,34,.09); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { margin-bottom: 9px; color: var(--brand-dark); }
+    .checkout-pane[data-checkout-pane="3"] h3 { font-size: 28px; }
+    .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) { margin-bottom: 25px; color: #536158; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-section-label { display: flex; align-items: center; gap: 9px; margin-top: 25px; color: #25342a; font-size: 11px; letter-spacing: .08em; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-section-label::before { content: ''; width: 5px; height: 15px; border-radius: 4px; background: var(--brand); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order { margin-bottom: 18px; padding: 17px 18px; border-color: #b9cdbc; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-row { color: #5a685e; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-row strong { color: #1d2b21; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 14px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 24px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-total { color: #27372c; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-grid { gap: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 17px; border: 1px solid #c3d4c7; border-left: 4px solid var(--brand); border-radius: 12px; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > span { margin-bottom: 9px; color: var(--brand-dark); font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card strong { font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card small { font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta { margin: 0 0 20px; padding: 14px 15px; border-color: #9bbb9f; background: #eaf5ec; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta span { color: #45664d; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta strong { color: #1f5a2b; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 20px; border: 1px solid #8fb49a; background: linear-gradient(145deg, #eff8f1 0%, #f8fbf8 100%); box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box strong { font-size: 16px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box p { color: #506158; font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 15px; padding-top: 13px; color: #536158; font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { color: #1f5a2b; font-size: 20px; }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 56px !important; margin-top: 15px !important; font-size: 14px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-actions { margin-top: 20px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-actions .checkout-back { min-height: 46px; }
+    .checkout-payment-trust { display: flex; align-items: flex-start; gap: 8px; margin: 14px 0 0; color: #5e6c62; font-size: 10px; line-height: 1.5; }
+    .checkout-payment-trust::before { content: '✓'; display: grid; width: 17px; height: 17px; flex: none; place-items: center; border-radius: 50%; background: #d9eadc; color: var(--brand-dark); font-size: 10px; font-weight: 900; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] { padding: 22px 16px 24px; border-radius: 15px; }
+      .checkout-pane[data-checkout-pane="3"] h3 { font-size: 23px; }
+      .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) { font-size: 11px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-order { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-order-row { font-size: 11px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 21px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 16px; }
+    }
     @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-order-total { margin-top: 10px; padding: 12px 10px 2px; } .checkout-order-total strong { font-size: 19px; } .checkout-payment-summary { display: block; padding: 12px 13px; } .checkout-payment-summary span { display: block; margin-top: 4px; text-align: left; } .checkout-grid-2 { grid-template-columns: 1fr; gap: 13px; } .checkout-grid-address { grid-template-columns: minmax(0, 1.35fr) minmax(76px, .65fr); gap: 10px; } .checkout-number-row { grid-template-columns: minmax(76px, .65fr) minmax(0, 1.35fr); } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
@@ -1320,18 +1368,21 @@
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
           <p class="checkout-pane-kicker">Confirmação</p><h3>Revisar e pagar</h3>
-          <p>Confira o item, seus dados de entrega e o total antes de gerar o PIX.</p>
+          <p>Sua camiseta é grátis. Você paga apenas o frete de R$ 39,00.</p>
+          <div class="checkout-section-label">Resumo do pedido</div>
           <div class="checkout-order">
             <div class="checkout-order-row"><span>Item</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
             <div class="checkout-order-row"><span>Preço do produto</span><strong>R$ 0,00</strong></div>
-            <div class="checkout-order-row"><span>Frete</span><strong id="checkout-shipping-label">R$ 39,00</strong></div>
             <div class="checkout-order-row checkout-order-total"><span>Total a pagar</span><strong id="checkout-total">R$ 39,00</strong></div>
           </div>
+          <div class="checkout-section-label">Dados para entrega</div>
           <div class="checkout-review-grid" aria-label="Dados para conferência">
             <div class="checkout-review-card"><span>Dados do cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
             <div class="checkout-review-card"><span>Endereço de entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
           </div>
-          <div class="pix-box"><strong>Pagar com PIX</strong><p>Confira R$ 39,00 no aplicativo do seu banco antes de confirmar.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar PIX de R$ 39,00 <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
+          <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo de entrega<strong>Até 3 dias úteis</strong></span><span>Valor do frete<strong>R$ 39,00</strong></span></div>
+          <div class="checkout-section-label">Pagamento</div>
+          <div class="pix-box"><strong>Pagar com PIX</strong><p>Confira o beneficiário e confirme o valor no aplicativo do seu banco.</p><div class="checkout-payment-amount"><span>Valor do frete</span><strong>R$ 39,00</strong></div><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar PIX de R$ 39,00 <span class="cta-arrow">→</span></button><p class="checkout-payment-trust">Pagamento processado com segurança. O pedido só será confirmado após a identificação do PIX.</p><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
           <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="2">Voltar</button></div>
           <p class="checkout-alert" id="checkout-alert" role="alert"></p>
         </section>
