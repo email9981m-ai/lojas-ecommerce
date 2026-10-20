@@ -185,14 +185,19 @@
     .footer-cols a, .footer-cols p { display: block; margin: 0 0 5px; color: var(--muted); font-size: 11px; }
     .footer-cols a:hover { color: var(--brand-dark); }
     .legal-line { padding: 12px 0 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
-    .sticky { position: fixed; inset: auto 0 0; z-index: 20; width: 100%; max-width: 600px; display: none; align-items: center; gap: 12px; margin-inline: auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border: 1px solid rgba(255,255,255,.12); border-bottom: 0; border-radius: 15px 15px 0 0; background: linear-gradient(110deg, #173f2d 0%, #24533d 100%); box-shadow: 0 -10px 30px rgba(17,45,31,.28); transform: translateY(120%); transition: transform .22s; }
+    .sticky { position: fixed; inset: auto 0 0; z-index: 20; width: 100%; max-width: 600px; display: none; align-items: center; gap: 12px; margin-inline: auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border: 1px solid rgba(255,255,255,.12); border-bottom: 0; border-radius: 15px 15px 0 0; background: #214b36; box-shadow: 0 -8px 24px rgba(17,45,31,.22); transform: translateY(120%); transition: transform .22s; }
     .sticky.on { transform: none; }
-    .sticky-offer { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; line-height: 1.1; }
-    .sticky-offer-label { display: inline-flex; align-items: center; gap: 5px; color: #f5cf8c; font-size: 7.5px; font-weight: 850; letter-spacing: .065em; text-transform: uppercase; white-space: nowrap; }
-    .sticky-clock { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .sticky-offer strong { color: #fff; font-size: 15px; font-weight: 820; letter-spacing: -.02em; white-space: nowrap; }
-    .sticky .cta { width: auto; min-width: 0; min-height: 48px; justify-content: center; gap: 7px; margin: 0; padding: 9px 11px; border: 1px solid #f2c477; border-radius: 10px; background: linear-gradient(135deg, #f2c477 0%, #ffdc9c 100%); color: #20382a; box-shadow: 0 4px 12px rgba(0,0,0,.16); font-size: 12px; white-space: nowrap; }
-    .sticky .cta:hover { border-color: #ffe3ac; background: linear-gradient(135deg, #ffdc9c 0%, #ffe7bb 100%); color: #172d20; }
+    .sticky-offer { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; line-height: 1.1; }
+    .sticky-offer strong { color: #fff; font-size: 15px; font-weight: 760; letter-spacing: -.015em; white-space: nowrap; }
+    .sticky-clock { width: 13px; height: 13px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .sticky-countdown { display: inline-flex; align-items: center; gap: 5px; color: rgba(255,255,255,.84); font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .sticky-countdown time { color: #f3cf8d; font-weight: 800; }
+    .sticky-countdown[hidden], .sticky-offer-fallback[hidden] { display: none; }
+    .sticky-offer-fallback { color: rgba(255,255,255,.78); font-size: 10px; font-weight: 550; white-space: nowrap; }
+    .sticky .cta { width: auto; min-width: 0; min-height: 48px; justify-content: center; gap: 7px; margin: 0; padding: 9px 11px; border: 1px solid #f2c477; border-radius: 10px; background: #f4d59e; color: #24432f; box-shadow: 0 3px 9px rgba(0,0,0,.14); font-size: 12px; white-space: nowrap; }
+    .sticky .cta:hover { border-color: #ffe3ac; background: #ffe0a7; color: #172d20; }
+    .sticky .cta:disabled, .sticky .cta:disabled:hover { opacity: .65; cursor: not-allowed; box-shadow: none; }
+    .product-info > .cta:disabled, .product-info > .cta:disabled:hover { opacity: .58; cursor: not-allowed; box-shadow: none; transform: none; }
     .sticky .cta > svg { width: 17px; height: 17px; padding: 0; border: 0; border-radius: 0; background: transparent; box-sizing: content-box; }
     .sticky .cta .sticky-arrow { margin-left: 0; color: inherit; font-size: 18px; }
     dialog { width: min(440px, calc(100% - 28px)); max-height: min(80vh, 680px); padding: 0; overflow: auto; border: 0; border-radius: 17px; color: var(--ink); box-shadow: 0 24px 80px rgba(0,0,0,.3); }
@@ -336,7 +341,7 @@
         <div class="price-block" aria-label="Preço do produto">
           <span class="price-kicker">Oferta do produto</span>
           <div class="price-row"><span class="price">Grátis</span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
-          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; termina hoje, 19 de outubro de 2026.</span></p>
+          <p class="offer-timing" aria-live="off"><span class="offer-timing-text" id="offer-timing-text" aria-hidden="true">Para a Fiel · por tempo limitado</span><span class="sr-only">Oferta para a torcida do Corinthians por tempo limitado; o cronômetro aparece quando o encerramento real for configurado.</span></p>
         </div>
 
         <div class="offer-card">
@@ -416,8 +421,8 @@
   </footer>
 
   <div class="sticky" id="sticky-bar" role="region" aria-label="Compra rápida">
-    <div class="sticky-offer"><span class="sticky-offer-label"><svg class="sticky-clock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Último dia da oferta</span><strong>Termina hoje</strong></div>
-    <button class="cta" type="button" id="sticky-button" aria-label="Aproveitar oferta e adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Aproveitar oferta</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
+    <div class="sticky-offer"><strong id="sticky-offer-title">Camiseta grátis</strong><span class="sticky-countdown" id="sticky-countdown" aria-live="off" hidden><svg class="sticky-clock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Termina em</span><time id="sticky-countdown-time">20:00</time></span><span class="sticky-offer-fallback" id="sticky-offer-fallback">Oferta por tempo limitado</span></div>
+    <button class="cta" type="button" id="sticky-button" aria-label="Aproveitar oferta e adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span id="sticky-button-label">Aproveitar oferta</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
   </div>
 
   <dialog id="cart-dialog" aria-labelledby="cart-title">
@@ -435,6 +440,8 @@
   <script>
     // Para ativar um checkout real, informe a URL da loja aqui. O tamanho segue como ?size=P|M|G.
     const CHECKOUT_URL = '';
+    // Prazo global real em ISO 8601 com fuso (ex.: AAAA-MM-DDTHH:MM:SS-03:00). Vazio = sem cronômetro.
+    const OFFER_END_AT = '';
     // Preencha somente informações reais da loja; campos vazios não aparecem.
     const STORE = { email: '', whatsapp: '', razaoSocial: '', cnpj: '', privacidade: '', termos: '', trocas: '' };
     const imgs = [
@@ -449,19 +456,38 @@
     const cart = [];
 
     const offerTiming = $('offer-timing-text');
-    const offerPhrases = ['Para a Fiel · por tempo limitado', 'Para a Fiel · termina hoje (19/10/2026)'];
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      offerTiming.textContent = 'Para a Fiel · por tempo limitado · termina hoje (19/10/2026)';
-    } else {
-      let offerPhraseIndex = 0;
-      window.setInterval(() => {
-        offerTiming.classList.add('is-changing');
-        window.setTimeout(() => {
-          offerPhraseIndex = (offerPhraseIndex + 1) % offerPhrases.length;
-          offerTiming.textContent = offerPhrases[offerPhraseIndex];
-          offerTiming.classList.remove('is-changing');
-        }, 220);
-      }, 3400);
+    offerTiming.textContent = 'Para a Fiel · por tempo limitado';
+    let offerExpired = false;
+    const offerDeadline = OFFER_END_AT.trim() ? Date.parse(OFFER_END_AT) : Number.NaN;
+    let countdownInterval = null;
+    function updateOfferCountdown() {
+      if (!Number.isFinite(offerDeadline)) return;
+      $('sticky-offer-fallback').hidden = true;
+      const secondsLeft = Math.ceil((offerDeadline - Date.now()) / 1000);
+      if (secondsLeft <= 0) {
+        offerExpired = true;
+        $('sticky-offer-title').textContent = 'Oferta encerrada';
+        $('sticky-countdown').hidden = true;
+        $('hint').textContent = 'Esta oferta terminou.';
+        $('hint').classList.remove('error');
+        document.querySelectorAll('.size').forEach((button) => { button.disabled = true; });
+        updateLabels();
+        $('add-button').setAttribute('aria-label', 'Oferta encerrada');
+        $('sticky-button').setAttribute('aria-label', 'Oferta encerrada');
+        if (countdownInterval !== null) window.clearInterval(countdownInterval);
+        return;
+      }
+      const hours = Math.floor(secondsLeft / 3600);
+      const minutes = Math.floor((secondsLeft % 3600) / 60);
+      const seconds = secondsLeft % 60;
+      $('sticky-countdown-time').textContent = hours
+        ? `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+        : `${String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      $('sticky-countdown').hidden = false;
+    }
+    if (Number.isFinite(offerDeadline)) {
+      updateOfferCountdown();
+      countdownInterval = window.setInterval(updateOfferCountdown, 1000);
     }
 
     $('main-image').src = imgs[0][0];
@@ -476,7 +502,10 @@
     });
 
     function updateLabels() {
-      $('add-label').textContent = 'Adicionar à sacola';
+      $('add-label').textContent = offerExpired ? 'Oferta encerrada' : 'Adicionar à sacola';
+      $('sticky-button-label').textContent = offerExpired ? 'Oferta encerrada' : 'Aproveitar oferta';
+      $('add-button').disabled = offerExpired;
+      $('sticky-button').disabled = offerExpired;
       $('size-label').textContent = size ? `· ${size}` : '';
     }
     document.querySelectorAll('.size').forEach((button) => button.addEventListener('click', () => {
@@ -521,6 +550,7 @@
       else dialog.setAttribute('open', '');
     }
     function buy() {
+      if (offerExpired) return;
       if (!size) {
         $('add-button').classList.remove('needs-size');
         void $('add-button').offsetWidth;
