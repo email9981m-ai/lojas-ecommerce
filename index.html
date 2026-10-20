@@ -918,15 +918,7 @@
     .checkout-head h2 { margin: 0; color: var(--ink); font-size: 22px; line-height: 1.15; letter-spacing: -.045em; }
     .checkout-secure { display: inline-flex; align-items: center; gap: 5px; color: var(--brand-dark); font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
     .checkout-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); cursor: pointer; font-size: 21px; line-height: 1; }
-    .checkout-steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; padding: 12px max(22px, calc((100% - 820px) / 2)) 11px; border-bottom: 1px solid var(--line); background: #fff; }
-    .checkout-steps::before { content: ''; position: absolute; top: 25px; left: max(56px, calc((100% - 730px) / 2)); right: max(56px, calc((100% - 730px) / 2)); height: 1px; background: #dfe5df; }
-    .checkout-step-pill { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--muted); text-align: center; font-size: 10px; font-weight: 700; transition: color .18s; }
-    .checkout-step-pill::before { content: attr(data-checkout-pill); display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid #d4ddd5; border-radius: 50%; background: #fff; color: var(--muted); font-size: 10px; font-weight: 800; transition: background .18s, border-color .18s, color .18s, transform .18s; }
-    .checkout-step-pill.active { color: var(--brand-dark); }
-    .checkout-step-pill.active::before { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; box-shadow: 0 3px 8px rgba(36,83,61,.16); transform: scale(1.06); }
-    .checkout-step-pill.done { color: #4f795b; }
-    .checkout-step-pill.done::before { border-color: #9abb9f; background: #edf5ef; color: #4f795b; content: '✓'; }
-    .checkout-body { width: min(820px, calc(100% - 48px)); margin: 0 auto; padding: 32px 0 64px; scroll-padding-top: 150px; }
+    .checkout-body { width: min(820px, calc(100% - 48px)); margin: 0 auto; padding: 36px 0 64px; scroll-padding-top: 120px; }
     .checkout-product-card { position: sticky; top: 0; z-index: 4; display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 14px; margin-bottom: 28px; padding: 10px 0 16px; border: 0; border-bottom: 1px solid #dfe8e0; border-radius: 0; background: rgba(248,247,244,.96); box-shadow: none; backdrop-filter: blur(8px); }
     .checkout-product-image { width: 76px; height: 76px; object-fit: contain; border: 1px solid #e0e7e0; border-radius: 12px; background: #f0f3ef; }
     .checkout-product-kicker { margin: 0 0 4px; color: var(--brand); font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
@@ -946,7 +938,7 @@
     .checkout-form input::placeholder { color: #a2aaa3; }
     .checkout-form input:hover, .checkout-form select:hover { border-color: #b9c8bb; background: #fff; }
     .checkout-form input:focus, .checkout-form select:focus { border-color: var(--brand); outline: 0; background: #fff; box-shadow: 0 0 0 3px rgba(47,107,79,.12), 0 2px 5px rgba(22,35,25,.05); }
-    .checkout-form input:invalid:not(:placeholder-shown) { border-color: #d6a5a0; box-shadow: 0 0 0 3px rgba(162,57,50,.08); }
+    .checkout-form input:user-invalid { border-color: #d6a5a0; box-shadow: 0 0 0 3px rgba(162,57,50,.08); }
     .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .checkout-grid-address { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(88px, .5fr); gap: 12px; }
     .checkout-actions { display: flex; gap: 10px; margin-top: 18px; }
@@ -985,7 +977,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-steps { gap: 5px; padding-top: 10px; padding-bottom: 10px; } .checkout-step-pill { padding: 0; font-size: 9px; } .checkout-step-pill::before { width: 22px; height: 22px; font-size: 9px; } .checkout-steps::before { top: 22px; left: 38px; right: 38px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1266,11 +1258,6 @@
         <div class="checkout-head-copy"><div class="checkout-logo" aria-label="Kokeshi">kokeshi<span>.</span></div><div><h2 id="checkout-title">Finalizar pedido</h2><span class="checkout-secure">● Checkout transparente</span></div></div>
         <button class="checkout-close" id="close-icon" type="button" aria-label="Fechar checkout">×</button>
       </div>
-      <div class="checkout-steps" aria-label="Etapas do checkout">
-        <div class="checkout-step-pill active" data-checkout-pill="1">Dados</div>
-        <div class="checkout-step-pill" data-checkout-pill="2">Entrega</div>
-        <div class="checkout-step-pill" data-checkout-pill="3">Pagamento</div>
-      </div>
       <div class="checkout-body">
         <article class="checkout-product-card" aria-label="Produto do pedido">
           <img class="checkout-product-image" id="checkout-product-image" alt="Camiseta Casual Corinthians">
@@ -1279,7 +1266,7 @@
         </article>
         <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
         <section class="checkout-pane active" data-checkout-pane="1">
-          <p class="checkout-pane-kicker">Etapa 1 · Identificação</p><h3>Dados do cliente</h3>
+          <p class="checkout-pane-kicker">Identificação</p><h3>Dados do cliente</h3>
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
           <form class="checkout-form" id="checkout-personal-form">
             <label>Nome completo<input id="checkout-name" autocomplete="name" required placeholder="Seu nome completo"></label>
@@ -1292,7 +1279,7 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="2">
-          <p class="checkout-pane-kicker">Etapa 2 · Entrega</p><h3>Endereço de entrega</h3>
+          <p class="checkout-pane-kicker">Entrega</p><h3>Endereço de entrega</h3>
           <p>Informe o CEP para preencher o endereço. Revise os dados antes de continuar.</p>
           <form class="checkout-form" id="checkout-address-form">
             <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000"></label>
@@ -1304,11 +1291,11 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <p class="checkout-pane-kicker">Etapa 3 · Confirmação</p><h3>Revisar e pagar</h3>
+          <p class="checkout-pane-kicker">Confirmação</p><h3>Revisar e pagar</h3>
           <p>Confira o item, a contribuição escolhida, o endereço e o valor final antes de gerar o PIX.</p>
           <div class="checkout-order">
-            <div class="checkout-order-row"><span>Produto</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
-            <div class="checkout-order-row"><span>Produto</span><strong>R$ 0,00</strong></div>
+            <div class="checkout-order-row"><span>Item</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
+            <div class="checkout-order-row"><span>Preço do produto</span><strong>R$ 0,00</strong></div>
             <div class="checkout-order-row"><span>Contribuição</span><strong id="checkout-contribution-label">Contribuição Benfeitor</strong></div>
             <div class="checkout-order-row checkout-order-total"><span>Total</span><strong id="checkout-total">R$ 50,00</strong></div>
           </div>
@@ -1792,6 +1779,8 @@
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
       document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
       syncCheckoutSummary();
+      const checkoutShell = document.querySelector('.checkout-shell');
+      if (checkoutShell) checkoutShell.scrollTo({ top: 0, behavior: 'smooth' });
     }
     function syncCheckoutSummary() {
       const selected = cart[0] || size || '—';
