@@ -228,6 +228,16 @@
     .image-view-content { position: relative; padding: 18px; }
     .image-view-close { position: absolute; top: 12px; right: 12px; z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(23,25,22,.1); border-radius: 50%; background: rgba(255,255,255,.94); color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.1); }
     .image-view-close:hover { background: #f2f4f1; }
+    .image-view-content { touch-action: pan-y; }
+    .image-view-content img { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+    .image-view-content img.is-dragging { cursor: grabbing; }
+    .image-view-nav { position: absolute; top: 50%; z-index: 1; width: 42px; height: 42px; display: grid; place-items: center; transform: translateY(-50%); border: 1px solid rgba(23,25,22,.1); border-radius: 50%; background: rgba(255,255,255,.94); color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,.12); }
+    .image-view-nav:hover { background: #f2f4f1; }
+    .image-view-prev { left: 28px; }
+    .image-view-next { right: 28px; }
+    .image-view-position { position: absolute; right: 24px; bottom: 60px; padding: 5px 9px; border-radius: 99px; background: rgba(23,25,22,.68); color: #fff; font-size: 10px; font-weight: 650; }
+    @media (max-width: 520px) { .image-view-content { padding: 12px; } .image-view-prev { left: 20px; } .image-view-next { right: 20px; } }
+
     .image-view-content img { width: 100%; max-height: min(76vh, 800px); object-fit: contain; border-radius: 12px; background: var(--canvas); }
     .image-view-caption { margin: 12px 2px 1px; color: var(--ink-soft); font-size: 13px; font-weight: 650; }
 
@@ -1161,7 +1171,10 @@
   <dialog class="image-view-dialog" id="image-view-dialog" aria-labelledby="image-view-caption">
     <div class="image-view-content">
       <button class="image-view-close" id="image-view-close" type="button" aria-label="Fechar visualização">×</button>
-      <img id="image-view-full" alt="">
+      <button class="image-view-nav image-view-prev" id="image-view-prev" type="button" aria-label="Imagem anterior">‹</button>
+      <img id="image-view-full" alt="" draggable="false">
+      <button class="image-view-nav image-view-next" id="image-view-next" type="button" aria-label="Próxima imagem">›</button>
+      <span class="image-view-position" id="image-view-position" aria-live="polite"></span>
       <p class="image-view-caption" id="image-view-caption"></p>
     </div>
   </dialog>
@@ -1328,22 +1341,67 @@
       image.src = imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
     });
     const imageView = $('image-view-dialog');
+    let imageViewItems = [];
+    let imageViewIndex = 0;
+    function renderViewedImage() {
+      if (!imageViewItems.length) return;
+      const item = imageViewItems[imageViewIndex];
+      $('image-view-full').src = item.src;
+      $('image-view-full').alt = item.alt;
+      $('image-view-caption').textContent = item.alt;
+      $('image-view-position').textContent = `${imageViewIndex + 1} / ${imageViewItems.length}`;
+      const showNav = imageViewItems.length > 1;
+      $('image-view-prev').hidden = !showNav;
+      $('image-view-next').hidden = !showNav;
+      $('image-view-position').hidden = !showNav;
+    }
+    function openImageViewer(items, index) {
+      imageViewItems = items;
+      imageViewIndex = (index + items.length) % items.length;
+      renderViewedImage();
+      imageView.showModal();
+    }
+    function stepViewedImage(direction) {
+      if (imageViewItems.length < 2) return;
+      imageViewIndex = (imageViewIndex + direction + imageViewItems.length) % imageViewItems.length;
+      renderViewedImage();
+    }
     $('view-main-image').addEventListener('click', () => {
-      const image = $('main-image');
-      $('image-view-full').src = image.currentSrc || image.src;
-      $('image-view-full').alt = image.alt;
-      $('image-view-caption').textContent = image.alt || 'Detalhes da camiseta';
-      imageView.showModal();
+      const selectedThumb = document.querySelector('.thumb[aria-pressed="true"]');
+      const selectedIndex = Number(selectedThumb?.dataset.i || 0);
+      openImageViewer(imgs.map(([src, alt]) => ({ src, alt })), selectedIndex);
     });
+    const similarImageItems = [...document.querySelectorAll('[data-similar-image]')].map((image) => ({ src: image.currentSrc || image.src, alt: image.alt }));
     document.querySelectorAll('[data-image-view]').forEach((button) => button.addEventListener('click', () => {
-      const image = button.querySelector('img');
-      $('image-view-full').src = image.currentSrc || image.src;
-      $('image-view-full').alt = image.alt;
-      $('image-view-caption').textContent = image.alt;
-      imageView.showModal();
+      openImageViewer(similarImageItems, Number(button.dataset.imageView) - 1);
     }));
+    $('image-view-prev').addEventListener('click', () => stepViewedImage(-1));
+    $('image-view-next').addEventListener('click', () => stepViewedImage(1));
     $('image-view-close').addEventListener('click', () => imageView.close());
     imageView.addEventListener('click', (event) => { if (event.target === imageView) imageView.close(); });
+    imageView.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') { event.preventDefault(); stepViewedImage(-1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); stepViewedImage(1); }
+    });
+    let pointerStartX = null;
+    const viewerImage = $('image-view-full');
+    viewerImage.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerStartX = event.clientX;
+      viewerImage.classList.add('is-dragging');
+      viewerImage.setPointerCapture?.(event.pointerId);
+    });
+    viewerImage.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null) return;
+      const deltaX = event.clientX - pointerStartX;
+      pointerStartX = null;
+      viewerImage.classList.remove('is-dragging');
+      if (Math.abs(deltaX) > 45) stepViewedImage(deltaX < 0 ? 1 : -1);
+    });
+    viewerImage.addEventListener('pointercancel', () => {
+      pointerStartX = null;
+      viewerImage.classList.remove('is-dragging');
+    });
 
     $('size-guide-link').addEventListener('click', () => {
       const guide = $('product-details');
