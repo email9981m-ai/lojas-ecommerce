@@ -104,12 +104,11 @@
     .price-row { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
     .price { color: var(--brand-dark); font-size: 46px; line-height: 1; letter-spacing: -.055em; font-weight: 820; }
     .price-wrap { position: relative; display: inline-block; flex: none; padding-bottom: 13px; }
-    .price-wrap .price { display: block; }
-    .price-wrap .price { display: block; transform-origin: left center; background-image: repeating-linear-gradient(90deg, #24533d 0px, #3d7050 26px, #789b81 52px, #3d7050 78px, #24533d 104px); background-size: 104px 100%; background-position: 0 0; background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: free-price-enter .62s cubic-bezier(.2,.75,.25,1) both, price-gradient-flow 4.4s linear .62s infinite; }
+    .price-wrap .price { display: block; color: var(--brand-dark); transform-origin: left center; animation: free-price-enter .42s ease-out both; }
 
     .price-brush { position: absolute; left: 0; bottom: 0; display: block; width: 100%; height: 15px; overflow: visible; }
-    .price-brush path { fill: none; stroke: #2f6b4f; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .16s forwards, brush-color-flow 4.6s ease-in-out 1.25s infinite; }
-    .price-brush path + path { stroke: #91b39a; stroke-width: 1.8; opacity: .78; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .34s forwards; }
+    .price-brush path { fill: none; stroke: #52795b; stroke-width: 4.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw .72s cubic-bezier(.2,.75,.25,1) .12s forwards; }
+    .price-brush path + path { stroke: #a4b8a6; stroke-width: 1.3; opacity: .8; animation: brush-draw .72s cubic-bezier(.2,.75,.25,1) .2s forwards; }
 
     .price-reference { display: grid; gap: 2px; padding-left: 15px; border-left: 1px solid #d7e5db; }
     .price-reference strong { color: var(--ink-soft); font-size: 14px; line-height: 1.2; }
@@ -293,10 +292,10 @@
     .final-purchase-copy p:last-child { margin: 11px 0 0; color: var(--muted); font-size: 12px; }
     .final-price { display: block; margin-top: 15px; color: var(--brand-dark); font-size: 29px; line-height: 1; font-weight: 820; letter-spacing: -.04em; }
     .final-price-note { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; }
-    .final-price { transform-origin: left center; background-image: repeating-linear-gradient(90deg, #24533d 0px, #3d7050 26px, #789b81 52px, #3d7050 78px, #24533d 104px); background-size: 104px 100%; background-position: 0 0; background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: free-price-enter .62s cubic-bezier(.2,.75,.25,1) .12s both, price-gradient-flow 4.4s linear .74s infinite; }
+    .final-price { transform-origin: left center; animation: free-price-enter .42s ease-out .08s both; }
     .price-flourish { display: block; width: 108px; height: 15px; margin: 3px 0 0 1px; overflow: visible; }
-    .price-flourish path { fill: none; stroke: #2f6b4f; stroke-width: 4.2; stroke-linecap: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .28s forwards, brush-color-flow 4.6s ease-in-out 1.37s infinite; }
-    .price-flourish path + path { stroke: #91b39a; stroke-width: 1.6; opacity: .78; animation: brush-draw 1.08s cubic-bezier(.2,.75,.25,1) .44s forwards; }
+    .price-flourish path { fill: none; stroke: #52795b; stroke-width: 3.8; stroke-linecap: round; stroke-dasharray: 180; stroke-dashoffset: 180; animation: brush-draw .72s cubic-bezier(.2,.75,.25,1) .16s forwards; }
+    .price-flourish path + path { stroke: #a4b8a6; stroke-width: 1.2; opacity: .8; animation: brush-draw .72s cubic-bezier(.2,.75,.25,1) .24s forwards; }
 
     .final-purchase-controls { min-width: 0; padding: 18px; border: 1px solid #e7ebe5; border-radius: 13px; background: rgba(255,255,255,.82); }
     .final-purchase-controls > strong { display: block; margin-bottom: 10px; font-size: 11px; }
@@ -307,10 +306,8 @@
     .final-purchase-hint.error { color: var(--red); }
     @keyframes free-price-enter { from { opacity: .55; transform: translateY(5px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
     @keyframes brush-draw { to { stroke-dashoffset: 0; } }
-    @keyframes price-gradient-flow { from { background-position: 0 0; } to { background-position: 104px 0; } }
-    @keyframes brush-color-flow { 0%, 100% { stroke: #2f6b4f; } 50% { stroke: #71947a; } }
     @media (prefers-reduced-motion: reduce) {
-      .price-wrap .price, .final-price { animation: none; background-position: 0 0; }
+      .price-wrap .price, .final-price { animation: none; }
       .price-brush path, .price-flourish path { animation: none; stroke-dashoffset: 0; }
     }
     .footer { border-top: 1px solid var(--line); background: #fcfcfa; }
