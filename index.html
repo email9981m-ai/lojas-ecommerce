@@ -1154,6 +1154,28 @@
       .checkout-pane[data-checkout-pane="3"] .pix-method-note { font-size: 9px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 23px; }
     }
+
+    /* Refinamento exclusivo do bloco de frete da etapa 2. */
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-block { gap: 9px; margin-top: 4px; padding-top: 2px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option { grid-template-columns: 20px minmax(0, 1fr) auto; gap: 12px; padding: 16px 15px; border: 1px solid #b8cdbb; border-radius: 14px; background: linear-gradient(135deg, #fbfdfb 0%, #f4faf5 100%); box-shadow: 0 5px 14px rgba(30,70,40,.07); }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option::before { content: 'Opção selecionada'; position: absolute; top: -9px; right: 13px; padding: 3px 7px; border: 1px solid #c5ddc9; border-radius: 999px; background: #edf7ef; color: #397049; font-size: 8px; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option:has(input:checked) { border-color: #78a982; box-shadow: 0 6px 17px rgba(30,70,40,.1), 0 0 0 3px rgba(47,107,79,.07); }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option input { width: 18px; height: 18px; margin-top: 5px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy { gap: 5px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-provider { gap: 8px; color: #2f6b4f; font-size: 9px; letter-spacing: .1em; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-status { padding: 4px 6px; background: #dff0e2; color: #347044; font-size: 8px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-postal-icon { width: 25px; height: 25px; border-radius: 7px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy strong { color: #1c2c21; font-size: 14px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy > span:last-child { color: #5f6e63; font-size: 10px; line-height: 1.45; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price { gap: 4px; padding-top: 3px; color: #245b31; font-size: 16px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price small { color: #66736a; font-size: 9px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note { display: flex; align-items: flex-start; gap: 6px; margin: 0 2px; color: #637067; font-size: 10px; line-height: 1.5; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note::before { content: '✓'; color: #397049; font-weight: 900; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option { grid-template-columns: 20px minmax(0, 1fr); padding: 15px 13px; }
+      .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price { grid-column: 2; justify-items: start; padding-top: 1px; }
+      .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option::before { right: 10px; font-size: 7px; }
+    }
   </style>
 </head>
 <body>
@@ -1461,7 +1483,7 @@
               <div class="checkout-grid-address checkout-number-row"><label>Número<input id="checkout-number" required></label><label title="Complemento opcional">Complemento<input id="checkout-complement" autocomplete="address-line2"></label></div>
               <label>Bairro<input id="checkout-neighborhood" required></label>
               <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
-              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios <em class="checkout-shipping-status">Selecionado</em></span><strong>Entrega padrão</strong><span>Prazo estimado: até 3 dias úteis</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Pagamento exclusivo da entrega · prazo e valor exibidos antes da confirmação.</p></div>
+              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios <em class="checkout-shipping-status">Selecionado</em></span><strong>Entrega em até 3 dias úteis</strong><span>Contados após a confirmação do pagamento</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Pagamento exclusivo da entrega · o prazo começa após a confirmação do pagamento.</p></div>
             </div>
             <div class="checkout-actions checkout-address-actions" id="checkout-address-actions"><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" id="checkout-address-submit" type="submit" disabled>Continuar para pagamento <span class="cta-arrow">→</span></button></div>
           </form>
