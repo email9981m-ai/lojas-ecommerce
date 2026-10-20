@@ -908,9 +908,9 @@
     }
   
     /* Checkout integrado */
-    .checkout-dialog { width: min(680px, calc(100% - 24px)); max-width: 680px; padding: 0; border: 0; border-radius: 18px; background: #fff; color: var(--ink); box-shadow: 0 24px 80px rgba(20,30,20,.22); }
-    .checkout-dialog::backdrop { background: rgba(16,24,18,.58); backdrop-filter: blur(5px); }
-    .checkout-shell { max-height: min(88vh, 820px); overflow: auto; }
+    .checkout-dialog { inset: 0; width: 100vw; max-width: none; height: 100vh; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: var(--canvas); color: var(--ink); box-shadow: none; }
+    .checkout-dialog::backdrop { background: var(--canvas); }
+    .checkout-shell { min-height: 100vh; max-height: none; overflow: auto; }
     .checkout-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 20px 22px 16px; border-bottom: 1px solid var(--line); background: #fbfcfa; }
     .checkout-head h2 { margin: 0; color: var(--ink); font-size: 21px; letter-spacing: -.035em; }
     .checkout-secure { display: inline-flex; align-items: center; gap: 5px; color: var(--brand-dark); font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
@@ -919,7 +919,7 @@
     .checkout-step-pill { padding: 8px 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--canvas); color: var(--muted); text-align: center; font-size: 10px; font-weight: 750; }
     .checkout-step-pill.active { border-color: #a8c9b2; background: var(--brand-soft); color: var(--brand-dark); }
     .checkout-step-pill.done { border-color: #d7e8da; background: #f4faf5; color: #4f795b; }
-    .checkout-body { padding: 22px; }
+    .checkout-body { width: min(760px, calc(100% - 48px)); margin: 0 auto; padding: 34px 0 60px; }
     .checkout-pane { display: none; }
     .checkout-pane.active { display: block; }
     .checkout-pane h3 { margin: 0 0 5px; color: var(--ink); font-size: 20px; letter-spacing: -.035em; }
@@ -956,7 +956,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head, .checkout-steps, .checkout-body { padding-left: 16px; padding-right: 16px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-body { width: calc(100% - 32px); padding-top: 24px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1243,6 +1243,7 @@
         <div class="checkout-step-pill" data-checkout-pill="3">3. Pagamento</div>
       </div>
       <div class="checkout-body">
+        <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
         <section class="checkout-pane active" data-checkout-pane="1">
           <h3>Dados do cliente</h3>
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
@@ -1461,7 +1462,8 @@
     $('close-account').addEventListener('click', () => $('account-dialog').close());
     $('close-account-action').addEventListener('click', () => $('account-dialog').close());
     $('account-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
-    $('close-cart').addEventListener('click', () => $('cart-dialog').close());
+    const closeCartButton = $('close-cart');
+    if (closeCartButton) closeCartButton.addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
     $('cart-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
     $('calculate-shipping').addEventListener('click', () => {
