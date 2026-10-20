@@ -239,6 +239,19 @@
     .final-purchase-hint { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); font-size: 10px; }
     .final-purchase-hint.error { color: var(--red); }
     .footer { border-top: 1px solid var(--line); background: #fcfcfa; }
+    .footer-inner { display: grid; grid-template-columns: minmax(180px,1.2fr) repeat(3,minmax(130px,1fr)); align-items: start; gap: 28px; padding: 38px 0 30px; }
+    .footer-static h2 { margin: 0 0 12px; color: var(--ink-soft); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+    .footer-static a { display: block; width: fit-content; margin: 0 0 9px; color: var(--muted); font-size: 11px; }
+    .footer-static a:hover { color: var(--brand-dark); text-decoration: underline; text-underline-offset: 3px; }
+    .footer-cols { gap: 28px; }
+    .footer-policy-notes { padding: 4px 0 20px; }
+    .footer-policy-notes > p { margin: 0 0 10px; color: var(--ink-soft); font-size: 11px; font-weight: 700; }
+    .footer-policy-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 28px; }
+    .footer-policy-grid details { border-bottom: 1px solid var(--line); }
+    .footer-policy-grid summary { padding: 11px 0; font-size: 11px; }
+    .footer-policy-grid details p { max-width: 80ch; font-size: 11px; }
+    .legal-line { line-height: 1.6; }
+
     .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; padding: 26px 0; }
     .footer-brand .logo { font-size: 23px; }
     .footer-brand p { max-width: 45ch; margin: 9px 0 0; color: var(--muted); font-size: 10px; }
@@ -375,8 +388,10 @@
       .final-purchase-sizes { justify-content: flex-start; }
       .sticky { display: flex; }
       body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
-      .footer-inner { flex-direction: column; gap: 22px; }
+      .footer-inner { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 18px; }
+      .footer-brand { grid-column: 1 / -1; }
       .footer-cols { gap: 24px; }
+      .footer-policy-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 390px) {
       .wrap { width: calc(100% - 26px); }
@@ -1045,12 +1060,37 @@
       </div>
     </section>
 
-  <footer class="footer">
+  <footer class="footer" aria-label="Rodapé e informações da loja">
     <div class="wrap footer-inner">
       <div class="footer-brand"><a class="logo" href="#inicio" aria-label="Kokeshi — voltar ao topo">kokeshi<span class="logo-dot">.</span></a><p>Uma apresentação de produto com informações objetivas e condições visíveis.</p></div>
-      <div class="footer-cols" id="footer-cols"></div>
+      <nav class="footer-static" aria-label="Explore a página">
+        <h2>Explore</h2>
+        <a href="#produto">Detalhes da camiseta</a>
+        <a href="#similar-title">Você também pode gostar</a>
+        <a href="#avaliacoes">Avaliações demonstrativas</a>
+        <a href="#faq-title">Dúvidas comuns</a>
+      </nav>
+      <nav class="footer-static" aria-label="Políticas e informações">
+        <h2>Políticas e informações</h2>
+        <a href="#policy-delivery">Entrega e frete</a>
+        <a href="#policy-payment">Preços e pagamento</a>
+        <a href="#policy-returns">Trocas e devoluções</a>
+        <a href="#policy-privacy">Privacidade</a>
+        <a href="#policy-terms">Termos de uso</a>
+      </nav>
+      <div class="footer-cols" id="footer-cols" aria-label="Contato e dados da loja"></div>
     </div>
-    <div class="wrap legal-line">Oferta independente, sujeita à disponibilidade e confirmação das condições. Página demonstrativa: não processa pedidos nem pagamentos.</div>
+    <div class="wrap footer-policy-notes">
+      <p>Informações importantes</p>
+      <div class="footer-policy-grid">
+        <details id="policy-delivery"><summary>Entrega e frete</summary><p>Esta página demonstrativa não calcula nem confirma entregas. Consulte a loja para verificar cobertura, prazo, disponibilidade e custo do frete para seu CEP antes de concluir a compra.</p></details>
+        <details id="policy-payment"><summary>Preços e pagamento</summary><p>O valor exibido e as condições de pagamento devem ser confirmados diretamente com a loja. Esta demonstração não processa pedidos ou pagamentos; o frete pode ser cobrado à parte.</p></details>
+        <details id="policy-returns"><summary>Trocas e devoluções</summary><p>As regras, prazos e canais para solicitar troca ou devolução precisam ser informados pela loja. Confirme a política vigente antes de comprar; este modelo não substitui os termos oficiais do vendedor.</p></details>
+        <details id="policy-privacy"><summary>Privacidade</summary><p>Esta página de demonstração não apresenta uma política oficial de privacidade. A loja responsável deve publicar informações claras sobre dados coletados, finalidade, compartilhamento, retenção e canais de contato.</p></details>
+        <details id="policy-terms"><summary>Termos de uso</summary><p>O conteúdo é ilustrativo e não constitui uma oferta vinculante. Disponibilidade, características, preço e condições devem ser confirmados nos canais oficiais da loja. Os termos aplicáveis devem ser publicados pelo responsável pela venda.</p></details>
+      </div>
+    </div>
+    <div class="wrap legal-line">Página demonstrativa: avaliações, nomes, notas e comentários são fictícios; não confirma estoque, não envia pedidos nem processa pagamentos. Consulte os canais oficiais da loja para confirmar informações e condições comerciais.</div>
   </footer>
 
   <div class="sticky" id="sticky-bar" role="region" aria-label="Compra rápida">
