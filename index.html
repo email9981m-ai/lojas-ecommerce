@@ -1034,6 +1034,9 @@
     .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta { margin: 0 0 20px; padding: 14px 15px; border-color: #9bbb9f; background: #eaf5ec; box-shadow: none; }
     .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta span { color: #45664d; font-size: 10px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta strong { color: #1f5a2b; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > .checkout-delivery-meta { margin: 18px -20px -18px; padding: 15px 20px; border: 0; border-top: 1px solid #b9d6bd; border-radius: 0 0 12px 12px; background: #e5f3e8; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > .checkout-delivery-meta span { color: #3e6747; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > .checkout-delivery-meta strong { color: #185b28; }
     .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 20px; border: 1px solid #8fb49a; background: linear-gradient(145deg, #eff8f1 0%, #f8fbf8 100%); box-shadow: none; }
     .checkout-pane[data-checkout-pane="3"] .pix-box strong { font-size: 16px; }
     .checkout-pane[data-checkout-pane="3"] .pix-box p { color: #506158; font-size: 12px; }
@@ -1053,6 +1056,7 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-order-total strong { font-size: 21px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-review-card { padding: 15px 14px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-review-section + .checkout-review-section { margin-top: 14px; padding-top: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-review-card > .checkout-delivery-meta { margin: 15px -14px -15px; padding: 14px; }
       .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 16px; }
     }
     @media (max-width: 520px) { .checkout-head { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 8px 0 14px; } .checkout-product-image { width: 60px; height: 60px; border-radius: 10px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p:not(.checkout-pane-kicker) { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-order-total { margin-top: 10px; padding: 12px 10px 2px; } .checkout-order-total strong { font-size: 19px; } .checkout-payment-summary { display: block; padding: 12px 13px; } .checkout-payment-summary span { display: block; margin-top: 4px; text-align: left; } .checkout-grid-2 { grid-template-columns: 1fr; gap: 13px; } .checkout-grid-address { grid-template-columns: minmax(0, 1.35fr) minmax(76px, .65fr); gap: 10px; } .checkout-number-row { grid-template-columns: minmax(76px, .65fr) minmax(0, 1.35fr); } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
@@ -1377,9 +1381,9 @@
             <div class="checkout-review-card">
               <div class="checkout-review-section"><span>Dados do cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
               <div class="checkout-review-section"><span>Endereço de entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+              <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo de entrega<strong>Até 3 dias úteis</strong></span><span>Valor do frete<strong>R$ 39,00</strong></span></div>
             </div>
           </div>
-          <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo de entrega<strong>Até 3 dias úteis</strong></span><span>Valor do frete<strong>R$ 39,00</strong></span></div>
           <div class="checkout-section-label">Pagamento</div>
           <div class="pix-box"><strong>Pagar com PIX</strong><p>Confira o beneficiário e confirme o valor no aplicativo do seu banco.</p><div class="checkout-payment-amount"><span>Valor do frete</span><strong>R$ 39,00</strong></div><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar PIX de R$ 39,00 <span class="cta-arrow">→</span></button><p class="checkout-payment-trust">Pagamento processado com segurança. O pedido só será confirmado após a identificação do PIX.</p><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div></div>
           <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="2">Voltar</button></div>
