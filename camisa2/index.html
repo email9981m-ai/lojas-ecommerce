@@ -150,33 +150,52 @@
     .product-tab-content p { max-width: 900px; margin: 0 auto; color: var(--ink-soft); font-size: 14px; line-height: 1.72; }
     .product-tab-content strong { color: var(--ink); font-weight: 750; }
 
-    .customer-reviews { margin-top: 58px; padding-top: 30px; border-top: 1px solid var(--line); }
-    .reviews-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 20px; }
-    .reviews-heading .eyebrow { margin-bottom: 6px; }
-    .reviews-heading h2 { margin: 0; font-size: 25px; line-height: 1.2; letter-spacing: -.04em; }
-    .reviews-subtitle { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
-    .reviews-count { flex: none; padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink-soft); font-size: 11px; font-weight: 700; }
-    .reviews-disclosure { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 21px; padding: 13px 15px; border: 1px solid #e8e3d5; border-radius: 10px; background: #faf8f1; color: #5e594b; font-size: 11px; line-height: 1.55; }
-    .reviews-disclosure svg { width: 17px; height: 17px; flex: none; margin-top: 1px; color: #89733e; }
-    .reviews-groups { display: grid; gap: 22px; }
-    .review-group h3 { margin: 0 0 10px; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
-    .review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .review-card { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .customer-reviews { margin-top: 54px; padding: 28px; border: 1px solid #e1e7e2; border-top: 4px solid var(--brand); border-radius: 16px; background: #f8faf8; box-shadow: 0 10px 30px rgba(28, 45, 33, .045); }
+    .reviews-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
+    .reviews-heading .eyebrow { margin-bottom: 7px; color: var(--brand-dark); }
+    .reviews-heading h2 { margin: 0; color: var(--ink); font-size: 27px; line-height: 1.18; letter-spacing: -.04em; }
+    .reviews-subtitle { margin: 7px 0 0; color: #68716a; font-size: 12px; }
+    .reviews-count { flex: none; padding: 9px 12px; border: 1px solid #d4e3d8; border-radius: 8px; background: #edf5ef; color: var(--brand-dark); font-size: 11px; font-weight: 700; }
+    .review-summary { display: grid; grid-template-columns: minmax(190px, .72fr) minmax(300px, 1.45fr); gap: 30px; align-items: center; margin: 0 0 17px; padding: 21px 23px; border: 1px solid #dce7df; border-radius: 12px; background: #fff; }
+    .review-score { display: flex; align-items: center; gap: 15px; }
+    .review-score-number { color: var(--brand-dark); font-size: 48px; line-height: .95; font-weight: 820; letter-spacing: -.065em; }
+    .review-score-meta { display: grid; gap: 5px; }
+    .review-score-stars { color: #b78222; font-size: 18px; letter-spacing: .08em; line-height: 1; }
+    .review-score-label { color: #68716a; font-size: 10px; line-height: 1.5; }
+    .review-breakdown { display: grid; gap: 7px; }
+    .review-breakdown-row { display: grid; grid-template-columns: 48px minmax(80px, 1fr) 25px; align-items: center; gap: 9px; color: #424a44; font-size: 10px; }
+    .review-breakdown-label { white-space: nowrap; }
+    .review-breakdown-track { height: 8px; overflow: hidden; border-radius: 99px; background: #e9eee9; }
+    .review-breakdown-fill { height: 100%; border-radius: inherit; background: #b78222; }
+    .review-breakdown-count { color: #68716a; text-align: right; font-variant-numeric: tabular-nums; }
+    .reviews-disclosure { display: flex; align-items: flex-start; gap: 9px; margin: 0 0 19px; padding: 11px 13px; border: 1px solid #d9e6dd; border-radius: 9px; background: #edf5ef; color: #455c4b; font-size: 10px; line-height: 1.55; }
+    .reviews-disclosure svg { width: 16px; height: 16px; flex: none; margin-top: 1px; color: var(--brand-dark); }
+    .reviews-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin: 0 0 12px; padding: 0 0 10px; border-bottom: 1px solid #e0e5e0; }
+    .reviews-toolbar strong { color: #303831; font-size: 12px; }
+    .reviews-sort { display: flex; align-items: center; gap: 8px; color: #626b64; font-size: 10px; }
+    .reviews-sort select { min-height: 38px; padding: 0 30px 0 11px; border: 1px solid #cfd8d0; border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 11px; cursor: pointer; }
+    .reviews-sort select:focus-visible { outline: 3px solid #a9cbb5; outline-offset: 2px; }
+    .reviews-groups { display: grid; gap: 19px; }
+    .review-group h3 { margin: 0 0 9px; color: #657168; font-size: 9px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+    .review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .review-card { min-width: 0; padding: 16px; border: 1px solid #e0e5e0; border-radius: 11px; background: #fff; box-shadow: 0 2px 7px rgba(28, 45, 33, .025); transition: border-color .18s, box-shadow .18s, transform .18s; }
+    .review-card:hover { transform: translateY(-1px); border-color: #c7d9cb; box-shadow: 0 5px 14px rgba(28, 45, 33, .07); }
     .review-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-    .review-author { display: block; color: var(--ink); font-size: 12px; font-weight: 750; }
-    .review-context { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
-    .review-rating { flex: none; color: #9b762b; font-size: 11px; font-weight: 750; white-space: nowrap; }
-    .review-rating span { margin-right: 4px; color: #b1852d; letter-spacing: .08em; }
-    .review-text { margin: 12px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
-    .reviews-pagination { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); }
-    .reviews-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-    .reviews-pagination button { min-width: 38px; height: 38px; padding: 0 11px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; cursor: pointer; font-size: 11px; font-weight: 700; }
+    .review-identity { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .review-avatar { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border: 1px solid #d6e5d9; border-radius: 50%; background: linear-gradient(145deg, #f0f7f1, #e3efe6); color: var(--brand-dark); font-size: 10px; font-weight: 800; }
+    .review-author { display: block; overflow: hidden; color: #222922; font-size: 11px; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+    .review-context { display: inline-block; margin-top: 4px; padding: 2px 6px; border-radius: 99px; background: #f2f4f1; color: #677168; font-size: 8px; line-height: 1.35; }
+    .review-rating { flex: none; padding-top: 2px; color: #454c46; font-size: 10px; font-weight: 700; white-space: nowrap; }
+    .review-rating span { margin-right: 4px; color: #b78222; letter-spacing: .055em; }
+    .review-text { margin: 13px 0 0; color: #444c46; font-size: 12px; line-height: 1.65; }
+    .reviews-pagination { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid #e0e5e0; }
+    .reviews-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+    .reviews-pagination button { min-width: 37px; height: 37px; padding: 0 11px; border: 1px solid #cfd8d0; border-radius: 8px; background: #fff; color: #354039; cursor: pointer; font-size: 10px; font-weight: 700; transition: background .16s, border-color .16s; }
     .reviews-pagination button:hover:not(:disabled) { border-color: var(--brand); color: var(--brand-dark); }
     .reviews-pagination button[aria-current="page"] { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
     .reviews-pagination button:disabled { opacity: .45; cursor: not-allowed; }
-    .reviews-page-status { min-width: 105px; color: var(--muted); font-size: 10px; text-align: center; }
+    .reviews-page-status { min-width: 105px; color: #647067; font-size: 9px; text-align: center; }
     .reviews-page-status:focus { outline: none; }
-
     .similar-products { margin-top: 58px; padding-top: 28px; border-top: 1px solid var(--line); }
     .similar-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
     .similar-head p { margin: 0 0 5px; color: var(--brand); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
@@ -279,15 +298,43 @@
       .share-block > span, .wishlist-block > span { min-width: 0; font-size: 8px; }
       .share-block button, .wishlist-block button { min-height: 25px; padding: 0; font-size: 11px; white-space: nowrap; }
 
-      .customer-reviews { margin-top: 42px; padding-top: 24px; }
-      .reviews-heading { display: block; }
+      .customer-reviews { margin-top: 38px; padding: 19px 15px 16px; border-top-width: 3px; border-radius: 13px; }
+      .reviews-heading { display: block; margin-bottom: 15px; }
       .reviews-heading h2 { font-size: 22px; }
-      .reviews-count { display: inline-block; margin-top: 12px; }
-      .review-grid { grid-template-columns: 1fr; gap: 9px; }
-      .review-card { padding: 14px; }
-      .reviews-pagination { gap: 7px; }
-      .reviews-pagination button { min-width: 34px; height: 36px; padding-inline: 9px; }
-      .reviews-page-status { min-width: 78px; font-size: 9px; }
+      .reviews-subtitle { max-width: 36ch; font-size: 11px; }
+      .reviews-count { display: inline-flex; margin-top: 11px; padding: 7px 9px; font-size: 10px; }
+      .review-summary { grid-template-columns: minmax(78px, .42fr) minmax(0, 1fr); gap: 12px; margin-bottom: 13px; padding: 15px 12px; }
+      .review-score { display: grid; justify-items: start; gap: 5px; }
+      .review-score-number { font-size: 39px; }
+      .review-score-meta { gap: 3px; }
+      .review-score-stars { font-size: 14px; letter-spacing: .04em; }
+      .review-score-label { font-size: 8px; }
+      .review-breakdown { gap: 6px; }
+      .review-breakdown-row { grid-template-columns: 42px minmax(25px, 1fr) 19px; gap: 5px; font-size: 9px; }
+      .review-breakdown-track { height: 7px; }
+      .reviews-disclosure { margin-bottom: 15px; padding: 10px; font-size: 9px; }
+      .reviews-toolbar { align-items: center; gap: 6px; margin-bottom: 10px; }
+      .reviews-toolbar strong { font-size: 10px; }
+      .reviews-sort { gap: 5px; font-size: 9px; }
+      .reviews-sort select { min-height: 36px; max-width: 130px; padding-left: 8px; padding-right: 24px; font-size: 10px; }
+      .reviews-groups { gap: 15px; }
+      .review-group h3 { margin-bottom: 7px; font-size: 8px; }
+      .review-grid { grid-template-columns: 1fr; gap: 8px; }
+      .review-card { padding: 13px; border-radius: 9px; }
+      .review-card-top { gap: 6px; }
+      .review-identity { gap: 8px; }
+      .review-avatar { width: 35px; height: 35px; }
+      .review-author { font-size: 10px; }
+      .review-context { font-size: 7px; }
+      .review-rating { font-size: 9px; }
+      .review-rating span { letter-spacing: .02em; }
+      .review-text { margin-top: 10px; font-size: 11px; line-height: 1.6; }
+      .reviews-pagination { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+      .reviews-pages { grid-column: 1 / -1; grid-row: 2; }
+      .reviews-page-status { grid-column: 1 / -1; grid-row: 1; min-width: 0; font-size: 9px; }
+      .reviews-pagination button { min-width: 34px; height: 36px; }
+      .reviews-pagination > button:first-child { grid-column: 1; grid-row: 3; justify-self: start; }
+      .reviews-pagination > button:last-child { grid-column: 2; grid-row: 3; justify-self: end; }
       .similar-products { margin-top: 42px; }
       .similar-head { display: block; }
       .similar-head small { display: block; margin-top: 8px; }
@@ -320,6 +367,61 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
       .announcement-track { animation: none !important; transform: none !important; will-change: auto !important; }
     }
+
+    /* Ajustes de legibilidade: avaliações em lista ampla, com maior contraste e tipografia. */
+    .reviews-heading h2 { font-size: 29px; }
+    .reviews-subtitle { font-size: 13px; }
+    .reviews-count { font-size: 12px; }
+    .review-score-number { font-size: 52px; }
+    .review-score-stars { font-size: 20px; }
+    .review-score-label { font-size: 11px; }
+    .review-breakdown-row { font-size: 11px; }
+    .reviews-disclosure { font-size: 11px; }
+    .reviews-toolbar strong { font-size: 14px; }
+    .reviews-sort { font-size: 11px; }
+    .reviews-sort select { font-size: 12px; }
+    .reviews-groups { gap: 22px; }
+    .review-group h3 { margin-bottom: 11px; font-size: 11px; }
+    .review-grid { grid-template-columns: 1fr; gap: 11px; }
+    .review-card { padding: 19px 21px; border-color: #d5e0d7; border-left: 3px solid #b7cfbd; border-radius: 11px; }
+    .review-card:hover { border-left-color: var(--brand); }
+    .review-identity { gap: 12px; }
+    .review-avatar { width: 44px; height: 44px; font-size: 12px; }
+    .review-author { font-size: 14px; }
+    .review-context { margin-top: 5px; padding: 3px 8px; font-size: 10px; }
+    .review-rating { font-size: 12px; }
+    .review-rating span { font-size: 16px; letter-spacing: .07em; }
+    .review-text { margin-top: 15px; color: #303a33; font-size: 15px; line-height: 1.72; }
+    .reviews-pagination button { min-width: 40px; height: 40px; font-size: 12px; }
+    .reviews-page-status { font-size: 11px; }
+    @media (max-width: 720px) {
+      .reviews-heading h2 { font-size: 24px; }
+      .reviews-subtitle { font-size: 12px; }
+      .reviews-count { font-size: 11px; }
+      .review-summary { grid-template-columns: minmax(76px, .4fr) minmax(0, 1fr); gap: 10px; }
+      .review-score-number { font-size: 40px; }
+      .review-score-stars { font-size: 15px; }
+      .review-score-label { font-size: 9px; }
+      .review-breakdown-row { font-size: 10px; }
+      .reviews-disclosure { font-size: 10px; line-height: 1.55; }
+      .reviews-toolbar strong { font-size: 11px; }
+      .reviews-sort { font-size: 9px; }
+      .reviews-sort select { font-size: 10px; }
+      .reviews-groups { gap: 17px; }
+      .review-group h3 { margin-bottom: 8px; font-size: 9px; }
+      .review-grid { grid-template-columns: 1fr; gap: 9px; }
+      .review-card { padding: 15px 14px; }
+      .review-identity { gap: 9px; }
+      .review-avatar { width: 39px; height: 39px; font-size: 11px; }
+      .review-author { font-size: 12.5px; }
+      .review-context { font-size: 9px; }
+      .review-rating { font-size: 10px; }
+      .review-rating span { font-size: 14px; letter-spacing: .03em; }
+      .review-text { margin-top: 12px; font-size: 13.5px; line-height: 1.7; }
+      .reviews-pagination button { min-width: 36px; height: 38px; font-size: 11px; }
+      .reviews-page-status { font-size: 10px; }
+    }
+
   </style>
 </head>
 <body>
@@ -435,15 +537,41 @@
       <div class="reviews-heading">
         <div>
           <p class="eyebrow">Opiniões sobre o produto</p>
-          <h2 id="reviews-title">Avaliações de clientes</h2>
-          <p class="reviews-subtitle">Leia os relatos organizados em cinco blocos, com dois grupos de cinco por bloco.</p>
+          <h2 id="reviews-title">Avaliações dos clientes</h2>
+          <p class="reviews-subtitle">Prévia da experiência de avaliações deste produto.</p>
         </div>
-        <span class="reviews-count" id="reviews-count">50 avaliações de exemplo</span>
+        <span class="reviews-count"><strong>50</strong> avaliações de exemplo</span>
+      </div>
+      <div class="review-summary" aria-label="Resumo ilustrativo das avaliações">
+        <div class="review-score">
+          <strong class="review-score-number">4,8</strong>
+          <div class="review-score-meta">
+            <span class="review-score-stars" aria-hidden="true">★★★★★</span>
+            <span class="review-score-label">de 5 · média ilustrativa<br>50 exemplos de avaliação</span>
+          </div>
+        </div>
+        <div class="review-breakdown" aria-label="Distribuição ilustrativa das notas">
+          <div class="review-breakdown-row"><span class="review-breakdown-label">5 estrelas</span><div class="review-breakdown-track" aria-hidden="true"><div class="review-breakdown-fill" style="width:82%"></div></div><span class="review-breakdown-count">41</span></div>
+          <div class="review-breakdown-row"><span class="review-breakdown-label">4 estrelas</span><div class="review-breakdown-track" aria-hidden="true"><div class="review-breakdown-fill" style="width:18%"></div></div><span class="review-breakdown-count">9</span></div>
+          <div class="review-breakdown-row"><span class="review-breakdown-label">3 estrelas</span><div class="review-breakdown-track" aria-hidden="true"><div class="review-breakdown-fill" style="width:0%"></div></div><span class="review-breakdown-count">0</span></div>
+          <div class="review-breakdown-row"><span class="review-breakdown-label">2 estrelas</span><div class="review-breakdown-track" aria-hidden="true"><div class="review-breakdown-fill" style="width:0%"></div></div><span class="review-breakdown-count">0</span></div>
+          <div class="review-breakdown-row"><span class="review-breakdown-label">1 estrela</span><div class="review-breakdown-track" aria-hidden="true"><div class="review-breakdown-fill" style="width:0%"></div></div><span class="review-breakdown-count">0</span></div>
+        </div>
       </div>
       <p class="reviews-disclosure">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
-        <span><strong>Transparência:</strong> esta página é uma demonstração. Os 50 relatos e as notas abaixo são exemplos fictícios, não foram enviados por clientes reais e não representam compras verificadas. Substitua-os por avaliações autênticas antes de publicar a loja.</span>
+        <span><strong>Conteúdo demonstrativo:</strong> nomes, datas, notas e comentários são exemplos fictícios para prévia do layout. Não correspondem a avaliações de clientes reais nem a compras verificadas.</span>
       </p>
+      <div class="reviews-toolbar">
+        <strong>Relatos dos clientes</strong>
+        <label class="reviews-sort" for="reviews-sort">Ordenar por
+          <select id="reviews-sort" aria-label="Ordenar avaliações">
+            <option value="recent">Mais recentes</option>
+            <option value="highest">Maior nota</option>
+            <option value="lowest">Menor nota</option>
+          </select>
+        </label>
+      </div>
       <div class="reviews-groups" id="reviews-groups" aria-live="polite" aria-atomic="true"></div>
       <nav class="reviews-pagination" aria-label="Navegação dos blocos de avaliações">
         <button type="button" id="reviews-prev" aria-label="Ver bloco anterior">Anterior</button>
@@ -696,7 +824,13 @@
       const status = $('reviews-page-status');
       const previous = $('reviews-prev');
       const next = $('reviews-next');
-      if (!groups || !pages || !status || !previous || !next) return;
+      const sort = $('reviews-sort');
+      if (!groups || !pages || !status || !previous || !next || !sort) return;
+      const sortedReviews = [...DEMO_REVIEWS].sort((a, b) => {
+        if (sort.value === 'highest') return b.rating - a.rating || parseInt(b.date, 10) - parseInt(a.date, 10);
+        if (sort.value === 'lowest') return a.rating - b.rating || parseInt(b.date, 10) - parseInt(a.date, 10);
+        return parseInt(b.date, 10) - parseInt(a.date, 10);
+      });
       const blockSize = 10;
       const blockStart = currentReviewBlock * blockSize;
       groups.replaceChildren();
@@ -711,27 +845,34 @@
         grid.setAttribute('role', 'list');
         for (let offset = 0; offset < 5; offset++) {
           const index = blockStart + groupIndex * 5 + offset;
-          const item = DEMO_REVIEWS[index];
+          const item = sortedReviews[index];
           const article = document.createElement('article');
           article.className = 'review-card';
           article.setAttribute('role', 'listitem');
           const top = document.createElement('div');
           top.className = 'review-card-top';
           const identity = document.createElement('div');
+          identity.className = 'review-identity';
+          const avatar = document.createElement('span');
+          avatar.className = 'review-avatar';
+          avatar.setAttribute('aria-hidden', 'true');
+          avatar.textContent = item.name.split(/\s+/).map(part => part.replace(/\./g, '')[0]).slice(0, 2).join('').toUpperCase();
+          const details = document.createElement('div');
           const author = document.createElement('span');
           author.className = 'review-author';
           author.textContent = item.name;
           const context = document.createElement('small');
           context.className = 'review-context';
           context.textContent = `Exemplo ilustrativo · ${item.date}`;
-          identity.append(author, context);
+          details.append(author, context);
+          identity.append(avatar, details);
           const rating = document.createElement('span');
           rating.className = 'review-rating';
           rating.setAttribute('aria-label', `Nota ilustrativa: ${item.rating} de 5`);
           const stars = document.createElement('span');
           stars.setAttribute('aria-hidden', 'true');
-          stars.textContent = '★'.repeat(item.rating);
-          rating.append(stars, document.createTextNode(`${item.rating}/5`));
+          stars.textContent = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+          rating.append(stars, document.createTextNode(`${item.rating},0`));
           const text = document.createElement('p');
           text.className = 'review-text';
           text.textContent = item.text;
@@ -756,6 +897,7 @@
       previous.disabled = currentReviewBlock === 0;
       next.disabled = currentReviewBlock === 4;
     }
+    $('reviews-sort')?.addEventListener('change', () => { currentReviewBlock = 0; renderReviews(); });
     $('reviews-prev')?.addEventListener('click', () => { if (currentReviewBlock > 0) { currentReviewBlock--; renderReviews(); } });
     $('reviews-next')?.addEventListener('click', () => { if (currentReviewBlock < 4) { currentReviewBlock++; renderReviews(); } });
     renderReviews();
