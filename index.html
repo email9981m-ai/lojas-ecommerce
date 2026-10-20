@@ -949,6 +949,11 @@
     .checkout-order-row strong { color: var(--ink); text-align: right; }
     .checkout-order-total { margin-top: 12px; padding-top: 12px; border-top: 1px solid #dce7de; font-size: 14px; }
     .checkout-order-total strong { color: var(--brand-dark); font-size: 18px; }
+    .checkout-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
+    .checkout-review-card { min-width: 0; padding: 12px 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.72); }
+    .checkout-review-card > span { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .checkout-review-card strong { display: block; overflow: hidden; color: var(--ink-soft); font-size: 11px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+    .checkout-review-card small { display: block; overflow: hidden; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
     .contribution-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin: 12px 0 17px; }
     .contribution-option { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: #fff; cursor: pointer; }
     .contribution-option:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 2px rgba(47,107,79,.08); }
@@ -964,7 +969,7 @@
     .pix-copy-row { display: flex; gap: 7px; }
     .pix-copy-row input { min-width: 0; flex: 1; }
     .pix-copy-row button { padding: 0 13px; border: 0; border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; font-weight: 750; }
-    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-steps { gap: 5px; padding-top: 10px; padding-bottom: 10px; } .checkout-step-pill { padding: 7px 3px; font-size: 9px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 10px; border-radius: 12px; } .checkout-product-image { width: 64px; height: 64px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p { font-size: 11px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
+    @media (max-width: 520px) { .checkout-head, .checkout-steps { padding-left: 16px; padding-right: 16px; } .checkout-head { padding-top: max(15px, env(safe-area-inset-top)); } .checkout-head h2 { font-size: 19px; } .checkout-secure { font-size: 8px; } .checkout-steps { gap: 5px; padding-top: 10px; padding-bottom: 10px; } .checkout-step-pill { padding: 7px 3px; font-size: 9px; } .checkout-body { width: calc(100% - 32px); padding-top: 22px; } .checkout-product-card { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 10px; margin-bottom: 22px; padding: 10px; border-radius: 12px; } .checkout-product-image { width: 64px; height: 64px; } .checkout-product-name { font-size: 12px; } .checkout-product-meta { margin-top: 3px; font-size: 10px; } .checkout-product-price { font-size: 13px; } .checkout-product-price small { font-size: 8px; } .checkout-pane h3 { font-size: 20px; } .checkout-pane > p { font-size: 11px; } .checkout-review-grid { grid-template-columns: 1fr; gap: 8px; } .checkout-grid-2, .checkout-grid-address { grid-template-columns: 1fr; gap: 13px; } .contribution-grid { grid-template-columns: 1fr 1fr; } .checkout-actions { flex-direction: column-reverse; } .checkout-actions .cta, .checkout-back { width: 100%; } }
 
   </style>
 </head>
@@ -1284,12 +1289,16 @@
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
           <h3>Revisar e pagar</h3>
-          <p>Confira o item, a contribuição escolhida e o valor final antes de gerar o PIX.</p>
+          <p>Confira o item, a contribuição escolhida, o endereço e o valor final antes de gerar o PIX.</p>
           <div class="checkout-order">
             <div class="checkout-order-row"><span>Produto</span><strong>1× Camiseta Casual Corinthians (<span id="checkout-size">—</span>)</strong></div>
             <div class="checkout-order-row"><span>Produto</span><strong>R$ 0,00</strong></div>
-            <div class="checkout-order-row"><span>Contribuição</span><strong id="checkout-contribution-label">Benfeitor</strong></div>
+            <div class="checkout-order-row"><span>Contribuição</span><strong id="checkout-contribution-label">Contribuição Benfeitor</strong></div>
             <div class="checkout-order-row checkout-order-total"><span>Total</span><strong id="checkout-total">R$ 50,00</strong></div>
+          </div>
+          <div class="checkout-review-grid" aria-label="Dados para conferência">
+            <div class="checkout-review-card"><span>Cliente</span><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
+            <div class="checkout-review-card"><span>Entrega</span><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
           </div>
           <strong style="font-size:12px;">Escolha a contribuição</strong>
           <div class="contribution-grid">
@@ -1764,7 +1773,7 @@
     function setCheckoutStep(step) {
       checkoutState.step = step;
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
-      document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); });
+      document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
       syncCheckoutSummary();
     }
     function syncCheckoutSummary() {
@@ -1772,14 +1781,22 @@
       const sizeEl = $('checkout-size'); if (sizeEl) sizeEl.textContent = selected;
       const cardSizeEl = $('checkout-card-size'); if (cardSizeEl) cardSizeEl.textContent = selected;
       const productImageEl = $('checkout-product-image'); if (productImageEl && imgs[0]) { productImageEl.src = imgs[0][0]; productImageEl.alt = imgs[0][1] || 'Camiseta Casual Corinthians'; }
-      const labelEl = $('checkout-contribution-label'); if (labelEl) labelEl.textContent = `Doação ${checkoutState.contributionLabel}`;
+      const labelEl = $('checkout-contribution-label'); if (labelEl) labelEl.textContent = `Contribuição ${checkoutState.contributionLabel}`;
       const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = moneyBRL(checkoutState.contribution);
+      const nameEl = $('checkout-review-name'); if (nameEl) nameEl.textContent = checkoutState.donor.name || 'A preencher';
+      const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
+      const addressEl = $('checkout-review-address'); if (addressEl) addressEl.textContent = checkoutState.donor.street ? `${checkoutState.donor.street}, ${checkoutState.donor.number}` : 'A preencher';
+      const cepEl = $('checkout-review-cep'); if (cepEl) cepEl.textContent = checkoutState.donor.cep ? `${checkoutState.donor.city || ''} · CEP ${checkoutState.donor.cep}` : 'CEP não informado';
     }
     function showCheckoutAlert(message) { const el = $('checkout-alert'); if (el) { el.textContent = message; el.classList.add('show'); } }
     function clearCheckoutAlert() { const el = $('checkout-alert'); if (el) { el.textContent = ''; el.classList.remove('show'); } }
+    function formatCpf(value) { const digits = value.replace(/\D/g, '').slice(0, 11); return digits.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); }
+    function formatPhone(value) { const digits = value.replace(/\D/g, '').slice(0, 11); if (digits.length <= 10) return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4})(\d)/, '$1-$2'); return digits.replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2'); }
+    $('checkout-cpf').addEventListener('input', () => { $('checkout-cpf').value = formatCpf($('checkout-cpf').value); });
+    $('checkout-phone').addEventListener('input', () => { $('checkout-phone').value = formatPhone($('checkout-phone').value); });
     document.querySelectorAll('input[name="checkout-contribution"]').forEach((input) => input.addEventListener('change', () => { checkoutState.contribution = Number(input.value); checkoutState.contributionLabel = input.dataset.label; clearCheckoutAlert(); syncCheckoutSummary(); }));
     document.querySelectorAll('[data-checkout-back]').forEach((button) => button.addEventListener('click', () => setCheckoutStep(Number(button.dataset.checkoutBack))));
-    $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.phone = $('checkout-phone').value.trim(); checkoutState.donor.cpf = $('checkout-cpf').value.trim(); setCheckoutStep(2); });
+    $('checkout-personal-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.name = $('checkout-name').value.trim(); checkoutState.donor.email = $('checkout-email').value.trim(); checkoutState.donor.phone = $('checkout-phone').value.replace(/\D/g, ''); checkoutState.donor.cpf = $('checkout-cpf').value.replace(/\D/g, ''); setCheckoutStep(2); });
     $('checkout-address-form').addEventListener('submit', (event) => { event.preventDefault(); checkoutState.donor.cep = $('checkout-cep').value.trim(); checkoutState.donor.street = $('checkout-street').value.trim(); checkoutState.donor.number = $('checkout-number').value.trim(); checkoutState.donor.complement = $('checkout-complement').value.trim(); checkoutState.donor.neighborhood = $('checkout-neighborhood').value.trim(); checkoutState.donor.city = $('checkout-city').value.trim(); checkoutState.donor.state = $('checkout-state').value.trim().toUpperCase(); setCheckoutStep(3); });
     $('checkout-cep').addEventListener('input', () => { const raw = $('checkout-cep').value.replace(/\D/g, '').slice(0, 8); $('checkout-cep').value = raw.length > 5 ? `${raw.slice(0,5)}-${raw.slice(5)}` : raw; if (raw.length === 8) fetch(`https://viacep.com.br/ws/${raw}/json/`).then((r) => r.json()).then((data) => { if (!data.erro) { $('checkout-street').value = data.logradouro || ''; $('checkout-neighborhood').value = data.bairro || ''; $('checkout-city').value = data.localidade || ''; $('checkout-state').value = data.uf || ''; } }).catch(() => {}); });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
