@@ -911,16 +911,19 @@
     .checkout-dialog { inset: 0; width: 100vw; max-width: none; height: 100vh; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: var(--canvas); color: var(--ink); box-shadow: none; }
     .checkout-dialog::backdrop { background: var(--canvas); }
     .checkout-shell { min-height: 100vh; max-height: none; overflow: auto; }
-    .checkout-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px max(22px, calc((100% - 820px) / 2)) 15px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); box-shadow: 0 1px 0 rgba(20,30,20,.02); }
+    .checkout-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 17px max(22px, calc((100% - 820px) / 2)) 15px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, #fbfcfa 100%); box-shadow: 0 1px 0 rgba(20,30,20,.02); }
+    .checkout-head-copy { display: flex; align-items: center; gap: 15px; min-width: 0; }
+    .checkout-logo { color: var(--ink); font-size: 18px; line-height: 1; font-weight: 850; letter-spacing: -.075em; }
+    .checkout-logo span { color: var(--brand); }
     .checkout-head h2 { margin: 0; color: var(--ink); font-size: 22px; line-height: 1.15; letter-spacing: -.045em; }
     .checkout-secure { display: inline-flex; align-items: center; gap: 5px; color: var(--brand-dark); font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
     .checkout-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); cursor: pointer; font-size: 21px; line-height: 1; }
     .checkout-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px max(22px, calc((100% - 820px) / 2)); border-bottom: 1px solid var(--line); background: #fff; }
-    .checkout-step-pill { padding: 8px 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--canvas); color: var(--muted); text-align: center; font-size: 10px; font-weight: 750; }
-    .checkout-step-pill.active { border-color: #a8c9b2; background: var(--brand-soft); color: var(--brand-dark); }
+    .checkout-step-pill { padding: 8px 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--canvas); color: var(--muted); text-align: center; font-size: 10px; font-weight: 750; transition: background .18s, border-color .18s, color .18s, transform .18s; }
+    .checkout-step-pill.active { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; box-shadow: 0 4px 10px rgba(36,83,61,.15); transform: translateY(-1px); }
     .checkout-step-pill.done { border-color: #d7e8da; background: #f4faf5; color: #4f795b; }
     .checkout-body { width: min(820px, calc(100% - 48px)); margin: 0 auto; padding: 32px 0 64px; scroll-padding-top: 150px; }
-    .checkout-product-card { position: sticky; top: 0; z-index: 4; display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; align-items: center; gap: 14px; margin-bottom: 24px; padding: 12px 14px; border: 1px solid #dce7de; border-radius: 14px; background: rgba(255,255,255,.97); box-shadow: 0 7px 20px rgba(28,45,33,.08); backdrop-filter: blur(10px); }
+    .checkout-product-card { position: sticky; top: 0; z-index: 4; display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; align-items: center; gap: 14px; margin-bottom: 26px; padding: 12px 14px; border: 1px solid #d7e5da; border-top: 3px solid var(--brand); border-radius: 14px; background: rgba(255,255,255,.98); box-shadow: 0 9px 24px rgba(28,45,33,.1); backdrop-filter: blur(10px); }
     .checkout-product-image { width: 82px; height: 82px; object-fit: contain; border: 1px solid #e5e9e4; border-radius: 10px; background: var(--canvas); }
     .checkout-product-kicker { margin: 0 0 3px; color: var(--brand); font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .checkout-product-name { margin: 0; color: var(--ink); font-size: 14px; font-weight: 800; line-height: 1.25; }
@@ -963,6 +966,8 @@
     .pix-box { padding: 15px; border: 1px dashed #b8d0bc; border-radius: 12px; background: #f7faf7; }
     .pix-box strong { display: block; margin-bottom: 4px; color: var(--brand-dark); font-size: 14px; }
     .pix-box p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .checkout-transparency-note { margin: 0 0 12px; padding: 11px 12px; border-left: 3px solid #9abb9f; border-radius: 0 9px 9px 0; background: #f5f9f5; color: #546057; font-size: 10px; line-height: 1.55; }
+    .checkout-transparency-note strong { color: var(--ink-soft); }
     .pix-result { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid #dce7de; }
     .pix-result.show { display: block; }
     .pix-result img { width: 180px; height: 180px; margin: 0 auto 12px; border: 8px solid #fff; }
@@ -1247,7 +1252,7 @@
   <dialog id="cart-dialog" class="checkout-dialog" aria-labelledby="checkout-title">
     <div class="checkout-shell">
       <div class="checkout-head">
-        <div><h2 id="checkout-title">Finalizar pedido</h2><span class="checkout-secure">● Ambiente seguro</span></div>
+        <div class="checkout-head-copy"><div class="checkout-logo" aria-label="Kokeshi">kokeshi<span>.</span></div><div><h2 id="checkout-title">Finalizar pedido</h2><span class="checkout-secure">● Checkout transparente</span></div></div>
         <button class="checkout-close" id="close-icon" type="button" aria-label="Fechar checkout">×</button>
       </div>
       <div class="checkout-steps" aria-label="Etapas do checkout">
@@ -1307,7 +1312,8 @@
             <label class="contribution-option"><input type="radio" name="checkout-contribution" value="20" data-label="Padrinho"><span>Padrinho</span><strong>R$ 20</strong></label>
             <label class="contribution-option"><input type="radio" name="checkout-contribution" value="50" data-label="Benfeitor" checked><span>Benfeitor</span><strong>R$ 50</strong></label>
           </div>
-          <div class="pix-box"><strong>Pagamento por PIX</strong><p>O QR Code será gerado pelo servidor de pagamento. Não confirme o pagamento antes de conferir o beneficiário e o valor no aplicativo do seu banco.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar QR Code PIX <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div></div></div>
+          <p class="checkout-transparency-note"><strong>Confira antes de pagar:</strong> total, endereço e beneficiário aparecem nesta etapa.</p>
+          <div class="pix-box"><strong>Pagamento por PIX</strong><p>Confira o beneficiário e o valor no aplicativo do seu banco antes de confirmar.</p><button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar QR Code PIX <span class="cta-arrow">→</span></button><div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar</button></div></div></div>
           <div class="checkout-actions"><button class="checkout-back" type="button" data-checkout-back="2">Voltar</button></div>
           <p class="checkout-alert" id="checkout-alert" role="alert"></p>
         </section>
