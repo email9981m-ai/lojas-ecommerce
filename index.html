@@ -1176,6 +1176,22 @@
       .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price { grid-column: 2; justify-items: start; padding-top: 1px; }
       .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option::before { right: 10px; font-size: 7px; }
     }
+
+    /* Composição final enxuta do frete: modalidade, prazo e valor sem redundâncias. */
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option::before { content: none; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option { grid-template-columns: 20px minmax(0, 1fr) auto; padding: 15px 16px; border-radius: 12px; background: #fff; box-shadow: 0 3px 10px rgba(30,50,35,.045); }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option:has(input:checked) { border-color: #a7c3ac; box-shadow: 0 0 0 2px rgba(47,107,79,.08); }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-option input { width: 17px; height: 17px; margin-top: 4px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-provider { gap: 7px; color: #617066; font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-status { display: none; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-postal-icon { width: 22px; height: 22px; border-radius: 6px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy { gap: 4px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy strong { color: #202c24; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-copy > span:last-child { color: #68756c; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price { padding-top: 1px; color: #245b31; font-size: 15px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-price small { margin-top: 2px; color: #748078; font-size: 9px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note { margin: 1px 2px 0; color: #69756d; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="2"] .checkout-shipping-note::before { content: none; }
   </style>
 </head>
 <body>
@@ -1483,7 +1499,7 @@
               <div class="checkout-grid-address checkout-number-row"><label>Número<input id="checkout-number" required></label><label title="Complemento opcional">Complemento<input id="checkout-complement" autocomplete="address-line2"></label></div>
               <label>Bairro<input id="checkout-neighborhood" required></label>
               <div class="checkout-grid-address"><label>Cidade<input id="checkout-city" autocomplete="address-level2" required></label><label>UF<input id="checkout-state" maxlength="2" required></label></div>
-              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios <em class="checkout-shipping-status">Selecionado</em></span><strong>Entrega em até 3 dias úteis</strong><span>Contados após a confirmação do pagamento</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Pagamento exclusivo da entrega · o prazo começa após a confirmação do pagamento.</p></div>
+              <div class="checkout-shipping-block"><label class="checkout-shipping-option"><input type="radio" name="checkout-shipping" value="39" checked><span class="checkout-shipping-copy"><span class="checkout-shipping-provider"><span class="checkout-postal-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>Correios</span><strong>Entrega padrão</strong><span>Até 3 dias úteis após o pagamento</span></span><strong class="checkout-shipping-price">R$ 39,00<small>frete</small></strong></label><p class="checkout-shipping-note">Frete pago separadamente · prazo contado após o pagamento.</p></div>
             </div>
             <div class="checkout-actions checkout-address-actions" id="checkout-address-actions"><button class="checkout-back" type="button" data-checkout-back="1">Voltar</button><button class="cta" id="checkout-address-submit" type="submit" disabled>Continuar para pagamento <span class="cta-arrow">→</span></button></div>
           </form>
