@@ -64,6 +64,9 @@
     .account-form input { width: 100%; min-height: 45px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 9px; background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
     .account-form input:focus { border-color: var(--brand); outline: 3px solid rgba(47,107,79,.13); }
     .account-form .cta { min-height: 50px; margin: 2px 0 0; }
+    .account-continue { width: 100%; min-height: 42px; margin-top: 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink-soft); cursor: pointer; font-size: 11px; font-weight: 650; transition: border-color .16s, background .16s, color .16s; }
+    .account-continue:hover { border-color: #c9d8cc; background: #f7faf7; color: var(--brand-dark); }
+
 
 
     .cart-icon { width: 20px; height: 20px; }
@@ -1187,6 +1190,7 @@
         <button class="cta" id="account-submit" type="submit">Criar cadastro</button>
       </form>
       <p class="account-dialog-note" id="account-demo-note" aria-live="polite">Demonstração visual: acesso e cadastro não estão conectados; e-mail e senha não serão enviados nem armazenados.</p>
+      <button class="account-continue" id="close-account-action" type="button">Continuar navegando</button>
     </div>
   </dialog>
 
@@ -1351,6 +1355,7 @@
       setAccountMode('register');
     });
     $('close-account').addEventListener('click', () => $('account-dialog').close());
+    $('close-account-action').addEventListener('click', () => $('account-dialog').close());
     $('account-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
     $('close-cart').addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
