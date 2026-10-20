@@ -50,6 +50,13 @@
     .brand-note { margin: 0 0 0 12px; color: var(--muted); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
     .brand-lockup { display: flex; align-items: center; }
     .cart-btn { display: inline-flex; align-items: center; gap: 10px; padding: 9px 0 9px 12px; border: 0; background: transparent; cursor: pointer; font-size: 13px; font-weight: 650; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .account-btn { width: 42px; height: 42px; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 8px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 12px; font-weight: 650; transition: background .16s, border-color .16s, color .16s; }
+    .account-btn:hover { border-color: var(--line); background: var(--canvas); color: var(--brand-dark); }
+    .account-btn svg { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
+    .account-dialog-copy { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .account-dialog-note { margin: 15px 0 0; padding: 12px; border: 1px solid #e2e8e2; border-radius: 9px; background: #f7f9f6; color: #606960; font-size: 11px; line-height: 1.55; }
+
     .cart-icon { width: 20px; height: 20px; }
     .cart-count { min-width: 22px; height: 22px; display: inline-grid; place-items: center; padding: 0 6px; border-radius: 999px; color: #fff; background: var(--ink); font-size: 11px; }
     main { padding-bottom: 72px; }
@@ -861,10 +868,15 @@
         <a class="logo" href="#inicio" aria-label="Kokeshi — início">kokeshi<span class="logo-dot">.</span></a>
         <p class="brand-note">curadoria casual</p>
       </div>
-      <button class="cart-btn" id="cart-button" type="button" aria-label="Abrir sacola, 0 itens">
-        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-        <span>Sacola</span><b class="cart-count" id="cart-count">0</b>
-      </button>
+      <div class="header-actions">
+        <button class="account-btn" id="account-button" type="button" aria-label="Abrir área de cadastro" title="Cadastro de cliente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg>
+        </button>
+        <button class="cart-btn" id="cart-button" type="button" aria-label="Abrir sacola, 0 itens">
+          <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+          <span>Sacola</span><b class="cart-count" id="cart-count">0</b>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -1125,6 +1137,15 @@
     </div>
   </dialog>
 
+  <dialog id="account-dialog" aria-labelledby="account-title">
+    <div class="dialog-body">
+      <div class="dialog-top"><h2 id="account-title">Cadastro de cliente</h2><button class="close" id="close-account" type="button" aria-label="Fechar cadastro">×</button></div>
+      <p class="account-dialog-copy">A área de cadastro da loja poderá ser acessada aqui quando estiver disponível.</p>
+      <p class="account-dialog-note">Esta é uma página demonstrativa: nenhum dado pessoal é solicitado ou armazenado e o cadastro ainda não está ativo.</p>
+      <button class="cta" id="close-account-action" type="button">Continuar navegando</button>
+    </div>
+  </dialog>
+
   <script>
     // Para ativar um checkout real, informe a URL da loja aqui. O tamanho segue como ?size=P|M|G.
     const CHECKOUT_URL = '';
@@ -1251,6 +1272,10 @@
       $('add-button').click();
     });
     $('cart-button').addEventListener('click', openCart);
+    $('account-button').addEventListener('click', () => $('account-dialog').showModal());
+    $('close-account').addEventListener('click', () => $('account-dialog').close());
+    $('close-account-action').addEventListener('click', () => $('account-dialog').close());
+    $('account-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
     $('close-cart').addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
     $('cart-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
