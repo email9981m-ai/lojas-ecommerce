@@ -944,14 +944,23 @@
     .checkout-number-row { grid-template-columns: minmax(88px, .65fr) minmax(0, 1.35fr); }
     .checkout-address-details { display: grid; gap: 14px; }
     .checkout-address-details[hidden], .checkout-address-actions[hidden], .checkout-cep-status[hidden] { display: none !important; }
+    .checkout-address-details:not([hidden]) { animation: checkout-address-reveal .28s ease-out both; }
     .checkout-address-actions .cta:disabled { opacity: .48; cursor: not-allowed; box-shadow: none; }
-    .checkout-cep-status { margin: -3px 0 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
-    .checkout-cep-status.loading { display: flex; align-items: center; gap: 7px; }
-    .checkout-cep-status.loading::before { content: ""; width: 14px; height: 14px; flex: none; border: 2px solid rgba(47,107,79,.22); border-top-color: var(--brand); border-radius: 50%; animation: checkout-cep-spin .7s linear infinite; }
+    .checkout-cep-status { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 12px 14px; border: 1px solid transparent; border-radius: 11px; font-size: 12px; font-weight: 600; line-height: 1.5; transition: background .2s, border-color .2s, color .2s, box-shadow .2s; }
+    .checkout-cep-status::before { width: 22px; height: 22px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 13px; font-weight: 850; line-height: 1; }
+    .checkout-cep-status.loading { border-color: #d5e5d9; background: linear-gradient(110deg, #f4f9f5 0%, #edf5ef 48%, #f4f9f5 100%); background-size: 220% 100%; color: #315e40; box-shadow: 0 3px 10px rgba(36,83,61,.05); animation: checkout-status-sheen 1.8s ease-in-out infinite; }
+    .checkout-cep-status.loading::before { content: ""; border: 2px solid rgba(47,107,79,.2); border-top-color: var(--brand); animation: checkout-cep-spin .72s linear infinite; }
+    .checkout-cep-status.success { border-color: #cfe2d3; background: #f0f7f1; color: #24533d; box-shadow: 0 3px 10px rgba(36,83,61,.045); animation: checkout-status-enter .24s ease-out both; }
+    .checkout-cep-status.success::before { content: "✓"; border: 1px solid #b8d3be; background: #dceee0; color: #24533d; }
+    .checkout-cep-status.error { border-color: #ecd5d2; background: #fcf4f3; color: #8c3932; }
+    .checkout-cep-status.error::before { content: "!"; border: 1px solid #e7c5c1; background: #f8e7e4; color: #8c3932; }
     @keyframes checkout-cep-spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { .checkout-cep-status.loading::before { animation: none; } }
-    .checkout-cep-status.success { color: var(--brand-dark); }
-    .checkout-cep-status.error { color: #8c3932; }
+    @keyframes checkout-status-sheen { 50% { background-position: 100% 0; } }
+    @keyframes checkout-status-enter { from { opacity: .55; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes checkout-address-reveal { from { opacity: .65; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .checkout-cep-status, .checkout-cep-status.loading, .checkout-cep-status.loading::before, .checkout-address-details:not([hidden]) { animation: none; transition: none; }
+    }
     .checkout-shipping-block { display: grid; gap: 8px; padding-top: 4px; }
     .checkout-shipping-option { position: relative; display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: start; gap: 11px; padding: 13px 14px; border: 1px solid #d1ddd4; border-radius: 12px; background: #fff; color: var(--ink-soft); box-shadow: 0 3px 11px rgba(30,50,35,.05); transition: border-color .16s, box-shadow .16s, transform .16s; }
     .checkout-shipping-option:has(input:checked) { border-color: #91b298; box-shadow: 0 4px 13px rgba(30,70,40,.08); }
@@ -1506,8 +1515,8 @@
           <p class="checkout-pane-kicker">Entrega</p><h3>Endereço de entrega</h3>
           <p>Informe o CEP para preencher o endereço. Revise os dados antes de continuar.</p>
           <form class="checkout-form" id="checkout-address-form">
-            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000" aria-describedby="checkout-cep-status"></label>
-            <p class="checkout-cep-status" id="checkout-cep-status" hidden role="status"></p>
+            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000" aria-describedby="checkout-cep-status" aria-controls="checkout-address-details"></label>
+            <p class="checkout-cep-status" id="checkout-cep-status" hidden role="status" aria-live="polite" aria-atomic="true" aria-busy="false"></p>
             <div class="checkout-address-details" id="checkout-address-details" hidden>
               <label>Rua / avenida<input id="checkout-street" autocomplete="address-line1" required></label>
               <div class="checkout-grid-address checkout-number-row"><label>Número<input id="checkout-number" inputmode="numeric" pattern="[0-9]*" required></label><label title="Complemento opcional">Complemento<input id="checkout-complement" autocomplete="address-line2"></label></div>
@@ -2024,6 +2033,11 @@
       if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
       if (checkoutShell) checkoutShell.scrollTo({ top: 0, behavior: 'auto' });
       window.scrollTo({ top: 0, behavior: 'auto' });
+      // Reaplica após o navegador recalcular o layout da etapa final.
+      if (step === 3) requestAnimationFrame(() => {
+        if (checkoutShell) checkoutShell.scrollTo({ top: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
     }
     function syncCheckoutSummary() {
       const selected = cart[0] || size || '—';
@@ -2070,7 +2084,7 @@
       const raw = cepInput.value.replace(/\D/g, '').slice(0, 8);
       cepInput.value = raw.length > 5 ? `${raw.slice(0,5)}-${raw.slice(5)}` : raw;
       const status = $('checkout-cep-status'); const details = $('checkout-address-details');
-      if (raw.length < 8) { ++cepRequestId; status.hidden = true; status.className = 'checkout-cep-status'; details.hidden = true; $('checkout-address-submit').disabled = true; return; }
+      if (raw.length < 8) { ++cepRequestId; status.hidden = true; status.className = 'checkout-cep-status'; status.setAttribute('aria-busy', 'false'); details.hidden = true; $('checkout-address-submit').disabled = true; return; }
       // Ao completar o CEP, fecha o teclado virtual sem abrir o próximo campo automaticamente.
       cepInput.blur();
       const requestId = ++cepRequestId;
@@ -2079,18 +2093,18 @@
         const remaining = 1500 - (Date.now() - loadingStartedAt);
         if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
       };
-      status.hidden = false; status.className = 'checkout-cep-status loading'; status.textContent = 'Consultando endereço…'; details.hidden = true; $('checkout-address-submit').disabled = true;
+      status.hidden = false; status.className = 'checkout-cep-status loading'; status.setAttribute('aria-busy', 'true'); status.textContent = 'Consultando endereço… Aguarde enquanto localizamos seu endereço.'; details.hidden = true; $('checkout-address-submit').disabled = true;
       try {
         const response = await fetch(`https://viacep.com.br/ws/${raw}/json/`); const data = await response.json();
         await waitForMinimumLoading();
         if (requestId !== cepRequestId) return;
         if (data.erro) throw new Error('CEP não encontrado');
         $('checkout-street').value = data.logradouro || ''; $('checkout-neighborhood').value = data.bairro || ''; $('checkout-city').value = data.localidade || ''; $('checkout-state').value = data.uf || '';
-        status.className = 'checkout-cep-status success'; status.textContent = 'Endereço encontrado. Confira os dados abaixo.'; details.hidden = false; $('checkout-address-submit').disabled = false;
+        status.className = 'checkout-cep-status success'; status.setAttribute('aria-busy', 'false'); status.textContent = 'Endereço encontrado. Confira os dados abaixo.'; details.hidden = false; $('checkout-address-submit').disabled = false;
       } catch (error) {
         await waitForMinimumLoading();
         if (requestId !== cepRequestId) return;
-        status.className = 'checkout-cep-status error'; status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; $('checkout-address-submit').disabled = false;
+        status.className = 'checkout-cep-status error'; status.setAttribute('aria-busy', 'false'); status.textContent = 'Não foi possível localizar este CEP. Confira o número ou preencha o endereço manualmente.'; details.hidden = false; $('checkout-address-submit').disabled = false;
       }
     });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
