@@ -3376,6 +3376,19 @@
       .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 15px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { display: flex; align-items: center; justify-content: space-between; }
     }
+
+    /* Informações essenciais de entrega visíveis, sem expandir o restante do resumo. */
+    .checkout-pane[data-checkout-pane="3"] h3 { max-width: 30ch; margin-bottom: 14px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { gap: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 13px 15px; border: 1px solid #e5e9e5; border-radius: 11px; background: #fafbf9; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title { margin: 0 0 5px; color: #69746b; font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-address { display: block; color: #29352d; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-location { display: block; margin-top: 2px; color: #69746b; font-size: 10px; line-height: 1.45; overflow-wrap: anywhere; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline { display: flex; flex-wrap: wrap; gap: 4px 8px; margin-top: 9px; padding-top: 8px; border-top: 1px solid #e8ece8; color: #68736a; font-size: 10px; line-height: 1.4; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { color: #344139; font-weight: 700; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-edit-address { margin-top: 5px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pix-explanation { margin: 0; color: #667168; font-size: 11px; line-height: 1.5; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -3692,17 +3705,24 @@
         </section>
         <section class="checkout-pane" data-checkout-pane="3" aria-labelledby="checkout-final-title">
           <p class="checkout-pane-kicker">Etapa 3 de 3</p>
-          <h3 id="checkout-final-title">Pague com Pix</h3>
+          <h3 id="checkout-final-title">Confirme a entrega e pague o frete</h3>
           <div class="checkout-final-layout">
+            <section class="checkout-final-review" aria-label="Endereço e prazo de entrega">
+              <p class="checkout-delivery-title">Endereço de entrega</p>
+              <strong class="checkout-delivery-address" id="checkout-review-address">A preencher</strong>
+              <small class="checkout-delivery-location" id="checkout-review-cep">CEP não informado</small>
+              <div class="checkout-delivery-deadline"><span>Prazo estimado</span><strong>Até 3 dias úteis após o pagamento do frete</strong></div>
+              <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2">Editar endereço</button>
+            </section>
             <div class="checkout-final-payment">
               <div class="pix-box">
-                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span></div>
-                <div class="checkout-order-breakdown" aria-label="Resumo do valor"><span>Camiseta R$ 0,00 <span aria-hidden="true">·</span> Frete <strong id="checkout-shipping-label">R$ 39,00</strong></span></div>
-                <div class="checkout-payment-amount"><span>Total a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
-                <button class="cta" id="checkout-pix-button" type="button"><span id="checkout-pix-button-label">Gerar Pix</span><span class="cta-arrow" aria-hidden="true">→</span></button>
+                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Pagamento do frete</span></div>
+                <p class="checkout-pix-explanation">A camiseta custa R$ 0,00. Este Pix é somente do frete.</p>
+                <div class="checkout-payment-amount"><span>Frete a pagar agora</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <button class="cta" id="checkout-pix-button" type="button"><span id="checkout-pix-button-label">Gerar Pix do frete</span><span class="cta-arrow" aria-hidden="true">→</span></button>
                 <p class="checkout-payment-trust">Confira o valor e o recebedor no app do banco antes de confirmar.</p>
                 <div class="pix-result" id="checkout-pix-result" aria-live="polite">
-                  <img id="checkout-pix-qr" alt="QR Code Pix para pagamento">
+                  <img id="checkout-pix-qr" alt="QR Code Pix para pagamento do frete">
                   <p class="pix-result-hint">Escaneie o QR ou copie o código Pix no app do seu banco.</p>
                   <div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código Pix copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div>
                   <div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade do código</span><strong id="checkout-pix-countdown">15:00</strong></div>
@@ -3710,17 +3730,6 @@
               </div>
               <p class="checkout-alert" id="checkout-alert" role="alert"></p>
             </div>
-            <details class="checkout-final-review">
-              <summary>Conferir dados e entrega</summary>
-              <div class="checkout-review-grid" aria-label="Dados para conferência">
-                <div class="checkout-review-card">
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Cliente</span></div><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Endereço</span></div><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
-                  <div class="checkout-delivery-meta" aria-label="Prazo estimado"><span>Prazo<strong>Até 3 dias úteis</strong></span></div>
-                </div>
-              </div>
-              <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2">Editar endereço</button>
-            </details>
           </div>
         </section>
         <div class="checkout-final-back-footer" id="checkout-final-back-footer" hidden>
@@ -4346,8 +4355,10 @@
       const pixAmountEl = $('checkout-pix-amount'); if (pixAmountEl) pixAmountEl.textContent = totalAmount;
       const nameEl = $('checkout-review-name'); if (nameEl) nameEl.textContent = checkoutState.donor.name || 'A preencher';
       const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
-      const addressEl = $('checkout-review-address'); if (addressEl) addressEl.textContent = checkoutState.donor.street ? `${checkoutState.donor.street}, ${checkoutState.donor.number}` : 'A preencher';
-      const cepEl = $('checkout-review-cep'); if (cepEl) cepEl.textContent = checkoutState.donor.cep ? `${checkoutState.donor.city || ''} · CEP ${checkoutState.donor.cep}` : 'CEP não informado';
+      const addressEl = $('checkout-review-address');
+      if (addressEl) addressEl.textContent = checkoutState.donor.street ? [checkoutState.donor.street, checkoutState.donor.number].filter(Boolean).join(', ') : 'Endereço não informado';
+      const cepEl = $('checkout-review-cep');
+      if (cepEl) cepEl.textContent = [checkoutState.donor.complement ? `Compl. ${checkoutState.donor.complement}` : '', checkoutState.donor.neighborhood, [checkoutState.donor.city, checkoutState.donor.state].filter(Boolean).join('/'), checkoutState.donor.cep ? `CEP ${checkoutState.donor.cep}` : ''].filter(Boolean).join(' · ') || 'Confira o endereço';
     }
     function showCheckoutAlert(message) { const el = $('checkout-alert'); if (el) { el.textContent = message; el.classList.add('show'); } }
     function setCheckoutStatusAnnouncement(message) {
