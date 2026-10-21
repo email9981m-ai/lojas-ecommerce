@@ -1157,7 +1157,7 @@
     .checkout-pane[data-checkout-pane="3"] .pix-box > strong { color: #173f24; font-size: 17px; }
     .checkout-pane[data-checkout-pane="3"] .pix-box > p { max-width: none; margin-top: 6px; color: #536259; font-size: 11px; }
     .checkout-pane[data-checkout-pane="3"] .pix-box > p strong { color: #1b5429; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 16px; padding: 13px 0; border-block: 1px solid #d7e7da; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { align-items: center; margin-top: 16px; padding: 14px 0; border-block: 1px solid #d7e7da; }
     .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { color: #185b28; font-size: 23px; }
     .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { width: 100%; min-height: 54px !important; margin-top: 14px !important; }
     .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin: 12px 0 0; font-size: 10px; }
@@ -1225,9 +1225,6 @@
     .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 0; }
     .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { position: static; padding: 0; border: 0; }
     .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label { margin-top: 0; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-caption { margin: 0; color: #536259; font-size: 11px; line-height: 1.5; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-caption strong { color: var(--brand-dark); }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-bottom: 11px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 22px; border-color: #8fb49a; background: linear-gradient(145deg, #edf7ef 0%, #fbfdfb 100%); box-shadow: 0 5px 16px rgba(36,83,61,.07); }
     .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button { min-height: 58px !important; margin-top: 14px !important; font-size: 14px; }
     @media (max-width: 520px) {
@@ -1591,8 +1588,7 @@
                 <strong>Pague o frete via Pix</strong>
                 <p>A camiseta é grátis. O único valor a pagar para concluir é o frete de entrega.</p>
                 <div class="checkout-payment-amount"><span>Total para pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
-                <p class="checkout-payment-caption">Confirme o valor de <strong id="checkout-pix-total-copy">R$ 39,00</strong> no aplicativo do seu banco.</p>
-                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar Pix e pagar o frete <span class="cta-arrow">→</span></button>
+                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar Pix para o frete <span class="cta-arrow">→</span></button>
                 <p class="checkout-payment-trust">Você só conclui quando conferir o valor e o beneficiário no seu banco.</p>
                 <div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div>
               </div>
@@ -2216,7 +2212,6 @@
       const totalAmount = moneyBRL(checkoutState.contribution + checkoutState.shipping);
       const totalEl = $('checkout-total'); if (totalEl) totalEl.textContent = totalAmount;
       const pixAmountEl = $('checkout-pix-amount'); if (pixAmountEl) pixAmountEl.textContent = totalAmount;
-      const pixCopyEl = $('checkout-pix-total-copy'); if (pixCopyEl) pixCopyEl.textContent = totalAmount;
       const nameEl = $('checkout-review-name'); if (nameEl) nameEl.textContent = checkoutState.donor.name || 'A preencher';
       const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
       const addressEl = $('checkout-review-address'); if (addressEl) addressEl.textContent = checkoutState.donor.street ? `${checkoutState.donor.street}, ${checkoutState.donor.number}` : 'A preencher';
