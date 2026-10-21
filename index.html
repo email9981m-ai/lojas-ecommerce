@@ -124,10 +124,12 @@
     .size-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
     .size-heading strong { font-size: 13px; }
     .size-guide-link { border: 0; padding: 0; background: transparent; color: var(--brand-dark); font-size: 11px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-    .sizes { display: flex; gap: 9px; }
-    .size { width: 54px; height: 48px; border: 1px solid var(--line-strong); border-radius: 9px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 650; transition: background .15s, color .15s, border-color .15s; }
-    .size:hover { border-color: var(--ink); }
-    .size[aria-pressed="true"] { border-color: var(--brand-dark); background: var(--brand-dark); color: #fff; }
+    .sizes, .final-purchase-sizes { display: flex; align-items: center; gap: 9px; }
+    .size { display: inline-grid; width: 56px; height: 50px; flex: 0 0 56px; place-items: center; padding: 0; border: 1px solid #d9e1db; border-radius: 10px; background: #fff; color: #3f4b42; box-shadow: 0 1px 2px rgba(26,43,31,.04); cursor: pointer; font-size: 14px; font-weight: 700; touch-action: manipulation; transition: transform .15s, background .15s, color .15s, border-color .15s, box-shadow .15s; }
+    .size:hover:not([aria-pressed="true"]) { transform: translateY(-1px); border-color: #9aac9f; background: #f8faf8; box-shadow: 0 3px 8px rgba(26,43,31,.07); }
+    .size[aria-pressed="true"] { transform: none; border-color: #568064; background: #edf4ee; color: #285b40; box-shadow: inset 0 0 0 1px rgba(47,107,79,.07); }
+    .size:focus-visible { outline: 2px solid #4e7b5c; outline-offset: 3px; }
+    .size:active { transform: scale(.98); }
     .size-fieldset { margin: 0 0 14px; padding: 0; border: 0; }
     .product-info > #add-button { margin-top: 0; }
     .hint { min-height: 19px; margin: 8px 0 0; color: var(--muted); font-size: 11px; }
@@ -296,8 +298,7 @@
 
     .final-purchase-controls { min-width: 0; padding: 18px; border: 1px solid #e7ebe5; border-radius: 13px; background: rgba(255,255,255,.82); }
     .final-purchase-controls > strong { display: block; margin-bottom: 10px; font-size: 11px; }
-    .final-purchase-sizes { display: flex; gap: 8px; margin-bottom: 14px; }
-    .final-purchase-sizes .size { width: 44px; height: 42px; }
+    .final-purchase-sizes { margin-bottom: 14px; }
     .final-purchase .cta { min-height: 52px; margin: 0; }
     .final-purchase-hint { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); font-size: 10px; }
     .final-purchase-hint.error { color: var(--red); }
@@ -1315,7 +1316,7 @@
 
         <fieldset class="size-fieldset" id="tamanhos" aria-describedby="hint">
           <legend class="sr-only">Selecione o tamanho</legend>
-          <div class="size-heading"><strong>Escolha seu tamanho <span id="size-label" aria-live="polite"></span></strong><button class="size-guide-link" type="button" id="size-guide-link">Ajuda com o tamanho</button></div>
+          <div class="size-heading"><strong>Escolha seu tamanho </strong><button class="size-guide-link" type="button" id="size-guide-link">Ajuda com o tamanho</button></div>
           <div class="sizes">
             <button class="size" type="button" data-size="P" aria-pressed="false">P</button>
             <button class="size" type="button" data-size="M" aria-pressed="false">M</button>
@@ -1473,7 +1474,7 @@
         <small class="final-price-note">Frete e prazo calculados conforme o CEP.</small>
       </div>
       <div class="final-purchase-controls">
-        <strong>Selecione seu tamanho</strong>
+        <strong>Escolha seu tamanho </strong>
         <div class="final-purchase-sizes" role="group" aria-label="Escolha o tamanho da camiseta">
           <button class="size" type="button" data-final-size="P" aria-pressed="false">P</button>
           <button class="size" type="button" data-final-size="M" aria-pressed="false">M</button>
@@ -1670,17 +1671,19 @@
 
     function updateLabels() {
       $('add-label').textContent = 'Adicionar à sacola';
-      $('size-label').textContent = size ? `· ${size}` : '';
+      const finalBuyLabel = $('final-buy-button')?.querySelector('span');
+      if (finalBuyLabel) finalBuyLabel.textContent = size ? 'Adicionar à sacola' : 'Escolha um tamanho';
+      document.querySelectorAll('.sizes .size').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.size === size)));
+      document.querySelectorAll('[data-final-size]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.finalSize === size)));
     }
     document.querySelectorAll('.sizes .size[data-size="M"]').forEach((button) => button.setAttribute('aria-pressed', 'true'));
     document.querySelectorAll('[data-final-size="M"]').forEach((button) => button.setAttribute('aria-pressed', 'true'));
-    document.querySelectorAll('.size').forEach((button) => button.addEventListener('click', () => {
+    document.querySelectorAll('.sizes .size').forEach((button) => button.addEventListener('click', () => {
       size = button.dataset.size;
-      document.querySelectorAll('.size').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      updateLabels();
       $('hint').textContent = `Tamanho ${size} selecionado — pronto para adicionar à sacola.`;
       $('hint').classList.remove('error', 'cart-empty-feedback');
       $('hint').classList.add('sr-only');
-      updateLabels();
     }));
 
     function renderCart() {
@@ -1764,7 +1767,7 @@
       const matchingSize = document.querySelector(`.sizes .size[data-size="${button.dataset.finalSize}"]`);
       if (matchingSize) matchingSize.click();
       document.querySelectorAll('[data-final-size]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-      $('final-buy-button').querySelector('span').textContent = `Adicionar tamanho ${button.dataset.finalSize} à sacola`;
+      $('final-buy-button').querySelector('span').textContent = 'Adicionar à sacola';
       $('final-purchase-hint').textContent = `Tamanho ${button.dataset.finalSize} selecionado.`;
       $('final-purchase-hint').classList.remove('error');
     }));
@@ -2140,6 +2143,9 @@
       hasSavedCheckoutDraft = true;
     }
     applyCheckoutDraft();
+    updateLabels();
+    $('hint').textContent = size ? `Tamanho ${size} selecionado — pronto para adicionar à sacola.` : 'P · M · G — toque para selecionar.';
+    $('final-purchase-hint').textContent = size ? `Tamanho ${size} selecionado.` : 'Selecione P, M ou G para continuar.';
     function activateCheckoutBackGuard() {
       if (checkoutBackGuardActive) return;
       try { history.pushState({ ...(history.state || {}), kokeshiCheckoutGuard: true }, '', location.href); checkoutBackGuardActive = true; } catch (error) { checkoutBackGuardActive = false; }
