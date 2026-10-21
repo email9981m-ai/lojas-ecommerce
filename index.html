@@ -1238,9 +1238,6 @@
     .checkout-draft-note { margin: -12px 0 18px; color: #717970; font-size: 10px; line-height: 1.5; }
     .checkout-review-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-section-heading > span { margin: 0; color: #647168; font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-    .checkout-review-edit { padding: 3px 0 3px 8px; border: 0; background: transparent; color: var(--brand-dark); font: inherit; font-size: 11px; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-    .checkout-review-edit:hover { color: var(--ink); }
-    .checkout-review-edit:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 3px; }
     .cart-empty-feedback { display: block; width: 100%; margin: 10px 0 0; padding: 10px 12px; border: 1px solid #dce7de; border-radius: 9px; background: #f5f8f5; color: #42594a; font-size: 12px; line-height: 1.5; }
 
     .checkout-transition-loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: #faf9f6; -webkit-backdrop-filter: none; backdrop-filter: none; opacity: 0; visibility: hidden; transition: opacity .18s ease, visibility .18s ease; }
@@ -1575,8 +1572,8 @@
               <div class="checkout-section-label checkout-data-label">Seus dados</div>
               <div class="checkout-review-grid" aria-label="Dados para conferência">
                 <div class="checkout-review-card">
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Cliente</span><button class="checkout-review-edit" type="button" data-checkout-back="1">Editar</button></div><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Entrega</span><button class="checkout-review-edit" type="button" data-checkout-back="2">Editar</button></div><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Cliente</span></div><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
+                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Entrega</span></div><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
                   <div class="checkout-delivery-meta" aria-label="Prazo e valor da entrega"><span>Prazo estimado<strong>Até 3 dias úteis</strong></span><span>Frete<strong id="checkout-shipping-label">R$ 39,00</strong></span></div>
                 </div>
               </div>
