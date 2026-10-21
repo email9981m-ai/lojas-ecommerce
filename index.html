@@ -3348,60 +3348,33 @@
       }
     }
 
-    /* Etapa Pix: hierarquia simples, total explícito e prioridade para a ação principal. */
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper {
-      display: flex; align-items: center; gap: 0; margin: 0 0 20px; padding: 0; list-style: none;
-    }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper li {
-      position: relative; display: flex; flex: 1; align-items: center; gap: 8px; color: #788078; font-size: 11px; font-weight: 650;
-    }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper li:not(:last-child)::after {
-      content: ""; height: 1px; flex: 1; margin: 0 10px; background: #dfe6df;
-    }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper .checkout-step-number {
-      display: grid; width: 24px; height: 24px; flex: none; place-items: center; border: 1px solid #d8dfd8; border-radius: 50%; background: #fff; color: #68736a; font-size: 10px; font-weight: 800;
-    }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper .is-complete { color: #47634e; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper .is-complete .checkout-step-number { border-color: #d4e4d7; background: #edf5ef; color: #2f6b4f; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper .is-current { color: #234c34; font-weight: 800; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-stepper .is-current .checkout-step-number { border-color: #2f6b4f; background: #2f6b4f; color: #fff; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { grid-template-areas: "review payment"; grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); gap: 18px; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { grid-area: review; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { grid-area: payment; border-color: #d5e3d8; background: linear-gradient(180deg, #f7faf7 0%, #fff 100%); }
-    .checkout-pane[data-checkout-pane="3"] .checkout-final-intro { margin-bottom: 18px !important; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown { display: grid; gap: 8px; margin: 16px 0 0; padding: 13px 0 0; border-top: 1px solid #edf0ec; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #68736a; font-size: 11px; line-height: 1.45; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown strong { color: #344139; font-size: 11px; font-weight: 700; white-space: nowrap; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 12px; border-color: #cfe0d2; background: #edf5ef; box-shadow: inset 3px 0 0 #2f6b4f; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount span { color: #344f3b; font-weight: 750; }
-    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 58px !important; justify-content: space-between; padding-inline: 17px; text-align: left; }
-    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button .cta-copy { gap: 4px; }
-    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button .cta-copy small { font-size: 10px; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-edit-address { display: inline-flex; gap: 5px; margin-top: 14px; padding: 8px 0; color: #356346; font-size: 11px; font-weight: 700; }
-    .checkout-pane[data-checkout-pane="3"] .checkout-edit-address span + span { text-decoration: underline; text-underline-offset: 3px; }
-    .checkout-pane[data-checkout-pane="3"] .pix-result-heading { display: grid; gap: 3px; margin-bottom: 10px; text-align: center; }
-    .checkout-pane[data-checkout-pane="3"] .pix-result-heading strong { color: #26342a; font-size: 14px; }
-    .checkout-pane[data-checkout-pane="3"] .pix-result-heading span { color: #68736a; font-size: 11px; }
-    .checkout-pane[data-checkout-pane="3"] .pix-payment-instructions { margin-top: 12px; padding: 12px; border: 1px solid #e3ebe3; border-radius: 9px; background: #f8faf8; }
-    .checkout-pane[data-checkout-pane="3"] .pix-payment-instructions > strong { color: #344139; font-size: 11px; }
-    .checkout-pane[data-checkout-pane="3"] .pix-payment-instructions ol { display: grid; gap: 6px; margin: 8px 0 0; padding-left: 18px; color: #59655c; font-size: 10px; line-height: 1.5; }
-    .checkout-pane[data-checkout-pane="3"] .pix-payment-instructions li::marker { color: #2f6b4f; font-weight: 800; }
-    .checkout-pane[data-checkout-pane="3"] .pix-copy-row input { font-size: 11px; }
-    @media (max-width: 700px) {
-      .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { grid-template-areas: "payment" "review"; grid-template-columns: minmax(0, 1fr); }
-      .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding-block: 15px; }
-    }
+    /* Versão enxuta da etapa final: foco no total e na ação Pix. */
+    .checkout-pane[data-checkout-pane="3"] { max-width: 620px; margin-inline: auto; padding: 22px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { margin-bottom: 7px; padding: 0; border: 0; background: transparent; color: #68736a; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 17px; font-size: clamp(23px, 3vw, 28px); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { display: flex; flex-direction: column; gap: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { width: 100%; padding: 0; border: 0; background: transparent; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 18px; border-color: #e1e7e1; background: #fff; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .pix-heading-row { justify-content: flex-start; margin-bottom: 12px; padding: 0; border: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown { margin: 0; padding: 0; border: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown > span { color: #69746b; font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-order-breakdown strong { color: #344139; font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin: 12px 0; padding: 13px 14px; }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 54px !important; justify-content: center; gap: 10px; margin: 0 !important; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin-top: 9px; padding-top: 0; border: 0; color: #6b746d; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review summary { padding: 8px 0; color: #5f6c62; font-size: 11px; font-weight: 650; cursor: pointer; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review[open] .checkout-review-grid { margin-top: 8px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review .checkout-review-card { padding: 12px; border: 1px solid #e8ece8; border-radius: 10px; background: #fff; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review .checkout-review-section { padding: 8px 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review .checkout-review-section:first-child { padding-top: 0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-edit-address { margin-top: 8px; padding: 5px 0; color: #356346; font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result { margin-top: 12px; padding-top: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result-hint { margin: 0 0 10px; color: #68736a; font-size: 11px; text-align: center; }
     @media (max-width: 520px) {
-      .checkout-pane[data-checkout-pane="3"] .checkout-stepper { margin-bottom: 17px; }
-      .checkout-pane[data-checkout-pane="3"] .checkout-stepper li { gap: 6px; font-size: 10px; }
-      .checkout-pane[data-checkout-pane="3"] .checkout-stepper li:not(:last-child)::after { margin-inline: 6px; }
-      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { border-color: #d5e3d8; background: linear-gradient(180deg, #f7faf7 0%, #fff 100%); }
-      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-      .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 58px !important; }
-    }
-    @media (max-width: 360px) {
-      .checkout-pane[data-checkout-pane="3"] .checkout-stepper li { font-size: 9px; }
-      .checkout-pane[data-checkout-pane="3"] .checkout-stepper .checkout-step-number { width: 22px; height: 22px; }
+      .checkout-pane[data-checkout-pane="3"] { padding: 17px 14px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+      .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 15px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { display: flex; align-items: center; justify-content: space-between; }
     }
   </style>
 </head>
@@ -3718,49 +3691,36 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3" aria-labelledby="checkout-final-title">
-          <p class="checkout-pane-kicker">Etapa final · pagamento</p>
-          <ol class="checkout-stepper" aria-label="Etapas do pedido">
-            <li class="is-complete"><span class="checkout-step-number" aria-hidden="true">✓</span><span>Dados</span></li>
-            <li class="is-complete"><span class="checkout-step-number" aria-hidden="true">✓</span><span>Entrega</span></li>
-            <li class="is-current" aria-current="step"><span class="checkout-step-number" aria-hidden="true">3</span><span>Pagamento</span></li>
-          </ol>
-          <h3 id="checkout-final-title">Revise e pague com Pix</h3>
-          <p class="checkout-final-intro">Confira o endereço e o valor total antes de gerar o código. A camiseta custa R$ 0,00; o valor abaixo corresponde ao frete.</p>
+          <p class="checkout-pane-kicker">Etapa 3 de 3</p>
+          <h3 id="checkout-final-title">Pague com Pix</h3>
           <div class="checkout-final-layout">
-            <div class="checkout-final-review">
-              <div class="checkout-section-label checkout-data-label">Resumo do pedido</div>
-              <div class="checkout-review-grid" aria-label="Dados para conferência">
-                <div class="checkout-review-card">
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Cliente</span></div><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
-                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Endereço de entrega</span></div><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
-                  <div class="checkout-delivery-meta" aria-label="Prazo estimado"><span>Prazo estimado<strong>Até 3 dias úteis</strong></span></div>
-                </div>
-              </div>
-              <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2"><span aria-hidden="true">Editar</span><span>endereço de entrega</span></button>
-            </div>
             <div class="checkout-final-payment">
-              <div class="checkout-section-label">Pagamento via Pix</div>
               <div class="pix-box">
-                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Confirmação no app do banco</span></div>
-                <strong>Valor total do pedido</strong>
-                <p>Sem cobranças adicionais nesta etapa. Confira o beneficiário antes de confirmar no banco.</p>
-                <div class="checkout-order-breakdown" aria-label="Composição do valor">
-                  <div><span>Camiseta</span><strong>R$ 0,00</strong></div>
-                  <div><span>Frete · entrega padrão</span><strong id="checkout-shipping-label">R$ 39,00</strong></div>
-                </div>
-                <div class="checkout-payment-amount"><span>Total a pagar agora</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
-                <button class="cta" id="checkout-pix-button" type="button"><span class="cta-copy"><span>Gerar código Pix</span><small>Você confirma o pagamento no app do banco</small></span><span class="cta-arrow" aria-hidden="true">→</span></button>
-                <p class="checkout-payment-trust">Gerar o código não realiza o débito. No app do banco, confira o valor e o nome do recebedor antes de confirmar.</p>
+                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span></div>
+                <div class="checkout-order-breakdown" aria-label="Resumo do valor"><span>Camiseta R$ 0,00 <span aria-hidden="true">·</span> Frete <strong id="checkout-shipping-label">R$ 39,00</strong></span></div>
+                <div class="checkout-payment-amount"><span>Total a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <button class="cta" id="checkout-pix-button" type="button"><span id="checkout-pix-button-label">Gerar Pix</span><span class="cta-arrow" aria-hidden="true">→</span></button>
+                <p class="checkout-payment-trust">Confira o valor e o recebedor no app do banco antes de confirmar.</p>
                 <div class="pix-result" id="checkout-pix-result" aria-live="polite">
-                  <div class="pix-result-heading"><strong>Pix pronto para pagamento</strong><span>Escaneie o QR Code ou use o Pix copia e cola.</span></div>
                   <img id="checkout-pix-qr" alt="QR Code Pix para pagamento">
+                  <p class="pix-result-hint">Escaneie o QR ou copie o código Pix no app do seu banco.</p>
                   <div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código Pix copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div>
-                  <div class="pix-payment-instructions"><strong>Finalize no app do seu banco</strong><ol><li>Escaneie o QR Code ou cole o código Pix.</li><li>Confira o valor e o nome do recebedor.</li><li>Confirme o pagamento no aplicativo.</li></ol></div>
-                  <div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div>
+                  <div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade do código</span><strong id="checkout-pix-countdown">15:00</strong></div>
                 </div>
               </div>
               <p class="checkout-alert" id="checkout-alert" role="alert"></p>
             </div>
+            <details class="checkout-final-review">
+              <summary>Conferir dados e entrega</summary>
+              <div class="checkout-review-grid" aria-label="Dados para conferência">
+                <div class="checkout-review-card">
+                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Cliente</span></div><strong id="checkout-review-name">A preencher</strong><small id="checkout-review-email">E-mail não informado</small></div>
+                  <div class="checkout-review-section"><div class="checkout-review-section-heading"><span>Endereço</span></div><strong id="checkout-review-address">A preencher</strong><small id="checkout-review-cep">CEP não informado</small></div>
+                  <div class="checkout-delivery-meta" aria-label="Prazo estimado"><span>Prazo<strong>Até 3 dias úteis</strong></span></div>
+                </div>
+              </div>
+              <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2">Editar endereço</button>
+            </details>
           </div>
         </section>
         <div class="checkout-final-back-footer" id="checkout-final-back-footer" hidden>
@@ -4484,9 +4444,9 @@
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert();
-      const button = $('checkout-pix-button'); button.disabled = true; button.textContent = 'Gerando PIX…';
+      const button = $('checkout-pix-button'); button.disabled = true; $('checkout-pix-button-label').textContent = 'Gerando Pix…';
       const payload = { payment_method_id: 'pix', transaction_amount: checkoutState.contribution + checkoutState.shipping, payer: { name: checkoutState.donor.name, email: checkoutState.donor.email, cpf: checkoutState.donor.cpf }, product: { name: 'Camiseta Casual Corinthians', size: cart[0] || size, quantity: 1 }, shipping: { amount: checkoutState.shipping, label: 'Entrega em até 3 dias' }, address: checkoutState.donor };
-      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); button.textContent = 'PIX gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; button.innerHTML = '<span class="cta-copy"><span>Gerar código Pix</span><small>Você confirma o pagamento no app do banco</small></span><span class="cta-arrow" aria-hidden="true">→</span>'; } });
+      try { const response = await fetch('/api/create-payment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); if (!response.ok) throw new Error('Não foi possível gerar o PIX.'); const data = await response.json(); const code = data.point_of_interaction?.transaction_data?.qr_code || data.qr_code || ''; const image = data.point_of_interaction?.transaction_data?.qr_code_base64 || data.qr_code_base64 || ''; if (!code && !image) throw new Error('O servidor não retornou os dados do PIX.'); $('checkout-pix-code').value = code; $('checkout-pix-qr').src = image ? (image.startsWith('data:') ? image : `data:image/png;base64,${image}`) : `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`; $('checkout-pix-result').classList.add('show'); startPixCountdown(data.expires_in || 900); $('checkout-pix-button-label').textContent = 'Pix gerado'; } catch (error) { showCheckoutAlert(`${error.message} Configure o endpoint /api/create-payment no servidor para ativar o pagamento.`); button.disabled = false; $('checkout-pix-button-label').textContent = 'Gerar Pix'; } });
 
     renderCart();
   </script>
