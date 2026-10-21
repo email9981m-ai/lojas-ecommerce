@@ -1062,6 +1062,9 @@
     /* Acabamento final da etapa de confirmação: clareza, ritmo visual e ação principal. */
     .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border-radius: 999px; background: #e8f2ea; color: #2d6540; font-size: 9px; letter-spacing: .1em; }
     .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker::before { content: '✓'; font-size: 10px; letter-spacing: 0; }
+    .checkout-final-step-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .checkout-final-step-heading .checkout-pane-kicker { margin: 0; }
+    .checkout-final-step-heading .checkout-back { display: inline-flex; width: auto; flex: 0 0 auto; align-items: center; justify-content: center; min-height: 38px; padding: 0 12px; border-color: #d9e2db; border-radius: 9px; background: #fff; color: #385343; font-size: 11px; white-space: nowrap; }
     .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 8px; color: #18271d; font-size: 29px; }
     .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) { max-width: 52ch; color: #59675d; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-card { overflow: hidden; border-color: #b7ccbc; background: #fff; }
@@ -1241,7 +1244,7 @@
     .checkout-review-edit:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 3px; }
     .cart-empty-feedback { display: block; width: 100%; margin: 10px 0 0; padding: 10px 12px; border: 1px solid #dce7de; border-radius: 9px; background: #f5f8f5; color: #42594a; font-size: 12px; line-height: 1.5; }
 
-    .checkout-transition-loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: rgba(250,249,246,.88); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity .18s ease, visibility .18s ease; }
+    .checkout-transition-loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; background: #faf9f6; -webkit-backdrop-filter: none; backdrop-filter: none; opacity: 0; visibility: hidden; transition: opacity .18s ease, visibility .18s ease; }
     .checkout-transition-loader[hidden] { display: none !important; }
     .checkout-transition-loader.is-visible { opacity: 1; visibility: visible; }
     .checkout-transition-card { display: grid; justify-items: center; gap: 9px; padding: 0; border: 0; background: transparent; color: var(--ink); text-align: center; }
@@ -1552,7 +1555,7 @@
           <p class="checkout-pane-kicker">Entrega</p><h3>Endereço de entrega</h3>
           <p>Informe o CEP para preencher o endereço. Revise os dados antes de continuar.</p>
           <form class="checkout-form" id="checkout-address-form">
-            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="postal-code" required placeholder="00000-000" aria-describedby="checkout-cep-status" aria-controls="checkout-address-details"></label>
+            <label>CEP<input id="checkout-cep" inputmode="numeric" maxlength="9" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" required placeholder="00000-000" aria-describedby="checkout-cep-status" aria-controls="checkout-address-details"></label>
             <p class="checkout-cep-status" id="checkout-cep-status" hidden role="status" aria-live="polite" aria-atomic="true" aria-busy="false"></p>
             <span class="sr-only" id="checkout-cep-announcement" role="status" aria-live="polite" aria-atomic="true"></span>
             <div class="checkout-address-details" id="checkout-address-details" hidden>
@@ -1566,7 +1569,10 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <p class="checkout-pane-kicker">Revisão final</p>
+          <div class="checkout-final-step-heading">
+            <p class="checkout-pane-kicker">Revisão final</p>
+            <button class="checkout-back" type="button" data-checkout-back="2"><span aria-hidden="true">← </span>Voltar para entrega</button>
+          </div>
           <h3>Revise seus dados</h3>
           <p>Confira seus dados e o valor do frete antes de gerar o Pix.</p>
           <div class="checkout-final-layout">
@@ -2128,7 +2134,8 @@
       }
       checkoutDraftFieldIds.forEach((id) => { const input = $(id); if (input && typeof draft.fields[id] === 'string') input.value = draft.fields[id].slice(0, 300); });
       const savedStep = [1, 2, 3].includes(Number(draft.step)) ? Number(draft.step) : 1;
-      checkoutDraftReturnStep = savedStep > 1 ? savedStep : null;
+      // Ao retomar, reveja sempre frete/endereço; um rascunho da etapa 3 retorna à 2.
+      checkoutDraftReturnStep = savedStep > 1 ? Math.min(savedStep, 2) : null;
       checkoutState.step = checkoutDraftReturnStep ? 1 : savedStep;
       checkoutState.shipping = Number.isFinite(Number(draft.shipping)) && Number(draft.shipping) > 0 ? Number(draft.shipping) : 39;
       checkoutState.donor = {
@@ -2281,8 +2288,8 @@
       const status = $('checkout-cep-status'); const details = $('checkout-address-details');
       $('checkout-cep-announcement').textContent = '';
       if (raw.length < 8) { ++cepRequestId; status.hidden = true; status.className = 'checkout-cep-status'; status.setAttribute('aria-busy', 'false'); details.hidden = true; $('checkout-address-submit').disabled = true; return; }
-      // Ao completar o CEP, fecha o teclado virtual sem abrir o próximo campo automaticamente.
-      cepInput.blur();
+      // Aguarda o teclado concluir a edição e só fecha se o CEP ainda estiver focado.
+      window.setTimeout(() => { if (document.activeElement === cepInput) cepInput.blur(); }, 80);
       const requestId = ++cepRequestId;
       const minimumLoadingDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 700 : 3200; // Dois percursos de 1,5 s, mais margem de renderização.
       const loadingStartedAt = Date.now();
