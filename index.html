@@ -1062,9 +1062,11 @@
     /* Acabamento final da etapa de confirmação: clareza, ritmo visual e ação principal. */
     .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border-radius: 999px; background: #e8f2ea; color: #2d6540; font-size: 9px; letter-spacing: .1em; }
     .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker::before { content: '✓'; font-size: 10px; letter-spacing: 0; }
-    .checkout-final-step-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-    .checkout-final-step-heading .checkout-pane-kicker { margin: 0; }
-    .checkout-final-step-heading .checkout-back { display: inline-flex; width: auto; flex: 0 0 auto; align-items: center; justify-content: center; min-height: 38px; padding: 0 12px; border-color: #d9e2db; border-radius: 9px; background: #fff; color: #385343; font-size: 11px; white-space: nowrap; }
+    .checkout-final-back-footer { display: flex; justify-content: flex-start; margin: 16px 0 0; padding: 0 4px 4px; }
+    .checkout-final-back-footer[hidden] { display: none !important; }
+    .checkout-final-back-link { display: inline-flex; align-items: center; gap: 7px; padding: 5px 0; border: 0; background: transparent; color: #59685e; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .checkout-final-back-link:hover { color: var(--brand-dark); text-decoration: underline; text-underline-offset: 3px; }
+    .checkout-final-back-link:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; border-radius: 3px; }
     .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 8px; color: #18271d; font-size: 29px; }
     .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) { max-width: 52ch; color: #59675d; }
     .checkout-pane[data-checkout-pane="3"] .checkout-review-card { overflow: hidden; border-color: #b7ccbc; background: #fff; }
@@ -1540,7 +1542,6 @@
           <div class="checkout-product-price">Grátis<small>camiseta · R$ 0,00</small></div>
         </article>
         <ul class="sr-only" id="cart-items" aria-live="polite"></ul>
-        <p class="checkout-draft-note">Nome, e-mail e endereço ficam salvos neste navegador para você retomar o checkout. CPF e dados de pagamento não ficam no rascunho.</p>
         <section class="checkout-pane active" data-checkout-pane="1">
           <p class="checkout-pane-kicker">Identificação</p><h3>Dados do cliente</h3>
           <p>Preencha seus dados para identificar o pedido e receber as atualizações.</p>
@@ -1569,10 +1570,7 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          <div class="checkout-final-step-heading">
-            <p class="checkout-pane-kicker">Revisão final</p>
-            <button class="checkout-back" type="button" data-checkout-back="2"><span aria-hidden="true">← </span>Voltar para entrega</button>
-          </div>
+          <p class="checkout-pane-kicker">Revisão final</p>
           <h3>Revise seus dados</h3>
           <p>Confira seus dados e o valor do frete antes de gerar o Pix.</p>
           <div class="checkout-final-layout">
@@ -1602,6 +1600,9 @@
             </div>
           </div>
         </section>
+        <div class="checkout-final-back-footer" id="checkout-final-back-footer" hidden>
+          <button class="checkout-final-back-link" type="button" data-checkout-back="2"><span aria-hidden="true">←</span><span>Voltar para entrega</span></button>
+        </div>
       </div>
     </div>
     <div class="checkout-transition-loader" id="checkout-step-loader" hidden role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
@@ -2164,6 +2165,8 @@
     function setCheckoutStep(step) {
       checkoutState.step = step;
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
+      const finalBackFooter = $('checkout-final-back-footer');
+      if (finalBackFooter) finalBackFooter.hidden = step !== 3;
       document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
       syncCheckoutSummary();
       persistCheckoutDraft();
