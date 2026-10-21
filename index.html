@@ -3276,11 +3276,13 @@
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment {
         padding: 17px;
-        border: 1px solid #d8e4d9;
-        border-left: 3px solid #3d7650;
+        border: 1px solid #e0e7e0;
         border-radius: 14px;
-        background: #f5f8f5;
-        box-shadow: none;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(28, 45, 33, .03);
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label::before {
+        display: none;
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label {
         margin-bottom: 14px;
@@ -3294,8 +3296,9 @@
         box-shadow: none;
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-heading-row {
-        margin-bottom: 15px;
-        padding-bottom: 12px;
+        margin-bottom: 14px;
+        padding-bottom: 0;
+        border-bottom: 0;
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box > strong {
         font-size: 17px;
@@ -3312,7 +3315,10 @@
         gap: 7px;
         margin: 16px 0 14px;
         padding: 14px 15px;
+        border: 1px solid #e0e9e1;
         border-radius: 11px;
+        background: #f2f6f2;
+        box-shadow: none;
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-amount span {
         font-size: 10px;
@@ -3330,8 +3336,9 @@
         font-size: 14px;
       }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-trust {
-        margin-top: 13px;
-        padding-top: 12px;
+        margin-top: 12px;
+        padding-top: 0;
+        border-top: 0;
         font-size: 11px;
       }
     }
@@ -3674,10 +3681,10 @@
               <div class="pix-box">
                 <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Aprovação imediata</span></div>
                 <strong>Pague somente o frete</strong>
-                <p>A camiseta custa R$ 0,00. O valor abaixo corresponde apenas à entrega.</p>
+                <p>Camiseta: R$ 0,00. Frete cobrado à parte.</p>
                 <div class="checkout-payment-amount"><span>Frete para pagar agora</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
-                <button class="cta" id="checkout-pix-button" type="button" style="min-height:52px;margin-top:13px;">Gerar Pix para o frete <span class="cta-arrow">→</span></button>
-                <p class="checkout-payment-trust">Confira o valor e o beneficiário no app do seu banco antes de confirmar o Pix.</p>
+                <button class="cta" id="checkout-pix-button" type="button">Gerar Pix para o frete <span class="cta-arrow">→</span></button>
+                <p class="checkout-payment-trust">Antes de pagar, confira o valor e o beneficiário no app do seu banco.</p>
                 <div class="pix-result" id="checkout-pix-result"><img id="checkout-pix-qr" alt="QR Code PIX"><div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código PIX copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div><div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade deste QR Code</span><strong id="checkout-pix-countdown">15:00</strong></div></div>
               </div>
               <p class="checkout-alert" id="checkout-alert" role="alert"></p>
