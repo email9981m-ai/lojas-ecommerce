@@ -3398,6 +3398,25 @@
     .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { box-shadow: 0 5px 12px rgba(36,83,61,.15); }
     .checkout-pane[data-checkout-pane="3"] #checkout-pix-button:focus-visible { outline: 3px solid #9cbca5; outline-offset: 3px; }
     .checkout-pane[data-checkout-pane="3"] .checkout-edit-address { min-height: 32px; }
+
+    /* Leitura rápida: endereço completo, prazo e finalidade do Pix em blocos distintos. */
+    .checkout-pane[data-checkout-pane="3"] h3 { max-width: 32ch; margin-bottom: 15px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 15px 16px; background: #f8faf8; border-color: #dfe7e0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title { margin-bottom: 7px; color: #3c6148; font-size: 10px; letter-spacing: .06em; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-address { font-size: 14px; line-height: 1.4; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-location { margin-top: 3px; color: #667168; font-size: 11px; line-height: 1.45; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 2px 8px; margin-top: 11px; padding-top: 10px; color: #68736a; font-size: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { color: #293b2e; font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline small { grid-column: 2; color: #68736a; font-size: 10px; line-height: 1.4; }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-note { color: #365f43; font-weight: 750; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pix-explanation { margin-top: 2px; color: #4f5e53; font-size: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin-top: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { font-size: 11px; line-height: 1.5; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 13px 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { font-size: 11px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { font-size: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -3714,22 +3733,23 @@
         </section>
         <section class="checkout-pane" data-checkout-pane="3" aria-labelledby="checkout-final-title">
           <p class="checkout-pane-kicker">Etapa 3 de 3</p>
-          <h3 id="checkout-final-title">Confirme a entrega e pague o frete</h3>
+          <h3 id="checkout-final-title">Confira a entrega e pague somente o frete</h3>
           <div class="checkout-final-layout">
             <section class="checkout-final-review" aria-label="Endereço e prazo de entrega">
               <p class="checkout-delivery-title">Endereço de entrega</p>
               <strong class="checkout-delivery-address" id="checkout-review-address">A preencher</strong>
-              <small class="checkout-delivery-location" id="checkout-review-cep">CEP não informado</small>
-              <div class="checkout-delivery-deadline"><span>Prazo estimado</span><strong>Até 3 dias úteis após o pagamento do frete</strong></div>
+              <small class="checkout-delivery-location" id="checkout-review-cep">Complemento e bairro</small>
+              <small class="checkout-delivery-location checkout-delivery-city" id="checkout-review-city">Cidade/UF · CEP</small>
+              <div class="checkout-delivery-deadline"><span>Prazo estimado</span><strong>Até 3 dias úteis</strong><small>Contado após a confirmação do pagamento do frete</small></div>
               <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2">Editar endereço</button>
             </section>
             <div class="checkout-final-payment">
               <div class="pix-box">
                 <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Pagamento do frete</span></div>
-                <p class="checkout-pix-explanation">A camiseta custa R$ 0,00. Este Pix é somente do frete.</p>
-                <div class="checkout-payment-amount"><span>Frete a pagar agora</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <p class="checkout-pix-explanation">A camiseta é grátis. Este Pix cobre somente o frete.</p>
+                <div class="checkout-payment-amount"><span>Frete a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
                 <button class="cta" id="checkout-pix-button" type="button"><span id="checkout-pix-button-label">Gerar Pix do frete</span><span class="cta-arrow" aria-hidden="true">→</span></button>
-                <p class="checkout-payment-trust">Confira o valor e o recebedor no app do banco antes de confirmar.</p>
+                <p class="checkout-payment-trust">Gerar o código não faz a cobrança. No app do banco, confira o valor e o recebedor e confirme o pagamento.</p>
                 <div class="pix-result" id="checkout-pix-result" aria-live="polite">
                   <img id="checkout-pix-qr" alt="QR Code Pix para pagamento do frete">
                   <p class="pix-result-hint">Escaneie o QR ou copie o código Pix no app do seu banco.</p>
@@ -4363,8 +4383,10 @@
       const emailEl = $('checkout-review-email'); if (emailEl) emailEl.textContent = checkoutState.donor.email || 'E-mail não informado';
       const addressEl = $('checkout-review-address');
       if (addressEl) addressEl.textContent = checkoutState.donor.street ? [checkoutState.donor.street, checkoutState.donor.number].filter(Boolean).join(', ') : 'Endereço não informado';
-      const cepEl = $('checkout-review-cep');
-      if (cepEl) cepEl.textContent = [checkoutState.donor.complement ? `Compl. ${checkoutState.donor.complement}` : '', checkoutState.donor.neighborhood, [checkoutState.donor.city, checkoutState.donor.state].filter(Boolean).join('/'), checkoutState.donor.cep ? `CEP ${checkoutState.donor.cep}` : ''].filter(Boolean).join(' · ') || 'Confira o endereço';
+      const complementEl = $('checkout-review-cep');
+      if (complementEl) { const details = [checkoutState.donor.complement ? `Compl. ${checkoutState.donor.complement}` : '', checkoutState.donor.neighborhood].filter(Boolean); complementEl.textContent = details.join(' · '); complementEl.hidden = details.length === 0; }
+      const cityEl = $('checkout-review-city');
+      if (cityEl) cityEl.textContent = [[checkoutState.donor.city, checkoutState.donor.state].filter(Boolean).join('/'), checkoutState.donor.cep ? `CEP ${checkoutState.donor.cep}` : ''].filter(Boolean).join(' · ') || 'Cidade e CEP não informados';
     }
     function showCheckoutAlert(message) { const el = $('checkout-alert'); if (el) { el.textContent = message; el.classList.add('show'); } }
     function setCheckoutStatusAnnouncement(message) {
