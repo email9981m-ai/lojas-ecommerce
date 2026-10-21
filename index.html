@@ -3263,6 +3263,83 @@
       .checkout-pane[data-checkout-pane="3"] *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     }
 
+  
+    /* Mobile: painel de pagamento em uma única superfície, com total e ação bem destacados. */
+    @media (max-width: 520px) {
+      /* Usa a largura útil do celular; evita card de pagamento dentro de card externo. */
+      .checkout-pane[data-checkout-pane="3"] {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment {
+        padding: 17px;
+        border: 1px solid #d8e4d9;
+        border-left: 3px solid #3d7650;
+        border-radius: 14px;
+        background: #f5f8f5;
+        box-shadow: none;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-heading-row {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box > strong {
+        font-size: 17px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box > p {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-amount {
+        display: grid;
+        justify-content: start;
+        align-items: start;
+        gap: 7px;
+        margin: 16px 0 14px;
+        padding: 14px 15px;
+        border-radius: 11px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-amount span {
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: .035em;
+        text-transform: uppercase;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-amount strong {
+        font-size: 30px;
+        line-height: 1.05;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button {
+        min-height: 58px !important;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-trust {
+        margin-top: 13px;
+        padding-top: 12px;
+        font-size: 11px;
+      }
+    }
+    @media (max-width: 360px) {
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-payment-amount strong {
+        font-size: 28px;
+      }
+    }
   </style>
 </head>
 <body>
