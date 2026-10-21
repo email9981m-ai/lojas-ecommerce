@@ -3417,6 +3417,63 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { font-size: 11px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { font-size: 10px; }
     }
+
+    /* Hierarquia final e leitura rápida da entrega e do Pix. */
+    .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 16px; font-size: clamp(24px, 3vw, 29px); line-height: 1.16; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { gap: 12px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 16px; border-radius: 13px; box-shadow: 0 2px 8px rgba(28,45,33,.035); }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title { margin-bottom: 7px; font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-address { font-size: 14px; font-weight: 750; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-location { font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline { grid-template-columns: 1fr; gap: 2px; margin-top: 12px; padding: 10px 11px; border: 0; border-radius: 9px; background: #f0f5f0; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline span { color: #5d6b60; font-size: 10px; font-weight: 650; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { color: #2e5639; font-size: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline small { grid-column: auto; color: #5e6b61; font-size: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 19px; border-radius: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-heading-row { gap: 10px; margin-bottom: 11px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-note { color: #2c5438; font-size: 14px; font-weight: 750; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pix-explanation { color: #4d5e51; font-size: 12px; line-height: 1.5; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin: 13px 0; padding: 14px 15px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount span { font-size: 12px; font-weight: 700; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: clamp(26px, 4vw, 30px); }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 56px !important; font-size: 15px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin-top: 10px; color: #5e6b61; font-size: 11px; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 14px; font-size: 24px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 16px; }
+    }
+
+    /* Acabamento responsivo: a informação de segurança antecede a ação de pagamento. */
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { gap: 10px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin: 10px 0 11px; }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { margin-top: 0 !important; }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] { padding-top: 14px; }
+      .checkout-pane[data-checkout-pane="3"] h3 { margin-bottom: 11px; font-size: 23px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { gap: 8px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review { padding: 11px 12px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title { margin-bottom: 5px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-address { font-size: 13px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-location { margin-top: 2px; font-size: 10px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline { margin-top: 8px; padding: 7px 9px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-edit-address { margin-top: 2px; min-height: 28px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin: 10px 0 8px; padding: 11px 12px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 27px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin: 8px 0 9px; font-size: 10px; }
+      .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 51px !important; }
+    }
+
+    /* Prazo compacto, alinhado ao fim do resumo do endereço. */
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-top: 10px; padding: 10px 0 0; border: 0; border-top: 1px solid #e4e9e4;
+      border-radius: 0; background: transparent; color: #5d6b60; font-size: 12px; line-height: 1.4;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline span { color: #5d6b60; font-size: 12px; font-weight: 600; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong { color: #2e5639; font-size: 13px; font-weight: 750; white-space: nowrap; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline small { display: none; }
   </style>
 </head>
 <body>
@@ -3740,16 +3797,15 @@
               <strong class="checkout-delivery-address" id="checkout-review-address">A preencher</strong>
               <small class="checkout-delivery-location" id="checkout-review-cep">Complemento e bairro</small>
               <small class="checkout-delivery-location checkout-delivery-city" id="checkout-review-city">Cidade/UF · CEP</small>
-              <div class="checkout-delivery-deadline"><span>Prazo estimado</span><strong>Até 3 dias úteis</strong><small>Contado após a confirmação do pagamento do frete</small></div>
-              <button class="checkout-final-back-link checkout-edit-address" type="button" data-checkout-back="2">Editar endereço</button>
+              <div class="checkout-delivery-deadline" aria-label="Prazo estimado: 3 dias úteis após o pagamento do frete" title="Contado após o pagamento do frete"><span>Prazo estimado</span><strong>3 dias úteis</strong></div>
             </section>
             <div class="checkout-final-payment">
               <div class="pix-box">
-                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><span class="pix-method-note">Pagamento do frete</span></div>
-                <p class="checkout-pix-explanation">A camiseta é grátis. Este Pix cobre somente o frete.</p>
+                <div class="pix-heading-row"><span class="pix-method-badge">PIX</span><strong class="pix-method-note">Pagamento do frete</strong></div>
+                <p class="checkout-pix-explanation">A camiseta custa R$ 0,00; o Pix é somente do frete.</p>
                 <div class="checkout-payment-amount"><span>Frete a pagar</span><strong id="checkout-pix-amount">R$ 39,00</strong></div>
+                <p class="checkout-payment-trust">Gerar o código não cobra. Confira o valor e o recebedor e confirme no app do banco.</p>
                 <button class="cta" id="checkout-pix-button" type="button"><span id="checkout-pix-button-label">Gerar Pix do frete</span><span class="cta-arrow" aria-hidden="true">→</span></button>
-                <p class="checkout-payment-trust">Gerar o código não faz a cobrança. No app do banco, confira o valor e o recebedor e confirme o pagamento.</p>
                 <div class="pix-result" id="checkout-pix-result" aria-live="polite">
                   <img id="checkout-pix-qr" alt="QR Code Pix para pagamento do frete">
                   <p class="pix-result-hint">Escaneie o QR ou copie o código Pix no app do seu banco.</p>
