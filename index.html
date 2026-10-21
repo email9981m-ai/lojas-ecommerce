@@ -2934,6 +2934,335 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 25px; }
     }
 
+  
+    /* Refinamento coeso e responsivo da etapa final do checkout. */
+    .checkout-pane[data-checkout-pane="3"] {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: clamp(20px, 3vw, 32px);
+      border: 1px solid #e3e8e2;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(28, 45, 33, .07);
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 10px;
+      padding: 6px 10px;
+      border: 1px solid #dce9de;
+      border-radius: 999px;
+      background: #f4f8f4;
+      color: #356346;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .045em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .checkout-pane[data-checkout-pane="3"] h3 {
+      max-width: 34ch;
+      margin: 0 0 8px;
+      color: #202923;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: clamp(23px, 3vw, 29px);
+      font-weight: 750;
+      line-height: 1.2;
+      letter-spacing: -.045em;
+    }
+    .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) {
+      max-width: 60ch;
+      margin: 0 0 22px;
+      color: #606a62;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+      align-items: start;
+      gap: 16px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment {
+      min-width: 0;
+      padding: 19px;
+      border: 1px solid #e3e8e2;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(28, 45, 33, .035);
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment {
+      border-color: #d6e3d8;
+      background: #f8faf8;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-section-label,
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 14px;
+      padding: 0 0 12px;
+      border: 0;
+      border-bottom: 1px solid #e8ece7;
+      color: #29382d;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.35;
+      letter-spacing: -.01em;
+      text-transform: none;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: none;
+      border-radius: 50%;
+      background: #3d7650;
+      box-shadow: 0 0 0 4px #eaf2eb;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .checkout-section-label::before {
+      background: #2f6b4f;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-grid {
+      display: block;
+      margin: 0;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section,
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section + .checkout-review-section {
+      min-width: 0;
+      margin: 0;
+      padding: 12px 0;
+      border: 0;
+      border-bottom: 1px solid #edf0ec;
+      border-radius: 0;
+      background: transparent;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section:first-child { padding-top: 2px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section-heading { margin: 0 0 5px; }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-section-heading > span {
+      color: #69766c;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card strong {
+      display: block;
+      overflow-wrap: anywhere;
+      color: #263129;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      text-overflow: clip;
+      white-space: normal;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card small {
+      display: block;
+      overflow-wrap: anywhere;
+      margin-top: 3px;
+      color: #6b746d;
+      font-size: 11px;
+      line-height: 1.5;
+      text-overflow: clip;
+      white-space: normal;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-review-card > .checkout-delivery-meta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 9px;
+      margin: 13px 0 0;
+      padding: 12px;
+      border: 1px solid #e0e9e1;
+      border-radius: 10px;
+      background: #f5f8f5;
+      box-shadow: none;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta span,
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta span:last-child {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #68746b;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta span + span {
+      padding-left: 10px;
+      border-left: 1px solid #dce6dd;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-meta strong {
+      color: #2f5438;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.35;
+      letter-spacing: -.01em;
+      text-transform: none;
+      overflow-wrap: anywhere;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-box {
+      padding: 16px;
+      border: 1px solid #e0e8e0;
+      border-radius: 11px;
+      background: #fff;
+      box-shadow: none;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-heading-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 0 13px;
+      padding: 0 0 11px;
+      border-bottom: 1px solid #edf0ec;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-badge {
+      display: inline-flex;
+      min-width: 44px;
+      min-height: 26px;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 9px;
+      border: 1px solid #d7e7d9;
+      border-radius: 7px;
+      background: #eef6ef;
+      color: #2e6945;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .06em;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-note {
+      color: #5e7062;
+      font-size: 10px;
+      font-weight: 650;
+      text-align: right;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-box > strong {
+      margin: 0;
+      color: #26342a;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: 16px;
+      font-weight: 750;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-box > p {
+      margin: 5px 0 0;
+      color: #606c63;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 15px 0 12px;
+      padding: 13px 14px;
+      border: 1px solid #dce8dd;
+      border-radius: 10px;
+      background: #f2f7f2;
+      box-shadow: inset 3px 0 0 #3d7650;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount span {
+      color: #47584b;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong {
+      flex: none;
+      color: #285b3a;
+      font-family: Manrope, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-size: clamp(22px, 2.8vw, 27px);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button {
+      min-height: 56px !important;
+      margin: 0 !important;
+      border-radius: 11px;
+      box-shadow: 0 5px 12px rgba(36, 83, 61, .16);
+      font-size: 14px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust {
+      align-items: flex-start;
+      gap: 8px;
+      margin: 12px 0 0;
+      padding: 11px 0 0;
+      border-top: 1px solid #edf0ec;
+      color: #647067;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust::before {
+      width: 18px;
+      height: 18px;
+      background: #eaf2eb;
+      color: #356346;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-alert { margin-top: 12px; }
+    @media (max-width: 700px) {
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+      }
+    }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] {
+        padding: 19px 16px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(28, 45, 33, .055);
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { margin-bottom: 9px; }
+      .checkout-pane[data-checkout-pane="3"] h3 { font-size: 23px; }
+      .checkout-pane[data-checkout-pane="3"] > p:not(.checkout-pane-kicker) {
+        margin-bottom: 17px;
+        font-size: 12px;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { padding: 15px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-section-label { margin-bottom: 12px; }
+      .checkout-pane[data-checkout-pane="3"] .pix-box { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { padding: 12px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment #checkout-pix-button { min-height: 54px !important; }
+    }
+    @media (max-width: 360px) {
+      .checkout-pane[data-checkout-pane="3"] { padding: 16px 13px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { padding: 13px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { gap: 8px; padding: 11px 10px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount span { font-size: 10px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .checkout-pane[data-checkout-pane="3"] *,
+      .checkout-pane[data-checkout-pane="3"] *::before,
+      .checkout-pane[data-checkout-pane="3"] *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -3249,7 +3578,7 @@
           </form>
         </section>
         <section class="checkout-pane" data-checkout-pane="3">
-          
+          <p class="checkout-pane-kicker">Etapa final · 3 de 3</p>
           <h3>Confirme seus dados e o frete</h3>
           <p>Confira o endereço, o prazo e o valor. Você paga somente o frete; a camiseta custa R$ 0,00.</p>
           <div class="checkout-final-layout">
