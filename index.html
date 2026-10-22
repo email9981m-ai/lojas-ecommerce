@@ -3773,6 +3773,162 @@
       .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 26px; }
       .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 52px !important; }
     }
+
+
+    /* Polimento visual final — hierarquia, respiro e foco na decisão. */
+    .checkout-pane[data-checkout-pane="3"] {
+      max-width: 780px;
+      padding: clamp(28px, 4.5vw, 42px);
+      border-color: #dfe8e1;
+      border-radius: 22px;
+      box-shadow: 0 20px 52px rgba(28,45,33,.09);
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker {
+      min-height: 28px;
+      margin-bottom: 15px;
+      padding-inline: 11px;
+      background: #f4f8f4;
+      color: #456a50;
+      letter-spacing: .08em;
+    }
+    .checkout-pane[data-checkout-pane="3"] h3 {
+      max-width: 24ch;
+      font-size: clamp(26px, 3.3vw, 34px);
+      line-height: 1.1;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-subtitle {
+      max-width: 52ch;
+      margin: 12px 0 30px;
+      color: #68756c;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-layout {
+      grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+      gap: 20px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment {
+      border-radius: 16px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-review {
+      padding: 22px;
+      border-color: #e2e9e3;
+      background: #fcfdfc;
+      box-shadow: 0 2px 9px rgba(28,45,33,.025);
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title {
+      margin-bottom: 20px;
+      padding-bottom: 13px;
+      color: #355742;
+      font-size: 13px;
+      letter-spacing: -.01em;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-section-icon {
+      width: 21px;
+      height: 21px;
+      background: #e5f2e7;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-address {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-location {
+      margin-top: 6px;
+      color: #748078;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline {
+      margin-top: 22px;
+      padding-top: 14px;
+      color: #69776e;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline strong {
+      color: #2c6840;
+      font-size: 13px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box {
+      padding: 22px;
+      border-color: #cfe1d3;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfefb 100%);
+      box-shadow: 0 7px 20px rgba(28,65,39,.075);
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-heading-row {
+      margin-bottom: 15px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #e6eee7;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-method-note {
+      font-size: 15px;
+      letter-spacing: -.015em;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-pix-explanation {
+      max-width: 34ch;
+      color: #607066;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount {
+      margin: 20px 0 14px;
+      padding: 16px 17px;
+      border-radius: 12px;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount span {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong {
+      font-size: clamp(28px, 4.2vw, 34px);
+    }
+    .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust {
+      margin: 0 0 32px;
+      color: #68766d;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+    .checkout-pane[data-checkout-pane="3"] #checkout-pix-button {
+      min-height: 58px !important;
+      border-radius: 12px;
+      font-size: 15px;
+      letter-spacing: .005em;
+    }
+    .checkout-pane[data-checkout-pane="3"] .pix-result {
+      margin-top: 18px;
+      padding-top: 18px;
+    }
+    @media (max-width: 760px) {
+      .checkout-pane[data-checkout-pane="3"] { max-width: 640px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { grid-template-columns: 1fr; gap: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { order: 0; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review { order: 1; }
+    }
+    @media (max-width: 520px) {
+      .checkout-pane[data-checkout-pane="3"] {
+        padding: 21px 16px;
+        border-radius: 17px;
+        box-shadow: none;
+      }
+      .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { margin-bottom: 12px; }
+      .checkout-pane[data-checkout-pane="3"] h3 { font-size: 25px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-subtitle { margin: 9px 0 22px; font-size: 12px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 17px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-title { margin-bottom: 17px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-delivery-deadline { margin-top: 18px; padding-top: 12px; }
+      .checkout-pane[data-checkout-pane="3"] .pix-heading-row { margin-bottom: 13px; padding-bottom: 12px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount { margin: 16px 0 12px; padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 28px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-trust { margin-bottom: 26px; }
+      .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 54px !important; }
+    }
+    @media (max-width: 360px) {
+      .checkout-pane[data-checkout-pane="3"] { padding-inline: 13px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
+      .checkout-pane[data-checkout-pane="3"] .checkout-final-payment .pix-box { padding: 14px; }
+      .checkout-pane[data-checkout-pane="3"] .checkout-payment-amount strong { font-size: 26px; }
+    }
   </style>
 </head>
 <body>
