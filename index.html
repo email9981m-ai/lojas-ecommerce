@@ -4302,6 +4302,24 @@
       .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-copy-row button { width: 100%; }
     }
 
+
+    /* Acabamento de credibilidade para a tela dedicada de pagamento. */
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen { background: linear-gradient(180deg, #f3f8f4 0%, #f8faf8 45%, #f1f6f2 100%); }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-topbar { width: min(100%, 560px); margin-bottom: 24px; padding-bottom: 15px; border-bottom: 1px solid #dde8df; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-main { width: min(100%, 520px); padding: 24px 24px 22px; border: 1px solid #dce8de; border-radius: 22px; background: rgba(255,255,255,.96); box-shadow: 0 14px 36px rgba(38, 76, 51, .09); }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-heading { margin-bottom: 16px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-total { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 18px; padding: 12px 14px; border: 1px solid #d9e9dc; border-radius: 11px; background: #f1f8f2; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-total span { color: #587062; font-size: 10px; font-weight: 750; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-total strong { color: #24533d; font-family: Manrope, sans-serif; font-size: 20px; font-weight: 850; letter-spacing: -.045em; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-hint { margin-bottom: 13px; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-instructions { border-color: #e1ebe3; background: #f8fbf8; }
+    .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-demo-note { padding: 9px 10px; border: 1px solid #eadfc8; border-radius: 8px; background: #fffaf0; }
+    @media (max-width: 420px) {
+      .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-topbar { margin-bottom: 17px; }
+      .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-main { padding: 18px 15px 17px; border-radius: 18px; }
+      .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-total { margin-bottom: 15px; }
+    }
+
   </style>
 </head>
 <body>
@@ -4647,17 +4665,20 @@
                 <p class="checkout-payment-trust"><span class="trust-check" aria-hidden="true">✓</span><span>Confira o valor e o recebedor no app do banco antes de confirmar.</span></p>
                 <div class="pix-result" id="checkout-pix-result" aria-live="polite">
                   <div class="pix-result-topbar"><button class="pix-result-back" id="checkout-pix-back" type="button">← Voltar ao resumo</button><span class="pix-result-brand">kokeshi<span>.</span></span></div>
-                  <div class="pix-result-heading"><span class="pix-result-check" aria-hidden="true">✓</span><div><strong>Pix gerado</strong><small>Escaneie ou copie o código para pagar o frete.</small></div></div>
-                  <img id="checkout-pix-qr" alt="QR Code Pix para pagamento do frete">
-                  <p class="pix-result-hint">Abra o app do seu banco, escolha <strong>Pix Copia e Cola</strong> e use o código abaixo.</p>
-                  <div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código Pix copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div>
-                  <div class="pix-instructions" aria-label="Como pagar com Pix">
-                    <p><b>1</b><span>Toque em <strong>Copiar código</strong>.</span></p>
-                    <p><b>2</b><span>Abra o aplicativo do seu banco e selecione <strong>Pix Copia e Cola</strong>.</span></p>
-                    <p><b>3</b><span>Cole o código, confira o valor e confirme o pagamento.</span></p>
+                  <div class="pix-result-main">
+                    <div class="pix-result-heading"><span class="pix-result-check" aria-hidden="true">✓</span><div><strong>Pix gerado</strong><small>Escaneie ou copie o código para pagar o frete.</small></div></div>
+                    <div class="pix-result-total"><span>Frete de entrega</span><strong id="checkout-pix-fullscreen-amount">R$ 39,00</strong></div>
+                    <img id="checkout-pix-qr" alt="QR Code Pix para pagamento do frete">
+                    <p class="pix-result-hint">Abra o app do seu banco, escolha <strong>Pix Copia e Cola</strong> e use o código abaixo.</p>
+                    <div class="pix-copy-row"><input id="checkout-pix-code" readonly aria-label="Código Pix copia e cola"><button id="checkout-pix-copy" type="button">Copiar código</button></div>
+                    <div class="pix-instructions" aria-label="Como pagar com Pix">
+                      <p><b>1</b><span>Toque em <strong>Copiar código</strong>.</span></p>
+                      <p><b>2</b><span>Abra o aplicativo do seu banco e selecione <strong>Pix Copia e Cola</strong>.</span></p>
+                      <p><b>3</b><span>Cole o código, confira o valor e confirme o pagamento.</span></p>
+                    </div>
+                    <p class="pix-demo-note" id="checkout-pix-demo-note" hidden>Modo demonstração: este código é apenas visual e não gera uma cobrança real.</p>
+                    <div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade do código</span><strong id="checkout-pix-countdown">15:00</strong></div>
                   </div>
-                  <p class="pix-demo-note" id="checkout-pix-demo-note" hidden>Modo demonstração: este código é apenas visual e não gera uma cobrança real.</p>
-                  <div class="pix-expiry" id="checkout-pix-expiry" hidden aria-live="polite"><span>Validade do código</span><strong id="checkout-pix-countdown">15:00</strong></div>
                 </div>
               </div>
               <p class="checkout-alert" id="checkout-alert" role="alert"></p>
@@ -5283,6 +5304,7 @@
       const breakdownProductEl = $('checkout-breakdown-product'); if (breakdownProductEl) breakdownProductEl.textContent = moneyBRL(checkoutState.contribution);
       const breakdownShippingEl = $('checkout-breakdown-shipping'); if (breakdownShippingEl) breakdownShippingEl.textContent = shippingAmount;
       const pixAmountEl = $('checkout-pix-amount'); if (pixAmountEl) pixAmountEl.textContent = totalAmount;
+      const fullscreenPixAmountEl = $('checkout-pix-fullscreen-amount'); if (fullscreenPixAmountEl) fullscreenPixAmountEl.textContent = shippingAmount;
       const pixButtonLabelEl = $('checkout-pix-button-label');
       const pixResultEl = $('checkout-pix-result');
       if (pixButtonLabelEl && !pixResultEl?.classList.contains('show')) pixButtonLabelEl.textContent = `Gerar Pix de ${totalAmount}`;
