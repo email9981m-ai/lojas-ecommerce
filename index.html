@@ -5289,7 +5289,7 @@
     const checkoutState = { step: 1, contribution: 0, contributionLabel: 'Não incluída', shipping: 39, donor: {} };
     const moneyBRL = (value) => Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const checkoutDraftKey = 'kokeshi.checkout.draft.v1';
-    const checkoutDraftFieldIds = ['checkout-name', 'checkout-phone', 'checkout-email', 'checkout-cep', 'checkout-street', 'checkout-number', 'checkout-complement', 'checkout-neighborhood', 'checkout-city', 'checkout-state'];
+    const checkoutDraftFieldIds = ['checkout-name', 'checkout-phone', 'checkout-email', 'checkout-cpf', 'checkout-cep', 'checkout-street', 'checkout-number', 'checkout-complement', 'checkout-neighborhood', 'checkout-city', 'checkout-state'];
     const checkoutDraftMaxAge = 30 * 24 * 60 * 60 * 1000;
     let hasSavedCheckoutDraft = false;
     let checkoutDraftReturnStep = null;
@@ -5327,14 +5327,14 @@
       }
       checkoutDraftFieldIds.forEach((id) => { const input = $(id); if (input && typeof draft.fields[id] === 'string') input.value = draft.fields[id].slice(0, 300); });
       const savedStep = [1, 2, 3].includes(Number(draft.step)) ? Number(draft.step) : 1;
-      // Ao retomar, reveja sempre frete/endereço; um rascunho da etapa 3 retorna à 2.
-      checkoutDraftReturnStep = savedStep > 1 ? Math.min(savedStep, 2) : null;
-      checkoutState.step = checkoutDraftReturnStep ? 1 : savedStep;
+      // Ao retomar, preserva a etapa exata para que uma atualização não devolva o cliente ao início.
+      checkoutDraftReturnStep = null;
+      checkoutState.step = savedStep;
       checkoutState.shipping = Number.isFinite(Number(draft.shipping)) && Number(draft.shipping) > 0 ? Number(draft.shipping) : 39;
       checkoutState.donor = {
-        name: $('checkout-name').value.trim(), phone: $('checkout-phone').value.trim(), email: $('checkout-email').value.trim(), cep: $('checkout-cep').value.trim(),
+        name: $('checkout-name').value.trim(), phone: $('checkout-phone').value.trim(), email: $('checkout-email').value.trim(), cpf: $('checkout-cpf').value.replace(/\D/g, ''), cep: $('checkout-cep').value.trim(),
         street: $('checkout-street').value.trim(), number: $('checkout-number').value.trim(), complement: $('checkout-complement').value.trim(),
-        neighborhood: $('checkout-neighborhood').value.trim(), city: $('checkout-city').value.trim(), state: $('checkout-state').value.trim().toUpperCase(), cpf: ''
+        neighborhood: $('checkout-neighborhood').value.trim(), city: $('checkout-city').value.trim(), state: $('checkout-state').value.trim().toUpperCase()
       };
       hasSavedCheckoutDraft = true;
     }
@@ -5547,6 +5547,27 @@
       }
     });
 
+    // Mantém o rascunho atualizado quando o navegador entra em segundo plano ou é fechado.
+    window.addEventListener('pagehide', () => { if ($('cart-dialog')?.open) persistCheckoutDraft(); });
+    window.addEventListener('beforeunload', (event) => {
+      if (!$('cart-dialog')?.open || checkoutState.step < 1 || $('checkout-pix-result')?.classList.contains('is-fullscreen')) return;
+      persistCheckoutDraft();
+      event.preventDefault();
+      event.returnValue = '';
+    });
+    // Se havia um checkout em andamento, reabre a janela na mesma etapa após o reload.
+    if (hasSavedCheckoutDraft && cart.length) {
+      window.setTimeout(() => {
+        openCart();
+        const notice = $('checkout-back-notice');
+        if (notice) {
+          notice.textContent = 'Seu progresso foi recuperado. Você continua de onde parou.';
+          notice.hidden = false;
+          clearTimeout(notice.hideTimer);
+          notice.hideTimer = setTimeout(() => { notice.hidden = true; }, 4600);
+        }
+      }, 80);
+    }
     renderCart();
   </script>
 </body>
