@@ -5531,21 +5531,42 @@
       }
     });
     $('checkout-pix-copy').addEventListener('click', async () => { const input = $('checkout-pix-code'); await navigator.clipboard?.writeText(input.value); $('checkout-pix-copy').textContent = 'Copiado'; setTimeout(() => $('checkout-pix-copy').textContent = 'Copiar', 1800); });
-    $('checkout-pix-back').addEventListener('click', () => { setPixLoading(false); $('checkout-pix-result').classList.remove('show', 'is-fullscreen'); $('checkout-pix-button').disabled = false; $('checkout-pix-button-label').textContent = `Gerar Pix de ${moneyBRL(checkoutState.contribution + checkoutState.shipping)}`; });
+    $('checkout-pix-back').addEventListener('click', () => { sessionStorage.removeItem('kokeshi.pix.result.v1'); setPixLoading(false); $('checkout-pix-result').classList.remove('show', 'is-fullscreen'); $('checkout-pix-button').disabled = false; $('checkout-pix-button-label').textContent = `Gerar Pix de ${moneyBRL(checkoutState.contribution + checkoutState.shipping)}`; });
     function setPixLoading(visible) {
       const loading = $('checkout-pix-loading');
       if (!loading) return;
       loading.hidden = !visible;
       loading.classList.toggle('is-visible', visible);
     }
-    function showPixResult(code, image, expiresIn = 900, demo = false) {
+    function showPixResult(code, image, expiresIn = 900, demo = false, persist = true) {
       setPixLoading(false);
+      if (persist) {
+        try {
+          sessionStorage.setItem('kokeshi.pix.result.v1', JSON.stringify({ code, image, demo, expiresAt: Date.now() + (Math.max(60, Number(expiresIn) || 900) * 1000) }));
+        } catch (error) {}
+      }
       $('checkout-pix-code').value = code;
       $('checkout-pix-qr').src = image || `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(code)}`;
       $('checkout-pix-result').classList.add('show', 'is-fullscreen');
       const demoNote = $('checkout-pix-demo-note');
       if (demoNote) demoNote.hidden = !demo;
       startPixCountdown(expiresIn);
+    }
+    function restorePixResult() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem('kokeshi.pix.result.v1') || 'null');
+        if (!saved || !saved.code || Number(saved.expiresAt) <= Date.now()) {
+          sessionStorage.removeItem('kokeshi.pix.result.v1');
+          return false;
+        }
+        const remaining = Math.max(60, Math.ceil((Number(saved.expiresAt) - Date.now()) / 1000));
+        setCheckoutStep(3);
+        showPixResult(saved.code, saved.image || '', remaining, Boolean(saved.demo), false);
+        return true;
+      } catch (error) {
+        sessionStorage.removeItem('kokeshi.pix.result.v1');
+        return false;
+      }
     }
     $('checkout-pix-button').addEventListener('click', async () => {
       clearCheckoutAlert();
@@ -5575,13 +5596,7 @@
     if (hasSavedCheckoutDraft && cart.length) {
       // Reabre na mesma etapa antes de liberar a pintura da página.
       openCart();
-      const notice = $('checkout-back-notice');
-      if (notice) {
-        notice.textContent = 'Seu progresso foi recuperado. Você continua de onde parou.';
-        notice.hidden = false;
-        clearTimeout(notice.hideTimer);
-        notice.hideTimer = setTimeout(() => { notice.hidden = true; }, 4600);
-      }
+      restorePixResult();
       requestAnimationFrame(revealPageAfterResume);
     } else {
       revealPageAfterResume();
