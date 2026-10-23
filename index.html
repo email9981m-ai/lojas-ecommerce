@@ -4320,6 +4320,57 @@
       .checkout-pane[data-checkout-pane="3"] .pix-result.is-fullscreen .pix-result-total { margin-bottom: 15px; }
     }
 
+
+    /* Barra superior: marquee editorial preto, contínuo e legível. */
+    .announcement {
+      position: relative;
+      z-index: 20;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #0f1110;
+      color: #f4f6f4;
+      border-bottom: 1px solid #252a27;
+      font-family: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 10px;
+      font-weight: 650;
+      letter-spacing: .085em;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .announcement::before,
+    .announcement::after {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      bottom: 0;
+      width: 72px;
+      pointer-events: none;
+      content: '';
+    }
+    .announcement::before { left: 0; background: linear-gradient(90deg, #0f1110 8%, rgba(15,17,16,0)); }
+    .announcement::after { right: 0; background: linear-gradient(270deg, #0f1110 8%, rgba(15,17,16,0)); }
+    .announcement-track { display: flex; width: max-content; min-height: 40px; align-items: center; animation: announcement-marquee 38s linear infinite; will-change: transform; }
+    .announcement-group { min-height: 40px; display: flex; flex: none; align-items: center; gap: 27px; padding: 0 27px; }
+    .announcement-group::before { width: 5px; height: 5px; flex: none; border-radius: 50%; background: #83ad8f; box-shadow: 0 0 0 4px rgba(131,173,143,.1); content: ''; }
+    .announcement strong { color: #bfe0c7; font-weight: 800; }
+    .announcement-sep { color: #5c7563; font-size: 12px; }
+    @keyframes announcement-marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+    .announcement:hover .announcement-track,
+    .announcement:focus-within .announcement-track { animation-play-state: paused; }
+    @media (max-width: 600px) {
+      .announcement { min-height: 36px; font-size: 9px; letter-spacing: .07em; }
+      .announcement-track, .announcement-group { min-height: 36px; }
+      .announcement-group { gap: 20px; padding-inline: 20px; }
+      .announcement::before, .announcement::after { width: 38px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .announcement-track { animation: none; transform: none; }
+      .announcement-group + .announcement-group { display: none; }
+    }
+
   </style>
 </head>
 <body>
