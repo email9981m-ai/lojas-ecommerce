@@ -4075,25 +4075,6 @@
     }
 
     /* Checkout v3 — etapa final: hierarquia clara, confiança e foco no pagamento. */
-    .checkout-progress {
-      width: min(100% - 64px, 620px);
-      margin: 0 auto;
-      padding: 16px 0 17px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid #edf0ec;
-    }
-    .checkout-progress-step { display: inline-flex; align-items: center; gap: 7px; min-width: 0; color: #9aa39c; font-size: 10px; font-weight: 700; white-space: nowrap; }
-    .checkout-progress-step b { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid #d9e0da; border-radius: 50%; background: #fff; color: #8b958e; font-size: 10px; font-weight: 800; }
-    .checkout-progress-step[aria-current="step"] { color: #24533d; }
-    .checkout-progress-step[aria-current="step"] b { border-color: #2f6b4f; background: #2f6b4f; color: #fff; box-shadow: 0 0 0 4px #eaf3ec; }
-    .checkout-progress-step.done { color: #50715a; }
-    .checkout-progress-step.done b { border-color: #a8c8af; background: #edf6ef; color: #2f6b4f; }
-    .checkout-progress-step.done b::before { content: '✓'; }
-    .checkout-progress-step.done b { font-size: 0; }
-    .checkout-progress i { height: 1px; flex: 1; min-width: 18px; background: #e0e6e1; }
-
     .checkout-pane[data-checkout-pane="3"] { max-width: 720px; margin: 0 auto; padding: 30px 34px 34px; border: 1px solid #e0e8e1; border-radius: 18px; background: #fff; box-shadow: 0 12px 34px rgba(28, 52, 35, .07); }
     .checkout-pane[data-checkout-pane="3"] .checkout-pane-kicker { margin: 0 0 8px; color: #2f6b4f; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .checkout-pane[data-checkout-pane="3"] h3 { max-width: none; margin: 0; color: #17271c; font-family: Manrope, sans-serif; font-size: clamp(25px, 3vw, 31px); font-weight: 800; letter-spacing: -.055em; line-height: 1.12; }
@@ -4128,17 +4109,11 @@
     .checkout-pane[data-checkout-pane="3"] .trust-check { flex: none; color: #2f6b4f; font-weight: 900; }
     .checkout-pane[data-checkout-pane="3"] .pix-result { margin-top: 14px; padding-top: 14px; border-top: 1px solid #dfeae1; }
     @media (max-width: 700px) {
-      .checkout-progress { width: calc(100% - 32px); gap: 7px; }
-      .checkout-progress-step { gap: 5px; font-size: 9px; }
-      .checkout-progress-step b { width: 22px; height: 22px; }
       .checkout-pane[data-checkout-pane="3"] { padding: 22px 17px 24px; border-radius: 15px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-layout { grid-template-columns: 1fr; gap: 12px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-payment { order: -1; }
     }
     @media (max-width: 420px) {
-      .checkout-progress-step span { display: none; }
-      .checkout-progress { justify-content: center; }
-      .checkout-progress i { max-width: 44px; }
       .checkout-pane[data-checkout-pane="3"] { padding-inline: 14px; }
       .checkout-pane[data-checkout-pane="3"] h3 { font-size: 24px; }
       .checkout-pane[data-checkout-pane="3"] .checkout-final-review,
@@ -4538,13 +4513,6 @@
         <div class="checkout-head-copy"><div class="checkout-logo" aria-label="Kokeshi">kokeshi<span>.</span></div><div><h2 id="checkout-title">Finalizar pedido</h2><span class="checkout-secure">● Checkout transparente</span></div></div>
         <button class="checkout-close" id="close-icon" type="button" aria-label="Fechar checkout">×</button>
       </div>
-      <nav class="checkout-progress" aria-label="Progresso do checkout">
-        <span class="checkout-progress-step" data-checkout-pill="1"><b>1</b><span>Seus dados</span></span>
-        <i aria-hidden="true"></i>
-        <span class="checkout-progress-step" data-checkout-pill="2"><b>2</b><span>Entrega</span></span>
-        <i aria-hidden="true"></i>
-        <span class="checkout-progress-step" data-checkout-pill="3"><b>3</b><span>Pagamento</span></span>
-      </nav>
       <div class="checkout-body">
         <article class="checkout-product-card" aria-label="Produto do pedido">
           <img class="checkout-product-image" id="checkout-product-image" alt="Camiseta Casual Corinthians">
@@ -5187,7 +5155,6 @@
       document.querySelectorAll('[data-checkout-pane]').forEach((pane) => pane.classList.toggle('active', Number(pane.dataset.checkoutPane) === step));
       const finalBackFooter = $('checkout-final-back-footer');
       if (finalBackFooter) finalBackFooter.hidden = step !== 3;
-      document.querySelectorAll('[data-checkout-pill]').forEach((pill) => { const n = Number(pill.dataset.checkoutPill); pill.classList.toggle('active', n === step); pill.classList.toggle('done', n < step); if (n === step) pill.setAttribute('aria-current', 'step'); else pill.removeAttribute('aria-current'); });
       syncCheckoutSummary();
       persistCheckoutDraft();
       const checkoutDialog = $('cart-dialog');
