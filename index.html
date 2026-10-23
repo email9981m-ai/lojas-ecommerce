@@ -4934,6 +4934,22 @@
       const selectedSize = document.querySelector('.sizes .size[aria-pressed="true"]') || document.querySelector('.sizes .size');
       selectedSize?.focus({ preventScroll: true });
     }
+    function clearAddressForNewPurchase() {
+      ['checkout-cep', 'checkout-street', 'checkout-number', 'checkout-complement', 'checkout-neighborhood', 'checkout-city', 'checkout-state'].forEach((id) => {
+        const input = $(id);
+        if (input) input.value = '';
+      });
+      const details = $('checkout-address-details');
+      if (details) details.hidden = true;
+      const submit = $('checkout-address-submit');
+      if (submit) submit.disabled = true;
+      const status = $('checkout-cep-status');
+      if (status) { status.hidden = true; status.className = 'checkout-cep-status'; status.textContent = ''; status.setAttribute('aria-busy', 'false'); }
+      const announcement = $('checkout-cep-announcement');
+      if (announcement) announcement.textContent = '';
+      checkoutState.donor.cep = ''; checkoutState.donor.street = ''; checkoutState.donor.number = '';
+      checkoutState.donor.complement = ''; checkoutState.donor.neighborhood = ''; checkoutState.donor.city = ''; checkoutState.donor.state = '';
+    }
     function restoreSavedAddress() {
       const donor = checkoutState.donor || {};
       const savedDraft = readCheckoutDraft();
@@ -4993,8 +5009,9 @@
         return;
       }
       cart.splice(0, cart.length, size);
-      // Nova compra começa sempre na identificação, mesmo que exista um rascunho antigo.
+      // Nova compra começa com a entrega limpa, mesmo que exista um rascunho antigo.
       try { sessionStorage.removeItem('kokeshi.pix.result.v1'); } catch (error) {}
+      clearAddressForNewPurchase();
       openCart(false);
     }
     $('add-button').addEventListener('click', buy);
