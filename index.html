@@ -14,7 +14,7 @@
       try {
         var raw = localStorage.getItem('kokeshi.checkout.draft.v1');
         var draft = raw ? JSON.parse(raw) : null;
-        var valid = draft && draft.version === 1 && draft.fields && Date.now() - Number(draft.savedAt || 0) <= 30 * 24 * 60 * 60 * 1000;
+        var valid = draft && draft.version === 1 && draft.fields && Date.now() - Number(draft.savedAt || 0) <= 30 * 24 * 60 * 60 * 1000 && sessionStorage.getItem('kokeshi.checkout.open.v1') === '1';
         if (valid) document.documentElement.classList.add('checkout-resume-pending');
       } catch (error) {}
     }());
@@ -4950,12 +4950,17 @@
       renderCart();
       if (!dialog.open && typeof dialog.showModal === 'function') dialog.showModal();
       else dialog.setAttribute('open', '');
+      try { sessionStorage.setItem('kokeshi.checkout.open.v1', '1'); } catch (error) {}
       activateCheckoutBackGuard();
       if (stepToOpen >= 2) restoreSavedAddress();
       setCheckoutStep(stepToOpen);
       syncCheckoutSummary();
     }
-    $('cart-dialog').addEventListener('close', () => { persistCheckoutDraft(); releaseCheckoutBackGuard(); });
+    $('cart-dialog').addEventListener('close', () => {
+      persistCheckoutDraft();
+      try { sessionStorage.setItem('kokeshi.checkout.open.v1', '0'); } catch (error) {}
+      releaseCheckoutBackGuard();
+    });
     $('cart-dialog').addEventListener('cancel', (event) => { if ($('cart-dialog').getAttribute('aria-busy') === 'true') event.preventDefault(); });
     function buy() {
       if (!size) {
@@ -5583,14 +5588,22 @@
     });
 
     // Mantém o rascunho atualizado quando o navegador entra em segundo plano ou é fechado.
-    window.addEventListener('pagehide', () => { if ($('cart-dialog')?.open) persistCheckoutDraft(); });
+    window.addEventListener('pagehide', () => {
+      const isCheckoutOpen = Boolean($('cart-dialog')?.open);
+      try { sessionStorage.setItem('kokeshi.checkout.open.v1', isCheckoutOpen ? '1' : '0'); } catch (error) {}
+      if (isCheckoutOpen) persistCheckoutDraft();
+    });
     window.addEventListener('beforeunload', (event) => {
-      if (!$('cart-dialog')?.open || checkoutState.step < 1) return;
+      const isCheckoutOpen = Boolean($('cart-dialog')?.open);
+      try { sessionStorage.setItem('kokeshi.checkout.open.v1', isCheckoutOpen ? '1' : '0'); } catch (error) {}
+      if (!isCheckoutOpen || checkoutState.step < 1) return;
       persistCheckoutDraft();
       event.preventDefault();
       event.returnValue = '';
     });
-    if (hasSavedCheckoutDraft && cart.length) {
+    let shouldRestoreCheckout = false;
+    try { shouldRestoreCheckout = sessionStorage.getItem('kokeshi.checkout.open.v1') === '1'; } catch (error) {}
+    if (hasSavedCheckoutDraft && cart.length && shouldRestoreCheckout) {
       openCart();
       restorePixResult();
       requestAnimationFrame(() => document.documentElement.classList.remove('checkout-resume-pending'));
