@@ -4936,10 +4936,16 @@
     }
     function restoreSavedAddress() {
       const donor = checkoutState.donor || {};
+      const savedDraft = readCheckoutDraft();
+      const savedFields = savedDraft?.fields || {};
       const fieldMap = {
-        'checkout-cep': donor.cep, 'checkout-street': donor.street, 'checkout-number': donor.number,
-        'checkout-complement': donor.complement, 'checkout-neighborhood': donor.neighborhood,
-        'checkout-city': donor.city, 'checkout-state': donor.state
+        'checkout-cep': donor.cep || savedFields['checkout-cep'],
+        'checkout-street': donor.street || savedFields['checkout-street'],
+        'checkout-number': donor.number || savedFields['checkout-number'],
+        'checkout-complement': donor.complement || savedFields['checkout-complement'],
+        'checkout-neighborhood': donor.neighborhood || savedFields['checkout-neighborhood'],
+        'checkout-city': donor.city || savedFields['checkout-city'],
+        'checkout-state': donor.state || savedFields['checkout-state']
       };
       Object.entries(fieldMap).forEach(([id, value]) => {
         const input = $(id);
