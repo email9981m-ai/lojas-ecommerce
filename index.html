@@ -5512,7 +5512,7 @@
       const returnStep = checkoutDraftReturnStep;
       checkoutDraftReturnStep = null;
       if (returnStep >= 2) { restoreSavedAddress(); setCheckoutStep(returnStep); }
-      else setCheckoutStep(2);
+      else { setCheckoutStep(2); restoreSavedAddress(); }
     });
     $('checkout-address-form').addEventListener('submit', (event) => {
       event.preventDefault();
