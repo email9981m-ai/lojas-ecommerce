@@ -4935,11 +4935,22 @@
       selectedSize?.focus({ preventScroll: true });
     }
     function restoreSavedAddress() {
+      const donor = checkoutState.donor || {};
+      const fieldMap = {
+        'checkout-cep': donor.cep, 'checkout-street': donor.street, 'checkout-number': donor.number,
+        'checkout-complement': donor.complement, 'checkout-neighborhood': donor.neighborhood,
+        'checkout-city': donor.city, 'checkout-state': donor.state
+      };
+      Object.entries(fieldMap).forEach(([id, value]) => {
+        const input = $(id);
+        if (input && typeof value === 'string' && value) input.value = value;
+      });
       if ($('checkout-cep').value.replace(/\D/g, '').length !== 8) return;
       const status = $('checkout-cep-status');
       status.hidden = true; status.className = 'checkout-cep-status'; status.setAttribute('aria-busy', 'false');
       setCheckoutStatusAnnouncement('Endereço recuperado. Confira os campos preenchidos.');
-      $('checkout-address-details').hidden = false; $('checkout-address-submit').disabled = false;
+      $('checkout-address-details').hidden = false;
+      $('checkout-address-submit').disabled = false;
     }
     function openCart(restoreExisting = false) {
       if (!cart.length) { showEmptyCartFeedback(); return; }
@@ -4954,6 +4965,8 @@
       activateCheckoutBackGuard();
       if (stepToOpen >= 2) restoreSavedAddress();
       setCheckoutStep(stepToOpen);
+      if (stepToOpen >= 2) restoreSavedAddress();
+      if (stepToOpen >= 2) requestAnimationFrame(restoreSavedAddress);
       syncCheckoutSummary();
     }
     $('cart-dialog').addEventListener('close', () => {
