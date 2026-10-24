@@ -4857,32 +4857,21 @@
     .offer-status[hidden] { display: none !important; }
     .offer-status svg { width: 14px; height: 14px; flex: none; color: #8b6a2b; }
     @media (max-width: 420px) { .offer-status { font-size: 9px; } }
-    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e6ddd5; }
-    .stock-message { min-width: 0; margin: 0; color: #553f34; font-size: 13px; font-weight: 700; line-height: 1.35; }
-    .stock-message strong { color: #91462f; font-size: 23px; font-weight: 900; letter-spacing: -.05em; vertical-align: -1px; }
-    .offer-timer-secondary { flex: none; display: flex; align-items: center; gap: 7px; }
-    .offer-timer-label { color: var(--muted); font-size: 9px; font-weight: 650; white-space: nowrap; }
-    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 4px; padding: 5px 7px; border: 1px solid #d9e4dc; border-radius: 7px; background: #eff5f0; }
-    .scarcity-digits { color: var(--brand-dark); font: 850 16px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
-    .scarcity-units { color: var(--brand); font-size: 7px; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
+    .scarcity-card { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e6ddd5; }
+    .stock-message { margin: 0; color: #553f34; font-size: 13px; font-weight: 700; line-height: 1.35; }
+    .stock-message strong { color: #91462f; font-size: 24px; font-weight: 900; letter-spacing: -.05em; vertical-align: -1px; }
+    .offer-duration-note { margin: 4px 0 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
     .scarcity-card.is-expired .stock-message { color: #737a72; }
     .scarcity-card.is-expired .stock-message strong { color: #737a72; }
-    .scarcity-card.is-expired .offer-timer-label { color: #737a72; }
-    .scarcity-card.is-expired .scarcity-timer { border-color: #e0e2dc; background: #f1f2ee; }
-    .scarcity-card.is-expired .scarcity-digits, .scarcity-card.is-expired .scarcity-units { color: #72776f; }
     .shipping-price-note { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
     .shipping-price-note a { color: var(--brand-dark); font-weight: 750; text-decoration: underline; text-underline-offset: 2px; }
     .shipping-price-note + .size-fieldset { margin-top: 13px; }
     .price-row[hidden] { display: none !important; }
     .cta:disabled, #sticky-button:disabled, #final-buy-button:disabled { cursor: not-allowed; opacity: .62; box-shadow: none; transform: none; }
     @media (max-width: 520px) {
-      .scarcity-card { align-items: flex-start; flex-direction: column; gap: 8px; }
       .stock-message { font-size: 12px; }
-      .stock-message strong { font-size: 21px; }
-      .offer-timer-label { font-size: 9px; }
-      .scarcity-timer { padding: 6px 8px; }
-      .scarcity-digits { font-size: 17px; }
-      .scarcity-units { font-size: 6px; }
+      .stock-message strong { font-size: 22px; }
+      .offer-duration-note { font-size: 9px; }
       .shipping-price-note { font-size: 10px; }
       .shipping-price-note + .size-fieldset { margin-top: 11px; }
     }
@@ -4946,15 +4935,9 @@
             <span id="offer-status-text"></span>
           </div>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
-          <section class="scarcity-card" id="scarcity-card" aria-label="Estoque disponível e prazo da oferta">
+          <section class="scarcity-card" id="scarcity-card" aria-label="Estoque da oferta">
             <p class="stock-message" id="scarcity-title" aria-live="polite">Restam apenas <strong>3</strong> unidades no total</p>
-            <div class="offer-timer-secondary">
-              <span class="offer-timer-label" id="offer-timer-label">Oferta termina em</span>
-              <div class="scarcity-timer" role="timer" aria-label="Tempo restante da oferta">
-                <span class="scarcity-digits" id="offer-countdown">20:00</span>
-                <span class="scarcity-units">MIN : SEG</span>
-              </div>
-            </div>
+            <p class="offer-duration-note">Oferta válida por 20 minutos a partir do primeiro acesso.</p>
           </section>
         </div>
         <p class="shipping-price-note">Frete, se houver, pode ser cobrado à parte. <a href="#frete-calculo">Consulte pelo CEP</a> antes de confirmar.</p>
@@ -5357,16 +5340,14 @@
       if (!(storedDeadline > 0)) localStorage.setItem(offerTimerKey, String(offerDeadline));
     } catch (error) { offerDeadline = Date.now() + offerDurationMs; }
     let offerExpired = false;
-    let offerTimerInterval;
+    let offerExpiryTimeout;
     function closeLimitedOffer() {
       if (offerExpired) return;
       offerExpired = true;
-      clearInterval(offerTimerInterval);
+      clearTimeout(offerExpiryTimeout);
       $('scarcity-card').classList.add('is-expired');
       $('scarcity-title').textContent = 'Oferta encerrada';
-      $('offer-timer-label').textContent = 'Prazo encerrado';
-      $('offer-countdown').textContent = '00:00';
-      $('offer-countdown').setAttribute('aria-label', 'Oferta encerrada');
+      document.querySelector('.offer-duration-note')?.setAttribute('hidden', '');
       document.querySelector('.price-row')?.setAttribute('hidden', '');
       document.querySelector('meta[name="description"]')?.setAttribute('content', 'A oferta promocional da Camiseta Casual Corinthians foi encerrada. Consulte a loja para verificar as condições atuais.');
       document.querySelector('meta[property="og:description"]')?.setAttribute('content', 'Oferta promocional encerrada. Consulte a loja para verificar as condições atuais.');
@@ -5384,15 +5365,12 @@
       const finalLabel = $('final-buy-button')?.querySelector('span');
       if (finalLabel) finalLabel.textContent = 'Oferta encerrada';
     }
-    function updateOfferCountdown() {
-      const remaining = Math.max(0, Math.ceil((offerDeadline - Date.now()) / 1000));
+    function checkOfferExpiry() {
+      const remaining = offerDeadline - Date.now();
       if (remaining <= 0) { closeLimitedOffer(); return; }
-      const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
-      const seconds = String(remaining % 60).padStart(2, '0');
-      $('offer-countdown').textContent = `${minutes}:${seconds}`;
+      offerExpiryTimeout = setTimeout(checkOfferExpiry, remaining);
     }
-    updateOfferCountdown();
-    if (!offerExpired) offerTimerInterval = setInterval(updateOfferCountdown, 1000);
+    checkOfferExpiry();
     let size = 'M';
     const cart = [];
 
