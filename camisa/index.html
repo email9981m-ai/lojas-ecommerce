@@ -5380,7 +5380,7 @@
           ? 'Último minuto — finalize agora'
           : phase === 'final-five'
             ? 'Últimos 5 minutos — garanta já'
-            : 'Garanta agora — a oferta termina em:';
+            : 'A oferta termina em:';
         $('scarcity-title').textContent = message;
       }
       const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
