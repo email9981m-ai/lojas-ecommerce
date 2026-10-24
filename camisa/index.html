@@ -4857,12 +4857,13 @@
     .offer-status[hidden] { display: none !important; }
     .offer-status svg { width: 14px; height: 14px; flex: none; color: #8b6a2b; }
     @media (max-width: 420px) { .offer-status { font-size: 9px; } }
-    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #dfe8e0; }
-    .scarcity-message { min-width: 0; margin: 0; padding-left: 11px; border-left: 3px solid #b87551; color: var(--ink-soft); font-size: 14px; font-weight: 800; line-height: 1.3; letter-spacing: -.015em; }
-    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 5px; padding: 9px 10px; border: 1px solid var(--brand-dark); border-radius: 8px; background: var(--brand-dark); box-shadow: 0 2px 5px rgba(36,83,61,.12); }
-    .scarcity-digits { color: #fff; font: 850 22px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
-    .scarcity-units { color: #d6e6da; font-size: 8px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
-    .scarcity-card.is-expired .scarcity-message { border-left-color: #858a82; color: #737a72; }
+    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 10px 11px; border: 1px solid #e8cfc2; border-left: 4px solid #9b4932; border-radius: 9px; background: #fbf1eb; }
+    .scarcity-message { min-width: 0; margin: 0; color: #823a29; font-size: 13px; font-weight: 900; line-height: 1.3; letter-spacing: .015em; text-transform: uppercase; }
+    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 5px; padding: 10px 11px; border: 1px solid #91462f; border-radius: 8px; background: #91462f; box-shadow: 0 2px 6px rgba(110,49,32,.18); }
+    .scarcity-digits { color: #fff; font: 900 25px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .scarcity-units { color: #f5ded3; font-size: 8px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
+    .scarcity-card.is-expired { border-color: #dedfd9; border-left-color: #858a82; background: #f1f2ee; }
+    .scarcity-card.is-expired .scarcity-message { color: #737a72; }
     .scarcity-card.is-expired .scarcity-timer { border-color: #858a82; background: #858a82; box-shadow: none; }
     .scarcity-card.is-expired .scarcity-digits, .scarcity-card.is-expired .scarcity-units { color: #fff; }
     .shipping-price-note { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
@@ -4872,8 +4873,8 @@
     .cta:disabled, #sticky-button:disabled, #final-buy-button:disabled { cursor: not-allowed; opacity: .62; box-shadow: none; transform: none; }
     @media (max-width: 520px) {
       .scarcity-message { font-size: 12px; }
-      .scarcity-timer { padding: 7px 8px; }
-      .scarcity-digits { font-size: 18px; }
+      .scarcity-timer { padding: 8px 9px; }
+      .scarcity-digits { font-size: 21px; }
       .scarcity-units { font-size: 7px; }
       .shipping-price-note { font-size: 10px; }
       .shipping-price-note + .size-fieldset { margin-top: 11px; }
@@ -4940,7 +4941,7 @@
           </div>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
           <section class="scarcity-card" id="scarcity-card" aria-labelledby="scarcity-title">
-            <p class="scarcity-message" id="scarcity-title">A oferta termina em breve</p>
+            <p class="scarcity-message" id="scarcity-title">GARANTA AGORA — A OFERTA TERMINA EM</p>
             <div class="scarcity-timer" role="timer" aria-label="Tempo restante da oferta">
               <span class="scarcity-digits" id="offer-countdown">20:00</span>
               <span class="scarcity-units">MIN : SEG</span>
@@ -4960,7 +4961,7 @@
           <p class="hint sr-only" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
         </fieldset>
 
-        <button class="cta" id="add-button" type="button" aria-label="Aproveitar oferta — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Aproveitar oferta</span></span><span class="cta-arrow" aria-hidden="true">→</span></button>
+        <button class="cta" id="add-button" type="button" aria-label="Aproveitar oferta agora — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Aproveitar oferta agora</span></span><span class="cta-arrow" aria-hidden="true">→</span></button>
         <section class="shipping-box" id="frete-calculo" aria-label="Frete e prazo">
           <div class="shipping-heading"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Frete e prazo</strong><span id="shipping-status">Consulte pelo CEP</span></div>
           <label class="shipping-label" for="postal-code">CEP</label>
@@ -5156,7 +5157,7 @@
 
   <div class="sticky" id="sticky-bar" role="region" aria-label="Compra rápida">
     <span class="sticky-price"><strong>Grátis</strong><small>Frete a confirmar</small></span>
-    <button class="cta" type="button" id="sticky-button" aria-label="Aproveitar oferta — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Aproveitar oferta</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
+    <button class="cta" type="button" id="sticky-button" aria-label="Aproveitar oferta agora — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Aproveitar oferta agora</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
   </div>
 
   <dialog id="cart-dialog" class="checkout-dialog" aria-labelledby="checkout-title">
@@ -5361,11 +5362,28 @@
       document.querySelectorAll('#add-button, #sticky-button, #final-buy-button').forEach((button) => {
         button.disabled = true;
         button.setAttribute('aria-disabled', 'true');
+        button.setAttribute('aria-label', 'Oferta encerrada');
       });
+      $('add-label').textContent = 'Oferta encerrada';
+      const stickyLabel = $('sticky-button')?.querySelector('span:not(.sticky-arrow)');
+      if (stickyLabel) stickyLabel.textContent = 'Oferta encerrada';
+      const finalLabel = $('final-buy-button')?.querySelector('span');
+      if (finalLabel) finalLabel.textContent = 'Oferta encerrada';
     }
+    let offerMessagePhase = '';
     function updateOfferCountdown() {
       const remaining = Math.max(0, Math.ceil((offerDeadline - Date.now()) / 1000));
       if (remaining <= 0) { closeLimitedOffer(); return; }
+      const phase = remaining <= 60 ? 'last-minute' : remaining <= 300 ? 'final-five' : 'active';
+      if (phase !== offerMessagePhase) {
+        offerMessagePhase = phase;
+        const message = phase === 'last-minute'
+          ? 'ÚLTIMO MINUTO — FINALIZE AGORA'
+          : phase === 'final-five'
+            ? 'ÚLTIMOS 5 MINUTOS — GARANTA JÁ'
+            : 'GARANTA AGORA — A OFERTA TERMINA EM';
+        $('scarcity-title').textContent = message;
+      }
       const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
       const seconds = String(remaining % 60).padStart(2, '0');
       $('offer-countdown').textContent = `${minutes}:${seconds}`;
@@ -5455,9 +5473,12 @@
     galleryStage.addEventListener('pointercancel', () => { swipeStartX = swipeStartY = null; });
 
     function updateLabels() {
-      $('add-label').textContent = 'Aproveitar oferta';
+      const actionLabel = offerExpired ? 'Oferta encerrada' : 'Aproveitar oferta agora';
+      $('add-label').textContent = actionLabel;
+      const stickyActionLabel = $('sticky-button')?.querySelector('span:not(.sticky-arrow)');
+      if (stickyActionLabel) stickyActionLabel.textContent = actionLabel;
       const finalBuyLabel = $('final-buy-button')?.querySelector('span');
-      if (finalBuyLabel) finalBuyLabel.textContent = size ? 'Aproveitar oferta' : 'Escolha um tamanho';
+      if (finalBuyLabel) finalBuyLabel.textContent = offerExpired ? 'Oferta encerrada' : size ? actionLabel : 'Escolha um tamanho';
       document.querySelectorAll('.sizes .size').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.size === size)));
       document.querySelectorAll('[data-final-size]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.finalSize === size)));
     }
@@ -5597,7 +5618,7 @@
       const matchingSize = document.querySelector(`.sizes .size[data-size="${button.dataset.finalSize}"]`);
       if (matchingSize) matchingSize.click();
       document.querySelectorAll('[data-final-size]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-      $('final-buy-button').querySelector('span').textContent = 'Aproveitar oferta';
+      $('final-buy-button').querySelector('span').textContent = offerExpired ? 'Oferta encerrada' : 'Aproveitar oferta agora';
       $('final-purchase-hint').textContent = `Tamanho ${button.dataset.finalSize} selecionado.`;
       $('final-purchase-hint').classList.remove('error');
     }));
