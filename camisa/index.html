@@ -4857,13 +4857,12 @@
     .offer-status[hidden] { display: none !important; }
     .offer-status svg { width: 14px; height: 14px; flex: none; color: #8b6a2b; }
     @media (max-width: 420px) { .offer-status { font-size: 9px; } }
-    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 10px 11px; border: 1px solid #e8cfc2; border-left: 4px solid #9b4932; border-radius: 9px; background: #fbf1eb; }
-    .scarcity-message { min-width: 0; margin: 0; color: #823a29; font-size: 13px; font-weight: 900; line-height: 1.3; letter-spacing: .015em; text-transform: uppercase; }
-    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 5px; padding: 10px 11px; border: 1px solid #91462f; border-radius: 8px; background: #91462f; box-shadow: 0 2px 6px rgba(110,49,32,.18); }
-    .scarcity-digits { color: #fff; font: 900 25px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 12px 0 0; border-top: 1px solid #e6ddd5; }
+    .scarcity-message { min-width: 0; margin: 0; padding-left: 11px; border-left: 3px solid #b87551; color: #713c2c; font-size: 14px; font-weight: 850; line-height: 1.35; letter-spacing: -.01em; }
+    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 5px; padding: 10px 11px; border: 1px solid #91462f; border-radius: 8px; background: #91462f; box-shadow: 0 2px 5px rgba(110,49,32,.16); }
+    .scarcity-digits { color: #fff; font: 900 24px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
     .scarcity-units { color: #f5ded3; font-size: 8px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
-    .scarcity-card.is-expired { border-color: #dedfd9; border-left-color: #858a82; background: #f1f2ee; }
-    .scarcity-card.is-expired .scarcity-message { color: #737a72; }
+    .scarcity-card.is-expired .scarcity-message { border-left-color: #858a82; color: #737a72; }
     .scarcity-card.is-expired .scarcity-timer { border-color: #858a82; background: #858a82; box-shadow: none; }
     .scarcity-card.is-expired .scarcity-digits, .scarcity-card.is-expired .scarcity-units { color: #fff; }
     .shipping-price-note { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
@@ -4872,9 +4871,9 @@
     .price-row[hidden] { display: none !important; }
     .cta:disabled, #sticky-button:disabled, #final-buy-button:disabled { cursor: not-allowed; opacity: .62; box-shadow: none; transform: none; }
     @media (max-width: 520px) {
-      .scarcity-message { font-size: 12px; }
+      .scarcity-message { font-size: 13px; }
       .scarcity-timer { padding: 8px 9px; }
-      .scarcity-digits { font-size: 21px; }
+      .scarcity-digits { font-size: 20px; }
       .scarcity-units { font-size: 7px; }
       .shipping-price-note { font-size: 10px; }
       .shipping-price-note + .size-fieldset { margin-top: 11px; }
@@ -4941,7 +4940,7 @@
           </div>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
           <section class="scarcity-card" id="scarcity-card" aria-labelledby="scarcity-title">
-            <p class="scarcity-message" id="scarcity-title">GARANTA AGORA — A OFERTA TERMINA EM</p>
+            <p class="scarcity-message" id="scarcity-title" aria-live="polite">Garanta agora — a oferta termina em:</p>
             <div class="scarcity-timer" role="timer" aria-label="Tempo restante da oferta">
               <span class="scarcity-digits" id="offer-countdown">20:00</span>
               <span class="scarcity-units">MIN : SEG</span>
@@ -5378,10 +5377,10 @@
       if (phase !== offerMessagePhase) {
         offerMessagePhase = phase;
         const message = phase === 'last-minute'
-          ? 'ÚLTIMO MINUTO — FINALIZE AGORA'
+          ? 'Último minuto — finalize agora'
           : phase === 'final-five'
-            ? 'ÚLTIMOS 5 MINUTOS — GARANTA JÁ'
-            : 'GARANTA AGORA — A OFERTA TERMINA EM';
+            ? 'Últimos 5 minutos — garanta já'
+            : 'Garanta agora — a oferta termina em:';
         $('scarcity-title').textContent = message;
       }
       const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
