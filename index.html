@@ -4763,6 +4763,94 @@
     @media (prefers-reduced-motion: reduce) {
       .stage > img#main-image, .stage > img.gallery-slide-out { transition: none !important; }
     }
+
+    /* Avaliações em padrão ecommerce: resumo compacto e opiniões em lista. */
+    .customer-reviews {
+      margin-top: 48px;
+      padding: 30px 0 0;
+      border: 0;
+      border-top: 1px solid #e2e7e2;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .reviews-heading { align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e8ece8; }
+    .reviews-heading .eyebrow { margin-bottom: 5px; }
+    .reviews-heading h2 { font-size: clamp(23px, 2.5vw, 28px); letter-spacing: -.035em; }
+    .reviews-subtitle { margin-top: 6px; color: #68716a; font-size: 13px; line-height: 1.5; }
+    .reviews-count { padding: 7px 10px; border: 1px solid #dfe5df; border-radius: 6px; background: #fff; color: #4c574f; font-size: 11px; font-weight: 650; }
+    .reviews-disclosure-wide { margin: 0 0 16px; padding: 11px 13px; border: 1px solid #e8dfc9; border-radius: 6px; background: #fbf8f1; color: #5e5545; font-size: 11px; line-height: 1.55; }
+    .reviews-disclosure-wide svg { color: #8b6a2b; }
+    .reviews-disclosure-wide strong { color: #433a2a; }
+    .reviews-average {
+      grid-template-columns: minmax(180px, .62fr) minmax(250px, 1.38fr);
+      gap: 28px;
+      align-items: center;
+      margin: 0 0 22px;
+      padding: 20px 22px;
+      border: 1px solid #e1e6e1;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .average-score { grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; }
+    .average-number { color: #252c27; font-size: 52px; letter-spacing: -.06em; }
+    .average-meta { gap: 5px; }
+    .average-stars { color: #ad7b20; font-size: 17px; letter-spacing: .04em; }
+    .average-out-of { color: #606a62; font-size: 12px; font-weight: 500; }
+    .average-caption { margin-top: 10px; color: #68716a; font-size: 10px; line-height: 1.5; }
+    .average-breakdown { gap: 7px; }
+    .average-row { grid-template-columns: 66px minmax(60px,1fr) 24px; gap: 9px; color: #4a534c; font-size: 11px; }
+    .average-track { height: 8px; background: #ecefec; }
+    .average-fill { background: #ad7b20; }
+    .average-count { color: #606a62; }
+    .reviews-toolbar { align-items: center; gap: 16px; margin: 0 0 13px; padding: 0 0 12px; border-bottom: 1px solid #e4e8e4; }
+    .reviews-toolbar > strong { color: #282f29; font-size: 14px; font-weight: 700; }
+    .review-controls { display: flex; align-items: center; gap: 12px; }
+    .reviews-sort { gap: 7px; color: #5c665e; font-size: 11px; }
+    .reviews-sort select { min-height: 38px; padding: 0 30px 0 10px; border: 1px solid #d5dcd6; border-radius: 6px; background: #fff; color: #303831; font-size: 11px; }
+    .reviews-groups { gap: 0; }
+    .review-group h3 { margin: 0 0 4px; padding: 0 0 10px; color: #69736b; font-size: 10px; font-weight: 650; letter-spacing: .035em; text-transform: none; }
+    .review-grid { grid-template-columns: 1fr; gap: 0; }
+    .review-card { padding: 16px 2px 18px; border: 0; border-top: 1px solid #e9ece9; border-radius: 0; background: transparent; box-shadow: none; transition: none; }
+    .review-card:hover { transform: none; border-color: #e9ece9; box-shadow: none; }
+    .review-card-top { align-items: center; gap: 12px; }
+    .review-identity { gap: 0; }
+    .review-author { color: #343d36; font-size: 12px; font-weight: 700; }
+    .review-context { margin-top: 3px; padding: 0; background: transparent; color: #7a827b; font-size: 10px; }
+    .review-rating { color: #525b54; font-size: 10px; }
+    .review-rating span { color: #ad7b20; }
+    .review-title { margin: 11px 0 0; color: #283129; font-size: 13px; font-weight: 700; line-height: 1.45; }
+    .review-text { max-width: 88ch; margin: 5px 0 0; color: #4f5851; font-size: 12px; line-height: 1.65; }
+    .reviews-pagination { margin-top: 8px; padding-top: 13px; border-top: 1px solid #e4e8e4; }
+    .reviews-pagination button { min-width: 38px; height: 38px; border-color: #d7ded7; border-radius: 6px; font-size: 11px; }
+    .reviews-pagination button[aria-current="page"] { border-color: var(--brand-dark); background: var(--brand-dark); }
+    .reviews-page-status { color: #677168; font-size: 10px; }
+    @media (max-width: 720px) {
+      .customer-reviews { margin-top: 38px; padding-top: 24px; }
+      .reviews-average { grid-template-columns: minmax(150px,.6fr) minmax(0,1.4fr); gap: 18px; padding: 17px; }
+      .review-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .customer-reviews { margin-top: 32px; padding-top: 21px; }
+      .reviews-heading { display: block; margin-bottom: 15px; }
+      .reviews-heading h2 { font-size: 23px; }
+      .reviews-count { display: inline-flex; margin-top: 9px; }
+      .reviews-disclosure-wide { padding: 10px; font-size: 10px; }
+      .reviews-average { grid-template-columns: 1fr; gap: 15px; margin-bottom: 18px; padding: 15px 13px; }
+      .average-score { grid-template-columns: auto 1fr; }
+      .average-number { font-size: 48px; }
+      .average-row { grid-template-columns: 62px minmax(40px,1fr) 22px; gap: 7px; font-size: 10px; }
+      .reviews-toolbar { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .review-controls { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); width: 100%; gap: 8px; }
+      .reviews-sort { display: grid; gap: 5px; min-width: 0; font-size: 10px; }
+      .reviews-sort select { width: 100%; min-width: 0; min-height: 40px; padding-inline: 8px 22px; font-size: 10px; }
+      .review-card { padding: 14px 1px 16px; }
+      .reviews-pagination { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .reviews-pages { grid-column: 1 / -1; grid-row: 2; }
+      .reviews-page-status { grid-column: 1 / -1; grid-row: 1; }
+      .reviews-pagination > button:first-child { grid-column: 1; grid-row: 3; justify-self: start; }
+      .reviews-pagination > button:last-child { grid-column: 2; grid-row: 3; justify-self: end; }
+    }
   </style>
 </head>
 <body>
@@ -4899,7 +4987,7 @@
         <div>
           <p class="eyebrow">Opiniões sobre o produto</p>
           <h2 id="reviews-title">Avaliações dos clientes</h2>
-          <p class="reviews-subtitle">Leia os comentários e filtre as avaliações por nota ou relevância.</p>
+          <p class="reviews-subtitle">Explore a demonstração e use os filtros para navegar pelas avaliações de exemplo.</p>
         </div>
         <span class="reviews-count">50 avaliações de exemplo</span>
       </div>
@@ -4921,11 +5009,13 @@
             <div class="average-breakdown" aria-label="Distribuição das notas">
               <div class="average-row"><span>5 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:82%"></div></div><span class="average-count">41</span></div>
               <div class="average-row"><span>4 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:18%"></div></div><span class="average-count">9</span></div>
-              <div class="average-row"><span>1–3 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:0%"></div></div><span class="average-count">0</span></div>
+              <div class="average-row"><span>3 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:0%"></div></div><span class="average-count">0</span></div>
+              <div class="average-row"><span>2 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:0%"></div></div><span class="average-count">0</span></div>
+              <div class="average-row"><span>1 estrela</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:0%"></div></div><span class="average-count">0</span></div>
             </div>
           </section>
           <div class="reviews-toolbar">
-            <strong>Opiniões em destaque</strong>
+            <strong>Exemplos de avaliações</strong>
             <div class="review-controls">
               <label class="reviews-sort" for="reviews-filter">Nota
                 <select id="reviews-filter" aria-label="Filtrar avaliações por nota">
