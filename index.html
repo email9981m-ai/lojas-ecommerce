@@ -4756,51 +4756,20 @@
     }
 
 
-    /* Barra superior: oferta clara, estática e confortável em telas pequenas. */
-    .announcement {
-      position: relative;
-      z-index: 20;
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 18px;
-      overflow: visible;
-      border: 0;
-      border-bottom: 1px solid #e2e9e2;
-      background: #f3f7f3;
-      color: #4c574f;
-      font-family: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .005em;
-      line-height: 1.4;
-      text-transform: none;
-      white-space: normal;
-    }
-    .announcement::before, .announcement::after { display: none; content: none; }
-    .announcement-content { display: flex; align-items: center; justify-content: center; gap: 12px; width: min(100%, 1180px); }
-    .announcement-badge { flex: none; padding: 4px 8px; border: 1px solid #d5e4d8; border-radius: 999px; background: #e8f1e9; color: #285b40; font-size: 9px; font-weight: 800; letter-spacing: .08em; line-height: 1.2; text-transform: uppercase; }
-    .announcement-message { display: inline-flex; align-items: center; justify-content: center; gap: 12px; text-align: center; }
-    .announcement-message strong { color: #24533d; font-weight: 750; }
-    .announcement-divider { width: 3px; height: 3px; flex: none; border-radius: 50%; background: #9aad9e; }
-    @media (max-width: 480px) {
-      .announcement { min-height: 42px; padding: 6px 12px; font-size: 10px; }
-      .announcement-content { gap: 8px; }
-      .announcement-message { gap: 8px; }
-    }
-    @media (max-width: 350px) {
-      .announcement-content { gap: 7px; }
-      .announcement-badge { padding: 4px 6px; font-size: 8px; }
-      .announcement-message { gap: 6px; font-size: 9px; }
+    /* Transição da galeria: a foto acompanha o movimento lateral. */
+    .stage > img#main-image { position: relative; z-index: 2; will-change: transform; }
+    .stage > img.gallery-slide-out { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; pointer-events: none; will-change: transform; }
+    @media (prefers-reduced-motion: reduce) {
+      .stage > img#main-image, .stage > img.gallery-slide-out { transition: none !important; }
     }
   </style>
 </head>
 <body>
   <div class="announcement" role="region" aria-label="Informações da oferta">
-    <div class="announcement-content">
-      <span class="announcement-badge">Oferta</span>
-      <span class="announcement-message"><strong>Camiseta grátis</strong><span class="announcement-divider" aria-hidden="true"></span><span>Eventual frete informado antes da confirmação</span></span>
+    <span class="sr-only">Estilo de torcida Kokeshi. Preço do produto: R$ 0,00. Frete, se houver, sujeito à confirmação. Opções de tamanho exibidas: P, M e G.</span>
+    <div class="announcement-track" aria-hidden="true">
+      <div class="announcement-group"><span>ESTILO DE TORCIDA · KOKESHI</span><span class="announcement-sep">•</span><span>PREÇO DO PRODUTO <strong>R$ 0,00</strong></span><span class="announcement-sep">•</span><span>FRETE, SE HOUVER, SUJEITO À CONFIRMAÇÃO</span><span class="announcement-sep">•</span><span>ESCOLHA ENTRE P, M E G</span><span class="announcement-sep">•</span></div>
+      <div class="announcement-group"><span>ESTILO DE TORCIDA · KOKESHI</span><span class="announcement-sep">•</span><span>PREÇO DO PRODUTO <strong>R$ 0,00</strong></span><span class="announcement-sep">•</span><span>FRETE, SE HOUVER, SUJEITO À CONFIRMAÇÃO</span><span class="announcement-sep">•</span><span>ESCOLHA ENTRE P, M E G</span><span class="announcement-sep">•</span></div>
     </div>
   </div>
   <header class="header">
@@ -5229,22 +5198,66 @@
     const cart = [];
 
     const galleryThumbs = [...document.querySelectorAll('.thumb')];
+    const mainImage = $('main-image');
+    const galleryStage = document.querySelector('.stage');
     let currentGalleryIndex = 0;
-    function showGalleryImage(index) {
-      currentGalleryIndex = (index + imgs.length) % imgs.length;
-      $('main-image').src = imgs[currentGalleryIndex][0];
-      $('main-image').alt = imgs[currentGalleryIndex][1];
+    let slideCleanupTimer = null;
+    let slideAnimationFrame = null;
+    function showGalleryImage(index, direction = 1) {
+      const nextIndex = (index + imgs.length) % imgs.length;
+      if (nextIndex === currentGalleryIndex) return;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const oldClone = galleryStage.querySelector('.gallery-slide-out');
+      if (oldClone) oldClone.remove();
+      if (slideCleanupTimer) window.clearTimeout(slideCleanupTimer);
+      if (slideAnimationFrame) cancelAnimationFrame(slideAnimationFrame);
+      mainImage.style.transition = 'none';
+      mainImage.style.transform = '';
+      currentGalleryIndex = nextIndex;
       galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
+      if (prefersReducedMotion) {
+        mainImage.src = imgs[currentGalleryIndex][0];
+        mainImage.alt = imgs[currentGalleryIndex][1];
+        return;
+      }
+
+      const outgoing = mainImage.cloneNode(true);
+      outgoing.removeAttribute('id');
+      outgoing.removeAttribute('fetchpriority');
+      outgoing.setAttribute('aria-hidden', 'true');
+      outgoing.alt = '';
+      outgoing.classList.add('gallery-slide-out');
+      outgoing.style.padding = getComputedStyle(mainImage).padding;
+      outgoing.style.transform = 'translateX(0)';
+      galleryStage.insertBefore(outgoing, mainImage);
+
+      mainImage.src = imgs[currentGalleryIndex][0];
+      mainImage.alt = imgs[currentGalleryIndex][1];
+      mainImage.style.transform = `translateX(${direction * 100}%)`;
+      void mainImage.offsetWidth;
+      slideAnimationFrame = requestAnimationFrame(() => {
+        const transition = 'transform 320ms cubic-bezier(.22,.61,.36,1)';
+        mainImage.style.transition = transition;
+        outgoing.style.transition = transition;
+        mainImage.style.transform = 'translateX(0)';
+        outgoing.style.transform = `translateX(${-direction * 100}%)`;
+      });
+      slideCleanupTimer = window.setTimeout(() => {
+        outgoing.remove();
+        slideAnimationFrame = null;
+        mainImage.style.transition = '';
+        mainImage.style.transform = '';
+        slideCleanupTimer = null;
+      }, 380);
     }
     $('main-image').src = imgs[0][0];
     $('final-product-image').src = imgs[0][0];
     galleryThumbs.forEach((button) => {
       const i = Number(button.dataset.i);
       button.querySelector('img').src = imgs[i][0];
-      button.addEventListener('click', () => showGalleryImage(i));
+      button.addEventListener('click', () => showGalleryImage(i, i >= currentGalleryIndex ? 1 : -1));
     });
 
-    const galleryStage = document.querySelector('.stage');
     let swipeStartX = null;
     let swipeStartY = null;
     galleryStage.addEventListener('pointerdown', (event) => {
@@ -5257,7 +5270,7 @@
       const deltaX = event.clientX - swipeStartX;
       const deltaY = event.clientY - swipeStartY;
       if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-        showGalleryImage(currentGalleryIndex + (deltaX < 0 ? 1 : -1));
+        showGalleryImage(currentGalleryIndex + (deltaX < 0 ? 1 : -1), deltaX < 0 ? 1 : -1);
       }
       swipeStartX = swipeStartY = null;
     });
