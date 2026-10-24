@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f8f7f4">
-  <meta name="description" content="Camiseta Casual Corinthians. Produto por R$ 0,00; confira eventuais custos de frete antes de confirmar.">
+  <meta name="description" content="Camiseta Casual Corinthians. Oferta por tempo limitado de 20 minutos. Frete pode ser cobrado à parte; consulte pelo CEP antes de concluir.">
   <meta property="og:type" content="product">
   <meta property="og:title" content="Camiseta Casual Corinthians | Kokeshi">
-  <meta property="og:description" content="Produto por R$ 0,00. Eventual frete é informado antes da confirmação.">
+  <meta property="og:description" content="Oferta especial por 20 minutos. Frete pode ser cobrado à parte e é informado antes da confirmação.">
   <title>Camiseta Casual Corinthians | Kokeshi</title>
   <script>
     (function () {
@@ -1353,7 +1353,7 @@
     .shipping-heading { margin-bottom: 10px; }
     .shipping-form input, .shipping-form button { height: 40px; border-radius: 7px; }
     .shipping-form button { padding-inline: 15px; background: #35443a; border-color: #35443a; }
-    .shipping-help { font-size: 9px; }
+    .shipping-help { font-size: 10px; }
     .product-actions-row { margin-top: 2px; padding: 5px 0 9px; }
     .product-action { height: 40px; color: #657067; }
     .product-action:hover { background: #f3f6f2; }
@@ -4852,55 +4852,33 @@
       .reviews-pagination > button:last-child { grid-column: 2; grid-row: 3; justify-self: end; }
     }
 
-    .offer-card--countdown {
-      align-items: flex-start;
-      gap: 11px;
-      margin: 14px 0 20px;
-      padding: 15px 16px;
-      border: 1px solid #efd5c8;
-      border-left: 3px solid #b85438;
-      border-radius: 12px;
-      background: linear-gradient(110deg, #fff7f2 0%, #fffdfb 100%);
-      box-shadow: 0 5px 16px rgba(103, 47, 31, .055);
-    }
-    .offer-card--countdown .offer-icon { width: 19px; height: 19px; margin-top: 2px; color: #a94430; }
-    .offer-card--countdown .offer-copy { flex: 1; min-width: 0; }
-    .offer-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .offer-card-message { min-width: 0; }
-    .offer-card--countdown .offer-copy strong { display: block; margin-bottom: 3px; color: #38251f; font-size: 13px; line-height: 1.3; }
-    .offer-card--countdown .offer-copy p { margin: 0; color: #69574f; font-size: 11px; line-height: 1.5; }
-    .offer-countdown {
-      flex: none;
-      min-width: 83px;
-      padding: 7px 9px;
-      border: 1px solid #e8c9bb;
-      border-radius: 8px;
-      background: #fff;
-      color: #9f3d2c;
-      font: 800 21px/1.1 "DM Sans", ui-sans-serif, system-ui, sans-serif;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: .035em;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(103, 47, 31, .05);
-    }
-    .offer-card--countdown .offer-copy .offer-expiry-note { margin-top: 8px; color: #7a6b63; font-size: 10px; }
-    .offer-card--countdown.is-expired { border-color: #e1e3dd; border-left-color: #858a83; background: #f7f8f5; box-shadow: none; }
-    .offer-card--countdown.is-expired .offer-icon { color: #6e756e; }
-    .offer-card--countdown.is-expired .offer-countdown { border-color: #d9ddd7; color: #626a63; background: #f1f3ef; }
-    @media (max-width: 520px) {
-      .offer-card--countdown { margin: 13px 0 18px; padding: 13px 12px; }
-      .offer-card-top { gap: 8px; }
-      .offer-countdown { min-width: 75px; padding: 7px 6px; font-size: 19px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .offer-card--countdown, .offer-countdown { scroll-behavior: auto; }
-    }
-
     /* Selo de condição promocional: só aparece após preencher validade/limite real. */
     .offer-status { width: fit-content; display: inline-flex; align-items: center; gap: 7px; margin: 0 0 11px; padding: 6px 9px; border: 1px solid #e8dcc4; border-radius: 6px; background: #fbf7ed; color: #655334; font-size: 10px; font-weight: 700; line-height: 1.35; }
     .offer-status[hidden] { display: none !important; }
     .offer-status svg { width: 14px; height: 14px; flex: none; color: #8b6a2b; }
     @media (max-width: 420px) { .offer-status { font-size: 9px; } }
+    .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #dfe8e0; }
+    .scarcity-message { min-width: 0; margin: 0; padding-left: 11px; border-left: 3px solid #b87551; color: var(--ink-soft); font-size: 14px; font-weight: 800; line-height: 1.3; letter-spacing: -.015em; }
+    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 5px; padding: 9px 10px; border: 1px solid var(--brand-dark); border-radius: 8px; background: var(--brand-dark); box-shadow: 0 2px 5px rgba(36,83,61,.12); }
+    .scarcity-digits { color: #fff; font: 850 22px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .scarcity-units { color: #d6e6da; font-size: 8px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
+    .scarcity-card.is-expired .scarcity-message { border-left-color: #858a82; color: #737a72; }
+    .scarcity-card.is-expired .scarcity-timer { border-color: #858a82; background: #858a82; box-shadow: none; }
+    .scarcity-card.is-expired .scarcity-digits, .scarcity-card.is-expired .scarcity-units { color: #fff; }
+    .shipping-price-note { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .shipping-price-note a { color: var(--brand-dark); font-weight: 750; text-decoration: underline; text-underline-offset: 2px; }
+    .shipping-price-note + .size-fieldset { margin-top: 13px; }
+    .price-row[hidden] { display: none !important; }
+    .cta:disabled, #sticky-button:disabled, #final-buy-button:disabled { cursor: not-allowed; opacity: .62; box-shadow: none; transform: none; }
+    @media (max-width: 520px) {
+      .scarcity-message { font-size: 12px; }
+      .scarcity-timer { padding: 7px 8px; }
+      .scarcity-digits { font-size: 18px; }
+      .scarcity-units { font-size: 7px; }
+      .shipping-price-note { font-size: 10px; }
+      .shipping-price-note + .size-fieldset { margin-top: 11px; }
+    }
+    @media (max-width: 380px) { .scarcity-card { align-items: flex-start; flex-direction: column; gap: 8px; } }
   </style>
 </head>
 <body>
@@ -4961,22 +4939,15 @@
             <span id="offer-status-text"></span>
           </div>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
-          <p class="price-disclosure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c-.7-1-1.7-1.5-3-1.5-1.7 0-2.8.8-2.8 2s1.1 1.8 2.8 2 2.8.8 2.8 2-1.1 2-2.8 2c-1.3 0-2.3-.5-3-1.5"/></svg><span><strong>R$ 0,00 pela camiseta.</strong> O frete pode ser cobrado à parte; confirme o valor pelo CEP antes do pedido.</span></p>
-        </div>
-
-        <div class="offer-card offer-card--countdown" id="limited-offer" aria-labelledby="offer-card-title">
-          <svg class="offer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <div class="offer-copy">
-            <div class="offer-card-top">
-              <div class="offer-card-message">
-                <strong id="offer-card-title">Sua oferta termina em</strong>
-                <p id="offer-message">Conclua seu pedido nos próximos 20 minutos para aproveitar esta condição especial.</p>
-              </div>
-              <span class="offer-countdown" id="offer-countdown" role="timer" aria-label="Tempo restante da oferta"><span id="offer-time">20:00</span></span>
+          <section class="scarcity-card" id="scarcity-card" aria-labelledby="scarcity-title">
+            <p class="scarcity-message" id="scarcity-title">A oferta termina em breve</p>
+            <div class="scarcity-timer" role="timer" aria-label="Tempo restante da oferta">
+              <span class="scarcity-digits" id="offer-countdown">20:00</span>
+              <span class="scarcity-units">MIN : SEG</span>
             </div>
-            <p class="offer-expiry-note" id="offer-expiry-note">O prazo começa quando esta oferta é exibida. Frete e valor total aparecem antes da confirmação.</p>
-          </div>
+          </section>
         </div>
+        <p class="shipping-price-note">Frete, se houver, pode ser cobrado à parte. <a href="#frete-calculo">Consulte pelo CEP</a> antes de confirmar.</p>
 
         <fieldset class="size-fieldset" id="tamanhos" aria-describedby="hint">
           <legend class="sr-only">Selecione o tamanho</legend>
@@ -4989,16 +4960,15 @@
           <p class="hint sr-only" id="hint" aria-live="polite">P · M · G — toque para selecionar.</p>
         </fieldset>
 
-        <button class="cta" id="add-button" type="button" aria-label="Adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Adicionar à sacola</span></span><span class="cta-arrow" aria-hidden="true">→</span></button>
-        <p class="checkout-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>Produto grátis. Eventuais custos de entrega e disponibilidade serão confirmados antes do pedido.</span></p>
-        <section class="shipping-box" aria-label="Frete e prazo">
+        <button class="cta" id="add-button" type="button" aria-label="Aproveitar oferta — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span id="add-label">Aproveitar oferta</span></span><span class="cta-arrow" aria-hidden="true">→</span></button>
+        <section class="shipping-box" id="frete-calculo" aria-label="Frete e prazo">
           <div class="shipping-heading"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Frete e prazo</strong><span id="shipping-status">Consulte pelo CEP</span></div>
           <label class="shipping-label" for="postal-code">CEP</label>
           <div class="shipping-form">
             <input id="postal-code" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" autocomplete="postal-code">
             <button type="button" id="calculate-shipping">Calcular</button>
           </div>
-          <p class="shipping-help">Informe seu CEP para simular prazo e disponibilidade de entrega.</p>
+          <p class="shipping-help">O frete pode ser cobrado à parte. Informe seu CEP para consultar o valor e o prazo antes de concluir o pedido.</p>
         </section>
 
         <div class="product-actions-row" role="group" aria-label="Ações do produto">
@@ -5186,7 +5156,7 @@
 
   <div class="sticky" id="sticky-bar" role="region" aria-label="Compra rápida">
     <span class="sticky-price"><strong>Grátis</strong><small>Frete a confirmar</small></span>
-    <button class="cta" type="button" id="sticky-button" aria-label="Adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Adicionar à sacola</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
+    <button class="cta" type="button" id="sticky-button" aria-label="Aproveitar oferta — adicionar camiseta à sacola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span>Aproveitar oferta</span><span class="sticky-arrow" aria-hidden="true">→</span></button>
   </div>
 
   <dialog id="cart-dialog" class="checkout-dialog" aria-labelledby="checkout-title">
@@ -5363,52 +5333,45 @@
       offerStatus.hidden = false;
     }
 
-    // O prazo começa na primeira exibição e permanece no mesmo navegador entre recargas.
-    // Para uma oferta vinculante, a validade também deve ser aplicada e validada no checkout da loja.
-    const OFFER_DURATION_MS = 20 * 60 * 1000;
-    const OFFER_DEADLINE_KEY = 'kokeshi.offer.deadline.20min.v1';
-    function getOfferDeadline(storage) {
-      const saved = storage.getItem(OFFER_DEADLINE_KEY);
-      if (saved !== null) {
-        const parsed = Number(saved);
-        if (Number.isFinite(parsed) && parsed > 0) return parsed;
-      }
-      const deadline = Date.now() + OFFER_DURATION_MS;
-      storage.setItem(OFFER_DEADLINE_KEY, String(deadline));
-      return deadline;
-    }
+    // O prazo inicia no primeiro acesso e fica persistido para não reiniciar em recargas.
+    const offerTimerKey = 'kokeshi.offer.corinthians.v1';
+    const offerDurationMs = 20 * 60 * 1000;
     let offerDeadline;
     try {
-      offerDeadline = getOfferDeadline(localStorage);
-    } catch (storageError) {
-      try { offerDeadline = getOfferDeadline(sessionStorage); }
-      catch (sessionError) { offerDeadline = Date.now() + OFFER_DURATION_MS; }
+      const storedDeadline = Number(localStorage.getItem(offerTimerKey));
+      offerDeadline = storedDeadline > 0 ? storedDeadline : Date.now() + offerDurationMs;
+      if (!(storedDeadline > 0)) localStorage.setItem(offerTimerKey, String(offerDeadline));
+    } catch (error) { offerDeadline = Date.now() + offerDurationMs; }
+    let offerExpired = false;
+    let offerTimerInterval;
+    function closeLimitedOffer() {
+      if (offerExpired) return;
+      offerExpired = true;
+      clearInterval(offerTimerInterval);
+      $('scarcity-card').classList.add('is-expired');
+      $('scarcity-title').textContent = 'Oferta encerrada';
+      $('offer-countdown').textContent = '00:00';
+      $('offer-countdown').setAttribute('aria-label', 'Oferta encerrada');
+      document.querySelector('.price-row')?.setAttribute('hidden', '');
+      document.querySelector('meta[name="description"]')?.setAttribute('content', 'A oferta promocional da Camiseta Casual Corinthians foi encerrada. Consulte a loja para verificar as condições atuais.');
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', 'Oferta promocional encerrada. Consulte a loja para verificar as condições atuais.');
+      document.querySelectorAll('.announcement-group strong').forEach((item) => {
+        if (item.textContent.trim() === 'R$ 0,00') item.textContent = 'Oferta encerrada';
+      });
+      document.querySelectorAll('#add-button, #sticky-button, #final-buy-button').forEach((button) => {
+        button.disabled = true;
+        button.setAttribute('aria-disabled', 'true');
+      });
     }
-    const offerTimer = $('offer-time');
-    const offerTimerBox = $('offer-countdown');
-    const offerCard = $('limited-offer');
-    let offerCountdownInterval;
-    function renderOfferCountdown() {
-      if (!offerTimer || !offerTimerBox || !offerCard) return;
-      const remaining = Math.max(0, offerDeadline - Date.now());
-      const minutes = Math.floor(remaining / 60000);
-      const seconds = Math.floor((remaining % 60000) / 1000);
-      offerTimer.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-      if (remaining <= 0) {
-        window.clearInterval(offerCountdownInterval);
-        offerCard.classList.add('is-expired');
-        $('offer-card-title').textContent = 'Prazo promocional encerrado';
-        $('offer-message').textContent = 'Consulte a loja para confirmar se esta condição ainda está disponível.';
-        $('offer-expiry-note').textContent = 'Confira o frete e o valor total com a loja antes de confirmar o pedido.';
-        offerTimerBox.setAttribute('aria-label', 'Prazo promocional encerrado');
-      }
+    function updateOfferCountdown() {
+      const remaining = Math.max(0, Math.ceil((offerDeadline - Date.now()) / 1000));
+      if (remaining <= 0) { closeLimitedOffer(); return; }
+      const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const seconds = String(remaining % 60).padStart(2, '0');
+      $('offer-countdown').textContent = `${minutes}:${seconds}`;
     }
-    renderOfferCountdown();
-    offerCountdownInterval = window.setInterval(renderOfferCountdown, 1000);
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) renderOfferCountdown();
-    });
-
+    updateOfferCountdown();
+    if (!offerExpired) offerTimerInterval = setInterval(updateOfferCountdown, 1000);
     let size = 'M';
     const cart = [];
 
@@ -5492,9 +5455,9 @@
     galleryStage.addEventListener('pointercancel', () => { swipeStartX = swipeStartY = null; });
 
     function updateLabels() {
-      $('add-label').textContent = 'Adicionar à sacola';
+      $('add-label').textContent = 'Aproveitar oferta';
       const finalBuyLabel = $('final-buy-button')?.querySelector('span');
-      if (finalBuyLabel) finalBuyLabel.textContent = size ? 'Adicionar à sacola' : 'Escolha um tamanho';
+      if (finalBuyLabel) finalBuyLabel.textContent = size ? 'Aproveitar oferta' : 'Escolha um tamanho';
       document.querySelectorAll('.sizes .size').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.size === size)));
       document.querySelectorAll('[data-final-size]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.finalSize === size)));
     }
@@ -5610,6 +5573,8 @@
     });
     $('cart-dialog').addEventListener('cancel', (event) => { if ($('cart-dialog').getAttribute('aria-busy') === 'true') event.preventDefault(); });
     function buy() {
+      if (Date.now() >= offerDeadline) closeLimitedOffer();
+      if (offerExpired) return;
       if (!size) {
         $('add-button').classList.remove('needs-size');
         void $('add-button').offsetWidth;
@@ -5632,7 +5597,7 @@
       const matchingSize = document.querySelector(`.sizes .size[data-size="${button.dataset.finalSize}"]`);
       if (matchingSize) matchingSize.click();
       document.querySelectorAll('[data-final-size]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-      $('final-buy-button').querySelector('span').textContent = 'Adicionar à sacola';
+      $('final-buy-button').querySelector('span').textContent = 'Aproveitar oferta';
       $('final-purchase-hint').textContent = `Tamanho ${button.dataset.finalSize} selecionado.`;
       $('final-purchase-hint').classList.remove('error');
     }));
