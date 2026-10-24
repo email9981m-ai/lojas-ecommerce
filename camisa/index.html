@@ -4859,11 +4859,11 @@
     @media (max-width: 420px) { .offer-status { font-size: 9px; } }
     .scarcity-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e6ddd5; }
     .stock-message { min-width: 0; margin: 0; color: #553f34; font-size: 13px; font-weight: 700; line-height: 1.35; }
-    .stock-message strong { color: #91462f; font-size: 16px; font-weight: 900; }
-    .offer-timer-secondary { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .offer-timer-label { color: var(--muted); font-size: 9px; font-weight: 650; }
-    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 4px; padding: 6px 8px; border: 1px solid #d9e4dc; border-radius: 7px; background: #eff5f0; }
-    .scarcity-digits { color: var(--brand-dark); font: 850 17px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .stock-message strong { color: #91462f; font-size: 23px; font-weight: 900; letter-spacing: -.05em; vertical-align: -1px; }
+    .offer-timer-secondary { flex: none; display: flex; align-items: center; gap: 7px; }
+    .offer-timer-label { color: var(--muted); font-size: 9px; font-weight: 650; white-space: nowrap; }
+    .scarcity-timer { flex: none; display: flex; align-items: baseline; gap: 4px; padding: 5px 7px; border: 1px solid #d9e4dc; border-radius: 7px; background: #eff5f0; }
+    .scarcity-digits { color: var(--brand-dark); font: 850 16px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
     .scarcity-units { color: var(--brand); font-size: 7px; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
     .scarcity-card.is-expired .stock-message { color: #737a72; }
     .scarcity-card.is-expired .stock-message strong { color: #737a72; }
@@ -4876,16 +4876,16 @@
     .price-row[hidden] { display: none !important; }
     .cta:disabled, #sticky-button:disabled, #final-buy-button:disabled { cursor: not-allowed; opacity: .62; box-shadow: none; transform: none; }
     @media (max-width: 520px) {
+      .scarcity-card { align-items: flex-start; flex-direction: column; gap: 8px; }
       .stock-message { font-size: 12px; }
-      .stock-message strong { font-size: 14px; }
-      .offer-timer-label { font-size: 8px; }
-      .scarcity-timer { padding: 5px 7px; }
-      .scarcity-digits { font-size: 16px; }
+      .stock-message strong { font-size: 21px; }
+      .offer-timer-label { font-size: 9px; }
+      .scarcity-timer { padding: 6px 8px; }
+      .scarcity-digits { font-size: 17px; }
       .scarcity-units { font-size: 6px; }
       .shipping-price-note { font-size: 10px; }
       .shipping-price-note + .size-fieldset { margin-top: 11px; }
     }
-    @media (max-width: 380px) { .scarcity-card { align-items: flex-start; flex-direction: column; gap: 8px; } .offer-timer-secondary { align-items: flex-start; } }
   </style>
 </head>
 <body>
@@ -4947,7 +4947,7 @@
           </div>
           <div class="price-row"><span class="price-wrap"><span class="price">Grátis</span><svg class="price-brush" viewBox="0 0 132 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C25 5 47 6 66 9S105 12 129 5"/><path d="M16 14C39 10 63 10 84 12"/></svg></span><span class="price-reference"><strong>R$ 0,00</strong><small>preço da camiseta</small></span></div>
           <section class="scarcity-card" id="scarcity-card" aria-label="Estoque disponível e prazo da oferta">
-            <p class="stock-message" id="scarcity-title" aria-live="polite">Restam apenas <strong>3 unidades no total</strong></p>
+            <p class="stock-message" id="scarcity-title" aria-live="polite">Restam apenas <strong>3</strong> unidades no total</p>
             <div class="offer-timer-secondary">
               <span class="offer-timer-label" id="offer-timer-label">Oferta termina em</span>
               <div class="scarcity-timer" role="timer" aria-label="Tempo restante da oferta">
