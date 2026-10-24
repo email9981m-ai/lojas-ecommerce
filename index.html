@@ -103,9 +103,9 @@
     .thumb:hover { transform: translateY(-1px); border-color: #a8beae; }
     .thumb[aria-pressed="true"] { border: 2px solid var(--ink); padding: 3px; }
     .thumb img { width: 100%; height: 100%; object-fit: contain; }
-    .stage { position: relative; min-width: 0; aspect-ratio: .87; display: grid; place-items: center; overflow: hidden; border: 1px solid #efeee9; border-radius: var(--radius); background: var(--canvas); }
+    .stage { position: relative; min-width: 0; aspect-ratio: .87; display: grid; place-items: center; overflow: hidden; border: 1px solid #efeee9; border-radius: var(--radius); background: var(--canvas); touch-action: pan-y; }
     .stage img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
-    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(255,255,255,.9); color: var(--ink-soft); font-size: 11px; font-weight: 650; cursor: zoom-in; backdrop-filter: blur(8px); transition: background .16s, transform .16s; }
+    .gallery-label { position: absolute; left: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.82); border-radius: 999px; background: rgba(237,245,239,.96); color: var(--brand-dark); box-shadow: 0 3px 12px rgba(23,25,22,.10); font-size: 10px; font-weight: 800; letter-spacing: .09em; cursor: zoom-in; backdrop-filter: blur(8px); transition: background .16s, transform .16s; }
     .gallery-label:hover { transform: translateY(-1px); background: #fff; }
     .gallery-label svg { width: 14px; height: 14px; color: var(--brand); }
     .gallery-caption { margin: 12px 0 0 90px; color: var(--muted); font-size: 11px; }
@@ -4755,14 +4755,52 @@
       .checkout-pane[data-checkout-pane="3"] #checkout-pix-button { min-height: 54px !important; }
     }
 
+
+    /* Barra superior: oferta clara, estática e confortável em telas pequenas. */
+    .announcement {
+      position: relative;
+      z-index: 20;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 18px;
+      overflow: visible;
+      border: 0;
+      border-bottom: 1px solid #e2e9e2;
+      background: #f3f7f3;
+      color: #4c574f;
+      font-family: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .005em;
+      line-height: 1.4;
+      text-transform: none;
+      white-space: normal;
+    }
+    .announcement::before, .announcement::after { display: none; content: none; }
+    .announcement-content { display: flex; align-items: center; justify-content: center; gap: 12px; width: min(100%, 1180px); }
+    .announcement-badge { flex: none; padding: 4px 8px; border: 1px solid #d5e4d8; border-radius: 999px; background: #e8f1e9; color: #285b40; font-size: 9px; font-weight: 800; letter-spacing: .08em; line-height: 1.2; text-transform: uppercase; }
+    .announcement-message { display: inline-flex; align-items: center; justify-content: center; gap: 12px; text-align: center; }
+    .announcement-message strong { color: #24533d; font-weight: 750; }
+    .announcement-divider { width: 3px; height: 3px; flex: none; border-radius: 50%; background: #9aad9e; }
+    @media (max-width: 480px) {
+      .announcement { min-height: 42px; padding: 6px 12px; font-size: 10px; }
+      .announcement-content { gap: 8px; }
+      .announcement-message { gap: 8px; }
+    }
+    @media (max-width: 350px) {
+      .announcement-content { gap: 7px; }
+      .announcement-badge { padding: 4px 6px; font-size: 8px; }
+      .announcement-message { gap: 6px; font-size: 9px; }
+    }
   </style>
 </head>
 <body>
   <div class="announcement" role="region" aria-label="Informações da oferta">
-    <span class="sr-only">Estilo de torcida Kokeshi. Preço do produto: R$ 0,00. Frete, se houver, sujeito à confirmação. Opções de tamanho exibidas: P, M e G.</span>
-    <div class="announcement-track" aria-hidden="true">
-      <div class="announcement-group"><span>ESTILO DE TORCIDA · KOKESHI</span><span class="announcement-sep">•</span><span>PREÇO DO PRODUTO <strong>R$ 0,00</strong></span><span class="announcement-sep">•</span><span>FRETE, SE HOUVER, SUJEITO À CONFIRMAÇÃO</span><span class="announcement-sep">•</span><span>ESCOLHA ENTRE P, M E G</span><span class="announcement-sep">•</span></div>
-      <div class="announcement-group"><span>ESTILO DE TORCIDA · KOKESHI</span><span class="announcement-sep">•</span><span>PREÇO DO PRODUTO <strong>R$ 0,00</strong></span><span class="announcement-sep">•</span><span>FRETE, SE HOUVER, SUJEITO À CONFIRMAÇÃO</span><span class="announcement-sep">•</span><span>ESCOLHA ENTRE P, M E G</span><span class="announcement-sep">•</span></div>
+    <div class="announcement-content">
+      <span class="announcement-badge">Oferta</span>
+      <span class="announcement-message"><strong>Camiseta grátis</strong><span class="announcement-divider" aria-hidden="true"></span><span>Eventual frete informado antes da confirmação</span></span>
     </div>
   </div>
   <header class="header">
@@ -4797,7 +4835,7 @@
           </div>
           <div class="stage">
             <img id="main-image" width="1031" height="1200" fetchpriority="high" decoding="async" alt="Camiseta preta casual com brasão do Corinthians, vestida por modelo">
-            <button class="gallery-label" id="view-main-image" type="button" aria-label="Ampliar imagem principal do produto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>Veja os detalhes nas fotos</button>
+            <button class="gallery-label" id="view-main-image" type="button" aria-label="Ampliar imagem principal do produto — produto grátis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>GRÁTIS</button>
           </div>
         </div>
         <p class="gallery-caption">Imagens do produto para referência visual.</p>
@@ -5190,17 +5228,40 @@
     let size = 'M';
     const cart = [];
 
+    const galleryThumbs = [...document.querySelectorAll('.thumb')];
+    let currentGalleryIndex = 0;
+    function showGalleryImage(index) {
+      currentGalleryIndex = (index + imgs.length) % imgs.length;
+      $('main-image').src = imgs[currentGalleryIndex][0];
+      $('main-image').alt = imgs[currentGalleryIndex][1];
+      galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
+    }
     $('main-image').src = imgs[0][0];
     $('final-product-image').src = imgs[0][0];
-    document.querySelectorAll('.thumb').forEach((button) => {
+    galleryThumbs.forEach((button) => {
       const i = Number(button.dataset.i);
       button.querySelector('img').src = imgs[i][0];
-      button.addEventListener('click', () => {
-        $('main-image').src = imgs[i][0];
-        $('main-image').alt = imgs[i][1];
-        document.querySelectorAll('.thumb').forEach((thumb) => thumb.setAttribute('aria-pressed', String(thumb === button)));
-      });
+      button.addEventListener('click', () => showGalleryImage(i));
     });
+
+    const galleryStage = document.querySelector('.stage');
+    let swipeStartX = null;
+    let swipeStartY = null;
+    galleryStage.addEventListener('pointerdown', (event) => {
+      if (event.target.closest('button')) return;
+      swipeStartX = event.clientX;
+      swipeStartY = event.clientY;
+    });
+    galleryStage.addEventListener('pointerup', (event) => {
+      if (swipeStartX === null || swipeStartY === null) return;
+      const deltaX = event.clientX - swipeStartX;
+      const deltaY = event.clientY - swipeStartY;
+      if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+        showGalleryImage(currentGalleryIndex + (deltaX < 0 ? 1 : -1));
+      }
+      swipeStartX = swipeStartY = null;
+    });
+    galleryStage.addEventListener('pointercancel', () => { swipeStartX = swipeStartY = null; });
 
     function updateLabels() {
       $('add-label').textContent = 'Adicionar à sacola';
