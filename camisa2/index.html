@@ -8,8 +8,8 @@
   <meta property="og:type" content="product">
   <meta property="og:title" content="Kit Completo Corinthians | Kokeshi">
   <meta property="og:description" content="Produto por R$ 0,00. Eventual frete é informado antes da confirmação.">
-  <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/LWUsaQAcOQcGxams.webp">
-  <meta property="og:image:alt" content="Modelo usando o kit Corinthians com corrente e pingente de fundo preto">
+  <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/ThmOBLqYfWeEbHid.webp">
+  <meta property="og:image:alt" content="Modelo do kit Corinthians segurando o copo, com corrente e pingente preto">
   <title>Kit Completo Corinthians | Kokeshi</title>
   <script>
     (function () {
@@ -4758,9 +4758,9 @@
     }
 
 
-    /* Transição da galeria: a foto acompanha o movimento lateral. */
-    .stage > img#main-image { position: relative; z-index: 2; will-change: transform; }
-    .stage > img.gallery-slide-out { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; pointer-events: none; will-change: transform; }
+    /* Transição suave: evita que duas fotos pareçam cortadas lado a lado. */
+    .stage > img#main-image { position: relative; z-index: 2; will-change: opacity; }
+    .stage > img.gallery-slide-out { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; pointer-events: none; will-change: opacity; }
     .stage > .gallery-label { z-index: 3; }
     @media (prefers-reduced-motion: reduce) {
       .stage > img#main-image, .stage > img.gallery-slide-out { transition: none !important; }
@@ -4893,9 +4893,9 @@
       <div class="gallery-column">
         <div class="gallery" role="group" aria-label="Fotos do produto">
           <div class="thumbs" aria-label="Escolha uma imagem">
-            <button class="thumb" type="button" aria-label="Ver modelo usando o kit Corinthians" aria-pressed="true" data-i="0"><img width="1031" height="1200" alt=""></button>
-            <button class="thumb" type="button" aria-label="Ver kit completo sem cortes" aria-pressed="false" data-i="1"><img width="966" height="1200" loading="lazy" alt=""></button>
-            <button class="thumb" type="button" aria-label="Ver composição com os itens do kit identificados" aria-pressed="false" data-i="2"><img width="647" height="1200" loading="lazy" alt=""></button>
+            <button class="thumb" type="button" aria-label="Ver modelo segurando o copo com o kit Corinthians" aria-pressed="true" data-i="0"><img width="1031" height="1200" alt=""></button>
+            <button class="thumb" type="button" aria-label="Ver kit completo sem cortes" aria-pressed="false" data-i="1"><img width="966" height="966" loading="lazy" alt=""></button>
+            <button class="thumb" type="button" aria-label="Ver composição com os itens do kit identificados" aria-pressed="false" data-i="2"><img width="1031" height="1200" loading="lazy" alt=""></button>
             <button class="thumb" type="button" aria-label="Ver detalhe do copo térmico Corinthians" aria-pressed="false" data-i="3"><img width="1200" height="1200" loading="lazy" alt=""></button>
             <button class="thumb" type="button" aria-label="Ver detalhe da corrente e pingente Corinthians" aria-pressed="false" data-i="4"><img width="1200" height="1200" loading="lazy" alt=""></button>
           </div>
@@ -5294,9 +5294,9 @@
       limitedQuantity: '' // Ex.: '100 unidades' — mantenha atualizado conforme o estoque real.
     };
     const imgs = [
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/LWUsaQAcOQcGxams.webp", "Modelo usando o kit Corinthians com corrente e pingente de fundo preto"],
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/RwPhmOuhNzqWKmFn.webp", "Kit Corinthians em composição: camiseta sem corte, copo térmico e corrente com pingente"],
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/AigXrcFvZgAoXKDz.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/ThmOBLqYfWeEbHid.webp", "Modelo do kit Corinthians segurando o copo, com corrente e pingente preto"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp", "Kit Corinthians em composição: camiseta sem corte, copo térmico e pingente totalmente visível", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/zJXOfgFMRutfdkNc.webp"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/vWYeOwQyYbjWPIpB.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp", "Copo térmico preto do Corinthians em detalhe"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/KdfbYLNFLOhIkJTC.webp", "Corrente prateada e pingente preto do Corinthians em detalhe"]
     ];
@@ -5329,6 +5329,7 @@
       if (slideAnimationFrame) cancelAnimationFrame(slideAnimationFrame);
       mainImage.style.transition = 'none';
       mainImage.style.transform = '';
+      mainImage.style.opacity = '';
       currentGalleryIndex = nextIndex;
       galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
       if (prefersReducedMotion) {
@@ -5344,33 +5345,34 @@
       outgoing.alt = '';
       outgoing.classList.add('gallery-slide-out');
       outgoing.style.padding = getComputedStyle(mainImage).padding;
-      outgoing.style.transform = 'translateX(0)';
+      outgoing.style.opacity = '1';
       galleryStage.insertBefore(outgoing, mainImage);
 
       mainImage.src = imgs[currentGalleryIndex][0];
       mainImage.alt = imgs[currentGalleryIndex][1];
-      mainImage.style.transform = `translateX(${direction * 100}%)`;
+      mainImage.style.opacity = '0';
       void mainImage.offsetWidth;
       slideAnimationFrame = requestAnimationFrame(() => {
-        const transition = 'transform 320ms cubic-bezier(.22,.61,.36,1)';
+        const transition = 'opacity 180ms ease-in-out';
         mainImage.style.transition = transition;
         outgoing.style.transition = transition;
-        mainImage.style.transform = 'translateX(0)';
-        outgoing.style.transform = `translateX(${-direction * 100}%)`;
+        mainImage.style.opacity = '1';
+        outgoing.style.opacity = '0';
       });
       slideCleanupTimer = window.setTimeout(() => {
         outgoing.remove();
         slideAnimationFrame = null;
         mainImage.style.transition = '';
         mainImage.style.transform = '';
+        mainImage.style.opacity = '';
         slideCleanupTimer = null;
-      }, 380);
+      }, 240);
     }
     $('main-image').src = imgs[0][0];
     $('final-product-image').src = imgs[0][0];
     galleryThumbs.forEach((button) => {
       const i = Number(button.dataset.i);
-      button.querySelector('img').src = imgs[i][0];
+      button.querySelector('img').src = imgs[i][2] || imgs[i][0];
       button.addEventListener('click', () => showGalleryImage(i, i >= currentGalleryIndex ? 1 : -1));
     });
 
