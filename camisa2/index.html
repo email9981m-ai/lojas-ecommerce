@@ -4895,7 +4895,7 @@
           <div class="thumbs" aria-label="Escolha uma imagem">
             <button class="thumb" type="button" aria-label="Ver modelo segurando o copo com o kit Corinthians" aria-pressed="true" data-i="0"><img width="1031" height="1200" alt=""></button>
             <button class="thumb" type="button" aria-label="Ver kit completo sem cortes" aria-pressed="false" data-i="1"><img width="966" height="966" loading="lazy" alt=""></button>
-            <button class="thumb" type="button" aria-label="Ver composição com os itens do kit identificados" aria-pressed="false" data-i="2"><img width="1031" height="1200" loading="lazy" alt=""></button>
+            <button class="thumb" type="button" aria-label="Ver composição com os itens do kit identificados" aria-pressed="false" data-i="2"><img width="984" height="984" loading="lazy" alt=""></button>
             <button class="thumb" type="button" aria-label="Ver detalhe do copo térmico Corinthians" aria-pressed="false" data-i="3"><img width="1200" height="1200" loading="lazy" alt=""></button>
             <button class="thumb" type="button" aria-label="Ver detalhe da corrente e pingente Corinthians" aria-pressed="false" data-i="4"><img width="1200" height="1200" loading="lazy" alt=""></button>
           </div>
@@ -5296,7 +5296,7 @@
     const imgs = [
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/ThmOBLqYfWeEbHid.webp", "Modelo do kit Corinthians segurando o copo, com corrente e pingente preto"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp", "Kit Corinthians em composição: camiseta sem corte, copo térmico e pingente totalmente visível", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/zJXOfgFMRutfdkNc.webp"],
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/vWYeOwQyYbjWPIpB.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/vWYeOwQyYbjWPIpB.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/NbgVeGFslkPlQNpR.webp"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp", "Copo térmico preto do Corinthians em detalhe"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/KdfbYLNFLOhIkJTC.webp", "Corrente prateada e pingente preto do Corinthians em detalhe"]
     ];
@@ -5316,57 +5316,99 @@
     const galleryThumbs = [...document.querySelectorAll('.thumb')];
     const mainImage = $('main-image');
     const galleryStage = document.querySelector('.stage');
+    const galleryImageCache = new Map();
+    function preloadGalleryImage(src) {
+      if (galleryImageCache.has(src)) return galleryImageCache.get(src);
+      const image = new Image();
+      image.decoding = 'async';
+      image.fetchPriority = 'high';
+      let resolveLoaded;
+      const loaded = new Promise((resolve) => { resolveLoaded = resolve; });
+      image.onload = () => resolveLoaded(true);
+      image.onerror = () => resolveLoaded(false);
+      image.src = src;
+      let ready = loaded;
+      if (typeof image.decode === 'function') {
+        try { ready = image.decode().then(() => true).catch(() => loaded); } catch (error) {}
+      }
+      const entry = { image, ready };
+      galleryImageCache.set(src, entry);
+      return entry;
+    }
     let currentGalleryIndex = 0;
     let slideCleanupTimer = null;
     let slideAnimationFrame = null;
+    let galleryRequestToken = 0;
+    let pendingGalleryIndex = null;
     function showGalleryImage(index, direction = 1) {
       const nextIndex = (index + imgs.length) % imgs.length;
       if (nextIndex === currentGalleryIndex) return;
+      const requestToken = ++galleryRequestToken;
+      pendingGalleryIndex = nextIndex;
+      const nextSrc = imgs[nextIndex][0];
+      const nextAlt = imgs[nextIndex][1];
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const oldClone = galleryStage.querySelector('.gallery-slide-out');
-      if (oldClone) oldClone.remove();
-      if (slideCleanupTimer) window.clearTimeout(slideCleanupTimer);
-      if (slideAnimationFrame) cancelAnimationFrame(slideAnimationFrame);
-      mainImage.style.transition = 'none';
-      mainImage.style.transform = '';
-      mainImage.style.opacity = '';
-      currentGalleryIndex = nextIndex;
-      galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
-      if (prefersReducedMotion) {
-        mainImage.src = imgs[currentGalleryIndex][0];
-        mainImage.alt = imgs[currentGalleryIndex][1];
-        return;
-      }
+      const cachedImage = preloadGalleryImage(nextSrc);
+      cachedImage.ready.then((loaded) => {
+        if (requestToken !== galleryRequestToken) return;
+        if (!loaded || !cachedImage.image.naturalWidth) {
+          pendingGalleryIndex = null;
+          return;
+        }
 
-      const outgoing = mainImage.cloneNode(true);
-      outgoing.removeAttribute('id');
-      outgoing.removeAttribute('fetchpriority');
-      outgoing.setAttribute('aria-hidden', 'true');
-      outgoing.alt = '';
-      outgoing.classList.add('gallery-slide-out');
-      outgoing.style.padding = getComputedStyle(mainImage).padding;
-      outgoing.style.opacity = '1';
-      galleryStage.insertBefore(outgoing, mainImage);
-
-      mainImage.src = imgs[currentGalleryIndex][0];
-      mainImage.alt = imgs[currentGalleryIndex][1];
-      mainImage.style.opacity = '0';
-      void mainImage.offsetWidth;
-      slideAnimationFrame = requestAnimationFrame(() => {
-        const transition = 'opacity 180ms ease-in-out';
-        mainImage.style.transition = transition;
-        outgoing.style.transition = transition;
-        mainImage.style.opacity = '1';
-        outgoing.style.opacity = '0';
-      });
-      slideCleanupTimer = window.setTimeout(() => {
-        outgoing.remove();
-        slideAnimationFrame = null;
-        mainImage.style.transition = '';
-        mainImage.style.transform = '';
-        mainImage.style.opacity = '';
+        const oldClone = galleryStage.querySelector('.gallery-slide-out');
+        if (oldClone) oldClone.remove();
+        if (slideCleanupTimer) window.clearTimeout(slideCleanupTimer);
+        if (slideAnimationFrame) cancelAnimationFrame(slideAnimationFrame);
         slideCleanupTimer = null;
-      }, 240);
+        slideAnimationFrame = null;
+        mainImage.style.transition = 'none';
+        mainImage.style.transform = '';
+        mainImage.style.opacity = '1';
+        currentGalleryIndex = nextIndex;
+        pendingGalleryIndex = null;
+        galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
+
+        if (prefersReducedMotion) {
+          mainImage.src = nextSrc;
+          mainImage.alt = nextAlt;
+          mainImage.style.opacity = '';
+          return;
+        }
+
+        const outgoing = mainImage.cloneNode(true);
+        outgoing.removeAttribute('id');
+        outgoing.removeAttribute('fetchpriority');
+        outgoing.setAttribute('aria-hidden', 'true');
+        outgoing.alt = '';
+        outgoing.classList.add('gallery-slide-out');
+        outgoing.style.padding = getComputedStyle(mainImage).padding;
+        outgoing.style.opacity = '1';
+        galleryStage.insertBefore(outgoing, mainImage);
+
+        mainImage.src = nextSrc;
+        mainImage.alt = nextAlt;
+        mainImage.style.opacity = '0';
+        void mainImage.offsetWidth;
+        slideAnimationFrame = requestAnimationFrame(() => {
+          if (requestToken !== galleryRequestToken) return;
+          const transition = 'opacity 160ms ease-in-out';
+          mainImage.style.transition = transition;
+          outgoing.style.transition = transition;
+          mainImage.style.opacity = '1';
+          outgoing.style.opacity = '0';
+        });
+        slideCleanupTimer = window.setTimeout(() => {
+          outgoing.remove();
+          if (requestToken === galleryRequestToken) {
+            slideAnimationFrame = null;
+            mainImage.style.transition = '';
+            mainImage.style.transform = '';
+            mainImage.style.opacity = '';
+            slideCleanupTimer = null;
+          }
+        }, 220);
+      });
     }
     $('main-image').src = imgs[0][0];
     $('final-product-image').src = imgs[0][0];
@@ -5375,6 +5417,7 @@
       button.querySelector('img').src = imgs[i][2] || imgs[i][0];
       button.addEventListener('click', () => showGalleryImage(i, i >= currentGalleryIndex ? 1 : -1));
     });
+    imgs.slice(1).forEach(([src]) => preloadGalleryImage(src));
 
     let swipeStartX = null;
     let swipeStartY = null;
