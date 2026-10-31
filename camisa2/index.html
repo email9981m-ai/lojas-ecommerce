@@ -204,23 +204,34 @@
     .product-tab-content strong { color: var(--ink); font-weight: 750; }
     .kit-description { max-width: 980px; margin: 0 auto; }
     .product-tab-content .kit-description-intro { max-width: 900px; margin: 0 auto 18px; color: var(--ink-soft); }
-    .kit-description-hero { max-width: 720px; margin: 22px auto 26px; overflow: hidden; border: 1px solid #e4e9e5; border-radius: 10px; background: #f8f9f8; }
-    .kit-description-hero img { display: block; width: 100%; max-width: 520px; height: auto; max-height: none; margin-inline: auto; object-fit: contain; }
-    .kit-description-hero figcaption { padding: 10px 14px; border-top: 1px solid #e8ece8; color: #68716a; font-size: 12px; text-align: center; }
+    .kit-description-hero { max-width: 420px; margin: 20px auto 24px; overflow: hidden; border: 1px solid #e3e8e4; border-radius: 8px; background: #fff; }
+    .kit-description-hero img { display: block; width: 100%; max-width: 340px; height: auto; max-height: none; margin-inline: auto; object-fit: contain; }
+    .kit-description-hero figcaption { padding: 9px 12px; border-top: 1px solid #eef1ee; color: #68716a; font-size: 11px; text-align: center; }
     .kit-description-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 900px; margin: 22px auto; }
     .kit-description-card { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #e3e8e4; border-radius: 8px; background: #fff; }
     .kit-description-card img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; padding: 9px; background: #f7f8f7; }
     .kit-description-card figcaption { display: grid; gap: 4px; padding: 11px 12px 13px; border-top: 1px solid #eef1ee; }
     .kit-description-card figcaption strong { font-size: 13px; }
     .kit-description-card figcaption span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .kit-description-eyebrow { max-width: 900px; margin: 0 auto 6px; color: var(--brand); font-size: 10px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    .kit-description-title { max-width: 900px; margin: 0 auto 10px; color: var(--ink); font-size: clamp(21px, 2.8vw, 28px); line-height: 1.18; letter-spacing: -.035em; }
+    .product-tab-content .kit-description-text { max-width: 900px; margin: 0 auto 13px; color: var(--ink-soft); font-size: 13px; line-height: 1.72; }
+    .kit-description-section-title { max-width: 900px; margin: 24px auto 8px; color: var(--ink); font-size: 18px; line-height: 1.3; letter-spacing: -.02em; }
+    .kit-description-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 900px; margin: 20px auto 0; }
+    .kit-description-detail { padding: 15px; border: 1px solid #e4e9e5; border-radius: 8px; background: #fafbfa; }
+    .kit-description-detail h4 { margin: 0 0 6px; color: var(--ink); font-size: 13px; }
+    .product-tab-content .kit-description-detail p { max-width: none; margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.65; }
+    @media (max-width: 520px) { .kit-description-details { grid-template-columns: 1fr; gap: 9px; } .kit-description-detail { padding: 13px; } }
     .product-tab-content .kit-description-note { max-width: 900px; margin: 20px auto 0; padding: 12px 14px; border-left: 3px solid var(--brand); background: #f5f8f5; color: #58625a; font-size: 12px; line-height: 1.6; }
     @media (max-width: 520px) {
-      .kit-description-hero { margin: 18px auto 20px; }
-      .kit-description-grid { gap: 8px; margin: 18px auto; }
-      .kit-description-card img { padding: 5px; }
-      .kit-description-card figcaption { padding: 8px 7px 10px; }
-      .kit-description-card figcaption strong { font-size: 11px; }
-      .kit-description-card figcaption span { font-size: 10px; }
+      .kit-description-hero { max-width: 290px; margin: 18px auto 20px; }
+      .kit-description-hero img { max-width: 260px; }
+      .kit-description-grid { grid-template-columns: 1fr; gap: 10px; margin: 18px auto; }
+      .kit-description-card { display: grid; grid-template-columns: minmax(104px, 38%) minmax(0, 1fr); align-items: stretch; }
+      .kit-description-card img { padding: 6px; }
+      .kit-description-card figcaption { align-content: center; padding: 10px 12px; border-top: 0; border-left: 1px solid #eef1ee; }
+      .kit-description-card figcaption strong { font-size: 13px; }
+      .kit-description-card figcaption span { font-size: 11px; }
     }
 
     .customer-reviews { margin-top: 54px; padding: 28px; border: 1px solid #e1e7e2; border-top: 4px solid var(--brand); border-radius: 16px; background: #f8faf8; box-shadow: 0 10px 30px rgba(28, 45, 33, .045); }
@@ -4984,26 +4995,43 @@
       </nav>
       <div class="product-tab-content" id="product-details">
         <div class="kit-description">
-          <p class="kit-description-intro">O Kit Completo Corinthians reúne três itens em uma só composição: camiseta preta do Corinthians, corrente prateada com pingente preto e copo térmico preto. As imagens abaixo mostram o conjunto e cada item separadamente para deixar claro o que acompanha o kit.</p>
+          <p class="kit-description-eyebrow">DESCRIÇÃO DO PRODUTO</p>
+          <h3 class="kit-description-title">Paixão pelo Corinthians em um kit completo</h3>
+          <p class="kit-description-intro">O Kit Completo Corinthians reúne três itens: uma camiseta original licenciada, uma corrente legítima em prata 925 com pingente preto e um copo térmico preto de 700 ml. A camiseta tem composição de 95% algodão e 5% elastano. A combinação reúne vestuário e acessórios com a identidade visual do Timão.</p>
+          <p class="kit-description-text">Abaixo, você pode conferir a apresentação geral do conjunto e observar cada produto separadamente. Use as imagens e as informações desta página para entender o que acompanha o kit e, antes de finalizar, confirme a disponibilidade e os detalhes comerciais diretamente com a loja.</p>
           <figure class="kit-description-hero">
             <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Composição do kit completo Corinthians com camiseta preta, corrente com pingente e copo térmico">
             <figcaption>Visão geral do conjunto: camiseta, corrente com pingente e copo térmico.</figcaption>
           </figure>
+          <h4 class="kit-description-section-title">O que acompanha o kit</h4>
+          <p class="kit-description-text">O conjunto é composto por uma unidade de cada item listado abaixo. As imagens individuais ajudam a visualizar o modelo e os detalhes aparentes de cada peça.</p>
           <div class="kit-description-grid" aria-label="Detalhes dos três itens incluídos no kit">
             <figure class="kit-description-card">
               <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/XoLJeSzMaBilMThF.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Camiseta preta do Corinthians vista de frente">
-              <figcaption><strong>Camiseta preta</strong><span>Modelo do Corinthians. Consulte os tamanhos disponíveis P, M e G.</span></figcaption>
+              <figcaption><strong>Camiseta preta</strong><span>Camiseta original licenciada do Corinthians, com escudo frontal e composição de 95% algodão e 5% elastano. Disponível nos tamanhos P, M e G, conforme estoque; consulte a tabela de medidas da loja.</span></figcaption>
             </figure>
             <figure class="kit-description-card">
-              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Copo térmico preto do Corinthians">
-              <figcaption><strong>Copo térmico</strong><span>Peça preta com símbolo do Corinthians, conforme a imagem.</span></figcaption>
+              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/HkrgkGdyvXHEoFSb.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Copo térmico preto do Corinthians com indicação de 700 ml">
+              <figcaption><strong>Copo térmico</strong><span>Copo térmico preto com símbolo do Corinthians e capacidade de 700 ml. Para detalhes sobre conservação e uso, consulte as orientações do fornecedor.</span></figcaption>
             </figure>
             <figure class="kit-description-card">
               <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/KdfbYLNFLOhIkJTC.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Corrente prateada com pingente preto do Corinthians">
-              <figcaption><strong>Corrente com pingente</strong><span>Corrente prateada com pingente preto do Corinthians.</span></figcaption>
+              <figcaption><strong>Corrente com pingente</strong><span>Corrente legítima em prata 925 com pingente preto do Corinthians. Para conferir comprimento, tipo de fecho e orientações de conservação, consulte a loja.</span></figcaption>
             </figure>
+            <figure class="kit-description-card">
           </div>
-          <p class="kit-description-note"><strong>Conteúdo do kit:</strong> 1 camiseta preta, 1 corrente com pingente e 1 copo térmico. Confira o tamanho, a disponibilidade, o frete e o prazo com a loja antes de concluir o pedido.</p>
+          <h4 class="kit-description-section-title">Orientações antes da compra</h4>
+          <div class="kit-description-details">
+            <section class="kit-description-detail" aria-labelledby="kit-size-title">
+              <h4 id="kit-size-title">Como escolher o tamanho</h4>
+              <p>Selecione P, M ou G conforme as opções disponíveis. Sempre que possível, compare as medidas da tabela da loja com uma camiseta que vista bem; se precisar de ajuda, solicite as medidas antes de concluir o pedido.</p>
+            </section>
+            <section class="kit-description-detail" aria-labelledby="kit-specs-title">
+              <h4 id="kit-specs-title">Detalhes dos acessórios</h4>
+              <p>O copo térmico tem capacidade de 700 ml e a corrente é de prata 925 legítima. Para dados não informados nesta página, como comprimento e tipo de fecho da corrente ou instruções de conservação, consulte a loja.</p>
+            </section>
+          </div>
+          <p class="kit-description-note"><strong>Conteúdo do kit:</strong> 1 camiseta preta + 1 corrente com pingente + 1 copo térmico. A foto do modelo em uso é ilustrativa e não representa um item adicional. Confira tamanho, estoque, frete, prazo e valor total com a loja antes de finalizar.</p>
         </div>
       </div>
     </section>
@@ -5013,7 +5041,7 @@
       <div class="similar-grid" aria-label="Três itens incluídos e imagem ilustrativa do kit em uso">
         <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="1" aria-label="Ampliar imagem: camiseta incluída no kit"><img data-similar-image="shirt" data-similar-src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/XoLJeSzMaBilMThF.webp" alt="Camiseta preta do Corinthians vista de frente"></button><strong>Camiseta Corinthians</strong><span>Incluída no kit</span></article>
         <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="2" aria-label="Ampliar imagem: corrente incluída no kit"><img data-similar-image="4" alt="Corrente e pingente do Corinthians, incluídos no kit"></button><strong>Corrente e pingente</strong><span>Incluídos no kit</span></article>
-        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="3" aria-label="Ampliar imagem: copo térmico incluído no kit"><img data-similar-image="3" alt="Copo térmico preto do Corinthians, incluído no kit"></button><strong>Copo térmico</strong><span>Incluído no kit</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="3" aria-label="Ampliar imagem: copo térmico incluído no kit"><img data-similar-image="3" alt="Copo térmico preto do Corinthians, incluído no kit, com capacidade de 700 ml"></button><strong>Copo térmico</strong><span>Incluído no kit</span></article>
         <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="4" aria-label="Ampliar imagem ilustrativa do modelo usando o kit completo"><img data-similar-image="0" alt="Modelo usando o kit completo Corinthians: camiseta, corrente e copo térmico"></button><strong>Kit completo em uso</strong><span>Imagem ilustrativa</span></article>
       </div>
     </section>
@@ -5327,7 +5355,7 @@
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/EVqIjLLoFeDBAejf.webp", "Modelo do kit Corinthians segurando o copo, com corrente e pingente preto"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp", "Kit Corinthians em composição: camiseta sem corte, copo térmico e pingente totalmente visível", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/zJXOfgFMRutfdkNc.webp"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/vWYeOwQyYbjWPIpB.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/NbgVeGFslkPlQNpR.webp"],
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp", "Copo térmico preto do Corinthians em detalhe"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/HkrgkGdyvXHEoFSb.webp", "Copo térmico preto do Corinthians com capacidade de 700 ml em detalhe"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/KdfbYLNFLOhIkJTC.webp", "Corrente prateada e pingente preto do Corinthians em detalhe"]
     ];
     const $ = (id) => document.getElementById(id);
