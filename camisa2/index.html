@@ -202,6 +202,26 @@
     .product-tab-content { width: 100%; margin: 0; padding: 24px 16px 30px; background: #fff; }
     .product-tab-content p { max-width: 900px; margin: 0 auto; color: var(--ink-soft); font-size: 14px; line-height: 1.72; }
     .product-tab-content strong { color: var(--ink); font-weight: 750; }
+    .kit-description { max-width: 980px; margin: 0 auto; }
+    .product-tab-content .kit-description-intro { max-width: 900px; margin: 0 auto 18px; color: var(--ink-soft); }
+    .kit-description-hero { max-width: 720px; margin: 22px auto 26px; overflow: hidden; border: 1px solid #e4e9e5; border-radius: 10px; background: #f8f9f8; }
+    .kit-description-hero img { display: block; width: 100%; max-width: 520px; height: auto; max-height: none; margin-inline: auto; object-fit: contain; }
+    .kit-description-hero figcaption { padding: 10px 14px; border-top: 1px solid #e8ece8; color: #68716a; font-size: 12px; text-align: center; }
+    .kit-description-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 900px; margin: 22px auto; }
+    .kit-description-card { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #e3e8e4; border-radius: 8px; background: #fff; }
+    .kit-description-card img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; padding: 9px; background: #f7f8f7; }
+    .kit-description-card figcaption { display: grid; gap: 4px; padding: 11px 12px 13px; border-top: 1px solid #eef1ee; }
+    .kit-description-card figcaption strong { font-size: 13px; }
+    .kit-description-card figcaption span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .product-tab-content .kit-description-note { max-width: 900px; margin: 20px auto 0; padding: 12px 14px; border-left: 3px solid var(--brand); background: #f5f8f5; color: #58625a; font-size: 12px; line-height: 1.6; }
+    @media (max-width: 520px) {
+      .kit-description-hero { margin: 18px auto 20px; }
+      .kit-description-grid { gap: 8px; margin: 18px auto; }
+      .kit-description-card img { padding: 5px; }
+      .kit-description-card figcaption { padding: 8px 7px 10px; }
+      .kit-description-card figcaption strong { font-size: 11px; }
+      .kit-description-card figcaption span { font-size: 10px; }
+    }
 
     .customer-reviews { margin-top: 54px; padding: 28px; border: 1px solid #e1e7e2; border-top: 4px solid var(--brand); border-radius: 16px; background: #f8faf8; box-shadow: 0 10px 30px rgba(28, 45, 33, .045); }
     .reviews-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
@@ -4963,28 +4983,38 @@
         <ul class="product-tab-list"><li class="active"><a id="product-info-tab" href="#product-details">Informações do Produto</a></li></ul>
       </nav>
       <div class="product-tab-content" id="product-details">
-        <p>
-          A camiseta casual Corinthians é uma peça essencial para quem quer levar a paixão pelo Timão ao visual do dia a dia. Com visual confortável e versátil, ela combina simplicidade, identidade e estilo para diferentes ocasiões.<br><br>
-          <strong>Principais características:</strong><br><br>
-          <strong>Visual de torcida:</strong> o brasão do Corinthians destaca a identidade da peça e cria um ponto de destaque no look.<br><br>
-          <strong>Conforto para o dia a dia:</strong> a modelagem foi pensada para acompanhar a rotina com liberdade de movimento e uso versátil.<br><br>
-          <strong>Estilo casual:</strong> combine a camiseta com jeans, bermudas ou outras peças básicas para criar produções simples e autênticas.<br><br>
-          <strong>Detalhes da peça:</strong> consulte as imagens da galeria para observar a frente, as costas, o brasão e a etiqueta.<br><br>
-          <strong>Tamanhos:</strong><br><br>
-          Escolha entre P, M e G. Compare uma camiseta que veste bem com as opções disponíveis antes de selecionar.<br><br>
-          <strong>Cuidados:</strong><br><br>
-          Siga as instruções da etiqueta para preservar o tecido, as cores e os detalhes da camiseta. Evite produtos agressivos e prefira a lavagem adequada à composição da peça.<br><br>
-          A disponibilidade, o prazo e eventuais custos de entrega devem ser confirmados antes da conclusão do pedido.
-        </p>
+        <div class="kit-description">
+          <p class="kit-description-intro">O Kit Completo Corinthians reúne três itens em uma só composição: camiseta preta do Corinthians, corrente prateada com pingente preto e copo térmico preto. As imagens abaixo mostram o conjunto e cada item separadamente para deixar claro o que acompanha o kit.</p>
+          <figure class="kit-description-hero">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Composição do kit completo Corinthians com camiseta preta, corrente com pingente e copo térmico">
+            <figcaption>Visão geral do conjunto: camiseta, corrente com pingente e copo térmico.</figcaption>
+          </figure>
+          <div class="kit-description-grid" aria-label="Detalhes dos três itens incluídos no kit">
+            <figure class="kit-description-card">
+              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/XoLJeSzMaBilMThF.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Camiseta preta do Corinthians vista de frente">
+              <figcaption><strong>Camiseta preta</strong><span>Modelo do Corinthians. Consulte os tamanhos disponíveis P, M e G.</span></figcaption>
+            </figure>
+            <figure class="kit-description-card">
+              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Copo térmico preto do Corinthians">
+              <figcaption><strong>Copo térmico</strong><span>Peça preta com símbolo do Corinthians, conforme a imagem.</span></figcaption>
+            </figure>
+            <figure class="kit-description-card">
+              <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/KdfbYLNFLOhIkJTC.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Corrente prateada com pingente preto do Corinthians">
+              <figcaption><strong>Corrente com pingente</strong><span>Corrente prateada com pingente preto do Corinthians.</span></figcaption>
+            </figure>
+          </div>
+          <p class="kit-description-note"><strong>Conteúdo do kit:</strong> 1 camiseta preta, 1 corrente com pingente e 1 copo térmico. Confira o tamanho, a disponibilidade, o frete e o prazo com a loja antes de concluir o pedido.</p>
+        </div>
       </div>
     </section>
 
     <section class="similar-products" aria-labelledby="similar-title">
       <div class="similar-head"><div><p>O que vem no kit</p><h2 id="similar-title">Três itens. Um kit completo.</h2></div><small>Camiseta, corrente com pingente e copo térmico.</small></div>
-      <div class="similar-grid">
-        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="1" aria-label="Ampliar imagem: camiseta incluída no kit"><img data-similar-image="2" alt="Camiseta apresentada na arte do kit completo Corinthians"></button><strong>Camiseta Corinthians</strong><span>Incluída no kit</span></article>
+      <div class="similar-grid" aria-label="Três itens incluídos e imagem ilustrativa do kit em uso">
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="1" aria-label="Ampliar imagem: camiseta incluída no kit"><img data-similar-image="shirt" data-similar-src="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/XoLJeSzMaBilMThF.webp" alt="Camiseta preta do Corinthians vista de frente"></button><strong>Camiseta Corinthians</strong><span>Incluída no kit</span></article>
         <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="2" aria-label="Ampliar imagem: corrente incluída no kit"><img data-similar-image="4" alt="Corrente e pingente do Corinthians, incluídos no kit"></button><strong>Corrente e pingente</strong><span>Incluídos no kit</span></article>
         <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="3" aria-label="Ampliar imagem: copo térmico incluído no kit"><img data-similar-image="3" alt="Copo térmico preto do Corinthians, incluído no kit"></button><strong>Copo térmico</strong><span>Incluído no kit</span></article>
+        <article class="similar-card"><button class="similar-image similar-image-button" type="button" data-image-view="4" aria-label="Ampliar imagem ilustrativa do modelo usando o kit completo"><img data-similar-image="0" alt="Modelo usando o kit completo Corinthians: camiseta, corrente e copo térmico"></button><strong>Kit completo em uso</strong><span>Imagem ilustrativa</span></article>
       </div>
     </section>
 
@@ -4997,10 +5027,10 @@
       <div class="reviews-heading">
         <div>
           <p class="eyebrow">Opiniões sobre o produto</p>
-          <h2 id="reviews-title">Avaliações dos clientes</h2>
-          <p class="reviews-subtitle">Explore a demonstração e use os filtros para navegar pelas avaliações de exemplo.</p>
+          <h2 id="reviews-title">Avaliações demonstrativas do kit</h2>
+          <p class="reviews-subtitle">Exemplos de comentários sobre o kit completo: camiseta, corrente com pingente e copo térmico. Os textos e as notas são fictícios.</p>
         </div>
-        <span class="reviews-count">50 avaliações de exemplo</span>
+        <span class="reviews-count">50 exemplos demonstrativos</span>
       </div>
       <div class="review-layout">
         <div class="review-main">
@@ -5015,7 +5045,7 @@
                 <span class="average-stars" aria-label="4,8 de 5 estrelas" role="img">★★★★★</span>
                 <span class="average-out-of">de 5,0</span>
               </div>
-              <p class="average-caption">Média geral baseada em 50 avaliações demonstrativas. A média exata dos exemplos é 4,82, exibida arredondada para uma casa decimal.</p>
+              <p class="average-caption">Resumo demonstrativo de 50 exemplos fictícios; não representa a nota ou a experiência de clientes reais.</p>
             </div>
             <div class="average-breakdown" aria-label="Distribuição das notas">
               <div class="average-row"><span>5 estrelas</span><div class="average-track" aria-hidden="true"><div class="average-fill" style="width:82%"></div></div><span class="average-count">41</span></div>
@@ -5026,7 +5056,7 @@
             </div>
           </section>
           <div class="reviews-toolbar">
-            <strong>Exemplos de avaliações</strong>
+            <strong>Exemplos sobre o kit completo</strong>
             <div class="review-controls">
               <label class="reviews-sort" for="reviews-filter">Nota
                 <select id="reviews-filter" aria-label="Filtrar avaliações por nota">
@@ -5611,7 +5641,7 @@
       button.title = added ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
     });
     document.querySelectorAll('[data-similar-image]').forEach((image) => {
-      image.src = imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
+      image.src = image.dataset.similarSrc || imgs[Number(image.dataset.similarImage)]?.[0] || imgs[0][0];
     });
     const imageView = $('image-view-dialog');
     let imageViewItems = [];
@@ -5684,56 +5714,56 @@
 
 
     const DEMO_REVIEWS = [
-      { name: "Camila R.", date: "18 out. 2026", text: "Comprei pela estampa e gostei mais ainda quando vi o brasão de perto. Ficou bem bonita no look.", rating: 5 },
-      { name: "Rafael M.", date: "18 out. 2026", text: "Curti bastante. É uma camiseta de torcida sem aquele visual carregado, combina fácil com jeans.", rating: 5 },
-      { name: "Juliana S.", date: "18 out. 2026", text: "A estampa é bem bonita e o preto deixa a peça fácil de usar. Já entrou para os meus looks de jogo.", rating: 5 },
-      { name: "Diego A.", date: "17 out. 2026", text: "Gostei da camiseta. O destaque do Corinthians ficou na medida certa e o visual é bem versátil.", rating: 4 },
-      { name: "Mariana F.", date: "17 out. 2026", text: "Presente para meu irmão e ele adorou. O modelo é simples, mas tem bastante personalidade.", rating: 5 },
-      { name: "Bruno C.", date: "17 out. 2026", text: "Gostei muito do visual, principalmente do escudo. Dá para usar no dia a dia sem ficar exagerado.", rating: 5 },
-      { name: "Larissa P.", date: "16 out. 2026", text: "A camiseta é linda! O preto com o símbolo do Timão ficou uma combinação certeira.", rating: 5 },
-      { name: "André L.", date: "16 out. 2026", text: "Boa opção para quem quer mostrar que é corintiano de um jeito mais casual. Curti.", rating: 4 },
-      { name: "Fernanda G.", date: "16 out. 2026", text: "O design é bonito e combina com várias peças. Gostei bastante da proposta.", rating: 5 },
-      { name: "Lucas T.", date: "15 out. 2026", text: "Bem legal, o brasão chama atenção e a camiseta fica com um visual bacana.", rating: 5 },
-      { name: "Priscila N.", date: "15 out. 2026", text: "Comprei para usar nos jogos e gostei muito. O estilo é discreto e ainda representa o Timão.", rating: 5 },
-      { name: "Eduardo V.", date: "15 out. 2026", text: "Gostei da estampa e da proposta mais casual. É bem o tipo de camiseta que eu estava procurando.", rating: 5 },
-      { name: "Beatriz O.", date: "14 out. 2026", text: "O visual é ainda mais bonito do que eu imaginava. O escudo fica em evidência sem pesar.", rating: 5 },
-      { name: "Felipe D.", date: "14 out. 2026", text: "Camiseta bonita, fácil de combinar e com a cara da torcida. Recomendo para quem curte o Corinthians.", rating: 5 },
-      { name: "Aline B.", date: "13 out. 2026", text: "Adorei! O modelo é simples e o detalhe do time deixa a peça especial.", rating: 5 },
-      { name: "Thiago E.", date: "13 out. 2026", text: "Gostei bastante do resultado. Usei com jeans e ficou um look casual bem legal.", rating: 4 },
-      { name: "Renata K.", date: "13 out. 2026", text: "A camiseta tem um visual caprichado e o brasão é o que mais gostei nela.", rating: 5 },
-      { name: "Gustavo H.", date: "12 out. 2026", text: "Boa camiseta para o dia a dia. Curti que dá para usar também fora dos dias de jogo.", rating: 5 },
-      { name: "Isabela M.", date: "12 out. 2026", text: "Presente para meu pai, que é corintiano desde sempre. Ele gostou muito do estilo.", rating: 5 },
-      { name: "Caio R.", date: "12 out. 2026", text: "Gostei da combinação do preto com o símbolo. Ficou discreta e com identidade.", rating: 5 },
-      { name: "Natália C.", date: "11 out. 2026", text: "O visual é muito bonito e combina com bastante coisa. Já usei algumas vezes.", rating: 5 },
-      { name: "Vitor P.", date: "11 out. 2026", text: "Curti a camiseta. Para quem gosta do Timão e prefere algo mais básico, é uma boa escolha.", rating: 5 },
-      { name: "Amanda L.", date: "11 out. 2026", text: "Achei linda! O escudo dá um toque especial e não fica exagerado.", rating: 5 },
-      { name: "Rodrigo F.", date: "10 out. 2026", text: "Gostei da proposta e do visual. É uma camiseta que funciona bem em várias ocasiões casuais.", rating: 4 },
-      { name: "Carolina A.", date: "10 out. 2026", text: "Comprei para meu namorado e ele adorou. O detalhe do Corinthians ficou muito legal.", rating: 5 },
-      { name: "Marcelo S.", date: "09 out. 2026", text: "Visual bonito e simples, do jeito que eu gosto. O brasão se destaca bastante.", rating: 5 },
-      { name: "Patrícia R.", date: "09 out. 2026", text: "A estampa é o ponto alto. Ficou bem bonita com calça jeans e tênis.", rating: 5 },
-      { name: "Henrique M.", date: "09 out. 2026", text: "Camiseta bacana para torcer. Gostei do estilo mais limpo e fácil de combinar.", rating: 5 },
-      { name: "Sofia D.", date: "08 out. 2026", text: "Meu irmão adorou o presente. O design é bonito e representa bem o time.", rating: 5 },
-      { name: "Danilo G.", date: "08 out. 2026", text: "Bem legal para usar no cotidiano. O escudo dá personalidade sem deixar a peça chamativa demais.", rating: 4 },
-      { name: "Bianca T.", date: "08 out. 2026", text: "Gostei muito do estilo casual. Dá para montar um look de torcida sem ficar só com cara de uniforme.", rating: 5 },
-      { name: "Igor N.", date: "07 out. 2026", text: "O preto é fácil de combinar e o detalhe do Timão ficou bem bacana.", rating: 5 },
-      { name: "Letícia V.", date: "07 out. 2026", text: "A camiseta é bonita e tem um visual versátil. Foi uma boa escolha para presentear.", rating: 5 },
-      { name: "Renan B.", date: "07 out. 2026", text: "Curti bastante o modelo. O símbolo do Corinthians aparece bem e dá o toque que faltava.", rating: 5 },
-      { name: "Débora C.", date: "06 out. 2026", text: "É simples, bonita e combina com meu estilo. Gostei da ideia da peça.", rating: 4 },
-      { name: "Fábio O.", date: "06 out. 2026", text: "Boa camiseta para quem é torcedor. O visual é discreto e ao mesmo tempo tem identidade.", rating: 5 },
-      { name: "Elaine P.", date: "06 out. 2026", text: "Presente para meu filho. Ele gostou muito e já quis usar para assistir ao jogo.", rating: 5 },
-      { name: "Murilo A.", date: "05 out. 2026", text: "Gostei da estampa, principalmente por não ser muito grande. Ficou na medida.", rating: 5 },
-      { name: "Cecília F.", date: "05 out. 2026", text: "O design é bem bonito e combina com jeans, bermuda, várias opções. Recomendo.", rating: 5 },
-      { name: "Alexandre K.", date: "04 out. 2026", text: "Visual bonito e bem corintiano. Gostei da camiseta para usar no fim de semana.", rating: 4 },
-      { name: "Melissa S.", date: "04 out. 2026", text: "A camiseta tem uma pegada casual que eu gostei bastante. O escudo ficou muito bonito.", rating: 5 },
-      { name: "Sérgio D.", date: "04 out. 2026", text: "Comprei pela paixão pelo Corinthians e gostei do estilo. É mais versátil do que uma camisa de jogo.", rating: 5 },
-      { name: "Mônica H.", date: "03 out. 2026", text: "Ficou ótima com uma calça básica. Adorei o visual e o detalhe do brasão.", rating: 5 },
-      { name: "Pedro L.", date: "03 out. 2026", text: "Gostei bastante. É uma camiseta simples, mas o símbolo deixa claro para qual time vai a torcida.", rating: 4 },
-      { name: "Raquel E.", date: "03 out. 2026", text: "Meu marido gostou muito do presente. A estampa é discreta e a camiseta tem estilo.", rating: 5 },
-      { name: "Wesley C.", date: "02 out. 2026", text: "Uma boa opção para torcedor. Gostei que o visual funciona também no dia a dia.", rating: 5 },
-      { name: "Luana M.", date: "02 out. 2026", text: "Amei o detalhe do Corinthians. É o tipo de camiseta casual que eu estava procurando.", rating: 5 },
-      { name: "Roberto T.", date: "02 out. 2026", text: "Bonita e fácil de combinar. O brasão é o destaque, sem deixar o visual carregado.", rating: 5 },
-      { name: "Gabriela N.", date: "01 out. 2026", text: "Comprei para usar no jogo e gostei bastante. O estilo é casual e o símbolo ficou bem bonito.", rating: 4 },
-      { name: "Daniela A.", date: "01 out. 2026", text: "Gostei da camiseta e da proposta. É uma forma legal de levar o Timão para o look do dia a dia.", rating: 5 }
+      { name: "Camila R.", date: "18 out. 2026", text: "A proposta do kit fica clara: camiseta preta, corrente com pingente e copo térmico.", rating: 5 },
+      { name: "Rafael M.", date: "18 out. 2026", text: "Gostei de ver camiseta, corrente e copo térmico reunidos em um único conjunto.", rating: 5 },
+      { name: "Juliana S.", date: "18 out. 2026", text: "A imagem ajuda a entender os três itens que acompanham o kit do Corinthians.", rating: 5 },
+      { name: "Diego A.", date: "17 out. 2026", text: "A camiseta preta é o destaque, e o copo e a corrente completam a composição.", rating: 4 },
+      { name: "Mariana F.", date: "17 out. 2026", text: "Como ideia de presente, o kit reúne camiseta, corrente com pingente e copo térmico.", rating: 5 },
+      { name: "Bruno C.", date: "17 out. 2026", text: "Curti a combinação da camiseta do Timão com o copo preto e o pingente.", rating: 5 },
+      { name: "Larissa P.", date: "16 out. 2026", text: "A descrição deixa claro que o kit inclui três itens, sem confundir a composição.", rating: 5 },
+      { name: "André L.", date: "16 out. 2026", text: "Camiseta, corrente e copo aparecem juntos numa proposta visual de torcida.", rating: 4 },
+      { name: "Fernanda G.", date: "16 out. 2026", text: "O copo térmico e o pingente complementam a camiseta do Corinthians.", rating: 5 },
+      { name: "Lucas T.", date: "15 out. 2026", text: "Gostei de ver o kit apresentado com a camiseta e os dois acessórios.", rating: 5 },
+      { name: "Priscila N.", date: "15 out. 2026", text: "A camiseta preta, o copo térmico e a corrente formam uma combinação coerente.", rating: 5 },
+      { name: "Eduardo V.", date: "15 out. 2026", text: "A composição mostra de forma objetiva o que vem no kit do Timão.", rating: 5 },
+      { name: "Beatriz O.", date: "14 out. 2026", text: "Interessante reunir uma camiseta do Corinthians com copo e corrente no mesmo conjunto.", rating: 5 },
+      { name: "Felipe D.", date: "14 out. 2026", text: "A corrente com pingente e o copo dão complemento à camiseta do kit.", rating: 5 },
+      { name: "Aline B.", date: "13 out. 2026", text: "A descrição lista os três itens e ajuda a entender a proposta do kit completo.", rating: 5 },
+      { name: "Thiago E.", date: "13 out. 2026", text: "A camiseta fica em evidência, acompanhada do copo térmico e da corrente.", rating: 4 },
+      { name: "Renata K.", date: "13 out. 2026", text: "Gostei da combinação de cores entre camiseta, copo preto e pingente.", rating: 5 },
+      { name: "Gustavo H.", date: "12 out. 2026", text: "O kit com camiseta e acessórios pode ser uma ideia temática de presente.", rating: 5 },
+      { name: "Isabela M.", date: "12 out. 2026", text: "As imagens deixam visíveis a camiseta, a corrente e o copo térmico.", rating: 5 },
+      { name: "Caio R.", date: "12 out. 2026", text: "O kit junta uma camiseta do Corinthians e dois acessórios.", rating: 5 },
+      { name: "Natália C.", date: "11 out. 2026", text: "A camiseta preta com o copo e a corrente criam um conjunto de torcedor.", rating: 5 },
+      { name: "Vitor P.", date: "11 out. 2026", text: "Curti que o copo térmico está incluído junto da camiseta e do pingente.", rating: 5 },
+      { name: "Amanda L.", date: "11 out. 2026", text: "A apresentação ajuda a distinguir os três itens incluídos no kit.", rating: 5 },
+      { name: "Rodrigo F.", date: "10 out. 2026", text: "Uma proposta com camiseta, corrente e copo para quem acompanha o Timão.", rating: 4 },
+      { name: "Carolina A.", date: "10 out. 2026", text: "O pingente e o copo térmico completam o visual da camiseta preta.", rating: 5 },
+      { name: "Marcelo S.", date: "09 out. 2026", text: "O kit pode servir como presente temático para torcedor do Corinthians.", rating: 5 },
+      { name: "Patrícia R.", date: "09 out. 2026", text: "Gostei da clareza: camiseta, corrente com pingente e copo térmico no mesmo kit.", rating: 5 },
+      { name: "Henrique M.", date: "09 out. 2026", text: "Os três itens do kit combinam com a proposta de torcida.", rating: 5 },
+      { name: "Sofia D.", date: "08 out. 2026", text: "As fotos ajudam a identificar camiseta, copo e corrente separadamente.", rating: 5 },
+      { name: "Danilo G.", date: "08 out. 2026", text: "A combinação da camiseta do Corinthians com os acessórios parece versátil.", rating: 4 },
+      { name: "Bianca T.", date: "08 out. 2026", text: "Camiseta preta, copo térmico e corrente: uma proposta de kit bem definida.", rating: 5 },
+      { name: "Igor N.", date: "07 out. 2026", text: "A composição visual deixa evidente que o kit reúne os três itens.", rating: 5 },
+      { name: "Letícia V.", date: "07 out. 2026", text: "A camiseta e os acessórios do Timão aparecem organizados na descrição.", rating: 5 },
+      { name: "Renan B.", date: "07 out. 2026", text: "Gostei da ideia de juntar corrente e copo térmico à camiseta.", rating: 5 },
+      { name: "Débora C.", date: "06 out. 2026", text: "Uma forma interessante de reunir acessórios e camiseta do Corinthians.", rating: 4 },
+      { name: "Fábio O.", date: "06 out. 2026", text: "O copo e o pingente complementam a camiseta sem tirar o foco do kit.", rating: 5 },
+      { name: "Elaine P.", date: "06 out. 2026", text: "A descrição do kit facilita conferir o que está incluído.", rating: 5 },
+      { name: "Murilo A.", date: "05 out. 2026", text: "A camiseta, a corrente e o copo térmico formam um kit completo.", rating: 5 },
+      { name: "Cecília F.", date: "05 out. 2026", text: "A organização das fotos ajuda a visualizar cada componente do kit.", rating: 5 },
+      { name: "Alexandre K.", date: "04 out. 2026", text: "Gostei da unidade entre a camiseta preta, o copo e a corrente.", rating: 4 },
+      { name: "Melissa S.", date: "04 out. 2026", text: "A imagem geral do kit mostra os três itens juntos; os detalhes ajudam a conferir.", rating: 5 },
+      { name: "Sérgio D.", date: "04 out. 2026", text: "O kit combina a camiseta com dois acessórios temáticos do Corinthians.", rating: 5 },
+      { name: "Mônica H.", date: "03 out. 2026", text: "Corrente com pingente e copo térmico complementam a peça principal.", rating: 5 },
+      { name: "Pedro L.", date: "03 out. 2026", text: "A apresentação separa bem cada item sem esconder a composição do kit.", rating: 4 },
+      { name: "Raquel E.", date: "03 out. 2026", text: "Uma opção de presente com camiseta, corrente e copo do Timão.", rating: 5 },
+      { name: "Wesley C.", date: "02 out. 2026", text: "A descrição do kit deixa clara a presença dos três itens do Corinthians.", rating: 5 },
+      { name: "Luana M.", date: "02 out. 2026", text: "A camiseta preta vem acompanhada pelo copo térmico e pela corrente.", rating: 5 },
+      { name: "Roberto T.", date: "02 out. 2026", text: "As imagens e legendas facilitam entender o kit completo.", rating: 5 },
+      { name: "Gabriela N.", date: "01 out. 2026", text: "Gostei da proposta visual do kit com camiseta e acessórios do Corinthians.", rating: 4 },
+      { name: "Daniela A.", date: "01 out. 2026", text: "A composição mostra camiseta, corrente e copo térmico num só conjunto.", rating: 5 }
     ];
     let currentReviewBlock = 0;
     function renderReviews() {
@@ -5793,12 +5823,12 @@
         headline.className = 'review-title';
         const reviewCopy = item.text.toLowerCase();
         headline.textContent = /presente|irmão|pai|marido|filho|namorado/.test(reviewCopy)
-          ? 'Uma boa opção para presentear'
-          : /escudo|brasão|estampa|símbolo|design/.test(reviewCopy)
-            ? 'Visual e detalhes em destaque'
-            : /combina|jeans|look|casual|dia a dia|cotidiano/.test(reviewCopy)
-              ? 'Estilo casual e versátil'
-              : 'Uma proposta que gostei';
+          ? 'Ideia demonstrativa de presente'
+          : /camiseta/.test(reviewCopy) && /copo/.test(reviewCopy) && /corrente/.test(reviewCopy)
+            ? 'Os três itens do kit em destaque'
+            : /copo|corrente|pingente/.test(reviewCopy)
+              ? 'Detalhes que completam o kit'
+              : 'Kit Corinthians completo';
         const text = document.createElement('p');
         text.className = 'review-text';
         text.textContent = item.text;
