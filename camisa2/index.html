@@ -151,6 +151,7 @@
     .size:active { transform: scale(.98); }
     .size-fieldset { margin: 0 0 14px; padding: 0; border: 0; }
     .product-info > #add-button { margin-top: 0; }
+    .shipping-result > #shipping-add-button { margin-top: 0; }
     .hint { min-height: 19px; margin: 8px 0 0; color: var(--muted); font-size: 11px; }
     .hint.error { color: var(--red); }
     .cta { position: relative; width: 100%; min-height: 68px; display: inline-flex; justify-content: center; align-items: center; gap: 11px; margin-top: 7px; padding: 13px 19px; overflow: hidden; border: 1px solid var(--brand-dark); border-radius: 12px; background: linear-gradient(135deg, var(--brand) 0%, #3b7b5b 100%); color: #fff; box-shadow: 0 8px 18px rgba(36,83,61,.2), inset 0 1px 0 rgba(255,255,255,.18); font-size: 15px; font-weight: 800; letter-spacing: .005em; cursor: pointer; transition: background .18s, border-color .18s, transform .18s, box-shadow .18s; }
@@ -185,6 +186,22 @@
     .shipping-form input { min-width: 0; flex: 1; height: 42px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 12px; }
     .shipping-form button { height: 42px; padding: 0 17px; border: 1px solid var(--ink); border-radius: 8px; background: var(--ink); color: #fff; cursor: pointer; font-size: 12px; font-weight: 700; }
     .shipping-help { margin: 9px 0 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .shipping-lookup-status { margin-top: 11px; }
+    .shipping-result { display: grid; gap: 12px; margin-top: 12px; padding: 14px; border: 1px solid #c9d9cc; border-radius: 12px; background: #f8fbf8; box-shadow: 0 3px 10px rgba(30,50,35,.045); animation: checkout-address-reveal .28s ease-out both; }
+    .shipping-result[hidden] { display: none !important; }
+    .shipping-result-address { display: grid; gap: 4px; min-width: 0; }
+    .shipping-result-label { color: var(--brand-dark); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .shipping-result-address strong { color: #202c24; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+    .shipping-result-address small { color: #637067; font-size: 11px; }
+    .shipping-result-option { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; align-items: start; gap: 10px; padding: 12px; border: 1px solid #b8cdbb; border-radius: 10px; background: #fff; }
+    .shipping-result-icon { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 6px; background: #edf5ef; color: var(--brand); }
+    .shipping-result-icon svg { width: 15px; height: 15px; }
+    .shipping-result-copy { display: grid; gap: 3px; min-width: 0; }
+    .shipping-result-provider { color: #617066; font-size: 9px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+    .shipping-result-copy strong { color: #202c24; font-size: 12px; }
+    .shipping-result-copy small { color: #637067; font-size: 10px; line-height: 1.45; }
+    .shipping-result-price { color: var(--brand-dark); font-size: 13px; font-weight: 850; white-space: nowrap; }
+    @media (prefers-reduced-motion: reduce) { .shipping-result { animation: none; } }
     .product-actions-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin-top: 0; padding: 7px 0 11px; border-bottom: 1px solid var(--line); background: linear-gradient(var(--line), var(--line)) center / 1px 24px no-repeat; }
     .product-action { width: 100%; height: 44px; justify-self: stretch; display: inline-grid; place-items: center; border: 0; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; transition: color .18s, background .18s; }
     .product-action:hover { background: var(--brand-soft); color: var(--brand-dark); }
@@ -5026,10 +5043,18 @@
           <div class="shipping-heading"><strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Frete e prazo</strong><span id="shipping-status">Consulte pelo CEP</span></div>
           <label class="shipping-label" for="postal-code">CEP</label>
           <div class="shipping-form">
-            <input id="postal-code" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" autocomplete="postal-code">
-            <button type="button" id="calculate-shipping">Calcular</button>
+            <input id="postal-code" inputmode="numeric" maxlength="9" placeholder="Digite seu CEP" autocomplete="postal-code" aria-describedby="shipping-help shipping-lookup-status" aria-controls="shipping-result">
           </div>
-          <p class="shipping-help">Informe seu CEP para simular prazo e disponibilidade de entrega.</p>
+          <p class="shipping-help" id="shipping-help">Digite seu CEP para consultar o endereço e as opções de entrega.</p>
+          <p class="checkout-cep-status shipping-lookup-status" id="shipping-lookup-status" hidden role="status" aria-live="polite" aria-atomic="true" aria-busy="false"></p>
+          <div class="shipping-result" id="shipping-result" hidden role="region" aria-label="Endereço e opção de frete">
+            <div class="shipping-result-address"><span class="shipping-result-label">Endereço localizado</span><strong id="shipping-street"></strong><small id="shipping-city-state"></small></div>
+            <div class="shipping-result-option" aria-label="Opção de frete disponível: Correios, entrega padrão">
+              <span class="shipping-result-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h10.5v9H4zM14.5 10H18l2 2.5v4h-5.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 7 19Zm11 0a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 18 19Z" fill="currentColor"/></svg></span>
+              <span class="shipping-result-copy"><span class="shipping-result-provider">Correios</span><strong>Entrega padrão</strong><small>Até 3 dias úteis após o pagamento do frete</small></span><strong class="shipping-result-price">R$ 39,00</strong>
+            </div>
+        <button class="cta" id="shipping-add-button" type="button" aria-label="Adicionar camiseta à sacola e abrir o checkout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l1 12H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cta-copy"><span>Adicionar à sacola</span><small>Escolha seu tamanho e continue para o checkout</small></span><span class="cta-arrow" aria-hidden="true">→</span></button>
+          </div>
         </section>
 
         <div class="product-actions-row" role="group" aria-label="Ações do produto">
@@ -5652,6 +5677,7 @@
       openCart(false);
     }
     $('add-button').addEventListener('click', buy);
+    $('shipping-add-button').addEventListener('click', buy);
     $('sticky-button').addEventListener('click', buy);
     document.querySelectorAll('[data-final-size]').forEach((button) => button.addEventListener('click', () => {
       const matchingSize = document.querySelector(`.sizes .size[data-size="${button.dataset.finalSize}"]`);
@@ -5700,11 +5726,47 @@
     if (closeCartButton) closeCartButton.addEventListener('click', () => $('cart-dialog').close());
     $('close-icon').addEventListener('click', () => $('cart-dialog').close());
     $('cart-dialog').addEventListener('click', (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
-    $('calculate-shipping').addEventListener('click', () => {
-      const raw = $('postal-code').value.replace(/\D/g, '').slice(0, 8);
-      $('postal-code').value = raw.length > 5 ? `${raw.slice(0, 5)}-${raw.slice(5)}` : raw;
-      $('shipping-status').textContent = raw.length === 8 ? 'Simulação disponível' : 'Informe um CEP válido';
-      $('shipping-status').style.color = raw.length === 8 ? 'var(--brand-dark)' : 'var(--red)';
+    let shippingCepRequestId = 0;
+    $('postal-code').addEventListener('input', async () => {
+      const cepInput = $('postal-code');
+      const raw = cepInput.value.replace(/\D/g, '').slice(0, 8);
+      cepInput.value = raw.length > 5 ? `${raw.slice(0, 5)}-${raw.slice(5)}` : raw;
+      const status = $('shipping-lookup-status');
+      const result = $('shipping-result');
+      const headingStatus = $('shipping-status');
+      if (raw.length < 8) {
+        ++shippingCepRequestId;
+        status.hidden = true; status.className = 'checkout-cep-status shipping-lookup-status'; status.setAttribute('aria-busy', 'false'); status.textContent = '';
+        result.hidden = true; headingStatus.textContent = raw ? 'Digite o CEP completo' : 'Consulte pelo CEP'; headingStatus.style.color = '';
+        return;
+      }
+      const requestId = ++shippingCepRequestId;
+      const minimumLoadingDuration = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 700 : 3200;
+      const loadingStartedAt = Date.now();
+      const waitForMinimumLoading = async () => {
+        const remaining = minimumLoadingDuration - (Date.now() - loadingStartedAt);
+        if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
+      };
+      result.hidden = true;
+      status.hidden = false; status.className = 'checkout-cep-status shipping-lookup-status loading'; status.setAttribute('aria-busy', 'true'); status.textContent = 'Buscando seu endereço…';
+      headingStatus.textContent = 'Buscando endereço…'; headingStatus.style.color = 'var(--brand-dark)';
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${raw}/json/`);
+        if (!response.ok) throw new Error('Falha na consulta do CEP');
+        const data = await response.json();
+        await waitForMinimumLoading();
+        if (requestId !== shippingCepRequestId) return;
+        if (data.erro || !data.localidade || !data.uf) throw new Error('CEP não encontrado');
+        $('shipping-street').textContent = data.logradouro || 'Rua não informada pelo CEP';
+        $('shipping-city-state').textContent = `${data.localidade} / ${data.uf}`;
+        status.hidden = true; status.className = 'checkout-cep-status shipping-lookup-status'; status.setAttribute('aria-busy', 'false'); status.textContent = '';
+        result.hidden = false; headingStatus.textContent = 'Entrega disponível'; headingStatus.style.color = 'var(--brand-dark)';
+      } catch (error) {
+        await waitForMinimumLoading();
+        if (requestId !== shippingCepRequestId) return;
+        status.className = 'checkout-cep-status shipping-lookup-status error'; status.setAttribute('aria-busy', 'false'); status.textContent = 'Não foi possível localizar este CEP. Confira o número e tente novamente.';
+        headingStatus.textContent = 'CEP não localizado'; headingStatus.style.color = 'var(--red)';
+      }
     });
     $('share-product').addEventListener('click', async () => {
       const shareData = { title: document.title, text: 'Confira este produto', url: location.href };
