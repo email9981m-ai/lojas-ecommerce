@@ -8,7 +8,7 @@
   <meta property="og:type" content="product">
   <meta property="og:title" content="Kit Completo Corinthians | Kokeshi">
   <meta property="og:description" content="Produto por R$ 0,00. Eventual frete é informado antes da confirmação.">
-  <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/ThmOBLqYfWeEbHid.webp">
+  <meta property="og:image" content="https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/EVqIjLLoFeDBAejf.webp">
   <meta property="og:image:alt" content="Modelo do kit Corinthians segurando o copo, com corrente e pingente preto">
   <title>Kit Completo Corinthians | Kokeshi</title>
   <script>
@@ -5294,7 +5294,7 @@
       limitedQuantity: '' // Ex.: '100 unidades' — mantenha atualizado conforme o estoque real.
     };
     const imgs = [
-      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/ThmOBLqYfWeEbHid.webp", "Modelo do kit Corinthians segurando o copo, com corrente e pingente preto"],
+      ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/EVqIjLLoFeDBAejf.webp", "Modelo do kit Corinthians segurando o copo, com corrente e pingente preto"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/jpfFkPAjnpXWagjf.webp", "Kit Corinthians em composição: camiseta sem corte, copo térmico e pingente totalmente visível", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/zJXOfgFMRutfdkNc.webp"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/vWYeOwQyYbjWPIpB.webp", "Kit completo: camiseta Corinthians, corrente e copo térmico identificados", "https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/NbgVeGFslkPlQNpR.webp"],
       ["https://files.manuscdn.com/user_upload_by_module/session_file/310519664054495255/DqQDQudJDJNnWiME.webp", "Copo térmico preto do Corinthians em detalhe"],
@@ -5336,13 +5336,19 @@
       return entry;
     }
     let currentGalleryIndex = 0;
-    let slideCleanupTimer = null;
-    let slideAnimationFrame = null;
     let galleryRequestToken = 0;
     let pendingGalleryIndex = null;
-    function showGalleryImage(index, direction = 1) {
+    function showGalleryImage(index) {
       const nextIndex = (index + imgs.length) % imgs.length;
-      if (nextIndex === currentGalleryIndex) return;
+      if (nextIndex === currentGalleryIndex) {
+        if (pendingGalleryIndex !== null) {
+          galleryRequestToken += 1;
+          pendingGalleryIndex = null;
+          galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
+        }
+        return;
+      }
+
       const requestToken = ++galleryRequestToken;
       pendingGalleryIndex = nextIndex;
       const nextSrc = imgs[nextIndex][0];
@@ -5356,58 +5362,16 @@
           return;
         }
 
-        const oldClone = galleryStage.querySelector('.gallery-slide-out');
-        if (oldClone) oldClone.remove();
-        if (slideCleanupTimer) window.clearTimeout(slideCleanupTimer);
-        if (slideAnimationFrame) cancelAnimationFrame(slideAnimationFrame);
-        slideCleanupTimer = null;
-        slideAnimationFrame = null;
+        galleryStage.querySelectorAll('.gallery-slide-out').forEach((outgoing) => outgoing.remove());
         mainImage.style.transition = 'none';
         mainImage.style.transform = '';
         mainImage.style.opacity = '1';
+        mainImage.src = nextSrc;
+        mainImage.alt = nextAlt;
         currentGalleryIndex = nextIndex;
         pendingGalleryIndex = null;
         galleryThumbs.forEach((thumb) => thumb.setAttribute('aria-pressed', String(Number(thumb.dataset.i) === currentGalleryIndex)));
-
-        if (prefersReducedMotion) {
-          mainImage.src = nextSrc;
-          mainImage.alt = nextAlt;
-          mainImage.style.opacity = '';
-          return;
-        }
-
-        const outgoing = mainImage.cloneNode(true);
-        outgoing.removeAttribute('id');
-        outgoing.removeAttribute('fetchpriority');
-        outgoing.setAttribute('aria-hidden', 'true');
-        outgoing.alt = '';
-        outgoing.classList.add('gallery-slide-out');
-        outgoing.style.padding = getComputedStyle(mainImage).padding;
-        outgoing.style.opacity = '1';
-        galleryStage.insertBefore(outgoing, mainImage);
-
-        mainImage.src = nextSrc;
-        mainImage.alt = nextAlt;
-        mainImage.style.opacity = '0';
-        void mainImage.offsetWidth;
-        slideAnimationFrame = requestAnimationFrame(() => {
-          if (requestToken !== galleryRequestToken) return;
-          const transition = 'opacity 160ms ease-in-out';
-          mainImage.style.transition = transition;
-          outgoing.style.transition = transition;
-          mainImage.style.opacity = '1';
-          outgoing.style.opacity = '0';
-        });
-        slideCleanupTimer = window.setTimeout(() => {
-          outgoing.remove();
-          if (requestToken === galleryRequestToken) {
-            slideAnimationFrame = null;
-            mainImage.style.transition = '';
-            mainImage.style.transform = '';
-            mainImage.style.opacity = '';
-            slideCleanupTimer = null;
-          }
-        }, 220);
+        if (prefersReducedMotion) mainImage.style.transition = 'none';
       });
     }
     $('main-image').src = imgs[0][0];
@@ -5415,7 +5379,7 @@
     galleryThumbs.forEach((button) => {
       const i = Number(button.dataset.i);
       button.querySelector('img').src = imgs[i][2] || imgs[i][0];
-      button.addEventListener('click', () => showGalleryImage(i, i >= currentGalleryIndex ? 1 : -1));
+      button.addEventListener('click', () => showGalleryImage(i));
     });
     imgs.slice(1).forEach(([src]) => preloadGalleryImage(src));
 
